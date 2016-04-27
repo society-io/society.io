@@ -17,5 +17,10 @@
   "dependencies": {
     "express": "^4.13.4",
     "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
   }
 }
