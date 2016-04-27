@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     jshint: {
-      files: ['public/**/*.js', 'server/**/*.js'],
+      files: ['public/app/*.js', 'server/**/*.js'],
       options: {
         globals: {
           jQuery: true
@@ -18,5 +18,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'watch']);
+  grunt.registerTask('default', ['jshint']);
 };
