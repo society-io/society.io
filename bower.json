@@ -1,0 +1,17 @@
+{
+  "name": "society.io",
+  "description": "Ultimate Rock Paper Scissors",
+  "main": "server.js",
+  "authors": [
+    "Kan Adachi <Kadachi1023@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/obber/society.io",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
