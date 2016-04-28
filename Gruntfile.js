@@ -11,12 +11,19 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['<%= jshint.files %>'],
-      tasks: ['jshint']
+      tasks: ['jshint', 'concat']
+    },
+    concat: {
+      dist: {
+        src: ['public/app/*.js'],
+        dest: 'public/dist/built.js'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('default', ['jshint']);
 };
