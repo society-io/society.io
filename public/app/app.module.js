@@ -1,2 +1,2 @@
 angular
-  .module('app', []); //dependencies in brackets w/ ''
+  .module('app', []); //dependencies in brackets w/ '' 
