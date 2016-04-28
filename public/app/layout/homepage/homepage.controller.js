@@ -1,13 +1,14 @@
+(function (){
 angular
   .module('app')
   .controller('IndexController', IndexController);
 
-IndexController.$inject = ['indexFactory'];
+IndexController.$inject = ['indexFactory', '$state'];
 
-  function IndexController(indexFactory) {
+  function IndexController(indexFactory, $state) {
 		/* jshint validthis: true */
 		var vm = this;
-	  vm.name = {};
+	  vm.goToBf = goToBf;
 	  //declare bindable members here ***
 		//ex:  vm.refresh = refresh
 
@@ -16,5 +17,8 @@ IndexController.$inject = ['indexFactory'];
 		//declare functions here ***
 		//no function declarations
 	  //ex: function refresh() {};
+	  function goToBf() {
+	  	$state.go('battlefield');
+	  }
   };
 })();

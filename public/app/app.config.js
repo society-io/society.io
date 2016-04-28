@@ -5,12 +5,12 @@ angular
 
 function config($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('lobby')
-	  .state('/lobby', {
+	  .state('lobby', {
 	  	url: '/lobby',
-	  	templateUrl: './layout/homepage/index.html',
+	  	templateUrl: './layout/homepage/homepage.html',
 	  	controller: 'IndexController'
 	  })
-	  .state('/battlefield', {
+	  .state('battlefield', {
 	  	url: '/battlefield',
 	  	templateUrl: './layout/battlefield/battlefield.html',
 	  	controller: 'BattlefieldController'
