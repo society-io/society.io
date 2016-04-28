@@ -2,29 +2,49 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var game = require('./game/Game.js');
+var Game = game.Game;
+var queue = require('./lobby/Queue.js');
+var Queue = queue.Queue;
+
 
 var port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 
 server.listen(port);
-console.log('Server is Running on Port: ', port);
+console.log('Server Running, Port: ', port);
+
+var queue = Object.create(Queue);
 
 io.on('connection', function(socket){
-  console.log('Socket Connected!');
+  console.log('*Socket Connected*');
+  // Queue Insertion
+  if(queue.storage.length < 2) {
+    queue.insert(socket);
+  }// End Queue Insertion
+
+  // Game Instantiation
+  if (queue.storage.length >= 2) {
+    var playerSockets = queue.remove();
+    var game = new Game (playerSockets);
+    console.log("gameStats: ", game);
+  }// End Game Instantiation
+
   socket.emit('rock', {
     message: 'rock'
+  });
+  socket.emit('paper', {
+    message: 'paper'
+  });
+  socket.emit('scissors', {
+    message: 'scissors'
   });
 });
 
 // BackEnd Sprint 1
 
-  // A User enters a io.connection
-  // Their socket is placed into Queue
-  // When theres two people in Queue,
-    // Instantiate new Game with both sockets
-
-  // Game Logic
+  // socket.Emit Logic
   // on new Game instantiation,
     // server emit an onReady event
     // server listen for play event
