@@ -1,26 +1,37 @@
 var logic = require('./logic.js').logic;
 
+var User = function(socket) {
+  this.socket = socket;
+  this.choice = null;
+  this.wins = null; 
+};
+
 var Game = function(playerSockets) {
   this.over = false;
   this.player1 = new User(playerSockets.player1);
   this.player2 = new User(playerSockets.player2);
   this.options = ['rich', 'bum', 'tax', 'cop', 'jail'];
-  this.choices = {player1:  null, player2: null};
-  this.player1Played = false;
-  this.player2Played = false;
+/*this.choices = [Object.create(this.player1), Object.create(this.player2)];*/
   this.winner = null;
 };
 
 Game.prototype.init = function() {
+
   this.emit('gameReady');
 
   this.player1.socket.on('choices', function(data){
-    this.updatePlayer1Choice(data.player1Choice);
+    this.player1.choice = data.player1Choice;
   });
+
   this.player2.socket.on('choices', function(data){
-    this.updatePlayer2Choice(data.player2Choice);
+    this.player2.choice = data.player2Choice;
   });
+
+  this.player1.choice && this.player2.choice ?
+    this.updateChoice(this.player1.choice, this.player2.choice) :
+    null;
 };
+
 
 Game.prototype.emit = function(event, data) {
   data = data || {};
@@ -32,28 +43,9 @@ Game.prototype.isOver = function() {
     this.over = true;
 };
 
-Game.prototype.updatePlayer1Choice = function(data) {
-    this.choices.player1 = data;
-    this.player1Played = true;
-    this.evaluateWinner();
-};
-
-Game.prototype.updatePlayer2Choice = function(data) {
-    this.choices.player2 = data;
-    this.player2Played = true;
-    this.evaluateWinner();
-};
-
-Game.prototype.evaluateWinner = function() {
-  if(this.player1Played && this.player2Played) {
-    this.winner = logic(this.choices.player1, this.choices.player2);
+Game.prototype.updateChoice = function(player1Choice, player2Choice) {
+    this.winner = logic(player1Choice, player2Choice);
     this.emit('gameResult', {message: this.winner});
-  }
-};
-
-var User = function(socket) {
-  this.socket = socket;
-  this.choice = null;
 };
 
 module.exports = {
