@@ -13,65 +13,85 @@ var Logic = function(choice1, choice2) {
 
     // Rich Beats:
     case 'rich', 'bum':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
 
     case 'rich', 'cop':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
 
     // Rich Loses:
     case 'rich', 'jail':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
 
     case 'rich', 'taxes':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
 
     // Bum Beats:
     case 'bum', 'jail':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
     case 'bum', 'tax':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
 
     // Bum Loses:
     case 'bum', 'cop':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
     case 'bum', 'rich':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
 
     // Tax Beats:
     case 'tax', 'cop':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
     case 'tax', 'rich':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
 
     // Tax Loses:
     case 'tax', 'jail':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
     case 'tax', 'bum':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
 
     // Cop Beats:
     case 'cop', 'jail':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
     case 'cop', 'bum':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
 
     // Cop Loses:
     case 'cop', 'tax':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
     case 'cop', 'rich':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
 
     // Jail Beats:
     case 'jail', 'rich':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
     case 'jail', 'tax':
-      return this.winner = this.player1;
+      this.winner = this.player1;
+      return this.winner;
 
     // Jail Loses:
     case 'jail', 'bum':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
     case 'jail', 'cop':
-      return this.winner = this.player2;
+      this.winner = this.player2;
+      return this.winner;
   }
 };
 
