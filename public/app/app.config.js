@@ -4,15 +4,17 @@ angular
 
 
 function config($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('lobby')
+	$urlRouterProvider.otherwise('lobby');
+
+	$stateProvider
 	  .state('lobby', {
 	  	url: '/lobby',
-	  	templateUrl: './layout/homepage/homepage.html',
+	  	templateUrl: '../app/layout/homepage/homepage.html',
 	  	controller: 'IndexController'
 	  })
 	  .state('battlefield', {
 	  	url: '/battlefield',
-	  	templateUrl: './layout/battlefield/battlefield.html',
+	  	templateUrl: '../app/layout/battlefield/battlefield.html',
 	  	controller: 'BattlefieldController'
 	  });
 }

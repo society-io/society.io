@@ -11,8 +11,8 @@ function bfFactoryFunction($http) {
 
 	var factory = {
 		name: name
-	}
-	return factory
+	};
+	return factory;
 
   //expose factory first; declare functions below
 

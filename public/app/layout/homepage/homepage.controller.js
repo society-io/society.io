@@ -10,9 +10,6 @@ IndexController.$inject = ['indexFactory', '$state'];
 		/* jshint validthis: true */
 		var vm = this;
 	  vm.goToBf = goToBf;
-	  //declare bindable members here ***
-		//ex:  vm.refresh = refresh
-
 
 
 		//declare functions here ***
@@ -21,5 +18,5 @@ IndexController.$inject = ['indexFactory', '$state'];
 	  function goToBf() {
 	  	$state.go('battlefield');
 	  }
-  };
+  }
 })();

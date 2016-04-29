@@ -18,5 +18,5 @@
 		//declare functions here ***
 		//no function declarations
 	  //ex: function refresh() {};
-  };
+  }
 })();
