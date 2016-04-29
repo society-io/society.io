@@ -18,12 +18,12 @@ Game.prototype.init = function() {
   this.emit('gameReady');
 
   this.player1.socket.on('choices', function(data){
-    this.player1.choice = data.player1Choice;
+    this.player1.choice = data.choice;
     this.choiceSubmitted();
   }.bind(this));
 
   this.player2.socket.on('choices', function(data){
-    this.player2.choice = data.player2Choice;
+    this.player2.choice = data.choice;
     this.choiceSubmitted();
   }.bind(this));
 };
@@ -34,13 +34,17 @@ Game.prototype.emit = function(event, data) {
   this.player2.socket.emit(event, data);
 };
 
+Game.prototype.err = function(msg) {
+  this.emit('err', { msg: msg });
+};
+
 Game.prototype.isOver = function() {
   this.over = true;
 };
 
 Game.prototype.choiceSubmitted = function() {
   if (this.player1.choice, this.player2.choice) {
-    this.winner = logic(this.player1.choice, this.player2.choice);
+    this.winner = logic.call(this, this.player1.choice, this.player2.choice);
     this.emit('gameResult', { message: this.winner });
   }
 };

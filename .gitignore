@@ -30,3 +30,6 @@ bower_components/
 
 # Webstorm Idea Files
 .idea/
+
+# Environment Configs
+.env
