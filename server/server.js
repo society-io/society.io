@@ -25,10 +25,6 @@ io.on('connection', function(socket){
     var playerSockets = queue.remove();
     var game = new Game(playerSockets);
     console.log("gameStats: ", game);
-    socket.emit('gameReady');
-    socket.emit('gameResult', {
-      message: game.evaluateWinner()
-    });
   }// End Game
 
 });
