@@ -7,7 +7,7 @@ var Logic = function(choice1, choice2) {
     case 'tax', 'tax':
     case 'cop', 'cop':
     case 'jail', 'jail':
-      this.winner = 'tie'
+      this.winner = 'tie';
       return this.winner;
 
 // Built This Out According to the society.io Pentagram //
