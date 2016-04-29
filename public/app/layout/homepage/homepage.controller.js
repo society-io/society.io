@@ -6,17 +6,18 @@ angular
 
 IndexController.$inject = ['indexFactory', '$state'];
 
-  function IndexController(indexFactory, $state) {
-		/* jshint validthis: true */
-		var vm = this;
-	  vm.goToBf = goToBf;
+function IndexController(indexFactory, $state) {
+	/* jshint validthis: true */
+	var vm = this;
+	vm.goToBf = goToBf;
 
 
-		//declare functions here ***
-		//no function declarations
-	  //ex: function refresh() {};
-	  function goToBf() {
-	  	$state.go('battlefield');
-	  }
-  }
+	//declare functions here ***
+	//no function declarations
+	//ex: function refresh() {};
+	function goToBf() {
+		console.log('button clicked');
+		$state.go('battlefield');
+	}
+}
 })();
