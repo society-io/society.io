@@ -2,21 +2,22 @@ angular
   .module('app')
   .factory('battlefieldFactory', bfFactoryFunction);
 
-bfFactoryFunction.$inject = ['$http']; //injections go inside brackets
+bfFactoryFunction.$inject = ['$http', 'socketFactory']; //injections go inside brackets
 
-function bfFactoryFunction($http) {
-	var ben = true;  
+function bfFactoryFunction($http, socketFactory) {
 
   //flags at top and then factory, then function declarations
 
+  var emit = socketFactory.emit;
+  var on = socketFactory.on;
+  on('gameReady', function(resp){
+    console.log('Game ready: ', resp);
+  });
+
 	var factory = {
-		name: name
 	};
 	return factory;
 
   //expose factory first; declare functions below
 
-  function name() {
-  	console.log("battlefield name factory function!");
-  }
 }

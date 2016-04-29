@@ -25,6 +25,7 @@ io.on('connection', function(socket){
   if (queue.storage.length >= 2) {
     var playerSockets = queue.remove();
     var game = new Game(playerSockets);
+    game.init();
     console.log("gameStats: ", game);
   }
 
