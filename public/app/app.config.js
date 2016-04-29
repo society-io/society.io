@@ -10,7 +10,8 @@ function config($stateProvider, $urlRouterProvider) {
 	  .state('lobby', {
 	  	url: '/lobby',
 	  	templateUrl: '../app/layout/homepage/homepage.html',
-	  	controller: 'IndexController'
+	  	controller: 'IndexController',
+	  	controllerAs: 'lobby'
 	  })
 	  .state('battlefield', {
 	  	url: '/battlefield',
