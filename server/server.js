@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var game = require('./game/Game.js');
+var game = require('./game/game.js');
 var Game = game.Game;
 var queue = require('./lobby/queue.js').Queue;
 
