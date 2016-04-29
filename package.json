@@ -2,7 +2,7 @@
   "name": "society.io",
   "version": "1.0.0",
   "description": "Ultimate Rock Paper Scissors",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "grunt --verbose",
     "start": "node server/server.js"

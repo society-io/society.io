@@ -1,5 +1,4 @@
-var logic = require('./Logic.js');
-var Logic = logic.Logic;
+var logic = require('./logic.js').logic;
 
 var Game = function(playerSockets) {
   this.over = false;

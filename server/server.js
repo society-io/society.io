@@ -4,9 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var game = require('./game/Game.js');
 var Game = game.Game;
-var queue = require('./lobby/Queue.js');
-var Queue = queue.Queue;
-
+var queue = require('./lobby/queue.js').Queue;
 
 var port = process.env.PORT || 3000;
 
@@ -14,8 +12,6 @@ app.use(express.static('public'));
 
 server.listen(port);
 console.log('Server Running, Port: ', port);
-
-var queue = Object.create(Queue);
 
 io.on('connection', function(socket){
   console.log('*Socket Connected*');
