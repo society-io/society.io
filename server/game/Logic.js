@@ -1,4 +1,4 @@
-var Logic = function(choice1, choice2) {
+var logic = function(choice1, choice2) {
   switch (choice1, choice2) {
 
     // Tie Cases
@@ -8,94 +8,96 @@ var Logic = function(choice1, choice2) {
     case 'cop', 'cop':
     case 'jail', 'jail':
       this.winner = 'tie';
-      return this.winner;
+      break;
 
-// Built This Out According to the society.io Pentagram //
+    // Built This Out According to the society.io Pentagram //
 
     // Rich Beats:
     case 'rich', 'bum':
       this.winner = this.player1;
-      return this.winner;
+      break;
 
     case 'rich', 'cop':
       this.winner = this.player1;
-      return this.winner;
+      break;
 
     // Rich Loses:
     case 'rich', 'jail':
       this.winner = this.player2;
-      return this.winner;
+      break;
 
     case 'rich', 'taxes':
       this.winner = this.player2;
-      return this.winner;
+      break;
 
     // Bum Beats:
     case 'bum', 'jail':
       this.winner = this.player1;
-      return this.winner;
+      break;
     case 'bum', 'tax':
       this.winner = this.player1;
-      return this.winner;
+      break;
 
     // Bum Loses:
     case 'bum', 'cop':
       this.winner = this.player2;
-      return this.winner;
+      break;
     case 'bum', 'rich':
       this.winner = this.player2;
-      return this.winner;
+      break;
 
     // Tax Beats:
     case 'tax', 'cop':
       this.winner = this.player1;
-      return this.winner;
+      break;
     case 'tax', 'rich':
       this.winner = this.player1;
-      return this.winner;
+      break;
 
     // Tax Loses:
     case 'tax', 'jail':
       this.winner = this.player2;
-      return this.winner;
+      break;
     case 'tax', 'bum':
       this.winner = this.player2;
-      return this.winner;
+      break;
 
     // Cop Beats:
     case 'cop', 'jail':
       this.winner = this.player1;
-      return this.winner;
+      break;
     case 'cop', 'bum':
       this.winner = this.player1;
-      return this.winner;
+      break;
 
     // Cop Loses:
     case 'cop', 'tax':
       this.winner = this.player2;
-      return this.winner;
+      break;
     case 'cop', 'rich':
       this.winner = this.player2;
-      return this.winner;
+      break;
 
     // Jail Beats:
     case 'jail', 'rich':
       this.winner = this.player1;
-      return this.winner;
+      break;
     case 'jail', 'tax':
       this.winner = this.player1;
-      return this.winner;
+      break;
 
     // Jail Loses:
     case 'jail', 'bum':
       this.winner = this.player2;
-      return this.winner;
+      break;
     case 'jail', 'cop':
       this.winner = this.player2;
-      return this.winner;
+      break;
   }
+
+  return this.winner;
 };
 
 module.exports = {
-  Logic: Logic
+  logic: logic
 };
