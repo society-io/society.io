@@ -74,7 +74,7 @@ var logic = function(choice1, choice2) {
     case 'cop', 'tax':
       this.winner = this.player2;
       break;
-    case 'cop', 'rich':
+    case 'cop', 'rich': 
       this.winner = this.player2;
       break;
 
