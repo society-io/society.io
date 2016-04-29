@@ -1,10 +1,10 @@
 angular
   .module('app')
-  .factory('battlefieldFactory', bfFactoryFunction);
+  .factory('indexFactory', indexFactoryFunction);
 
-bfFactoryFunction.$inject = ['$http']; //injections go inside brackets
+indexFactoryFunction.$inject = ['$http']; //injections go inside brackets
 
-function bfFactoryFunction($http) {
+function indexFactoryFunction($http) {
 	var ben = true;  
 
   //flags at top and then factory, then function declarations
@@ -12,6 +12,7 @@ function bfFactoryFunction($http) {
 	var factory = {
 		name: name
 	};
+  
 	return factory;
 
   //expose factory first; declare functions below
