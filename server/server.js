@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var DB = require('./db/db.js');
 var game = require('./game/game.js');
 var Game = game.Game;
 var queue = require('./lobby/queue.js').Queue;
@@ -30,15 +31,6 @@ io.on('connection', function(socket){
 
 });
 
-// BackEnd Sprint 1
-
-  // socket.Emit Logic
-  // on new Game instantiation,
-    // server emit an onReady event
-    // server listen for play event
-      // server make sure there are two choices
-      // server evaluate the winner/loser/tie
-    // server emit an update event with the result
 
 //***************************************************//
 
