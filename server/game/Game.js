@@ -17,6 +17,7 @@ var Game = function(playerSockets) {
     this.updatePlayer2Choice(data.player2Choice);
     this.player2Played = true;
   });
+
 };
 
 Game.prototype.isOver = function() {
@@ -31,7 +32,7 @@ Game.prototype.updatePlayer2Choice = function(data) {
     this.choices.player2 = data;
 };
 
-Game.prototype.evaluateWinner = function(data) {
+Game.prototype.evaluateWinner = function() {
   if(this.player1Played && this.player2Played) {
     this.winner = Logic(this.choices.player1, this.choices.player2);
     return this.winner;

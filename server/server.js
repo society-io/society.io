@@ -20,12 +20,16 @@ io.on('connection', function(socket){
     queue.insert(socket);
   }// End Queue Insertion
 
-  // Game Instantiation
+  // Game
   if (queue.storage.length >= 2) {
     var playerSockets = queue.remove();
     var game = new Game(playerSockets);
     console.log("gameStats: ", game);
-  }// End Game Instantiation
+    socket.emit('gameReady');
+    socket.emit('gameResult', {
+      message: game.evaluateWinner()
+    });
+  }// End Game
 
 });
 
@@ -38,3 +42,30 @@ io.on('connection', function(socket){
       // server make sure there are two choices
       // server evaluate the winner/loser/tie
     // server emit an update event with the result
+
+//***************************************************//
+
+  // Over-All Game Flow // ~Neil~
+
+    // As each client connects,
+      // server stores each clients' socket into queue.
+
+    // When queue.length = 2,
+      // server removes first 2 sockets from queue,
+        // initializes a new Game with those sockets.
+
+    // After initialization, server socket EMIT "gameReady"
+
+    // clients sockets ON "gameReady",
+      // each client enters a choice
+
+    // clients sockets EMIT "choices",
+      // send data object containing each player's choice
+
+    // server sockets ON "choices",
+      // store's each players' choice into game.choices
+
+    // server socket EMIT "gameResult",
+      // calls game.evaluateWinner(),
+        // the game method returns the winner,
+        // sends the winner as a socket.emit message.
