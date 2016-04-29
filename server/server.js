@@ -27,19 +27,10 @@ io.on('connection', function(socket){
   // Game Instantiation
   if (queue.storage.length >= 2) {
     var playerSockets = queue.remove();
-    var game = new Game (playerSockets);
+    var game = new Game(playerSockets);
     console.log("gameStats: ", game);
   }// End Game Instantiation
 
-  socket.emit('rock', {
-    message: 'rock'
-  });
-  socket.emit('paper', {
-    message: 'paper'
-  });
-  socket.emit('scissors', {
-    message: 'scissors'
-  });
 });
 
 // BackEnd Sprint 1
