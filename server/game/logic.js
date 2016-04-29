@@ -10,7 +10,7 @@ var logic = function(choice1, choice2) {
       this.winner = 'tie';
       break;
 
-    // Built This Out According to the society.io Pentagram //
+    // Built This Out According to the society.io Pentagram
 
     // Rich Beats:
     case 'rich', 'bum':
