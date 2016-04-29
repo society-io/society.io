@@ -4,7 +4,7 @@ angular
 
 bfFactoryFunction.$inject = ['$http']; //injections go inside brackets
 
-function bfFactoryFunction('$http') {
+function bfFactoryFunction($http) {
 	var ben = true;  
 
   //flags at top and then factory, then function declarations
