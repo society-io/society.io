@@ -34,8 +34,7 @@ Game.prototype.updatePlayer2Choice = function(data) {
 
 Game.prototype.evaluateWinner = function(data) {
   if(this.player1Played && this.player2Played) {
-    return this.winner = new Logic(this.choices.player1, this.choices.player2);
-    this.isOver();
+    return this.winner = Logic(this.choices.player1, this.choices.player2);
   }
 };
 
