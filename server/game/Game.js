@@ -9,14 +9,23 @@ var Game = function(playerSockets) {
   this.player1Played = false;
   this.player2Played = false;
   this.winner = null;
+};
+
+Game.prototype.init = function() {
+  this.emit('gameReady');
+
   this.player1.socket.on('choices', function(data){
     this.updatePlayer1Choice(data.player1Choice);
-    this.player1Played = true;
   });
   this.player2.socket.on('choices', function(data){
     this.updatePlayer2Choice(data.player2Choice);
-    this.player2Played = true;
   });
+};
+
+Game.prototype.emit = function(event, data) {
+  data = data || {};
+  this.player1.socket.emit(event, data);
+  this.player2.socket.emit(event, data);
 };
 
 Game.prototype.isOver = function() {
@@ -25,16 +34,20 @@ Game.prototype.isOver = function() {
 
 Game.prototype.updatePlayer1Choice = function(data) {
     this.choices.player1 = data;
+    this.player1Played = true;
+    this.evaluateWinner();
 };
 
 Game.prototype.updatePlayer2Choice = function(data) {
     this.choices.player2 = data;
+    this.player2Played = true;
+    this.evaluateWinner();
 };
 
-Game.prototype.evaluateWinner = function(data) {
+Game.prototype.evaluateWinner = function() {
   if(this.player1Played && this.player2Played) {
-    this.winner = Logic(this.choices.player1, this.choices.player2);
-    return this.winner;
+    this.winner = logic(this.choices.player1, this.choices.player2);
+    this.emit('gameResult', {message: this.winner});
   }
 };
 
