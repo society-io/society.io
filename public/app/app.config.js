@@ -11,11 +11,12 @@ function config($stateProvider, $urlRouterProvider) {
 	  	url: '/lobby',
 	  	templateUrl: '../app/layout/homepage/homepage.html',
 	  	controller: 'IndexController',
-	  	controllerAs: 'lobby'
+	  	controllerAs: 'Lobby'
 	  })
 	  .state('battlefield', {
 	  	url: '/battlefield',
 	  	templateUrl: '../app/layout/battlefield/battlefield.html',
-	  	controller: 'BattlefieldController'
+	  	controller: 'BattlefieldController',
+	  	controllerAs: 'Battlefield'
 	  });
 }
