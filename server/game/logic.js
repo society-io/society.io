@@ -1,4 +1,8 @@
-var evalRound = function(choice1, choice2) {
+var Gamelogic = function(game) {
+  this.game = game;
+};
+
+Gamelogic.prototype.evalRound = function(choice1, choice2) {
   var result;
 
   console.log('choice1 = ', choice1);
@@ -94,6 +98,24 @@ var evalRound = function(choice1, choice2) {
   return result;
 };
 
+Gamelogic.prototype.choiceSubmitted = function() {
+  var game = this.game;
+
+  // if both players have made a choice, evaluate round winner
+  if (game.player1.choice && game.player2.choice) {
+    console.log('player1 choice = ', game.player1.choice);
+    console.log('player2 choice = ', game.player2.choice);
+    game.roundWinner = game.logic.evalRound(game.player1.choice, game.player2.choice);
+    game.emit('roundResult', {
+      winner: game.roundWinner,
+      choices: {
+        1: game.player1.choice,
+        2: game.player2.choice
+      }
+    });
+  }
+};
+
 module.exports = {
-  evalRound: evalRound
+  Gamelogic: Gamelogic, 
 };
