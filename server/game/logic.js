@@ -1,103 +1,99 @@
-var logic = function(choice1, choice2) {
-  switch (choice1, choice2) {
+var evalRound = function(choice1, choice2) {
+  var result;
 
+  console.log('choice1 = ', choice1);
+  console.log('choice2 = ', choice2);
+
+  switch (choice1 + '|' + choice2) {
     // Tie Cases
-    case 'rich', 'rich':
-    case 'bum', 'bum':
-    case 'tax', 'tax':
-    case 'cop', 'cop':
-    case 'jail', 'jail':
-      this.winner = 'tie';
+    case 'rich|rich':
+    case 'bum|bum':
+    case 'tax|tax':
+    case 'cop|cop':
+    case 'jail|jail':
+      result = 0;
       break;
 
-    // Built This Out According to the society.io Pentagram
-
-    // Rich Beats:
-    case 'rich', 'bum':
-      this.winner = this.player1;
+    /**
+     *  rich
+     *
+     *  Beats: bum, cop
+     *  Loses: jail, taxes
+     */
+    case 'rich|bum':
+    case 'rich|cop':
+      result = 1;
+      break;
+    case 'rich|jail':
+    case 'rich|taxes':
+      result = 2;
       break;
 
-    case 'rich', 'cop':
-      this.winner = this.player1;
+    /**
+     *  bum
+     *
+     *  Beats: jail, tax
+     *  Loses: cop, rich
+     */
+    case 'bum|jail':
+    case 'bum|tax':
+      result = 1;
+      break;
+    case 'bum|cop':
+    case 'bum|rich':
+      result = 2;
       break;
 
-    // Rich Loses:
-    case 'rich', 'jail':
-      this.winner = this.player2;
+    /**
+     *  tax
+     *
+     *  Beats: cop, rich
+     *  Loses: jail, bum
+     */
+    case 'tax|cop':
+    case 'tax|rich':
+      result = 1;
+      break;
+    case 'tax|jail':
+    case 'tax|bum':
+      result = 2;
       break;
 
-    case 'rich', 'taxes':
-      this.winner = this.player2;
+    /**
+     *  cop
+     *
+     *  Beats: jail, bum
+     *  Loses: tax, rich
+     */
+    case 'cop|jail':
+    case 'cop|bum':
+      result = 1;
+      break;
+    case 'cop|tax':
+    case 'cop|rich':
+      result = 2;
       break;
 
-    // Bum Beats:
-    case 'bum', 'jail':
-      this.winner = this.player1;
+    /**
+     *  jail
+     *
+     *  Beats: rich, tax
+     *  Loses: bum, cop
+     */
+    case 'jail|rich':
+    case 'jail|tax':
+      result = 1;
       break;
-    case 'bum', 'tax':
-      this.winner = this.player1;
-      break;
-
-    // Bum Loses:
-    case 'bum', 'cop':
-      this.winner = this.player2;
-      break;
-    case 'bum', 'rich':
-      this.winner = this.player2;
-      break;
-
-    // Tax Beats:
-    case 'tax', 'cop':
-      this.winner = this.player1;
-      break;
-    case 'tax', 'rich':
-      this.winner = this.player1;
-      break;
-
-    // Tax Loses:
-    case 'tax', 'jail':
-      this.winner = this.player2;
-      break;
-    case 'tax', 'bum':
-      this.winner = this.player2;
-      break;
-
-    // Cop Beats:
-    case 'cop', 'jail':
-      this.winner = this.player1;
-      break;
-    case 'cop', 'bum':
-      this.winner = this.player1;
-      break;
-
-    // Cop Loses:
-    case 'cop', 'tax':
-      this.winner = this.player2;
-      break;
-    case 'cop', 'rich': 
-      this.winner = this.player2;
-      break;
-
-    // Jail Beats:
-    case 'jail', 'rich':
-      this.winner = this.player1;
-      break;
-    case 'jail', 'tax':
-      this.winner = this.player1;
-      break;
-
-    // Jail Loses:
-    case 'jail', 'bum':
-      this.winner = this.player2;
-      break;
-    case 'jail', 'cop':
-      this.winner = this.player2;
+    case 'jail|bum':
+    case 'jail|cop':
+      result = 2;
       break;
   }
 
-  return this.winner;
+  console.log('returning result. result = ', result);
+  return result;
 };
 
 module.exports = {
-  logic: logic
+  evalRound: evalRound
 };
