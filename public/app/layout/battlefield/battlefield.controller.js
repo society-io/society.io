@@ -9,8 +9,10 @@
   function BattlefieldController(battlefieldFactory) {
 		/* jshint validthis: true */
 		var vm = this;
+		vm.currentChoice = false;
 		vm.choices = battlefieldFactory.getter('choices');
 		console.log('this is choices: ', vm.choices);
 	  vm.setChoice = battlefieldFactory.setChoice;
+
   }
 })();

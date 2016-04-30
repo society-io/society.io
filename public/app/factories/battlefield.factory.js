@@ -6,7 +6,6 @@ bfFactoryFunction.$inject = ['$http', 'socketFactory']; //injections go inside b
 
 function bfFactoryFunction($http, socketFactory) {
   //flags at top and then factory, then function declarations
-  var factoryChoice = []; //reset to choice upon function call
   var emit = socketFactory.emit;
   var on = socketFactory.on;
   var getterObj = {choices: ['Rich', 'Bum', 'Tax', 'Cop', 'Jail']};
@@ -24,9 +23,8 @@ function bfFactoryFunction($http, socketFactory) {
   return factory;
 
   function setChoice(userChoice){
-    factoryChoice = userChoice;
-    emit('choices', {choice: factoryChoice});
-    console.log('this is the factoryChoice: ', factoryChoice);
+    emit('choices', {choice: userChoice});
+    console.log('this is the factoryChoice: ', userChoice);
   }
 
   function getter(name){
