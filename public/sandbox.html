@@ -1,0 +1,40 @@
+<!-- Testing Sandbox Document -->
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+  <title>Society Game</title>
+
+    <script src='./bower_components/socket.io-client/socket.io.js'></script>
+</head>
+
+<body>
+
+  <button onclick="rich()">rich</button>
+  <button onclick="bum()">bum</button>
+
+    
+  <script>
+    var socket = io.connect();
+
+    socket.on('gameReady', function(data) {
+      console.log('gameReady heard! gameReady = ', data);
+    });
+
+    socket.on('roundResult', function(data) {
+      console.log('roundResult heard! data = ', data);
+    })
+
+    function rich() {
+      socket.emit('choice', {
+        choice: 'rich'
+      });
+    }
+
+    function bum() {
+      socket.emit('choice', {
+        choice: 'bum'
+      });
+    }
+  </script>
+</body>
+</html>

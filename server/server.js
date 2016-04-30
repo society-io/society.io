@@ -27,7 +27,6 @@ io.on('connection', function(socket){
     var playerSockets = queue.remove();
     var game = new Game(playerSockets);
     game.init();
-    console.log("gameStats: ", game);
   }
 
 });
