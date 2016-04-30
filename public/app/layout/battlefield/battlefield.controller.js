@@ -13,6 +13,5 @@
 		vm.choices = battlefieldFactory.getter('choices');
 		console.log('this is choices: ', vm.choices);
 	  vm.setChoice = battlefieldFactory.setChoice;
-
   }
 })();
