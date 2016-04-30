@@ -2,7 +2,10 @@
 
 	<button ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice); Battlefield.currentChoice = choice">{{choice}}</button>
 
-
-<div>This is your choice:
+<br>
+This is your choice:
 <div ng-show="Battlefield.currentChoice">{{Battlefield.currentChoice}}</div>
-</div>
+<br>
+This is your opponent's choice:
+<div ng-show="Battlefield.getResults()">{{Battlefield.oppenentId()}}</div>
+
