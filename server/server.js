@@ -17,7 +17,7 @@ app.use(passport.session());
 server.listen(port);
 console.log('Server Running, Port: ', port);
 
-app.use('/auth', routes.auth);
+// app.use('/auth', routes.auth);
 
 io.on('connection', function(socket){
   console.log('*Socket Connected*');
