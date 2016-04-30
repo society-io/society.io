@@ -2,17 +2,22 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var db = require('./db/db.js');
-var game = require('./game/game.js');
-var Game = game.Game;
-var queue = require('./lobby/queue.js').Queue;
+var db = require('./db/db');
+var Game = require('./game/game').Game;
+var queue = require('./lobby/queue').Queue;
+var routes = require('./routes/all');
+var passport = require('./auth/passport');
 
 var port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
+app.use(passport.initialize());
+app.use(passport.session());
 
 server.listen(port);
 console.log('Server Running, Port: ', port);
+
+app.use('/auth', routes.auth);
 
 io.on('connection', function(socket){
   console.log('*Socket Connected*');
