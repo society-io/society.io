@@ -1,11 +1,11 @@
 angular
 .module('app')
 .factory('authFactory', authFactory);
-authFactory.$inject = ['$http', '$location', '$window']
+authFactory.$inject = ['$http', '$location', '$window'];
 
 
 function authFactory($http, $location, $window) {
-	
+
 	function login (user) {
 		return $http({
 			method: 'POST',
@@ -16,7 +16,7 @@ function authFactory($http, $location, $window) {
 			console.log(resp);
 			return resp;
 		});
-	};
+	}
 
 	function register(user) {
 		return $http({
@@ -28,7 +28,7 @@ function authFactory($http, $location, $window) {
 			console.log('resp.data in signup', resp);
 			return resp;
 		});
-	};
+	}
 
 	var isAuth = function () {
 		return !!$window.localStorage.getItem('token');
@@ -38,5 +38,5 @@ function authFactory($http, $location, $window) {
 		signin: signin,
 		signup: signup,
 		isAuth: isAuth
-	}
+	};
 }
