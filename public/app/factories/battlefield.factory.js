@@ -21,7 +21,7 @@ function bfFactoryFunction($http, socketFactory) {
   });
 
   on('roundResult', function(resp){
-      console.log("this is resp inside getWinner()",resp);
+      console.log("this is resp",resp);
   });
 
   return factory;
