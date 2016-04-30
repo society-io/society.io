@@ -10,8 +10,17 @@
 		/* jshint validthis: true */
 		var vm = this;
 		vm.currentChoice = false;
+		vm.choicesReady = false;
 		vm.choices = battlefieldFactory.getter('choices');
-		console.log('this is choices: ', vm.choices);
+		vm.getResults = function(){
+			return battlefieldFactory.getter('results');
+		};
+		vm.playerId = battlefieldFactory.getter('playerId');
+		vm.oppenentId = function(){
+			console.log("inside controller",battlefieldFactory.getter('oppenentId'));
+			return battlefieldFactory.getter('oppenentId');
+		};
+		console.log('this is oppenentId', vm.oppenentId);
 	  vm.setChoice = battlefieldFactory.setChoice;
   }
 })();

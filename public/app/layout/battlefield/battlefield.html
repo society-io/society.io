@@ -1,8 +1,12 @@
 <div>battlefield view</div>
-<form>
-	<button ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice); Battlefield.currentChoice = choice">{{choice}}</button>
-</form>
 
-<div>This is your choice:
+	<button ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice); Battlefield.currentChoice = choice">{{choice}}</button>
+
+
+<br>
+This is your choice:
 <div ng-show="Battlefield.currentChoice">{{Battlefield.currentChoice}}</div>
-</div>
+<br>
+This is your opponent's choice:
+<div ng-show="Battlefield.getResults()">{{Battlefield.oppenentId()}}</div>
+
