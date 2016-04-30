@@ -33,3 +33,6 @@ bower_components/
 
 # Environment Configs
 .env
+
+# Config Files
+server/auth/config.js
