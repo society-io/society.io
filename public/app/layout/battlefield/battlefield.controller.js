@@ -7,20 +7,20 @@
   BattlefieldController.$inject = ['battlefieldFactory'];
 
   function BattlefieldController(battlefieldFactory) {
-		/* jshint validthis: true */
-		var vm = this;
-		vm.currentChoice = false;
-		vm.choicesReady = false;
-		vm.choices = battlefieldFactory.getter('choices');
-		vm.getResults = function(){
-			return battlefieldFactory.getter('results');
-		};
-		vm.playerId = battlefieldFactory.getter('playerId');
-		vm.oppenentId = function(){
-			console.log("inside controller",battlefieldFactory.getter('oppenentId'));
-			return battlefieldFactory.getter('oppenentId');
-		};
-		console.log('this is oppenentId', vm.oppenentId);
-	  vm.setChoice = battlefieldFactory.setChoice;
+
+    // abbreviate
+    var vm = this;
+    var bf = battlefieldFactory;
+
+		vm.choices = bf.get('choices');
+	  vm.setChoice = bf.setChoice;
+
+    vm.getChoice = function(person) {
+      return bf.get(person + 'Choice');
+    };
+
+    vm.getWinner = function() {
+      return bf.get('winner');
+    };
   }
 })();
