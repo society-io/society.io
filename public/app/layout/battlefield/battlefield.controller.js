@@ -9,14 +9,9 @@
   function BattlefieldController(battlefieldFactory) {
 		/* jshint validthis: true */
 		var vm = this;
-	  vm.name = {};
-	  //declare bindable members here ***
-		//ex:  vm.refresh = refresh
-
-
-
-		//declare functions here ***
-		//no function declarations
-	  //ex: function refresh() {};
+		vm.currentChoice = false;
+		vm.choices = battlefieldFactory.getter('choices');
+		console.log('this is choices: ', vm.choices);
+	  vm.setChoice = battlefieldFactory.setChoice;
   }
 })();
