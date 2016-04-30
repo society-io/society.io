@@ -7,7 +7,6 @@ var Game = require('./game/game').Game;
 var queue = require('./lobby/queue').Queue;
 var routes = require('./routes/all');
 var passport = require('./auth/passport');
-
 var port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
@@ -21,21 +20,19 @@ console.log('Server Running, Port: ', port);
 
 io.on('connection', function(socket){
   console.log('*Socket Connected*');
-
+  socket.on ('queue', function(socket) {
   // Put socket into queue
   if(queue.storage.length < 2) {
     queue.insert(socket);
   }
-
   // Instantiate game if more than 2 in queue
   if (queue.storage.length >= 2) {
     var playerSockets = queue.remove();
     var game = new Game(playerSockets);
     game.init();
   }
-
+    });
 });
-
 
 //***************************************************//
 
