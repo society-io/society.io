@@ -11,8 +11,10 @@
 
   <button onclick="rich()">rich</button>
   <button onclick="bum()">bum</button>
+  <button onclick="tax()">tax</button>
+  <button onclick="cop()">cop</button>
+  <button onclick="jail()">jail</button>
 
-    
   <script>
     var socket = io.connect();
 
@@ -22,7 +24,11 @@
 
     socket.on('roundResult', function(data) {
       console.log('roundResult heard! data = ', data);
-    })
+    });
+
+    socket.on('err', function(data) {
+      console.log('err heard! data = ', data);
+    });
 
     function rich() {
       socket.emit('choice', {
@@ -33,6 +39,24 @@
     function bum() {
       socket.emit('choice', {
         choice: 'bum'
+      });
+    }
+
+    function tax() {
+      socket.emit('choice', {
+        choice: 'tax'
+      });
+    }
+
+    function cop() {
+      socket.emit('choice', {
+        choice: 'cop'
+      });
+    }
+
+    function jail() {
+      socket.emit('choice', {
+        choice: 'jail'
       });
     }
   </script>

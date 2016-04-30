@@ -4,7 +4,7 @@ var evalRound = function(choice1, choice2) {
   console.log('choice1 = ', choice1);
   console.log('choice2 = ', choice2);
 
-  switch (choice1 + '|' + choice2) {
+  switch (choice1.toLowerCase() + '|' + choice2.toLowerCase()) {
     // Tie Cases
     case 'rich|rich':
     case 'bum|bum':
@@ -25,7 +25,7 @@ var evalRound = function(choice1, choice2) {
       result = 1;
       break;
     case 'rich|jail':
-    case 'rich|taxes':
+    case 'rich|tax':
       result = 2;
       break;
 

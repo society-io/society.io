@@ -127,9 +127,19 @@ Game.prototype.choiceSubmitted = function() {
     console.log('player2 choice = ', this.player2.choice);
     this.roundWinner = logic.evalRound(this.player1.choice, this.player2.choice);
     this.emit('roundResult', {
-      winner: this.roundWinner
+      winner: this.roundWinner,
+      choices: {
+        1: this.player1.choice,
+        2: this.player2.choice
+      }
     });
   }
+};
+
+Game.prototype.terminate = function(reason) {
+  this.emit('matchEnd', {
+    reason: reason
+  });
 };
 
 module.exports = {
