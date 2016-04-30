@@ -1,6 +1,4 @@
 <div>battlefield view</div>
-<button>Rich</button>
-<button>Bum</button>
-<button>Tax</button>
-<button>Cop</button>
-<button>Jails</button>
+<form>
+	<button ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice)">{{choice}}</button>
+</form>
