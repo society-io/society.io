@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['public/app/**/*.js'],
+      files: ['public/app/**/*.js', 'server/**/*.js'],
       tasks: ['jshint', 'concat'],
     },
     concat: {
