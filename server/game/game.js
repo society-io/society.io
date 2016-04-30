@@ -1,19 +1,5 @@
-var logic = require('./logic.js');
-var gameConfig = require('./config.js');
-
-var User = function(id, socket) {
-  // id should always be 1 or 2
-  this.id = id;
-
-  // reference to the underlying socket connection to user
-  this.socket = socket;
-
-  // health state
-  this.health = Object.assign({}, gameConfig.options);
-
-  // reference to the user choice
-  this.choice = null;
-};
+var Gamelogic = require('./logic').Gamelogic;
+var Player = require('./player').Player;
 
 var Game = function(playerSockets) {
   /**
@@ -23,11 +9,14 @@ var Game = function(playerSockets) {
    *  It will be passed by reference into instantiation of game logic
    */
 
-  // instantiate 2 user objects with ids and socket references
-  this.player1 = new User(1, playerSockets.player1);
-  this.player2 = new User(2, playerSockets.player2);
+  // event listener/trigger storage
+  this.events = {};
 
-  // convenience object: useful for passing health state to client
+  // instantiate 2 user objects with ids and socket references
+  this.player1 = new Player(1, playerSockets.player1, this.events);
+  this.player2 = new Player(2, playerSockets.player2, this.events);
+
+  // convenience object: useful for passing health state to client (?)
   this.health = {
     1: this.player1.health,
     2: this.player2.health
@@ -47,38 +36,31 @@ Game.prototype.init = function() {
    *  Game Initialization
    *
    *  The init should be called alongside a game instantiation
-   *  Sets up listeners for both players
+   *  Sets up game logic, socket listeners, and player listeners
    */
+
+  this.logic = new Gamelogic(this);
+
+  // socket listeners
+  this.player1.socket.on('choice', function(data){
+    this.player1.updateChoice(data.choice);
+  }.bind(this));
+
+  this.player2.socket.on('choice', function(data){
+    this.player2.updateChoice(data.choice);
+  }.bind(this));
+
+  // player eventing listeners
+  this.playerOn('playerChoiceUpdated', function(player) {
+    this.logic.choiceSubmitted();
+  }.bind(this));
+
+  // emit game ready to start game
+  console.log('emitting gameready');
   this.emit('gameReady', null,
     { playerId: this.player1.id },
     { playerId: this.player2.id }
   );
-
-  this.player1.socket.on('choice', function(data){
-    console.log('user 1 submitted a choice');
-
-    // validate
-    if (this.player1.choice) {
-      console.error('user 1 already has submitted a choice.');
-      this.err(data, 'you have already submitted a choice.');
-    } else {
-      this.player1.choice = data.choice;
-      this.choiceSubmitted();
-    }
-  }.bind(this));
-
-  this.player2.socket.on('choice', function(data){
-    console.log('user 2 submitted a choice');
-
-    // validate
-    if (this.player2.choice) {
-      console.error('user 2 already has submitted a choice.');
-      this.err(data, 'you have already submitted a choice.');
-    } else {
-      this.player2.choice = data.choice;
-      this.choiceSubmitted();
-    }
-  }.bind(this));
 };
 
 Game.prototype.emit = function(event, data, p1data, p2data) {
@@ -112,34 +94,24 @@ Game.prototype.emit = function(event, data, p1data, p2data) {
   }
 };
 
-Game.prototype.err = function(orig, msg) {
-  this.emit('err', { originalData: orig, msg: msg });
-};
-
 Game.prototype.roundOver = function() {
   this.roundOver = true;
-};
-
-Game.prototype.choiceSubmitted = function() {
-  // if both players have made a choice, evaluate round winner
-  if (this.player1.choice && this.player2.choice) {
-    console.log('player1 choice = ', this.player1.choice);
-    console.log('player2 choice = ', this.player2.choice);
-    this.roundWinner = logic.evalRound(this.player1.choice, this.player2.choice);
-    this.emit('roundResult', {
-      winner: this.roundWinner,
-      choices: {
-        1: this.player1.choice,
-        2: this.player2.choice
-      }
-    });
-  }
 };
 
 Game.prototype.terminate = function(reason) {
   this.emit('matchEnd', {
     reason: reason
   });
+};
+
+Game.prototype.playerOn = function(event, cb) {
+  /**
+   *  Register a callback for the player to trigger
+   *  
+   *  Utilize this custom eventing function when needing to pass information
+   *  from individual players to trigger game logic related events
+   */
+  this.events[event] = cb;
 };
 
 module.exports = {

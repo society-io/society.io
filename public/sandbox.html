@@ -30,6 +30,9 @@
       console.log('err heard! data = ', data);
     });
 
+    console.log('emitting queue');
+    socket.emit('queue');
+
     function rich() {
       socket.emit('choice', {
         choice: 'rich'
