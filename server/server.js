@@ -20,18 +20,20 @@ console.log('Server Running, Port: ', port);
 
 io.on('connection', function(socket){
   console.log('*Socket Connected*');
-  socket.on ('queue', function(socket) {
-  // Put socket into queue
-  if(queue.storage.length < 2) {
-    queue.insert(socket);
-  }
-  // Instantiate game if more than 2 in queue
-  if (queue.storage.length >= 2) {
-    var playerSockets = queue.remove();
-    var game = new Game(playerSockets);
-    game.init();
-  }
-    });
+  socket.on('queue', function() {
+    console.log('heard queue event');
+    console.log(queue);
+    // Put socket into queue
+    if(queue.storage.length < 2) {
+      queue.insert(socket);
+    }
+    // Instantiate game if more than 2 in queue
+    if (queue.storage.length >= 2) {
+      var playerSockets = queue.remove();
+      var game = new Game(playerSockets);
+      game.init();
+    }
+  });
 });
 
 //***************************************************//
