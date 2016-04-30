@@ -9,59 +9,54 @@ function bfFactoryFunction($http, socketFactory) {
   var emit = socketFactory.emit;
   var on = socketFactory.on;
 
-  var getterObj = {
+  listeners();
+
+  var state = {
     choices: ['rich', 'bum', 'tax', 'cop', 'jail'],
     results: false,
     playerId: false,
-    opponentId: false
+    opponentId: false,
+    playerChoice: '',
+    opponentChoice: '',
+    winner: null
   };
-
 
   var factory = {
     emit: emit,
     setChoice: setChoice,
-    getter: getter
+    get: get
   };
-
-  on('gameReady', function(resp) {
-    console.log('Game ready: ', resp);
-    getterObj.playerId = resp.playerId;
-    console.log('okay', getterObj.playerId);
-    if(resp.playerId === 1){
-      console.log( 'inside if');
-      getterObj.opponentId = 2;
-    } else {
-      getterObj.opponentId = 1;
-      console.log('inside else');
-    }
-    console.log('this is opponentId', getterObj.opponentId);
-  });
-
-  on('roundResult', function(resp){
-      console.log("this is the round result",resp);
-
-      getterObj.results = resp;
-
-  });
-
-  on('roundResult', function(resp){
-      console.log("this is resp inside getWinner()",resp);
-  });
 
   return factory;
 
   function setChoice(userChoice) {
     emit('choice', {choice: userChoice});
-    console.log('this is the factoryChoice: ', userChoice);
+    state.playerChoice = userChoice;
   }
 
-  function getter(name) {
-    return getterObj[name];
+  function get(name) {
+    return state[name];
   }
 
+  function listeners() {
+    on('gameReady', function(resp) {
+      console.log('Game ready: ', resp);
 
+      // store player IDs in state
+      state.playerId = resp.playerId;
+      state.opponentId = (resp.playerId === 1) ? 2 : 1;
+    });
 
-  
+    on('roundResult', function(resp){
+        console.log("this is the round result", resp);
 
+        state.results = resp;
+        state.opponentChoice = resp.choices[state.opponentId];
+        state.winner = resp.choices[resp.winner];
+        console.log('state.winner = ', state.winner);
+    });
+
+    emit('queue');
+  }
 
 }
