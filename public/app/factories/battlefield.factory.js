@@ -8,12 +8,14 @@ function bfFactoryFunction($http, socketFactory) {
   //flags at top and then factory, then function declarations
   var emit = socketFactory.emit;
   var on = socketFactory.on;
+
   var getterObj = {
     choices: ['rich', 'bum', 'tax', 'cop', 'jail'],
     results: false,
     playerId: false,
     opponentId: false
   };
+
 
   var factory = {
     emit: emit,
@@ -40,6 +42,10 @@ function bfFactoryFunction($http, socketFactory) {
 
       getterObj.results = resp;
 
+  });
+
+  on('roundResult', function(resp){
+      console.log("this is resp inside getWinner()",resp);
   });
 
   return factory;
