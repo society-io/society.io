@@ -23,12 +23,14 @@ function bfFactoryFunction($http, socketFactory) {
   return factory;
 
   function setChoice(userChoice){
-    emit('choices', {choice: userChoice});
+    emit('choice', {choice: userChoice});
     console.log('this is the factoryChoice: ', userChoice);
   }
 
   function getter(name){
     return getterObj[name];
   }
+
+  
 
 }
