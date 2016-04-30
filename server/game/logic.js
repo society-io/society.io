@@ -25,7 +25,7 @@ var evalRound = function(choice1, choice2) {
       result = 1;
       break;
     case 'rich|jail':
-    case 'rich|taxes':
+    case 'rich|tax':
       result = 2;
       break;
 
