@@ -1,75 +1,18 @@
-<!-- Testing Sandbox Document -->
 <!DOCTYPE html>
 <html ng-app='app'>
 <head>
   <title>Society Game</title>
 
+    <script src='./bower_components/angular/angular.min.js'></script>
+    <script src='./bower_components/angular-ui-router/release/angular-ui-router.min.js'></script>
+    <script src='./bower_components/angular-socket-io/socket.min.js'></script>
     <script src='./bower_components/socket.io-client/socket.io.js'></script>
 </head>
 
 <body>
+  <div ui-view></div>
 
-  <button onclick="rich()">rich</button>
-  <button onclick="bum()">bum</button>
-  <button onclick="tax()">tax</button>
-  <button onclick="cop()">cop</button>
-  <button onclick="jail()">jail</button>
 
-  <script>
-    var socket = io.connect();
-
-    socket.on('gameReady', function(data) {
-      console.log('gameReady heard! gameReady = ', data);
-    });
-
-    socket.on('roundResult', function(data) {
-      console.log('roundResult heard! data = ', data);
-    });
-
-    socket.on('newRound', function(data) {
-      console.log('newRound heard! data = ', data);
-    });
-
-    socket.on('matchResult', function(data) {
-      console.log('matchResult heard! data = ', data);
-    });
-
-    socket.on('err', function(data) {
-      console.log('err heard! data = ', data);
-    });
-
-    console.log('emitting queue');
-    socket.emit('queue');
-
-    function rich() {
-      socket.emit('choice', {
-        choice: 'rich'
-      });
-    }
-
-    function bum() {
-      socket.emit('choice', {
-        choice: 'bum'
-      });
-    }
-
-    function tax() {
-      socket.emit('choice', {
-        choice: 'tax'
-      });
-    }
-
-    function cop() {
-      socket.emit('choice', {
-        choice: 'cop'
-      });
-    }
-
-    function jail() {
-      socket.emit('choice', {
-        choice: 'jail'
-      });
-    }
-  </script>
+  <script src='./dist/built.js'></script>
 </body>
 </html>

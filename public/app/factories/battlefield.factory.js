@@ -8,17 +8,24 @@ function bfFactoryFunction($http, socketFactory) {
   //flags at top and then factory, then function declarations
   var emit = socketFactory.emit;
   var on = socketFactory.on;
-
-  listeners();
+  var startingHealth = {
+    rich: 0,
+    bum: 0,
+    tax: 0,
+    cop: 0,
+    jail: 0
+  };
 
   var state = {
     choices: ['rich', 'bum', 'tax', 'cop', 'jail'],
     results: false,
     playerId: false,
-    opponentId: false,
     playerChoice: '',
+    opponentId: false,
     opponentChoice: '',
-    winner: null
+    roundWinner: null,
+    playerHealth: Object.assign({}, startingHealth),
+    opponentHealth: Object.assign({}, startingHealth)
   };
 
   var factory = {
@@ -26,6 +33,8 @@ function bfFactoryFunction($http, socketFactory) {
     setChoice: setChoice,
     get: get
   };
+
+  listeners();
 
   return factory;
 
@@ -45,15 +54,25 @@ function bfFactoryFunction($http, socketFactory) {
       // store player IDs in state
       state.playerId = resp.playerId;
       state.opponentId = (resp.playerId === 1) ? 2 : 1;
+
+      // store the starting health as given by the server
+      for (var choice in resp.startingHealth) {
+        state.playerHealth[choice] += resp.startingHealth[choice];
+        state.opponentHealth[choice] += resp.startingHealth[choice];
+      }
     });
 
     on('roundResult', function(resp){
-        console.log("this is the round result", resp);
+      console.log("this is the round result", resp);
 
-        state.results = resp;
-        state.opponentChoice = resp.choices[state.opponentId];
-        state.winner = resp.choices[resp.winner];
-        console.log('state.winner = ', state.winner);
+      state.results = resp;
+      state.opponentChoice = resp.choices[state.opponentId];
+      state.roundWinner = resp.choices[resp.roundWinner];
+
+      for (var choice in resp.health[1]) {
+        state.playerHealth[choice] = resp.health[1][choice];
+        state.opponentHealth[choice] = resp.health[2][choice];
+      }
     });
 
     emit('queue');
