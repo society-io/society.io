@@ -16,7 +16,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use(
-    new FacebookStrategy({
+    new FacebookStrategy({ // If server/auth/config.js is missing, add a new one w/ API keys
     clientID: facebookAuth.clientID,
     clientSecret: facebookAuth.clientSecret,
     callbackURL: facebookAuth.callbackURL,
