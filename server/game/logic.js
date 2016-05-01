@@ -1,119 +1,75 @@
+var evalRound = require('./evalRound');
+
 var Gamelogic = function(game) {
   this.game = game;
 };
 
-Gamelogic.prototype.evalRound = function(choice1, choice2) {
-  var result;
-
-  console.log('choice1 = ', choice1);
-  console.log('choice2 = ', choice2);
-
-  switch (choice1.toLowerCase() + '|' + choice2.toLowerCase()) {
-    // Tie Cases
-    case 'rich|rich':
-    case 'bum|bum':
-    case 'tax|tax':
-    case 'cop|cop':
-    case 'jail|jail':
-      result = 0;
-      break;
-
-    /**
-     *  rich
-     *
-     *  Beats: bum, cop
-     *  Loses: jail, taxes
-     */
-    case 'rich|bum':
-    case 'rich|cop':
-      result = 1;
-      break;
-    case 'rich|jail':
-    case 'rich|tax':
-      result = 2;
-      break;
-
-    /**
-     *  bum
-     *
-     *  Beats: jail, tax
-     *  Loses: cop, rich
-     */
-    case 'bum|jail':
-    case 'bum|tax':
-      result = 1;
-      break;
-    case 'bum|cop':
-    case 'bum|rich':
-      result = 2;
-      break;
-
-    /**
-     *  tax
-     *
-     *  Beats: cop, rich
-     *  Loses: jail, bum
-     */
-    case 'tax|cop':
-    case 'tax|rich':
-      result = 1;
-      break;
-    case 'tax|jail':
-    case 'tax|bum':
-      result = 2;
-      break;
-
-    /**
-     *  cop
-     *
-     *  Beats: jail, bum
-     *  Loses: tax, rich
-     */
-    case 'cop|jail':
-    case 'cop|bum':
-      result = 1;
-      break;
-    case 'cop|tax':
-    case 'cop|rich':
-      result = 2;
-      break;
-
-    /**
-     *  jail
-     *
-     *  Beats: rich, tax
-     *  Loses: bum, cop
-     */
-    case 'jail|rich':
-    case 'jail|tax':
-      result = 1;
-      break;
-    case 'jail|bum':
-    case 'jail|cop':
-      result = 2;
-      break;
-  }
-
-  console.log('returning result. result = ', result);
-  return result;
-};
-
 Gamelogic.prototype.choiceSubmitted = function() {
   var game = this.game;
+  var p1choice = game.player1.choice;
+  var p2choice = game.player2.choice;
 
   // if both players have made a choice, evaluate round winner
-  if (game.player1.choice && game.player2.choice) {
-    console.log('player1 choice = ', game.player1.choice);
-    console.log('player2 choice = ', game.player2.choice);
-    game.roundWinner = game.logic.evalRound(game.player1.choice, game.player2.choice);
+  if (p1choice && p2choice) {
+    console.log('player1 choice = ', p1choice);
+    console.log('player2 choice = ', p2choice);
+    game.roundWinner = evalRound(p1choice, p2choice);
+
+    // update the health of the round loser
+    if (game.roundWinner === 1) {
+      game.player2.updateHealth(p2choice);
+    } else if (game.roundWinner === 2) {
+      game.player1.updateHealth(p1choice);
+    }
+
+    // emit round result to client
     game.emit('roundResult', {
       winner: game.roundWinner,
       choices: {
-        1: game.player1.choice,
-        2: game.player2.choice
-      }
+        1: p1choice,
+        2: p2choice
+      },
+      health: game.health
     });
+
+    // check if match is over
+    if (this.isMatchOver()) {
+      game.matchOver = true;
+      game.matchWinner = game.roundWinner;
+
+      game.emit('matchResult', {
+        winner: game.roundWinner
+      });
+      game.terminate('gameOver');
+
+    // if not, reset choices and emit newRound to players
+    } else {
+      game.player1.resetChoice();
+      game.player2.resetChoice();
+      game.emit('newRound', {
+        health: game.health
+      });
+    }
   }
+};
+
+Gamelogic.prototype.isMatchOver = function() {
+  var game = this.game;
+  var zeroCount = 0;
+
+  for (var id in game.health) {
+    for (var choice in game.health[id]) {
+      if (game.health[id][choice] === 0) {
+        zeroCount++;
+      }
+    }
+  }
+
+  if (zeroCount >= 4) {
+    return true;
+  }
+
+  return false;
 };
 
 module.exports = {

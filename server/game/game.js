@@ -1,6 +1,19 @@
 var Gamelogic = require('./logic').Gamelogic;
 var Player = require('./player').Player;
 
+var onDisconnect = function(player) {
+  console.log(player + ' socket disconnected!');
+  this.terminate('a player disconnected.');
+};
+
+var onChoice = function(player, data) {
+  console.log('inside of onChoice ====== ');
+  console.log('player = ', player);
+  console.log('inside of onChoice. data.choice = ', data.choice);
+  console.log('========================= ');
+  this[player].updateChoice(data.choice);
+};
+
 var Game = function(playerSockets) {
   /**
    *  Game state properties (Constructor)
@@ -38,17 +51,13 @@ Game.prototype.init = function() {
    *  The init should be called alongside a game instantiation
    *  Sets up game logic, socket listeners, and player listeners
    */
-
   this.logic = new Gamelogic(this);
 
   // socket listeners
-  this.player1.socket.on('choice', function(data){
-    this.player1.updateChoice(data.choice);
-  }.bind(this));
-
-  this.player2.socket.on('choice', function(data){
-    this.player2.updateChoice(data.choice);
-  }.bind(this));
+  this.player1.socket.on('choice', onChoice.bind(this, 'player1'));
+  this.player2.socket.on('choice', onChoice.bind(this, 'player2'));
+  this.player1.socket.on('disconnect', onDisconnect.bind(this, 'player1'));
+  this.player2.socket.on('disconnect', onDisconnect.bind(this, 'player2'));
 
   // player eventing listeners
   this.playerOn('playerChoiceUpdated', function(player) {
@@ -65,7 +74,7 @@ Game.prototype.init = function() {
 
 Game.prototype.emit = function(event, data, p1data, p2data) {
   /**
-   *  Socket emission to clients
+   *  Socket emission to players
    *
    *  Accepts a data 2nd object OR p1data and p2data objects
    *  If 3rd and 4th argument is passed, we emit 2 separate events to each individual user
@@ -99,7 +108,7 @@ Game.prototype.roundOver = function() {
 };
 
 Game.prototype.terminate = function(reason) {
-  this.emit('matchEnd', {
+  this.emit('matchTerminated', {
     reason: reason
   });
 };

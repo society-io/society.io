@@ -17,21 +17,44 @@ var Player = function(id, socket, events) {
   this.choice = null;
 };
 
+/**
+ *  Choices / Health
+ *
+ *  resetChoice:  resets choice - used when a round winner is determined
+ *  updateChoice: stores the user choice
+ *  updateHealth: subtracts 1 health from the losing choice
+ */
+Player.prototype.resetChoice = function() {
+  this.choice = null;
+};
+
 Player.prototype.updateChoice = function(choice) {
-  // We return a boolean from this function to indicate a successfull choice update
   if (this.choice) {
-    console.error('player ' + this.id + ' player has already submitted a choice!');
+    console.error('player ' + this.id + ' has already submitted a choice!');
     this.err('You\'ve already submitted a choice!');
+  } else if (!this.health[choice]) {
+    console.error('player ' + this.id + ' is out of health for that option.');
+    this.err('You are out of health for that option.');
   } else {
     this.choice = choice;
     this.trigger('playerChoiceUpdated');
   }
 };
 
-// Convenience wrapper functions for socket emissions
+Player.prototype.updateHealth = function(choice) {
+  this.health[choice]--;
+};
+
+/**
+ *  Convenience wrapper functions for socket emissions
+ *
+ *  err:  emit 'err' signal to client
+ *  emit: emit any signal to client
+ */
 Player.prototype.err = function(msg) {
   this.emit('err', { msg: msg });
 };
+
 Player.prototype.emit = function(event, data) {
   this.socket.emit(event, data);
 };
@@ -41,6 +64,7 @@ Player.prototype.trigger = function(event) {
   if (!this.events[event]) {
     console.error(event + ' is not a registered event.');
   } else {
+    // pass a reference of the player into the event listener callback
     this.events[event](this);
   }
 };
