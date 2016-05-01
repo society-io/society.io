@@ -26,6 +26,14 @@
       console.log('roundResult heard! data = ', data);
     });
 
+    socket.on('newRound', function(data) {
+      console.log('newRound heard! data = ', data);
+    });
+
+    socket.on('matchResult', function(data) {
+      console.log('matchResult heard! data = ', data);
+    });
+
     socket.on('err', function(data) {
       console.log('err heard! data = ', data);
     });
