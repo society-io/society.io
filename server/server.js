@@ -7,8 +7,8 @@ var Game = require('./game/game').Game;
 var queue = require('./lobby/queue').Queue;
 var routes = require('./routes/all');
 var passport = require('./auth/passport');
-var users = {}; // { name: socket }
-var rooms = {}; // { joinCode: [socket1, socket2] }
+var usersSockets = {}; // { name: socket }
+var privateGames = {}; // { joinCode: [socket1, socket2] }
 
 var port = process.env.PORT || 3000;
 
@@ -40,10 +40,10 @@ io.on('connection', function(socket){
   });
 
   // Save User socket into users object, to be used for private games
-  socket.on('newUser', function(data, socket) {
+  socket.on('newUser', function(data, socket){
     // Insert socket into users as a value for the user's name key
-    users[data.name] = socket;
-    console.log(users);
+    usersSockets[data.name] = socket;
+    console.log(usersSockets);
   });
 
   socket.on('privateGame', function(data){
@@ -56,8 +56,8 @@ io.on('connection', function(socket){
 });
 
 module.exports = {
-  users: users,
-  rooms: rooms
+  users: usersSockets,
+  privateGames: privateGames
 };
 
 //***************************************************//
