@@ -7,6 +7,9 @@ var Game = require('./game/game').Game;
 var queue = require('./lobby/queue').Queue;
 var routes = require('./routes/all');
 var passport = require('./auth/passport');
+var users = {}; // { name: socket }
+var rooms = {}; // { joinCode: [socket1, socket2] }
+
 var port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
@@ -16,10 +19,11 @@ app.use(passport.session());
 server.listen(port);
 console.log('Server Running, Port: ', port);
 
-// app.use('/auth', routes.auth);
+app.use('/auth', routes.auth);
 
 io.on('connection', function(socket){
   console.log('*Socket Connected*');
+
   socket.on('queue', function() {
     console.log('heard queue event');
     console.log(queue);
@@ -34,7 +38,27 @@ io.on('connection', function(socket){
       game.init();
     }
   });
+
+  // Save User socket into users object, to be used for private games
+  socket.on('newUser', function(data, socket) {
+    // Insert socket into users as a value for the user's name key
+    users[data.name] = socket;
+    console.log(users);
+  });
+
+  socket.on('privateGame', function(data){
+   // Receive usernames from clients
+   // Use usernames to get sockets from users obj
+   // use sockets to instantiate a private game
+
+  });
+
 });
+
+module.exports = {
+  users: users,
+  rooms: rooms
+};
 
 //***************************************************//
 
@@ -62,3 +86,4 @@ io.on('connection', function(socket){
       // calls game.evaluateWinner(),
         // the game method returns the winner,
         // sends the winner as a socket.emit message.
+
