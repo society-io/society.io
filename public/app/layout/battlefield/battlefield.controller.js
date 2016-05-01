@@ -19,8 +19,12 @@
       return bf.get(person + 'Choice');
     };
 
-    vm.getWinner = function() {
-      return bf.get('winner');
+    vm.getHealth = function(person) {
+      return bf.get(person + 'Health');
+    };
+
+    vm.getRoundWinner = function() {
+      return bf.get('roundWinner');
     };
   }
 })();

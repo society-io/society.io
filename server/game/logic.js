@@ -24,7 +24,7 @@ Gamelogic.prototype.choiceSubmitted = function() {
 
     // emit round result to client
     game.emit('roundResult', {
-      winner: game.roundWinner,
+      roundWinner: game.roundWinner,
       choices: {
         1: p1choice,
         2: p2choice
