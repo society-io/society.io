@@ -33,7 +33,9 @@
   </tr>
 </table>
 
-<button ng-disabled="Battlefield.getSubmitted()" ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice)">{{choice}}</button>
+<h1 ng-show="Battlefield.get('matchOver')">Game over!</h1>
+
+<button ng-disabled="Battlefield.get('submitted') || Battlefield.get('matchOver')" ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice)">{{choice}}</button>
 
 <p>Your Health:</p>
 <ul>
@@ -52,4 +54,4 @@
 <div>{{Battlefield.getChoice('opponent')}}</div>
 
 <p>Round Winner:</p>
-<div>{{Battlefield.getRoundWinner()}}</div>
+<div>{{Battlefield.get('roundWinner')}}</div>
