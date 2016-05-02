@@ -44,7 +44,7 @@ function usertoDB(accessToken, refreshToken, profile, done) {
           if(err) {
             throw err;
           }
-          console.log(newUser);
+          console.log(user);
           return done(null, user);
         });
       }
