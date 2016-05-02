@@ -23,6 +23,7 @@ function bfFactoryFunction($http, socketFactory) {
     playerChoice: '',
     opponentId: false,
     opponentChoice: '',
+    submitted: false,
     roundWinner: null,
     playerHealth: Object.assign({}, startingHealth),
     opponentHealth: Object.assign({}, startingHealth)
@@ -41,6 +42,7 @@ function bfFactoryFunction($http, socketFactory) {
   function setChoice(userChoice) {
     emit('choice', {choice: userChoice});
     state.playerChoice = userChoice;
+    state.submitted = true;
   }
 
   function get(name) {
@@ -68,10 +70,11 @@ function bfFactoryFunction($http, socketFactory) {
       state.results = resp;
       state.opponentChoice = resp.choices[state.opponentId];
       state.roundWinner = resp.choices[resp.roundWinner];
+      state.submitted = false;
 
       for (var choice in resp.health[1]) {
-        state.playerHealth[choice] = resp.health[1][choice];
-        state.opponentHealth[choice] = resp.health[2][choice];
+        state.playerHealth[choice] = resp.health[state.playerId][choice];
+        state.opponentHealth[choice] = resp.health[state.opponentId][choice];
       }
     });
 
