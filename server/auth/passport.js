@@ -32,16 +32,20 @@ function usertoDB(accessToken, refreshToken, profile, done) {
       if(user) {
         return done(null, user);
       } else {
-        var newUser = new User();
-        newUser.fbid = profile.id;
-        newUser.name = profile.displayName;
-        newUser.email = profile.emails[0].value;
-        newUser.save(function(err){
+       user= new User({
+        fbid: profile.id,
+        name: profile.displayName,
+        email: profile.emails[0].value,
+        mmr: 1600,
+        wins: 0,
+	      losses:0
+	      });
+        user.save(function(err){
           if(err) {
             throw err;
           }
           console.log(newUser);
-          return done(null, newUser);
+          return done(null, user);
         });
       }
     });
