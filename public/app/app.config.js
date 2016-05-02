@@ -5,7 +5,6 @@ angular
 
 function config($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('lobby');
-
 	$stateProvider
 	  .state('lobby', {
 	  	url: '/lobby',
@@ -18,5 +17,11 @@ function config($stateProvider, $urlRouterProvider) {
 	  	templateUrl: '../app/layout/battlefield/battlefield.html',
 	  	controller: 'BattlefieldController',
 	  	controllerAs: 'Battlefield'
-	  });
+	  })
+		.state('login', {
+			url: '/login',
+			templateUrl: '../app/layout/login/login.html',
+			controller: 'LoginController',
+			controllerAs: 'Login'
+	}); 
 }
