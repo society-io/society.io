@@ -8,21 +8,21 @@ var queue = require('./lobby/queue').Queue;
 var routes = require('./routes/all');
 var passport = require('./auth/passport');
 var privateGameListeners = require('./lobby/privateGame').privateGameListeners;
-​
+
 var port = process.env.PORT || 3000;
-​
+
 app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
-​
+
 server.listen(port);
 console.log('Server Running, Port: ', port);
-​
+
 app.use('/auth', routes.auth);
-​
+
 io.on('connection', function(socket){
   console.log('*Socket Connected*');
-​
+
   socket.on('queue', function() {
     console.log('heard queue event');
     console.log(queue);
@@ -37,7 +37,7 @@ io.on('connection', function(socket){
       game.init();
     }
   });
-​
+
   privateGameListeners(socket);
-​
+
 });
