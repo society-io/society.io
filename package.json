@@ -5,8 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "test": "grunt --verbose",
-    "start": "node server/server.js",
-    "postinstall": "bower install && grunt"
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
