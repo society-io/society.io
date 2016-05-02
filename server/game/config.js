@@ -1,4 +1,4 @@
-var startingHealth = 3;
+var startingHealth = 1;
 var options = {
   rich: startingHealth,
   bum: startingHealth,
