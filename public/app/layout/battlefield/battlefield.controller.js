@@ -6,7 +6,7 @@
 
   BattlefieldController.$inject = ['battlefieldFactory'];
 
-  function BattlefieldController(battlefieldFactory) {
+  function BattlefieldController(battlefieldFactory, $scope) {
 
     // abbreviate
     var vm = this;
@@ -23,12 +23,6 @@
       return bf.get(person + 'Health');
     };
 
-    vm.getRoundWinner = function() {
-      return bf.get('roundWinner');
-    };
-
-    vm.getSubmitted = function() {
-      return bf.get('submitted');
-    };
+    vm.get = bf.get;
   }
 })();

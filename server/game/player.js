@@ -32,7 +32,7 @@ Player.prototype.updateChoice = function(choice) {
   if (this.choice) {
     console.error('player ' + this.id + ' has already submitted a choice!');
     this.err('You\'ve already submitted a choice!');
-  } else if (!this.health[choice]) {
+  } else if (this.health[choice] === 0) {
     console.error('player ' + this.id + ' is out of health for that option.');
     this.err('You are out of health for that option.');
   } else {
@@ -42,7 +42,18 @@ Player.prototype.updateChoice = function(choice) {
 };
 
 Player.prototype.updateHealth = function(choice) {
-  this.health[choice]--;
+  console.log('updateHealth called. choice = ', choice);
+  if (!choice || choice === 'noChoice') {
+    for (var option in this.health) {
+      if (this.health[option] > 0) {
+        console.log('subtracing ' + option + ' from health.');
+        this.health[option]--;
+        return;
+      }
+    }
+  } else {
+    this.health[choice]--;
+  }
 };
 
 /**

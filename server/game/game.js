@@ -1,18 +1,6 @@
 var Gamelogic = require('./logic').Gamelogic;
 var Player = require('./player').Player;
-
-var onDisconnect = function(player) {
-  console.log(player + ' socket disconnected!');
-  this.terminate('a player disconnected.');
-};
-
-var onChoice = function(player, data) {
-  console.log('inside of onChoice ====== ');
-  console.log('player = ', player);
-  console.log('inside of onChoice. data.choice = ', data.choice);
-  console.log('========================= ');
-  this[player].updateChoice(data.choice);
-};
+var listeners = require('./listeners');
 
 var Game = function(playerSockets) {
   /**
@@ -54,10 +42,12 @@ Game.prototype.init = function() {
   this.logic = new Gamelogic(this);
 
   // socket listeners
-  this.player1.socket.on('choice', onChoice.bind(this, 'player1'));
-  this.player2.socket.on('choice', onChoice.bind(this, 'player2'));
-  this.player1.socket.on('disconnect', onDisconnect.bind(this, 'player1'));
-  this.player2.socket.on('disconnect', onDisconnect.bind(this, 'player2'));
+  this.player1.socket.on('choice', listeners.onChoice.bind(this, 'player1'));
+  this.player2.socket.on('choice', listeners.onChoice.bind(this, 'player2'));
+  this.player1.socket.on('noChoice', listeners.onNoChoice.bind(this, 'player1'));
+  this.player2.socket.on('noChoice', listeners.onNoChoice.bind(this, 'player2'));
+  this.player1.socket.on('disconnect', listeners.onDisconnect.bind(this, 'player1'));
+  this.player2.socket.on('disconnect', listeners.onDisconnect.bind(this, 'player2'));
 
   // player eventing listeners
   this.playerOn('playerChoiceUpdated', function(player) {
@@ -111,6 +101,8 @@ Game.prototype.terminate = function(reason) {
   this.emit('matchTerminated', {
     reason: reason
   });
+  this.player1.socket.disconnect();
+  this.player2.socket.disconnect();
 };
 
 Game.prototype.playerOn = function(event, cb) {
