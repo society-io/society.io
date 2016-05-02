@@ -37,6 +37,9 @@
 
 <button ng-disabled="Battlefield.get('submitted') || Battlefield.get('matchOver')" ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice)">{{choice}}</button>
 
+<p>Timer</p>
+<h3>{{Battlefield.get('time')}}</h3>
+
 <p>Your Health:</p>
 <ul>
   <li ng-repeat="(choice, health) in Battlefield.getHealth('player')">{{choice}}: {{health}}</li>

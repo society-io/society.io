@@ -11,7 +11,14 @@ var onChoice = function(player, data) {
   this[player].updateChoice(data.choice);
 };
 
+var onNoChoice = function(player) {
+  console.log('inside of onNoChoice =====');
+  console.log('player = ', player);
+  this[player].updateChoice('noChoice');
+};
+
 module.exports = {
   onDisconnect: onDisconnect,
-  onChoice: onChoice
+  onChoice: onChoice,
+  onNoChoice: onNoChoice
 };

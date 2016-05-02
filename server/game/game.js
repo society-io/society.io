@@ -44,6 +44,8 @@ Game.prototype.init = function() {
   // socket listeners
   this.player1.socket.on('choice', listeners.onChoice.bind(this, 'player1'));
   this.player2.socket.on('choice', listeners.onChoice.bind(this, 'player2'));
+  this.player1.socket.on('noChoice', listeners.onNoChoice.bind(this, 'player1'));
+  this.player2.socket.on('noChoice', listeners.onNoChoice.bind(this, 'player2'));
   this.player1.socket.on('disconnect', listeners.onDisconnect.bind(this, 'player1'));
   this.player2.socket.on('disconnect', listeners.onDisconnect.bind(this, 'player2'));
 

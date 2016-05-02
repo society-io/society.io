@@ -1,8 +1,13 @@
 var evalRound = function(choice1, choice2) {
   var result;
 
-  console.log('choice1 = ', choice1);
-  console.log('choice2 = ', choice2);
+  if (choice1 === 'noChoice' && choice2 === 'noChoice') {
+    return 3;
+  } else if (choice1 === 'noChoice') {
+    return 2;
+  } else if (choice2 === 'noChoice') {
+    return 1;
+  }
 
   switch (choice1.toLowerCase() + '|' + choice2.toLowerCase()) {
     // Tie Cases
