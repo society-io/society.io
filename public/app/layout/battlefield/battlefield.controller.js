@@ -6,7 +6,7 @@
 
   BattlefieldController.$inject = ['battlefieldFactory'];
 
-  function BattlefieldController(battlefieldFactory) {
+  function BattlefieldController(battlefieldFactory, $scope) {
 
     // abbreviate
     var vm = this;
