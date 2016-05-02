@@ -67,8 +67,8 @@ Game.prototype.init = function() {
   // emit game ready to start game
   console.log('emitting gameready');
   this.emit('gameReady', null,
-    { playerId: this.player1.id },
-    { playerId: this.player2.id }
+    { playerId: this.player1.id, startingHealth: this.player1.health },
+    { playerId: this.player2.id, startingHealth: this.player2.health }
   );
 };
 

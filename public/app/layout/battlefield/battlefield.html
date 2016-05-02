@@ -1,12 +1,55 @@
 <div>battlefield view</div>
 
-<button ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice)">{{choice}}</button>
+<table border="1">
+  <tr>
+    <td>Options:</td>
+    <td>Wins against:</td>
+    <td>Loses against:</td>
+  </tr>
+  <tr>
+    <td>rich</td>
+    <td>bum, cop</td>
+    <td>jail, tax</td>
+  </tr>
+  <tr>
+    <td>bum</td>
+    <td>jail, tax</td>
+    <td>cop, rich</td>
+  </tr>
+  <tr>
+    <td>tax</td>
+    <td>cop, rich</td>
+    <td>jail, bum</td>
+  </tr>
+  <tr>
+    <td>cop</td>
+    <td>jail, bum</td>
+    <td>tax, rich</td>
+  </tr>
+  <tr>
+    <td>jail</td>
+    <td>rich, tax</td>
+    <td>bum, cop</td>
+  </tr>
+</table>
+
+<button ng-disabled="Battlefield.getSubmitted()" ng-repeat="choice in Battlefield.choices" ng-click="Battlefield.setChoice(choice)">{{choice}}</button>
+
+<p>Your Health:</p>
+<ul>
+  <li ng-repeat="(choice, health) in Battlefield.getHealth('player')">{{choice}}: {{health}}</li>
+</ul>
+
+<p>Opponent Health:</p>
+<ul>
+  <li ng-repeat="(choice, health) in Battlefield.getHealth('opponent')">{{choice}}: {{health}}</li>
+</ul>
 
 <p>This is your choice:</p>
-<div ng-show="Battlefield.getChoice('player')">{{Battlefield.getChoice('player')}}</div>
+<div>{{Battlefield.getChoice('player')}}</div>
 
 <p>This is your opponent's choice:</p>
-<div ng-show="Battlefield.getChoice('opponent')">{{Battlefield.getChoice('opponent')}}</div>
+<div>{{Battlefield.getChoice('opponent')}}</div>
 
-<p>Winner:</p>
-<div ng-show="Battlefield.getWinner()">{{Battlefield.getWinner()}}</div>
+<p>Round Winner:</p>
+<div>{{Battlefield.getRoundWinner()}}</div>
