@@ -4,7 +4,7 @@ angular
 
 
 function config($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('lobby');
+	$urlRouterProvider.otherwise('login');
 	$stateProvider
 	  .state('lobby', {
 	  	url: '/lobby',
@@ -23,5 +23,5 @@ function config($stateProvider, $urlRouterProvider) {
 			templateUrl: '../app/layout/login/login.html',
 			controller: 'LoginController',
 			controllerAs: 'Login'
-	}); 
+	});
 }
