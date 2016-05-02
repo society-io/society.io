@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "test": "grunt --verbose",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "postinstall": "bower install && grunt"
   },
   "repository": {
     "type": "git",
@@ -34,8 +35,8 @@
       "ghooks": {
         "pre-commit": "grunt jshint",
         "post-checkout": "grunt concat",
-        "post-merge": "npm install && grunt concat",
-        "post-rewrite": "npm install && grunt concat"
+        "post-merge": "npm install",
+        "post-rewrite": "npm install"
       }
     }
 }

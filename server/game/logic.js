@@ -65,6 +65,8 @@ Gamelogic.prototype.isMatchOver = function() {
     }
   }
 
+  console.log('zeroCount = ', zeroCount);
+
   if (zeroCount >= 4) {
     return true;
   }

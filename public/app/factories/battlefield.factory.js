@@ -2,9 +2,9 @@ angular
   .module('app')
   .factory('battlefieldFactory', bfFactoryFunction);
 
-bfFactoryFunction.$inject = ['$http', 'socketFactory']; //injections go inside brackets
+bfFactoryFunction.$inject = ['$http', 'socketFactory', '$state']; //injections go inside brackets
 
-function bfFactoryFunction($http, socketFactory) {
+function bfFactoryFunction($http, socketFactory, $state) {
   //flags at top and then factory, then function declarations
   var emit = socketFactory.emit;
   var on = socketFactory.on;
@@ -25,6 +25,7 @@ function bfFactoryFunction($http, socketFactory) {
     opponentChoice: '',
     submitted: false,
     roundWinner: null,
+    matchOver: false,
     playerHealth: Object.assign({}, startingHealth),
     opponentHealth: Object.assign({}, startingHealth)
   };
@@ -76,6 +77,14 @@ function bfFactoryFunction($http, socketFactory) {
         state.playerHealth[choice] = resp.health[state.playerId][choice];
         state.opponentHealth[choice] = resp.health[state.opponentId][choice];
       }
+    });
+
+    on('matchResult', function(resp) {
+      state.matchOver = true;
+      setTimeout(function() {
+        console.log('hi');
+        $state.go('lobby');
+      }, 1000);
     });
 
     emit('queue');
