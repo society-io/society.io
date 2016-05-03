@@ -46,7 +46,7 @@ function usertoDB(accessToken, refreshToken, profile, done) {
             throw err;
           }
           // Store this user's fbid to associate it with this user's socket
-          userFBID = user.fbid
+          userFBID = user.fbid;
           return done(null, user);
         });
       }
