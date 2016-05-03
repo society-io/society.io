@@ -1,0 +1,48 @@
+@import url(https://fonts.googleapis.com/css?family=Bree+Serif);
+
+.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.centered {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  /*border: 2px solid white;*/
+/*  height: 300px;
+  width: 300px;*/
+}
+
+.logo {
+	font-family: 'Bree Serif', serif;
+	text-align: center;
+	font-size: 400%;
+	/*height: 50%;*/
+	color: white;
+}
+
+.fb-btn {
+	text-align: center;
+}
+
+
+
+/*.fb-img {
+	height: 115px;
+	width: 240px;
+}*/
+
+
