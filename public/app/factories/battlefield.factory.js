@@ -21,16 +21,13 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
     time: 15,
     choices: ['rich', 'bum', 'tax', 'cop', 'jail'],
     results: false,
-    playerId: false,
-    playerChoice: '',
-    opponentId: false,
-    opponentChoice: '',
     submitted: false,
     roundWinner: null,
     matchOver: false,
-    playerHealth: Object.assign({}, startingHealth),
-    opponentHealth: Object.assign({}, startingHealth)
+    player: false,
+    opponent: false
   };
+
 
   var factory = {
     emit: emit,
@@ -41,6 +38,14 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
   listeners();
 
   return factory;
+
+  //var player = new player(1);
+  //var opponent = new player(2);
+  function Player(id) {
+    this.id = id;
+    this.choice = '';
+    health = Object.assign({}, startingHealth);
+  }
 
   function setChoice(userChoice) {
     console.log('setChoice called. userChoice = ', userChoice);
@@ -92,7 +97,6 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
       console.log('Game ready: ', resp);
 
       boardReset();
-
       // store player IDs in state
       state.playerId = resp.playerId;
       state.opponentId = (resp.playerId === 1) ? 2 : 1;
