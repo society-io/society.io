@@ -14,7 +14,16 @@
 
 		  function listeners() {
 
-				on('matchReady',function(){
+				on('matchReady',function(resp){
+					/*
+					//$timeout here
+					resp = {
+            player1:
+            player1mmr:
+            player2:
+            player2mmr:
+					}
+					*/
 					$state.go('/battlefield');
 				});
 
