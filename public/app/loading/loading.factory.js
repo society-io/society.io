@@ -16,7 +16,7 @@
 
 				on('matchReady',function(resp){
 					/*
-					//$timeout here
+					//insert $timeout here
 					resp = {
             player1:
             player1mmr:
