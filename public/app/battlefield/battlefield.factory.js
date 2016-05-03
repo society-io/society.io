@@ -136,7 +136,6 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
       }, 1000);
     });
 
-    emit('queue');
   }
 
 }
