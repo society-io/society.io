@@ -21,8 +21,9 @@ passport.use(
     clientID: facebookAuth.clientID,
     clientSecret: facebookAuth.clientSecret,
     callbackURL: facebookAuth.callbackURL,
-    profileFields: ["id", "displayName", "emails"]
+    profileFields: ["id", "displayName", "emails", "picture"]
   }, usertoDB));
+
 
 function usertoDB(accessToken, refreshToken, profile, done) {
   process.nextTick(function(){
@@ -37,6 +38,7 @@ function usertoDB(accessToken, refreshToken, profile, done) {
         fbid: profile.id,
         name: profile.displayName,
         email: profile.emails[0].value,
+        photo: fbProfile.photos[0].value,
         mmr: 1600,
         wins: 0,
 	      losses:0

@@ -2,21 +2,45 @@ angular
   .module('app')
   .factory('lobbyFactory', lobbyFactory);
 
-lobbyFactory.$inject = []; //injections go inside brackets
+	lobbyFactory.$inject = ['socketFactory', '$state'];
 
-function lobbyFactory() {
+	function lobbyFactory(socketFactory, $state) {
+		var emit = socketFactory.emit;
+		var on = socketFactory.on;
 
+		return {
+			joinQueue: joinQueue,
+			newPrivateGame: newPrivateGame,
+			joinPrivateGame: joinPrivateGame, 
+			queueGameInit: queueGameInit, 
+			privateGameInit: privateGameInit
+		};
+		
+		function joinQueue() {
+			emit('queue');
+			console.log('queue event emitted!');
+		}
 
-  //flags at top and then factory, then function declarations
+		function newPrivateGame(){
+			emit('newPrivateGame');
+			console.log('newPrivateGame event emitted!');
+		}
 
-	return {
-
-	};
-  
-
-  //expose factory first; declare functions below
-
-  function name() {
-  	console.log("battlefield name factory function!");
-  }
-}
+		function joinPrivateGame(){
+			emit('joinPrivateGame');
+			console.log('joinPrivateGame event emitted!');
+		}
+		
+		function privateGameInit() {
+			on('privateGameInitiated', function() {
+				$state.go('/battlefield');
+			});
+		}
+			
+		function queueGameInit() {
+			on('queueGameInitiated',function(){
+				$state.go('/battlefield');
+			});
+		}
+ 
+	}
