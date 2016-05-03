@@ -19,6 +19,7 @@ angular
 		function joinQueue() {
 			emit('queue');
 			console.log('queue event emitted!');
+			$state.go('loading');
 		}
 
 		function newPrivateGame(){
