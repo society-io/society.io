@@ -1,7 +1,7 @@
 (function(){
 
 
-app
+angular
   .module('app')
   .controller('LoadingController', LoadingController);
 
