@@ -5,9 +5,9 @@
 	.module('app')
 	.controller('LobbyController', LobbyController);
 
-	LobbyController.$inject = [ 'lobbyFactory', 'socketFactory'];
+	LobbyController.$inject = [ 'preGameFactory', 'socketFactory'];
 
-	function LobbyController (lobbyFactory, socketFactory) {
+	function LobbyController (preGameFactory, socketFactory) {
 		
 		var vm = this;
 		socketFactory.connectSocket();
