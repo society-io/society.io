@@ -4,8 +4,16 @@ angular
 
 
 function config($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('login');
+
+	$urlRouterProvider.otherwise('auth');
+
 	$stateProvider
+		.state('auth', {
+			url: '/auth',
+			templateUrl: '../app/layout/auth/auth.html',
+			controller: 'AuthController',
+			controllerAs: 'Auth'
+		})
 	  .state('lobby', {
 	  	url: '/lobby',
 	  	templateUrl: '../app/layout/lobby/lobby.html',
@@ -17,11 +25,5 @@ function config($stateProvider, $urlRouterProvider) {
 	  	templateUrl: '../app/layout/battlefield/battlefield.html',
 	  	controller: 'BattlefieldController',
 	  	controllerAs: 'Battlefield'
-	  })
-		.state('login', {
-			url: '/login',
-			templateUrl: '../app/layout/login/login.html',
-			controller: 'LoginController',
-			controllerAs: 'Login'
-	});
+	  });
 }
