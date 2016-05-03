@@ -6,7 +6,7 @@ var db = require('./db/db');
 var Game = require('./game/game').Game;
 var queue = require('./lobby/queue').Queue;
 var routes = require('./routes/all');
-var passport = require('./auth/passport');
+var passport = require('./auth/passport').passport;
 var privateGameListeners = require('./lobby/privateGame').privateGameListeners;
 
 var port = process.env.PORT || 3000;
@@ -21,7 +21,7 @@ console.log('Server Running, Port: ', port);
 app.use('/auth', routes.auth);
 
 io.on('connection', function(socket){
-  console.log('*Socket Connected*');
+  console.log('*New Client Connected*');
 
   socket.on('queue', function() {
     console.log('heard queue event');
