@@ -17,11 +17,15 @@
       };
 
     	listeners();
-    	return {};
+    	return {get: get};
+      
+      function get(keyName) {
+      	return playerInfo[keyName];
+      }
 
 		  function listeners() {
 
-				on('matchReady',function(resp){
+				// on('matchReady',function(resp){
 					/*
 					//insert $timeout here
 					resp = {
@@ -31,8 +35,8 @@
             player2mmr:
 					}
 					*/
-					$state.go('/battlefield');
-				});
+					// $state.go('/battlefield');
+				// });
 
 			}	
     }
