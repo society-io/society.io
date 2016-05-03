@@ -39,7 +39,7 @@ function usertoDB(accessToken, refreshToken, profile, done) {
         name: profile.displayName,
         email: profile.emails[0].value,
         photo: profile.photos[0].value,
-        accessToken: accessToken,
+        accessToken: profile.accessToken,
         mmr: 1600,
         wins: 0,
         losses:0
@@ -49,6 +49,7 @@ function usertoDB(accessToken, refreshToken, profile, done) {
             throw err;
           }
           // Store this user's fbid to associate it with this user's socket
+          console.log('user.accessToken: ', user.accessToken);
           console.log('user.picture: ', user.photo);
           userFBID = user.fbid;
           userPhoto = user.photo;
