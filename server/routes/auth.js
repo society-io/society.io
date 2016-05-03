@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('../auth/passport');
+var passport = require('../auth/passport').passport;
 
 
 // Redirect the user to Facebook for authentication.  When complete,
