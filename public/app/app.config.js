@@ -23,7 +23,7 @@ function config($stateProvider, $urlRouterProvider) {
 	  .state('lobby', {
 	  	url: '/lobby',
 	  	templateUrl: '../app/layout/lobby/lobby.html',
-	  	controller: 'IndexController',
+	  	controller: 'LobbyController',
 	  	controllerAs: 'Lobby'
 	  })
 	  .state('battlefield', {
