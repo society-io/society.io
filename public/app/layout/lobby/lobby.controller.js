@@ -2,11 +2,11 @@
 	'use strict';
 angular
   .module('app')
-  .controller('IndexController', IndexController);
+  .controller('LobbyController', LobbyController);
 
-IndexController.$inject = ['indexFactory', '$state'];
+LobbyController.$inject = ['lobbyFactory', '$state'];
 
-function IndexController(indexFactory, $state) {
+function LobbyController(indexFactory, $state) {
 	/* jshint validthis: true */
 	var vm = this; 
 	vm.goToBf = goToBf;

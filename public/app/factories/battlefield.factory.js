@@ -28,16 +28,16 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
     opponent: false
   };
 
+  listeners();
 
-  var factory = {
+  return {
     emit: emit,
     setChoice: setChoice,
     get: get
   };
 
-  listeners();
 
-  return factory;
+
 
   //var player = new player(1);
   //var opponent = new player(2);

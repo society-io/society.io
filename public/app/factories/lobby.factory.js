@@ -9,11 +9,10 @@ function lobbyFactory() {
 
   //flags at top and then factory, then function declarations
 
-	var state = {
+	return {
 
 	};
   
-	return factory;
 
   //expose factory first; declare functions below
 
