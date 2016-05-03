@@ -5,10 +5,10 @@ angular
   .module('app')
   .controller('LoadingController', LoadingController);
 
-  LoadingController.$inject = ['preGameFactory'];
+  LoadingController.$inject = ['loadingFactory'];
 
-  function LoadingController(preGameFactory) {
-
+  function LoadingController(loadingFactory) {
+    
   }
 
 })();
