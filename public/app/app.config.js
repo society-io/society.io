@@ -14,10 +14,16 @@ function config($stateProvider, $urlRouterProvider) {
 			controller: 'AuthController',
 			controllerAs: 'Auth'
 		})
+		.state('loading', {
+			url: '/loading',
+			templateUrl: '../app/layout/loading/loading.html',
+			controller: 'LoadingController',
+			controllerAs: 'Loading'
+		})
 	  .state('lobby', {
 	  	url: '/lobby',
 	  	templateUrl: '../app/layout/lobby/lobby.html',
-	  	controller: 'IndexController',
+	  	controller: 'LobbyController',
 	  	controllerAs: 'Lobby'
 	  })
 	  .state('battlefield', {

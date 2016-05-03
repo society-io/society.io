@@ -1,19 +1,18 @@
 angular
   .module('app')
-  .factory('indexFactory', indexFactoryFunction);
+  .factory('lobbyFactory', lobbyFactory);
 
-indexFactoryFunction.$inject = ['$http']; //injections go inside brackets
+lobbyFactory.$inject = []; //injections go inside brackets
 
-function indexFactoryFunction($http) {
-	var ben = true;  
+function lobbyFactory() {
+
 
   //flags at top and then factory, then function declarations
 
-	var factory = {
-		name: name
+	return {
+
 	};
   
-	return factory;
 
   //expose factory first; declare functions below
 

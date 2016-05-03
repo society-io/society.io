@@ -7,12 +7,11 @@ socketFactory.$inject = ['$rootScope'];
 function socketFactory($rootScope) {
   var socket = io.connect();
   
-  var factory = {
+  return {
     on: on, 
     emit: emit
   };
 
-  return factory;
 
   function on(eventName, callback) {
     socket.on(eventName, function() {
