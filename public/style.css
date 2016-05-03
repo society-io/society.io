@@ -29,16 +29,16 @@
 .logo {
 	font-family: 'Bree Serif', serif;
 	text-align: center;
-	/*font-size: 250%;*/
+	font-size: 400%;
 	/*height: 50%;*/
 	color: white;
 }
 
-.tag {
-	font-family: 'Bree Serif', serif;
+.fb-btn {
 	text-align: center;
-	color: white;
 }
+
+
 
 /*.fb-img {
 	height: 115px;
