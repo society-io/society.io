@@ -6,15 +6,16 @@ var userPics = {}; // { userFBID: userPhoto }
 
 var privateGameListeners = function(socket){
 
-  socket.on('newUser', associateSocketAndPhoto);
+  socket.on('newUser', associateSocketAndPhoto.bind(socket));
 
-  socket.on('newPrivateGame', storePrivateUser1);
+  socket.on('newPrivateGame', storePrivateUser1.bind(socket));
 
-  socket.on('joinPrivateGame', storePrivateUser2AndInitiate);
+  socket.on('joinPrivateGame', storePrivateUser2AndInitiate.bind(socket));
 
 };
 
 var associateSocketAndPhoto = function(){
+  var socket = this;
   usersSockets[userFBID] = socket;
   console.log(userSockets);
   userPics[userFBID] = userPhoto;
@@ -22,18 +23,19 @@ var associateSocketAndPhoto = function(){
 };
 
 var storePrivateUser1 = function(data){
+  var socket = this;
   // Check to see if joinCode Already Exists
   if(!privateGames[data.joinCode]) { // if Not
     // create a tuple for the users' sockets
     var socketsForGame = [];
     // Get the user's socket
-    socketsForGame[0] = retrieveSocket(data.fbid);
+    socketsForGame[0] = retrieveSocket(socket, data.fbid);
     // store a privateGame ready to be initiated within the privateGames obj
     privateGames[data.joinCode] = socketsForGame;
     // Tell Client that the Game is waiting for player 2 to enter joinCode
       // you could choose to show the user a "loading" view.
       // send Client the picture of the loaded user
-    var player1Pic = retrievePicture(data.fbid);
+    var player1Pic = retrievePicture(socket, data.fbid);
     socket.emit('waitingForPlayer2', {
       message: 'Great! Waiting on Player 2 to Enter your joinCode!',
       player1: player1Pic
@@ -46,14 +48,15 @@ var storePrivateUser1 = function(data){
 };
 
 var storePrivateUser2AndInitiate = function(data){
+  var socket = this;
   // Crossreference joinCode with those in privateGames
   for(var key in privateGames){
     // if the request joinCode matches one within privateGames
     if(privateGames[data.joinCode]) {
       // retrieve this user's socket,
         // and store within socketsForGame of that privateGame
-      privateGames[data.joinCode][1] = retrieveSocket(data.fbid);
-      var player2pic = retrievePicture(data.fbid);
+      privateGames[data.joinCode][1] = retrieveSocket(socket, data.fbid);
+      var player2pic = retrievePicture(socket, data.fbid);
       socket.emit('player2Pic', {
         player2: player2pic
       });
@@ -66,7 +69,7 @@ var storePrivateUser2AndInitiate = function(data){
   }
 };
 
-var retrieveSocket = function(fbid){
+var retrieveSocket = function(socket, fbid){
   // Crossreference fbid with those in userSockets
   for(var key in userSockets){
     // if the request fbid matches one in userSockets
@@ -82,7 +85,7 @@ var retrieveSocket = function(fbid){
   }
 };
 
-var retrievePicture = function(fbid){
+var retrievePicture = function(socket, fbid){
   // Crossreference fbid with those in userPics
   for(var key in userPics){
     // if the request fbid matches one in userPics
