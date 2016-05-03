@@ -1,4 +1,4 @@
-var userFBID = require('./auth/passport').userFBID;
+var userFBID = require('../auth/passport').userFBID;
 var userSockets = {}; // { userFBID: socket }
 var privateGames = {}; // { joinCode: [socket1, socket2] }
 
