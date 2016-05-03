@@ -4,8 +4,16 @@ angular
 
 
 function config($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('login');
+
+	$urlRouterProvider.otherwise('signup');
+
 	$stateProvider
+		.state('signup', {
+			url: '/signup',
+			templateUrl: '../app/layout/signup/signup.html',
+			controller: 'SignupController',
+			controllerAs: 'Signup'
+		})
 	  .state('lobby', {
 	  	url: '/lobby',
 	  	templateUrl: '../app/layout/lobby/lobby.html',
