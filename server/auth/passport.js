@@ -2,6 +2,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookAuth = require('./config').facebookAuth;
 var User = require('../db/user/userModel');
+var userFBID = null;
 
 // used to serialize the user for the session
 passport.serializeUser(function(user, done) {
@@ -32,7 +33,7 @@ function usertoDB(accessToken, refreshToken, profile, done) {
       if(user) {
         return done(null, user);
       } else {
-       user= new User({
+       user = new User({
         fbid: profile.id,
         name: profile.displayName,
         email: profile.emails[0].value,
@@ -44,7 +45,8 @@ function usertoDB(accessToken, refreshToken, profile, done) {
           if(err) {
             throw err;
           }
-          console.log(user);
+          // Store this user's fbid to associate it with this user's socket
+          userFBID = user.fbid;
           return done(null, user);
         });
       }
@@ -52,4 +54,4 @@ function usertoDB(accessToken, refreshToken, profile, done) {
   });
 }
 
-module.exports = passport;
+module.exports = {passport: passport, userFBID: userFBID};

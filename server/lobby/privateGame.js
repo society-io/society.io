@@ -1,9 +1,10 @@
-var usersSockets = {}; // { name: socket }
+var userFBID = require('./auth/passport').userFBID;
+var userSockets = {}; // { userFBID: socket }
 var privateGames = {}; // { joinCode: [socket1, socket2] }
 
 var privateGameListeners = function(socket){
 
-  socket.on('newUser', storeSocket);
+  socket.on('newUser', associateSocket);
 
   socket.on('newPrivateGame', storePrivateUser1);
 
@@ -11,9 +12,9 @@ var privateGameListeners = function(socket){
 
 };
 
-var storeSocket = function(data){
-  usersSockets[data.name] = socket;
-  console.log(usersSockets);
+var associateSocket = function(){
+  usersSockets[userFBID] = socket;
+  console.log(userSockets);
 };
 
 var storePrivateUser1 = function(data){
@@ -22,7 +23,7 @@ var storePrivateUser1 = function(data){
     // create a tuple for the users' sockets
     var socketsForGame = [];
     // Get the user's socket
-    socketsForGame[0] = retrieveSocket(data.name);
+    socketsForGame[0] = retrieveSocket(data.fbid);
     // store a privateGame ready to be initiated within the privateGames obj
     privateGames[data.joinCode] = socketsForGame;
     // Tell Client that the Game is waiting for player 2 to enter joinCode
@@ -54,13 +55,13 @@ var storePrivateUser2AndInitiate = function(data){
   }
 };
 
-var retrieveSocket = function(name){
-  // Crossreference name with those in users
-  for(var key in users){
-    // if the request name matches one in users
-    if(users[key] === name) {
+var retrieveSocket = function(fbid){
+  // Crossreference fbid with those in users
+  for(var key in userSockets){
+    // if the request fbid matches one in users
+    if(userSockets[key] === fbid) {
       // get that user's socket
-      return users[key];
+      return userSockets[key];
     } else { // if Not
       // Tell Client that user isn't connected
       socket.emit('error', {
