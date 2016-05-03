@@ -8,7 +8,7 @@ IndexController.$inject = ['indexFactory', '$state'];
 
 function IndexController(indexFactory, $state) {
 	/* jshint validthis: true */
-	var vm = this;
+	var vm = this; 
 	vm.goToBf = goToBf;
 
 
