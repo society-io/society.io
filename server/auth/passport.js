@@ -33,7 +33,7 @@ function usertoDB(accessToken, refreshToken, profile, done) {
       if(user) {
         return done(null, user);
       } else {
-       user= new User({
+       user = new User({
         fbid: profile.id,
         name: profile.displayName,
         email: profile.emails[0].value,
