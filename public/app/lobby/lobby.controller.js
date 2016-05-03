@@ -12,15 +12,15 @@
 		var vm = this;
 		socketFactory.connectSocket();
 
-		vm.queue = lobbyFactory.joinQueue;
+		vm.queue = preGameFactory.joinQueue;
 
-		vm.createGame = lobbyFactory.newPrivateGame;
+		vm.createGame = preGameFactory.newPrivateGame;
 		vm.showCreateGameInput = false;
 		vm.showCreateGameController = function () {
 			vm.showCreateGameInput = true;
 		};
 		
-		vm.joinGame = lobbyFactory.joinPrivateGame;
+		vm.joinGame = preGameFactory.joinPrivateGame;
 		vm.showJoinGameInput = false;
 		vm.showJoinGameController = function () {
 			vm.showJoinGameInput = true;

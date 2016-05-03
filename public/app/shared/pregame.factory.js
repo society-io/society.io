@@ -18,9 +18,9 @@ angular
 		};
 		
     function listeners() {
-    	on('matchReady', function(resp){
-    		console.log('match ready inside listeners, inside preGameFactory');
-    	});
+    	// on('matchReady', function(resp){
+    	// 	console.log('match ready inside listeners, inside preGameFactory');
+    	// });
     }
 
 
