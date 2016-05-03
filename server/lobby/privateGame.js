@@ -1,10 +1,12 @@
 var userFBID = require('../auth/passport').userFBID;
+var userPhoto = require('../auth/passport').userPhoto;
 var userSockets = {}; // { userFBID: socket }
 var privateGames = {}; // { joinCode: [socket1, socket2] }
+var userPics = {}; // { userFBID: userPhoto }
 
 var privateGameListeners = function(socket){
 
-  socket.on('newUser', associateSocket);
+  socket.on('newUser', associateSocketAndPhoto);
 
   socket.on('newPrivateGame', storePrivateUser1);
 
@@ -12,9 +14,11 @@ var privateGameListeners = function(socket){
 
 };
 
-var associateSocket = function(){
+var associateSocketAndPhoto = function(){
   usersSockets[userFBID] = socket;
   console.log(userSockets);
+  userPics[userFBID] = userPhoto;
+  console.log(userPics);
 };
 
 var storePrivateUser1 = function(data){
@@ -28,8 +32,11 @@ var storePrivateUser1 = function(data){
     privateGames[data.joinCode] = socketsForGame;
     // Tell Client that the Game is waiting for player 2 to enter joinCode
       // you could choose to show the user a "loading" view.
+      // send Client the picture of the loaded user
+    var player1Pic = retrievePicture(data.fbid);
     socket.emit('waitingForPlayer2', {
-      message: 'Great! Waiting on Player 2 to Enter your joinCode!'
+      message: 'Great! Waiting on Player 2 to Enter your joinCode!',
+      player1: player1Pic
     });
   } else { // if Yes
     socket.emit('error', {
@@ -45,7 +52,11 @@ var storePrivateUser2AndInitiate = function(data){
     if(privateGames[data.joinCode]) {
       // retrieve this user's socket,
         // and store within socketsForGame of that privateGame
-      privateGames[data.joinCode][1] = retrieveSocket(data.name);
+      privateGames[data.joinCode][1] = retrieveSocket(data.fbid);
+      var player2pic = retrievePicture(data.fbid);
+      socket.emit('player2Pic', {
+        player2: player2pic
+      });
       initiatePrivateGame();
     } else { // if Not
       socket.emit('error', {
@@ -56,12 +67,28 @@ var storePrivateUser2AndInitiate = function(data){
 };
 
 var retrieveSocket = function(fbid){
-  // Crossreference fbid with those in users
+  // Crossreference fbid with those in userSockets
   for(var key in userSockets){
-    // if the request fbid matches one in users
+    // if the request fbid matches one in userSockets
     if(userSockets[key] === fbid) {
       // get that user's socket
       return userSockets[key];
+    } else { // if Not
+      // Tell Client that user isn't connected
+      socket.emit('error', {
+        message: 'error! User socket NOT connected!'
+      });
+    }
+  }
+};
+
+var retrievePicture = function(fbid){
+  // Crossreference fbid with those in userPics
+  for(var key in userPics){
+    // if the request fbid matches one in userPics
+    if(userPics[key] === fbid) {
+      // get that user's picture url
+      return userPics[key];
     } else { // if Not
       // Tell Client that user isn't connected
       socket.emit('error', {
@@ -78,8 +105,7 @@ var initiatePrivateGame = function(data){
   privateGame.init();
   // Tell the Clients that a privateGame has been created & initiated
   socket.emit('privateGameInitiated', {
-    message: '*privateGame Created & Initiated*',
-    players: privateGames[data.joinCode]
+    message: '*privateGame Created & Initiated*'
   });
 };
 
