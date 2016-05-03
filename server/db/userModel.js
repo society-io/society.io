@@ -4,8 +4,9 @@ var Schema = mongoose.Schema;
 
 var usersSchema = new Schema({
   fbid: String,
-  name: String,
+	name: String,
   email: String,
+  photo: String,
   mmr: Number,
   wins: Number,
   losses: Number

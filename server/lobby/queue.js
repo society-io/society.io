@@ -6,7 +6,7 @@ var Queue = {
     this.storage.push(socket);
     console.log('QUEUE', this.storage.length);
     socket.on('disconnect', function(socket){
-      var idx=Queue.storage.indexOf(socket);
+      var idx = Queue.storage.indexOf(socket);
       Queue.storage.splice(idx, 1);
       console.log(Queue.storage);
     });

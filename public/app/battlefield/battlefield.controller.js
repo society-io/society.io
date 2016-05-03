@@ -2,7 +2,7 @@
   'use strict';
   angular
     .module('app')
-	  .controller('BattlefieldController', BattlefieldController);  
+	  .controller('BattlefieldController', BattlefieldController);
 
   BattlefieldController.$inject = ['battlefieldFactory'];
 

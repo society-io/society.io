@@ -1,8 +1,8 @@
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-var user = require('./user/userModel.js');
-var query = require('./user/userController.js');
-var routes = require('./user/userRoutes.js');
+var user = require('./userModel.js');
+// var query = require('./user/userController.js');
+// var routes = require('./user/userRoutes.js');
 
 var env = process.env.NODE_ENV || "development" ;
 
