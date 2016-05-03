@@ -6,6 +6,8 @@ angular
 
 	function socketFactory($rootScope) {
 
+		var socket;
+
 		return {
 		  connectSocket:connectSocket,
 		  on: on,
@@ -13,7 +15,7 @@ angular
 		};
 
 	  function connectSocket() {
-	    io.connect();
+	    socket = io.connect();
 	    console.log('connected');
 		}
 

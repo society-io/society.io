@@ -1,7 +1,7 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookAuth = require('./config').facebookAuth;
-var User = require('../db/user/userModel');
+var User = require('../db/userModel');
 var userFBID = null;
 
 // used to serialize the user for the session
@@ -38,7 +38,7 @@ function usertoDB(accessToken, refreshToken, profile, done) {
         fbid: profile.id,
         name: profile.displayName,
         email: profile.emails[0].value,
-        photo: fbProfile.photos[0].value,
+        photo: profile.photos[0].value,
         mmr: 1600,
         wins: 0,
 	      losses:0
