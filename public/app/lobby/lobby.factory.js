@@ -10,36 +10,35 @@ angular
 
 		return {
 			joinQueue: joinQueue,
-			newPrivateGame: newPrivateGame,
-			joinPrivateGame: joinPrivateGame, 
-			queueGameInit: queueGameInit, 
-			privateGameInit: privateGameInit
+			addedToQueue: addedToQueue,
+			createRoom: createRoom,
+			joinRoom: joinRoom,
 		};
 		
-		function joinQueue() {
-			emit('queue');
+		function joinQueue(message) {
+			emit('queue', message);
 			console.log('queue event emitted!');
 		}
-
-		function newPrivateGame(){
-			emit('newPrivateGame');
-			console.log('newPrivateGame event emitted!');
-		}
-
-		function joinPrivateGame(){
-			emit('joinPrivateGame');
-			console.log('joinPrivateGame event emitted!');
-		}
-		
-		function privateGameInit() {
-			on('privateGameInitiated', function() {
-				$state.go('/battlefield');
+	
+		function addedToQueue() {
+			on('added to queue', function() {
+				$state.go('/loading');
 			});
 		}
-			
-		function queueGameInit() {
-			on('queueGameInitiated',function(){
-				$state.go('/battlefield');
+		
+		function createRoom(message) {
+			emit('create room', message);
+			console.log('create room event emitted!');
+		}
+	
+		function joinRoom(message) {
+			emit('join room', message);
+			console.log('join room event emitted!');
+		}
+		
+		function waitingRoom(message) {
+			on('waiting room', function(){
+				$state.go('/loading');
 			});
 		}
  
