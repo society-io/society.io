@@ -34,6 +34,7 @@ router.post('/', function(req, res){
   		});
   	} else {
   		console.log("Username taken!");
+      res.send({nameExists: true}); //if username already in database upon signup
   	}
   });
 

@@ -24,9 +24,12 @@
           .then(success, error);
 
         function success(resp){
-          console.log('successful signup: ', resp);
-          if (resp.data.auth){
+          if (resp.data.token) {
             $state.go('lobby');
+            saveToken(resp.data.token);
+          }
+          if (resp.data.nameExists) {
+            console.log('name exists!');
           }
         }
 
