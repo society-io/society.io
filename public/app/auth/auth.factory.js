@@ -2,15 +2,16 @@
   angular
     .module('app')
     .factory('authFactory', authFactory);
-    
-    authFactory.$inject = ['$http', '$window', '$state'];
-    
-    function authFactory($http, $window, $state) {
+
+    authFactory.$inject = ['$http', '$window', '$state', '$location'];
+
+    function authFactory($http, $window, $state, $location) {
 
       return {
         signup: signup,
         signin: signin,
-        logout: logout
+        signout: signout,
+        checkAuth: checkAuth
       };
 
       function signup(userObj) {
@@ -23,7 +24,7 @@
         return $http(request)
           .then(success, error);
 
-        function success(resp){
+        function success(resp) {
           if (resp.data.token) {
             $state.go('lobby');
             saveToken(resp.data.token);
@@ -33,7 +34,7 @@
           }
         }
 
-        function error(err){
+        function error(err) {
           return console.error(err);
         }
       }
@@ -48,21 +49,23 @@
         return $http(request)
           .then(success, error);
 
-        function success(resp){
+        function success(resp) {
           console.log('successful signin: ', resp);
           if (resp.data.auth){
             $state.go('lobby');
             saveToken(resp.data.token);
           }
         }
-        function error(err){
+        function error(err) {
           return console.error(err);
         }
       }
 
-      function logout() {
+      function signout() {
+        console.log('authFactory: Signing Out User...');
         $window.localStorage.removeItem('token');
         delete $window.localStorage.token;
+        $location.url('/');
       }
 
       function attachToken(obj) {
@@ -76,6 +79,16 @@
 
       function saveToken(token) {
         $window.localStorage.token = token;
+      }
+
+      function isAuthed(token) {
+        return !!$window.localStorage.token;
+      }
+
+      function checkAuth() {
+        if(!isAuthed()) {
+          $state.go('auth');
+        }
       }
     }
 })();
