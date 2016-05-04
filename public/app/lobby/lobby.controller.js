@@ -2,13 +2,15 @@
 (function () {
 'use strict';
  angular
-	.module('app')
+	.module('app', ['firebase'])
 	.controller('LobbyController', LobbyController);
 
-	LobbyController.$inject = [ 'preGameFactory', 'socketFactory'];
+	LobbyController.$inject = [ 'preGameFactory', 'socketFactory', '$firebaseAuth'];
 
-	function LobbyController (preGameFactory, socketFactory) {
-		
+	function LobbyController (preGameFactory, socketFactory, $firebaseAuth) {
+		var ref = new Firebase("https://blistering-torch-6348.firebaseio.com/");
+		$scope.authObj = $firebaseAuth(ref);
+
 		var vm = this;
 		socketFactory.connectSocket();
 
@@ -19,7 +21,7 @@
 		vm.showCreateGameController = function () {
 			vm.showCreateGameInput = true;
 		};
-		
+
 		vm.joinGame = preGameFactory.joinPrivateGame;
 		vm.showJoinGameInput = false;
 		vm.showJoinGameController = function () {
