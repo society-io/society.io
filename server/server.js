@@ -4,7 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var db = require('./db/userModel.js');
 var Game = require('./game/game').Game;
-var queue = require('./lobby/queue').Queue;
+var queue = require('./lobby/queue');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
@@ -27,31 +27,9 @@ server.listen(port);
 console.log('Server Running, Port: ', port);
 
 io.on('connection', function(socket) {
-	console.log('*New Client Connected*');
-	console.log(socket);
-
-	// socket.on('init', function () {
-	// 	// deserialize
-	//
-	//
-	// });
-});
-
-/*
-  socket.on('queue', function() {
-    console.log('heard queue event');
-    console.log(queue);
-    // Put socket into queue
-    if(queue.storage.length < 2) {
-      queue.insert(socket);
-    }
-    // Instantiate game if more than 2 in queue
-    if (queue.storage.length >= 2) {
-      var playerSockets = queue.remove();
-      var game = new Game(playerSockets);
-      game.init();
-    }
+  console.log('*New Client Connected*');
+  console.log(socket);
+  socket.on('init', function(data) {
+	  socketInit(data.token, socket);
   });
-
-
-});*/
+});

@@ -1,16 +1,18 @@
 var firebase = require('firebase');
 
-var SocketAPI = function(socket, token) {
+var SocketAPI = function(socket, userModel, token) {
 // look up user in database
-
 	this.socket = socket;
 	this.socketId = socket.id;
 	this.user = userModel;
-	this.userId = userModel.fbid;
-	this.socketListeners = socket.listeners;
-	this.socketEmitters = socket.emitter;
-	this.privateGames={};
+	this.userId = userModel.uid;
+	this.token = token;
+	
+	// this.socketListeners = socket.listeners;
+	// this.socketEmitters = socket.emitter;
+	// this.privateGames={};
 };
+
 SocketAPI.prototype.on = function(event, cb, verify) {
 	if(verify) {
 		this.socket.on(event, cbWrapper.bind(this));
@@ -30,7 +32,9 @@ SocketAPI.prototype.emit = function(eventName, callback) {
 };
 
 SocketAPI.prototype.deleteEvent = function(eventName) {
+
 };
+
 
 
 
