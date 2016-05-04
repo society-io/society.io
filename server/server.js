@@ -28,6 +28,7 @@ console.log('Server Running, Port: ', port);
 
 io.on('connection', function(socket){
   console.log('*New Client Connected*');
+  console.log(socket);
 
   socket.on('queue', function() {
     console.log('heard queue event');
