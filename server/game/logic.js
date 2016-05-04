@@ -15,11 +15,6 @@ Gamelogic.prototype.choiceSubmitted = function() {
     console.log('player2 choice = ', p2choice);
     game.roundWinner = evalRound(p1choice, p2choice);
 
-    if (game.roundWinner === 3) {
-      game.player1.updateHealth();
-      game.player2.updateHealth();
-    }
-
     // update the health of the round loser
     if (game.roundWinner === 1) {
       game.player2.updateHealth(p2choice);

@@ -2,7 +2,7 @@ var evalRound = function(choice1, choice2) {
   var result;
 
   if (choice1 === 'noChoice' && choice2 === 'noChoice') {
-    return 3;
+    return 0;
   } else if (choice1 === 'noChoice') {
     return 2;
   } else if (choice2 === 'noChoice') {

@@ -30,6 +30,6 @@ function config($stateProvider, $urlRouterProvider) {
 	  	url: '/battlefield',
 	  	templateUrl: '../app/battlefield/battlefield.html',
 	  	controller: 'BattlefieldController',
-	  	controllerAs: 'Battlefield'
+	  	controllerAs: 'Bf'
 	  });
 }

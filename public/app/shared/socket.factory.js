@@ -7,7 +7,7 @@ angular
 	function socketFactory($rootScope) {
 
 		var socket;
-
+		
 		return {
 		  connectSocket:connectSocket,
 		  on: on,
