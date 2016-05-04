@@ -8,13 +8,24 @@
     function loadingFactory($state, socketFactory) {
     	var emit = socketFactory.emit;
 		  var on = socketFactory.on;
+      
+      var playerInfo = {
+      	player1Name: "Kan Adachi",
+      	player1MMR: false,
+      	player2Name: false,
+      	player2MMR: false
+      };
 
     	listeners();
-    	return {};
+    	return {get: get};
+      
+      function get(keyName) {
+      	return playerInfo[keyName];
+      }
 
 		  function listeners() {
 
-				on('matchReady',function(resp){
+				// on('matchReady',function(resp){
 					/*
 					//insert $timeout here
 					resp = {
@@ -24,12 +35,8 @@
             player2mmr:
 					}
 					*/
-					$state.go('/battlefield');
-				});
-
-				on('privateGameInitiated', function() {
-					$state.go('/battlefield');
-				});
+					// $state.go('/battlefield');
+				// });
 
 			}	
     }
