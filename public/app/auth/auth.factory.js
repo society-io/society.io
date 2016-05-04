@@ -24,8 +24,13 @@
           .then(success, error);
 
         function success(resp){
-          console.log('successful signup: ', resp);
-          $state.go('auth');
+          if (resp.data.token) {
+            $state.go('lobby');
+            saveToken(resp.data.token);
+          }
+          if (resp.data.nameExists) {
+            console.log('name exists!');
+          }
         }
 
         function error(err){
@@ -45,10 +50,11 @@
 
         function success(resp){
           console.log('successful signin: ', resp);
-          saveToken(resp.data.token);
-          $state.go('lobby');
+          if (resp.data.auth){
+            $state.go('lobby');
+            saveToken(resp.data.token);
+          }
         }
-
         function error(err){
           return console.error(err);
         }
