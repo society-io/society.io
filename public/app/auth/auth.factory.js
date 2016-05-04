@@ -12,6 +12,7 @@
         signin: signin,
         signout: signout,
         checkAuth: checkAuth
+        attachToken: attachToken
       };
 
       function signup(userObj) {
