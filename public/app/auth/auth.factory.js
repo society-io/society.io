@@ -10,9 +10,7 @@
     	return {
     		signup: signup,
     		signin: signin
-    	}
-
-
+    	};
 
 
 
@@ -21,7 +19,7 @@
     			method: 'POST',
     			url: '/signup',
     			data: userObj
-    		}
+    		};
 
     		return $http(request)
     			.then(success, error);
@@ -39,7 +37,7 @@
     			method: 'POST',
     			url: '/signin',
     			data: userObj
-    		}
+    		};
 
     		return $http(request)
     			.then(success, error);

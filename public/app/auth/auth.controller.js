@@ -4,21 +4,17 @@ angular
   .module('app')
   .controller('AuthController', AuthController);
 
-AuthController.$inject = [];
+AuthController.$inject = ['authFactory'];
 
-function AuthController() {
+function AuthController(authFactory) {
 	/* jshint validthis: true */
 	var vm = this;
-	this.signup = false;
-	this.signin = false;
+	vm.signupForm = false;
+	vm.signinForm = false;
 
 
 
-	vm.signup = function(obj){
-		Auth.signup(obj).then(function(resp) {
-			console.log(resp);
-		})
-	}
+	vm.signup = authFactory.signup;
 
 }
 })();
