@@ -13,7 +13,7 @@ router.post('/', function(req, res){
 			bcrypt.compare(req.body.password, users[0].password, function(err, result) {
 				if(err){
 					console.log('Compare function had this error:  ', err);
-				} 
+				}
 				if(result) {
 					console.log('User got his/her password correct');
 					var stringUID = users[0]._id.toString();
