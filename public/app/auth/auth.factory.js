@@ -7,12 +7,17 @@
 
     function authFactory($http, $window, $state, $location) {
 
+      var state = {
+        errorMessage: ''
+      };
+
       return {
         signup: signup,
         signin: signin,
         signout: signout,
-        checkAuth: checkAuth
-        attachToken: attachToken
+        checkAuth: checkAuth,
+        attachToken: attachToken,
+        get: get
       };
 
       function signup(userObj) {
@@ -32,6 +37,7 @@
           }
           if (resp.data.nameExists) {
             console.log('name exists!');
+            state.errorMessage += resp.data.message;
           }
         }
 
@@ -50,8 +56,7 @@
         return $http(request)
           .then(success, error);
 
-        function success(resp) {
-          console.log('successful signin: ', resp);
+        function success(resp){
           if (resp.data.auth){
             $state.go('lobby');
             saveToken(resp.data.token);
@@ -62,13 +67,17 @@
         }
       }
 
+      function get(name) {
+        return state[name];
+      }
+
       function signout() {
         console.log('authFactory: Signing Out User...');
         $window.localStorage.removeItem('token');
         delete $window.localStorage.token;
         $location.url('/');
       }
-
+      
       function attachToken(obj) {
         obj.token = $window.localStorage.token;
         return obj;

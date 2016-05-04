@@ -24,6 +24,8 @@
 		<li><input type="password" placeholder="Password" ng-model="Auth.passwordIn"></li>
 		<li><input type="submit" class="submit-btn" ng-click="Auth.signin({username: Auth.usernameIn, password: Auth.passwordIn})"></li>
 	</ul>
+
+	<div ng-if="Auth.errorMessage() && !Auth.signinForm">{{Auth.errorMessage()}}</div>
 </div>
 
 
