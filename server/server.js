@@ -30,6 +30,15 @@ io.on('connection', function(socket){
   console.log('*New Client Connected*');
   console.log(socket);
 
+  socket.on('init', function(){
+    deserialize
+
+
+
+  }
+})
+
+/*
   socket.on('queue', function() {
     console.log('heard queue event');
     console.log(queue);
@@ -46,4 +55,4 @@ io.on('connection', function(socket){
   });
 
 
-});
+});*/

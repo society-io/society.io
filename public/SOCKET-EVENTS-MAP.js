@@ -10,15 +10,15 @@ FOLDERS: /loading, /lobby
   emit('join room', {auth-token, joinCode}
 
  LISTENERS: ['waiting room', 'match ready']
-	on('waiting room', function(res, err) {state.go('/loading')}
-	on('match ready', function (res, err) {state.go('/battlefield')}
+	on('waiting room', function(res, err) {state.go('/loading')}); 
+	socket.once('match ready', function (res, err) {state.go('/battlefield')});
 
 SERVER
 FOLDERS:server/lobby/privateRoom.js
 
 	EMITTERS: ['waiting room', 'match ready']
     emit ('waiting room', {socketAPI.userModel})
-    emit('match ready'})
+    emit('match ready')
 
 	LISTENERS: ['create room', 'join room']
     on('create room', function(res, err) {
