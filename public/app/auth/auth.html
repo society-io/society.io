@@ -6,23 +6,23 @@
 
 	<ul ng-show="Auth.signupForm">
 		<li>
-			<input type="text" placeholder="Username" class="input" ng-model="Auth.username">
+			<input type="text" placeholder="Username" class="input" ng-model="Auth.usernameUp">
 		</li>
 		<li>
-			<input type="text" placeholder="Email" class="input" ng-model="Auth.email">
+			<input type="text" placeholder="Email" class="input" ng-model="Auth.emailUp">
 		</li>
 		<li>
-			<input type="text" placeholder="Password" class="input" ng-model="Auth.password">
+			<input type="password" placeholder="Password" class="input" ng-model="Auth.passwordUp">
 		</li>
 		<li>
-			<input type="submit" class="submit-btn" class="input" ng-click="Auth.signup({username: Auth.username, email: Auth.email, password: Auth.password})">
+			<input type="submit" class="submit-btn" class="input" ng-click="Auth.signup({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">
 		</li>
 	</ul>
 	
 	<ul ng-show='Auth.signinForm'>
-		<li><input type="text" placeholder="Email" ng-model="email2"></li>
-		<li><input type="text" placeholder="Password" ng-model="password2"></li>
-		<li><input type="submit" class="submit-btn"></li>
+		<li><input type="text" placeholder="Email" ng-model="Auth.emailIn"></li>
+		<li><input type="password" placeholder="Password" ng-model="Auth.passwordIn"></li>
+		<li><input type="submit" class="submit-btn" ng-click="Auth.signin({email: Auth.emailIn, password: Auth.passwordIn})"></li>
 	</ul>
 </div>
 

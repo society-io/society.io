@@ -15,6 +15,7 @@ function AuthController(authFactory) {
 
 
 	vm.signup = authFactory.signup;
+	vm.signin = authFactory.signin;
 
 }
 })();
