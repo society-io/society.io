@@ -26,8 +26,6 @@ app.use('/signin', signIn);
 server.listen(port);
 console.log('Server Running, Port: ', port);
 
-app.use('/auth', routes.auth);
-
 io.on('connection', function(socket){
   console.log('*New Client Connected*');
 
@@ -46,6 +44,5 @@ io.on('connection', function(socket){
     }
   });
 
-  privateGameListeners(socket);
 
 });
