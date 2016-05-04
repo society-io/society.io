@@ -9,18 +9,23 @@ var tokenGenerator = new FirebaseTokenGenerator(pI.secret);
 
 router.post('/', function(req, res){
 	db.find({username: req.body.username}, function(err, users){
-		if(users.length){
+		if(users.length) {
 			bcrypt.compare(req.body.password, users[0].password, function(err, result) {
 				if(err){
-					console.log('wrong password!');
-				} else {
+					console.log('Compare function had this error:  ', err);
+				} 
+				if(result) {
+					console.log('User got his/her password correct');
 					var stringUID = users[0]._id.toString();
-					var token = tokenGenerator.createToken({uid: stringUID, some: 'arbritrary', data: 'here'});
-					res.send({token: token});
+					var token = tokenGenerator.createToken({uid: stringUID, username: users[0].username});
+					res.send({token: token, auth: result});
+				} else {
+					console.log('User got his/her password incorrect');
+					res.send({auth: result});
 				}
 			});
 		} else {
-			console.log("username does not exist!");
+			console.log("Username does not exist!");
 		}
 	});
 });
