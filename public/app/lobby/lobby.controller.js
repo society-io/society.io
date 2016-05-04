@@ -2,32 +2,34 @@
 (function () {
 'use strict';
  angular
-	.module('app')
-	.controller('LobbyController', LobbyController);
+  .module('app')
+  .controller('LobbyController', LobbyController);
 
-	LobbyController.$inject = ['preGameFactory', 'socketFactory', 'authFactory'];
+  LobbyController.$inject = ['preGameFactory', 'socketFactory', 'authFactory', '$state'];
 
-	function LobbyController (preGameFactory, socketFactory, authFactory) {
+  function LobbyController (preGameFactory, socketFactory, authFactory, $state) {
 
-		var vm = this;
-		socketFactory.connectSocket();
+    authFactory.checkAuth();
 
-		vm.signOut = authFactory.signout;
+    var vm = this;
+    socketFactory.connectSocket();
 
-		vm.queue = preGameFactory.joinQueue;
+    vm.signOut = authFactory.signout;
 
-		vm.createGame = preGameFactory.newPrivateGame;
-		vm.showCreateGameInput = false;
-		vm.showCreateGameController = function () {
-			vm.showCreateGameInput = true;
-		};
+    vm.queue = preGameFactory.joinQueue;
 
-		vm.joinGame = preGameFactory.joinPrivateGame;
-		vm.showJoinGameInput = false;
-		vm.showJoinGameController = function () {
-			vm.showJoinGameInput = true;
-		};
+    vm.createGame = preGameFactory.newPrivateGame;
+    vm.showCreateGameInput = false;
+    vm.showCreateGameController = function () {
+      vm.showCreateGameInput = true;
+    };
 
-	}
+    vm.joinGame = preGameFactory.joinPrivateGame;
+    vm.showJoinGameInput = false;
+    vm.showJoinGameController = function () {
+      vm.showJoinGameInput = true;
+    };
+
+  }
 
 })();
