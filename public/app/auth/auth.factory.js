@@ -26,6 +26,7 @@
 
     		function success(resp){
     			console.log('successful signup: ', resp);
+    			$state.go('auth');
     		}
     		function error(err){
     			return console.error(err);
@@ -43,7 +44,8 @@
     			.then(success, error);
 
     		function success(resp){
-    			console.log('successful signup: ', resp);
+    			console.log('successful signin: ', resp);
+    			$state.go('lobby');
     		}
     		function error(err){
     			return console.error(err);
