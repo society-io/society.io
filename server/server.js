@@ -26,17 +26,16 @@ app.use('/signin', signIn);
 server.listen(port);
 console.log('Server Running, Port: ', port);
 
-io.on('connection', function(socket){
-  console.log('*New Client Connected*');
-  console.log(socket);
+io.on('connection', function(socket) {
+	console.log('*New Client Connected*');
+	console.log(socket);
 
-  socket.on('init', function(){
-    deserialize
-
-
-
-  }
-})
+	// socket.on('init', function () {
+	// 	// deserialize
+	//
+	//
+	// });
+});
 
 /*
   socket.on('queue', function() {
