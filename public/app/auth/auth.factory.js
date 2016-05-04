@@ -3,54 +3,73 @@
     .module('app')
     .factory('authFactory', authFactory);
     
-    authFactory.$inject = ['$http', '$window', '$state', '$rootScope'];
+    authFactory.$inject = ['$http', '$window', '$state'];
     
-    function authFactory($http, $window, $state, $rootScope) {
+    function authFactory($http, $window, $state) {
 
-    	return {
-    		signup: signup,
-    		signin: signin
-    	};
+      return {
+        signup: signup,
+        signin: signin,
+        logout: logout
+      };
 
+      function signup(userObj) {
+        var request = {
+          method: 'POST',
+          url: '/signup',
+          data: userObj
+        };
 
+        return $http(request)
+          .then(success, error);
 
-    	function signup(userObj){
-    		var request = {
-    			method: 'POST',
-    			url: '/signup',
-    			data: userObj
-    		};
+        function success(resp){
+          console.log('successful signup: ', resp);
+          $state.go('auth');
+        }
 
-    		return $http(request)
-    			.then(success, error);
+        function error(err){
+          return console.error(err);
+        }
+      }
 
-    		function success(resp){
-    			console.log('successful signup: ', resp);
-    			$state.go('auth');
-    		}
-    		function error(err){
-    			return console.error(err);
-    		}
-    	}
+      function signin(userObj) {
+        var request = {
+          method: 'POST',
+          url: '/signin',
+          data: userObj
+        };
 
-    	function signin(userObj){
-    		var request = {
-    			method: 'POST',
-    			url: '/signin',
-    			data: userObj
-    		};
+        return $http(request)
+          .then(success, error);
 
-    		return $http(request)
-    			.then(success, error);
+        function success(resp){
+          console.log('successful signin: ', resp);
+          saveToken(resp.data.token);
+          $state.go('lobby');
+        }
 
-    		function success(resp){
-    			console.log('successful signin: ', resp);
-    			$state.go('lobby');
-    		}
-    		function error(err){
-    			return console.error(err);
-    		}
-    	}
+        function error(err){
+          return console.error(err);
+        }
+      }
 
+      function logout() {
+        $window.localStorage.removeItem('token');
+        delete $window.localStorage.token;
+      }
+
+      function attachToken(obj) {
+        obj.token = $window.localStorage.token;
+        return obj;
+      }
+
+      function getToken(obj) {
+        return $window.localStorage.token;
+      }
+
+      function saveToken(token) {
+        $window.localStorage.token = token;
+      }
     }
 })();
