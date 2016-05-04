@@ -2,9 +2,9 @@ angular
   .module('app')
   .factory('socketFactory', socketFactory);
 
-	socketFactory.$inject = ['$rootScope'];
+	socketFactory.$inject = ['$rootScope', 'authFactory'];
 
-	function socketFactory($rootScope) {
+	function socketFactory($rootScope, authFactory) {
 
 		var socket;
 		
@@ -16,9 +16,15 @@ angular
 
 	  function connectSocket() {
 	    socket = io.connect();
-	    console.log('connected');
+	    socket.emit('init', authFactory.attachToken({}));
 		}
 
+		/**
+		 *	Socket Events
+		 *	
+		 *	Used to wrap the socket's native 'on' and 'emit' functions 
+		 *	packet envelope that we specify
+		 */
 	  function on(eventName, callback) {
 	    socket.on(eventName, function() {
 	      var args = arguments;
@@ -28,7 +34,11 @@ angular
 	    });
 	  }
 
-	  function emit(eventName, data, callback) {
+	  function emit(eventName, data, callback, auth) {
+	  	if (auth) {
+	  		data = data || {};
+	  		data = authFactory.attachToken(data);
+	  	}
 	    socket.emit(eventName, data, function() {
 	      var args = arguments;
 	      $rootScope.$apply(function() {
