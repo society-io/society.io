@@ -20,9 +20,9 @@
 	</ul>
 	
 	<ul ng-show='Auth.signinForm'>
-		<li><input type="text" placeholder="Username" ng-model="Auth.emailIn"></li>
+		<li><input type="text" placeholder="Username" ng-model="Auth.usernameIn"></li>
 		<li><input type="password" placeholder="Password" ng-model="Auth.passwordIn"></li>
-		<li><input type="submit" class="submit-btn" ng-click="Auth.signin({username: Auth.emailIn, password: Auth.passwordIn})"></li>
+		<li><input type="submit" class="submit-btn" ng-click="Auth.signin({username: Auth.usernameIn, password: Auth.passwordIn})"></li>
 	</ul>
 </div>
 
