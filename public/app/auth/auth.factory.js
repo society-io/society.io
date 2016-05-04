@@ -2,15 +2,15 @@
   angular
     .module('app')
     .factory('authFactory', authFactory);
-    
+
     authFactory.$inject = ['$http', '$window', '$state'];
-    
+
     function authFactory($http, $window, $state) {
 
       return {
         signup: signup,
         signin: signin,
-        logout: logout
+        signout: signout
       };
 
       function signup(userObj) {
@@ -60,9 +60,11 @@
         }
       }
 
-      function logout() {
+      function signout() {
+        console.log('authFactory: Signing Out User...');
         $window.localStorage.removeItem('token');
         delete $window.localStorage.token;
+        $state.go('auth');
       }
 
       function attachToken(obj) {
