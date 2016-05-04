@@ -12,7 +12,7 @@ var saltRounds = 10;
 router.post('/', function(req, res){
 	var userInputPassword = req.body.password;
 
-  newUser.find({email: req.body.email}, function(err, users) {
+  newUser.find({username: req.body.username}, function(err, users) {
   	if(users.length === 0){
   		bcrypt.hash(userInputPassword, saltRounds, function(err, hash) {
   			new newUser({email: req.body.email, username: req.body.username, password: hash, mmr: 1600, wins: 0, losses: 0})
@@ -20,7 +20,7 @@ router.post('/', function(req, res){
   			  	if(err){
   			  		console.log('saving went haywire.');
   			  	} else {
-  			  		newUser.find({email: req.body.email}, function(err, users) {
+  			  		newUser.find({username: req.body.username}, function(err, users) {
   			  			if(err){
   			  				console.log('you cant find after save...');
   			  			} else {
