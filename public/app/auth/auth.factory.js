@@ -11,7 +11,7 @@
         signup: signup,
         signin: signin,
         signout: signout,
-        checkAuth: checkAuth
+        checkAuth: checkAuth,
         attachToken: attachToken
       };
 
