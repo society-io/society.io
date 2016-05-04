@@ -1,0 +1,80 @@
+.tile-pos {
+  position: absolute;
+}
+
+.health-3 {
+  background-image: url('images/game/health-3.png');
+}
+
+.health-2 {
+  background-image: url('images/game/health-2.png');
+}
+
+.health-1 {
+  background-image: url('images/game/health-1.png');
+}
+
+.tile {
+  width: 174px;
+  height: 174px;
+  background-image: url('images/game/tile.png');
+  text-align: center;
+  line-height: 174px;
+}
+
+.player .tile:hover {
+  background-image: url('images/game/tile-active.png');
+  cursor: pointer;
+}
+
+.tile.active {
+  background-image: url('images/game/tile-active.png');
+}
+
+.tile.win {
+  background-image: url('images/game/tile-win.png');
+}
+
+.tile.lose {
+  background-image: url('images/game/tile-lose.png');
+}
+
+
+.dead .tile:hover {
+  background-image: url('images/game/tile.png');
+  cursor: not-allowed;
+}
+
+#rich {
+  left: 50%;
+  top: 0;
+
+  .health {
+    position: relative;
+    left: -50%;
+  }
+}
+
+#bum {
+  left: 0;
+  top: 137px;
+}
+
+#jail {
+  right: 0;
+  top: 137px;
+}
+
+#tax {
+  left: 61px;
+  bottom: 0;
+}
+
+#cop {
+  right: 61px;
+  bottom: 0;
+}
+
+.opponent #bum {
+
+}

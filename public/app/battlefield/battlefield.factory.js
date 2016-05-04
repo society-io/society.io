@@ -5,6 +5,9 @@ angular
 bfFactoryFunction.$inject = ['$http', 'socketFactory', '$state', '$rootScope']; //injections go inside brackets
 
 function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
+
+  // socketFactory.connectSocket();
+
   //flags at top and then factory, then function declarations
   var emit = socketFactory.emit;
   var on = socketFactory.on;
@@ -36,15 +39,10 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
     get: get
   };
 
-
-
-
-  //var player = new player(1);
-  //var opponent = new player(2);
   function Player(id) {
     this.id = id;
     this.choice = '';
-    health = Object.assign({}, startingHealth);
+    this.health = Object.assign({}, startingHealth);
   }
 
   function setChoice(userChoice) {
@@ -56,7 +54,7 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
       emit('noChoice');
     }
 
-    state.playerChoice = userChoice;
+    state.player.choice = userChoice;
     state.submitted = true;
   }
 
@@ -73,41 +71,23 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
     state.opponentHealth = Object.assign({}, startingHealth);
   }
 
-  function startTimer() {
-    timerTracker = setInterval(function() {
-      state.time--;
-      console.log('state.time = ', state.time);
-      $rootScope.$apply();
-      if (state.time === 0) {
-        stopTimer();
-        if (!state.submitted) {
-          setChoice();
-        }
-      }
-    }, 1000);
-  }
-
-  function stopTimer() {
-    clearInterval(timerTracker);
-  }
-
   function listeners() {
 
     on('gameReady', function(resp) {
       console.log('Game ready: ', resp);
 
       boardReset();
+
       // store player IDs in state
-      state.playerId = resp.playerId;
-      state.opponentId = (resp.playerId === 1) ? 2 : 1;
+      state.player = new Player(resp.playerId);
+      state.opponent = new Player(resp.playerId === 1 ? 2 : 1);
 
       // store the starting health as given by the server
       for (var choice in resp.startingHealth) {
-        state.playerHealth[choice] += resp.startingHealth[choice];
-        state.opponentHealth[choice] += resp.startingHealth[choice];
+        state.player.health[choice] = resp.startingHealth[choice];
+        state.opponent.health[choice] = resp.startingHealth[choice];
       }
 
-      startTimer();
     });
 
     on('roundResult', function(resp){
@@ -116,25 +96,26 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
       state.time = 15;
       state.results = resp;
       state.opponentChoice = resp.choices[state.opponentId];
-      state.roundWinner = resp.choices[resp.roundWinner];
+      state.roundWinner = resp.roundWinner;
       state.submitted = false;
+      state.player.choice = '';
+      state.opponent.choice = '';
 
       for (var choice in resp.health[1]) {
-        state.playerHealth[choice] = resp.health[state.playerId][choice];
-        state.opponentHealth[choice] = resp.health[state.opponentId][choice];
+        state.player.health[choice] = resp.health[state.player.id][choice];
+        state.opponent.health[choice] = resp.health[state.opponent.id][choice];
       }
-
-      stopTimer();
-      startTimer();
     });
 
     on('matchResult', function(resp) {
       state.matchOver = true;
-      stopTimer();
+      // stopTimer();
       setTimeout(function() {
         // $state.go('lobby');
       }, 1000);
     });
+
+    // emit('queue');
 
   }
 

@@ -1,23 +1,19 @@
-.board {
+.game-over {
+
+}
+
+.game-over.overlay {
+  background-color: rgba(0,0,0,0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  font-size: 0;
-}
+  color: #fff;
 
-.board .board-left,
-.board .board-right {
-  margin: 0;
-  padding: 0;
-  width: 50%;
-  height: 100%;
-  display: inline-block;
-  font-size: 1em;
-}
-
-.board-left {
-  background-color: #ddd;
-}
-
-.board-right {
-  background-color: #ccc;
+  h1 {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 300px;
+  }
 }
