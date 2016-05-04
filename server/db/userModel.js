@@ -2,11 +2,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-<<<<<<< 557d724aa07e237e20ab126a576f26d6dbd06683
-var usersSchema = new Schema({
-  fbid: String,
-  name: String,
-=======
+
 var env = process.env.NODE_ENV || "development" ;
 
 if (env === "development"){
@@ -18,10 +14,9 @@ if (env === "development"){
 }
 
 var usersSchema = new Schema({
->>>>>>> [Refactor] removed passport and implemented firebase for backend
   email: String,
-  photo: String,
-  accessToken: String,
+  username: String,
+  password: String,
   mmr: Number,
   wins: Number,
   losses: Number
