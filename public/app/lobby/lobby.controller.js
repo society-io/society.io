@@ -5,14 +5,15 @@
 	.module('app', ['firebase'])
 	.controller('LobbyController', LobbyController);
 
-	LobbyController.$inject = [ 'preGameFactory', 'socketFactory', '$firebaseAuth'];
+	LobbyController.$inject = ['preGameFactory','socketFactory','$firebaseAuth'];
 
 	function LobbyController (preGameFactory, socketFactory, $firebaseAuth) {
-		var ref = new Firebase("https://blistering-torch-6348.firebaseio.com/");
-		$scope.authObj = $firebaseAuth(ref);
-
 		var vm = this;
 		socketFactory.connectSocket();
+
+		var ref = new Firebase("https://blistering-torch-6348.firebaseio.com/");
+		vm.authObj = $firebaseAuth(ref);
+
 
 		vm.queue = preGameFactory.joinQueue;
 

@@ -2,15 +2,14 @@
   angular
     .module('app')
     .factory('authFactory', authFactory);
-    
+
     authFactory.$inject = ['$http', '$window', '$state'];
-    
+
     function authFactory($http, $window, $state) {
 
       return {
         signup: signup,
-        signin: signin,
-        logout: logout
+        signin: signin
       };
 
       function signup(userObj) {
@@ -52,11 +51,6 @@
         function error(err){
           return console.error(err);
         }
-      }
-
-      function logout() {
-        $window.localStorage.removeItem('token');
-        delete $window.localStorage.token;
       }
 
       function attachToken(obj) {
