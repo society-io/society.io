@@ -21,9 +21,6 @@
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
-  /*border: 2px solid white;*/
-/*  height: 300px;
-  width: 300px;*/
 }
 
 .logo {
@@ -34,15 +31,25 @@
 	color: white;
 }
 
-.fb-btn {
+h2 {
+	font-family: 'Bree Serif', serif;
+	text-align: center;
+	color: white;
+}
+
+.link {
+	text-decoration: none;
+	color: hotpink;
+}
+
+li {
+	list-style: none;
+	margin-bottom: 5px;
+}
+
+.submit-btn {
 	text-align: center;
 }
 
-
-
-/*.fb-img {
-	height: 115px;
-	width: 240px;
-}*/
 
 

@@ -1,12 +1,20 @@
-	
-	<img src="https://media.giphy.com/media/EpB8oRhHSQcnu/giphy.gif" alt="" class="bg">
+<img src="https://media.giphy.com/media/EpB8oRhHSQcnu/giphy.gif" alt="" class="bg">
 
-	<div class="centered">
-		<h1 class="logo">society</h1>
-		<a href='./auth/facebook'  class="fb-btn"> 
-			<img src="https://www.lifeinoneplace.com/images/loginwfb.png" alt="">
-		</a>
-	</div>
+<div class="centered">
+	<h1 class="logo">society</h1>
+	<h2><a href="" ng-click="Auth.signup=true ; Auth.signin=false" class="link">Sign Up</a> | <a href="" ng-click="Auth.signin=true ; Auth.signup = false" class="link">Sign In</a></h2>
+	<ul ng-show="Auth.signup">
+		<li><input type="text" placeholder="Username" class="input"></li>
+		<li><input type="text" placeholder="Email" class="input"></li>
+		<li><input type="text" placeholder="Password" class="input"></li>
+		<li><input type="submit" class="submit-btn" class="input"></li>
+	</ul>
+	<ul ng-show='Auth.signin'>
+		<li><input type="text" placeholder="Email"></li>
+		<li><input type="text" placeholder="Password"></li>
+		<li><input type="submit" class="submit-btn"></li>
+	</ul>
+</div>
 
 
 
