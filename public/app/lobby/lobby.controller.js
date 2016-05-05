@@ -9,6 +9,8 @@
 
 	function LobbyController (lobbyFactory, socketFactory, authFactory) {
 		
+		authFactory.checkAuth();
+		
 		var vm = this;
 		socketFactory.connectSocket();
 
