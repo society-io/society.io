@@ -5,7 +5,7 @@ var Game = require('./game/game').Game;
 var queue = require('./lobby/queue');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var socketInit = require('./socket/socketHelpers').socketInit;
+var socketCheck = require('./socket/socketHelpers').socketCheck;
 var SocketAPI = require('./socket/socketAPI').SocketAPI;
 var z = require('./z');
 
@@ -36,7 +36,7 @@ console.log('Server Running, Port: ', port);
 io.on('connection', function(socket) {
   console.log('*New Client Connected*');
   socket.on('init', function(data) {
-	  socketInit(data.token, socket)
+	  socketCheck(data.token, socket)
       .then(function(data) {
         var uid = data.uid;
         var socket = data.socket;
@@ -46,6 +46,7 @@ io.on('connection', function(socket) {
             throw err;
           } else {
             activeSockets[socket.id] = new SocketAPI(socket, user, token);
+            activeSockets[socket.id].init();
           }
         });
       }, function(err) {
