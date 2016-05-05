@@ -6,7 +6,7 @@ bfFactoryFunction.$inject = ['$http', 'socketFactory', '$state', '$rootScope']; 
 
 function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
 
-  // socketFactory.connectSocket();
+  socketFactory.connectSocket();
 
   //flags at top and then factory, then function declarations
   var emit = socketFactory.emit;
@@ -115,8 +115,7 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
       }, 1000);
     });
 
-    // emit('queue');
-
+    emit('newGame');
   }
 
 }
