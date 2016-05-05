@@ -37,6 +37,7 @@
             saveToken(resp.data.token);
           }
           if (resp.data.nameExists) {
+            state.signupErrorMessage = "";
             state.signupErrorMessage += resp.data.message;
           }
         }
@@ -63,6 +64,7 @@
             saveToken(resp.data.token);
           }
           if (!resp.data.auth){
+            state.signinErrorMessage = "";
             state.signinErrorMessage += resp.data.message;
           }
         }
