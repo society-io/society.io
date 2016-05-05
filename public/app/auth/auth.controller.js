@@ -10,24 +10,24 @@ function AuthController(authFactory, $scope) {
 	/* jshint validthis: true */
 	var vm = this;
 
-	vm.signupForm = false;
-	vm.signinForm = false;
-	vm.signupErrorMessage = function(){
+	vm.signUpForm = false;
+	vm.signInForm = false;
+	vm.signUpErrorMessage = function(){
 		return authFactory.get('signupErrorMessage');
 	};
-	vm.signinErrorMessage = function(){
+	vm.signInErrorMessage = function(){
 		return authFactory.get('signinErrorMessage');
 	};
 
-	vm.signup = function(obj){
-		authFactory.signup(obj);
+	vm.signUp = function(obj){
+		authFactory.signUp(obj);
 		vm.usernameUp = '';
 		vm.emailUp = '';
 		vm.passwordUp = '';
 	};
 
-	vm.signin = function(obj){
-		authFactory.signin(obj);
+	vm.signIn = function(obj){
+		authFactory.signIn(obj);
 		vm.usernameIn = '';
 		vm.passwordIn = '';
 	};
