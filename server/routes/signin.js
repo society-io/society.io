@@ -1,9 +1,8 @@
 var router = require('express').Router();
 var bcrypt = require('bcrypt');
 var FirebaseTokenGenerator = require("firebase-token-generator");
-// var pI = require('../config/config.js');
+var pI = require('../config/config.js');
 var db = require('../db/userModel.js');
-
 
 var tokenGenerator = new FirebaseTokenGenerator(pI.secret);
 

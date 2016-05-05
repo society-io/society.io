@@ -1,22 +1,6 @@
-var io = require('socket.io');
-var express = require('express'); 
+var io = require('../common').io;
 
-  socket.on('queue', function() {
-    console.log('heard queue event');
-    console.log(queue);
-    // Put socket into queue
-    if(queue.storage.length < 2) {
-      queue.insert(socket);
-    }
-    // Instantiate game if more than 2 in queue
-    if (queue.storage.length >= 2) {
-      var playerSockets = queue.remove();
-      var game = new Game(playerSockets);
-      game.init();
-    }
-  });
-
-var Queue = {
+var queue = {
   storage: [],
   insert: function(socket) {
     this.storage.push(socket);
@@ -36,9 +20,21 @@ var Queue = {
   }
 };
 
-module.exports = {
-  Queue: Queue
-};
-/*---TODO: queue Emit-- game ready and added to queue---*/
+io.on('queue', function(socket) {
+  console.log('heard queue event');
+  console.log(queue);
+  // Put socket into queue
+  if(queue.storage.length < 2) {
+    queue.insert(socket);
+  }
+  // Instantiate game if more than 2 in queue
+  if (queue.storage.length >= 2) {
+    var playerSockets = queue.remove();
+    var game = new Game(playerSockets);
+    game.init();
+  }
+});
 
-/*---TODO: queue On-- 'queue', 'join room', 'createRoom' ready and added to queue---*/
+module.exports = {
+  queue: queue
+};

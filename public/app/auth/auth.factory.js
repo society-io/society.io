@@ -12,18 +12,18 @@
       };
 
       return {
-        signup: signup,
-        signin: signin,
-        signout: signout,
+        signUp: signUp,
+        signIn: signIn,
+        signOut: signOut,
         checkAuth: checkAuth,
         attachToken: attachToken,
         get: get
       };
 
-      function signup(userObj) {
+      function signUp(userObj) {
         var request = {
           method: 'POST',
-          url: '/signup',
+          url: '/signUp',
           data: userObj
         };
 
@@ -36,8 +36,7 @@
             saveToken(resp.data.token);
           }
           if (resp.data.nameExists) {
-            console.log('name exists!');
-            state.errorMessage += resp.data.message;
+            state.errorMessage = resp.data.message;
           }
         }
 
@@ -46,10 +45,10 @@
         }
       }
 
-      function signin(userObj) {
+      function signIn(userObj) {
         var request = {
           method: 'POST',
-          url: '/signin',
+          url: '/signIn',
           data: userObj
         };
 
@@ -71,8 +70,7 @@
         return state[name];
       }
 
-      function signout() {
-        console.log('authFactory: Signing Out User...');
+      function signOut() {
         $window.localStorage.removeItem('token');
         delete $window.localStorage.token;
         $location.url('/');

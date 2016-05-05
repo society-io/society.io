@@ -9,16 +9,14 @@ AuthController.$inject = ['authFactory', '$scope'];
 function AuthController(authFactory, $scope) {
 	/* jshint validthis: true */
 	var vm = this;
-	vm.signupForm = false;
-	vm.signinForm = false;
+	vm.signUpForm = false;
+	vm.signInForm = false;
 	vm.errorMessage = function(){
 		return authFactory.get('errorMessage');
 	};
-	console.log('this is error mesg: ', vm.errorMessage);
 
-
-	vm.signup = authFactory.signup;
-	vm.signin = authFactory.signin;
+	vm.signUp = authFactory.signUp;
+	vm.signIn = authFactory.signIn;
 
 }
 })();
