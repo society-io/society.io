@@ -12,7 +12,7 @@ var privateGameListeners = function(socket){
 
   socket.on('join room', function(data){
     console.log('onJoinRoomData: ',data);
-    storePlayer2AndInitiate(data, socket);
+    storePlayer2(data, socket);
   });
 
   socket.on('joined room', function(data){
@@ -30,7 +30,7 @@ var storeJoinCode = function(data) {
       privateGames[data.joinCode] = socketsForGame;
       // privateGames = { joinCode: []}
     } else {
-      socket.emit('error', {
+      socket.emit('err', {
         message: 'joinCode exists!',
         success: false
       });
@@ -46,7 +46,7 @@ var storePlayer1 = function(data, socket) {
   });
 };
 
-var storePlayer2AndInitiate = function(data, socket) {
+var storePlayer2 = function(data, socket) {
   // Crossreference joinCode with those in privateGames
   for(var key in privateGames){
     // if the request joinCode matches one within privateGames
