@@ -1,17 +1,23 @@
 var express = require('express');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var common = require('./common');
 var db = require('./db/userModel.js');
 var Game = require('./game/game').Game;
 var queue = require('./lobby/queue');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var socketInit = require('./socket/socketHelpers').socketInit;
+var SocketAPI = require('./socket/socketAPI').SocketAPI;
+
+var app = common.app;
+var server = common.server;
+var io = common.io;
 
 var signUp = require('./routes/signup.js');
 var signIn = require('./routes/signin.js');
 
 var port = process.env.PORT || 3000;
+
+var activeSockets = common.activeSockets;
 
 app.use(express.static('public'));
 
@@ -28,8 +34,21 @@ console.log('Server Running, Port: ', port);
 
 io.on('connection', function(socket) {
   console.log('*New Client Connected*');
-  console.log(socket);
   socket.on('init', function(data) {
-	  socketInit(data.token, socket);
+	  socketInit(data.token, socket)
+      .then(function(data) {
+        var uid = data.uid;
+        var socket = data.socket;
+        var token = data.token;
+        db.findById(uid, function(err, user) {
+          if (err) {
+            throw err;
+          } else {
+            activeSockets[socket.id] = new SocketAPI(socket, user, token);
+          }
+        });
+      }, function(err) {
+        console.error(err);
+      });
   });
 });

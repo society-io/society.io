@@ -15,14 +15,14 @@
 			<input type="password" placeholder="Password" class="input" ng-model="Auth.passwordUp">
 		</li>
 		<li>
-			<input type="submit" class="submit-btn" class="input" ng-click="Auth.signup({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">
+			<input type="submit" class="submit-btn" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">
 		</li>
 	</ul>
 
 	<ul ng-show='Auth.signinForm'>
 		<li><input type="text" placeholder="Username" ng-model="Auth.usernameIn"></li>
 		<li><input type="password" placeholder="Password" ng-model="Auth.passwordIn"></li>
-		<li><input type="submit" class="submit-btn" ng-click="Auth.signin({username: Auth.usernameIn, password: Auth.passwordIn})"></li>
+		<li><input type="submit" class="submit-btn" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})"></li>
 	</ul>
 
 	<div ng-if="Auth.errorMessage() && !Auth.signinForm">{{Auth.errorMessage()}}</div>

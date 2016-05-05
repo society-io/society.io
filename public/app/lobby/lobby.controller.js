@@ -5,9 +5,9 @@
 	.module('app')
 	.controller('LobbyController', LobbyController);
 
-	LobbyController.$inject = [ 'lobbyFactory', 'socketFactory'];
+	LobbyController.$inject = [ 'lobbyFactory', 'socketFactory', 'authFactory'];
 
-	function LobbyController (lobbyFactory, socketFactory) {
+	function LobbyController (lobbyFactory, socketFactory, authFactory) {
 		
 		var vm = this;
 		socketFactory.connectSocket();
@@ -24,6 +24,10 @@
 		vm.showJoinGameInput = false;
 		vm.showJoinGameController = function () {
 			vm.showJoinGameInput = true;
+		};
+
+		vm.signOut = function() {
+			authFactory.signOut();
 		};
 
 	}

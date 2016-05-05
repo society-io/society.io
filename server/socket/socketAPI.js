@@ -1,11 +1,11 @@
-var firebase = require('firebase');
+var firebase = require('../common').firebase;
 
 var SocketAPI = function(socket, userModel, token) {
 // look up user in database
 	this.socket = socket;
 	this.socketId = socket.id;
 	this.user = userModel;
-	this.userId = userModel.uid;
+	this.userId = userModel._id;
 	this.token = token;
 	
 	// this.socketListeners = socket.listeners;
@@ -35,6 +35,6 @@ SocketAPI.prototype.deleteEvent = function(eventName) {
 
 };
 
-
-
-
+module.exports = {
+  SocketAPI: SocketAPI
+};

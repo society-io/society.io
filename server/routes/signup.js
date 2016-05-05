@@ -8,7 +8,6 @@ var tokenGenerator = new FirebaseTokenGenerator(pI.secret);
 
 var saltRounds = 10;
 
-
 router.post('/', function(req, res){
 	var userInputPassword = req.body.password;
 
@@ -37,11 +36,6 @@ router.post('/', function(req, res){
       res.send({nameExists: true, message: 'Username already exists!'}); //if username already in database upon signup
   	}
   });
-
-
-
 });
-
-
 
 module.exports = router;
