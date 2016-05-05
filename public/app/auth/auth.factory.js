@@ -8,7 +8,8 @@
     function authFactory($http, $window, $state, $location) {
 
       var state = {
-        errorMessage: ''
+        signupErrorMessage: '',
+        signinErrorMessage: ''
       };
 
       return {
@@ -36,7 +37,7 @@
             saveToken(resp.data.token);
           }
           if (resp.data.nameExists) {
-            state.errorMessage = resp.data.message;
+            state.signupErrorMessage += resp.data.message;
           }
         }
 
@@ -56,9 +57,13 @@
           .then(success, error);
 
         function success(resp){
+          console.log('this is resp: ', resp);
           if (resp.data.auth){
             $state.go('lobby');
             saveToken(resp.data.token);
+          }
+          if (!resp.data.auth){
+            state.signinErrorMessage += resp.data.message;
           }
         }
         function error(err) {

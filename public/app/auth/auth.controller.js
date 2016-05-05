@@ -9,14 +9,28 @@ AuthController.$inject = ['authFactory', '$scope'];
 function AuthController(authFactory, $scope) {
 	/* jshint validthis: true */
 	var vm = this;
-	vm.signUpForm = false;
-	vm.signInForm = false;
-	vm.errorMessage = function(){
-		return authFactory.get('errorMessage');
+
+	vm.signupForm = false;
+	vm.signinForm = false;
+	vm.signupErrorMessage = function(){
+		return authFactory.get('signupErrorMessage');
+	};
+	vm.signinErrorMessage = function(){
+		return authFactory.get('signinErrorMessage');
 	};
 
-	vm.signUp = authFactory.signUp;
-	vm.signIn = authFactory.signIn;
+	vm.signup = function(obj){
+		authFactory.signup(obj);
+		vm.usernameUp = '';
+		vm.emailUp = '';
+		vm.passwordUp = '';
+	};
+
+	vm.signin = function(obj){
+		authFactory.signin(obj);
+		vm.usernameIn = '';
+		vm.passwordIn = '';
+	};
 
 }
 })();

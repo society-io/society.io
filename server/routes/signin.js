@@ -20,7 +20,7 @@ router.post('/', function(req, res){
 					res.send({token: token, auth: result});
 				} else {
 					console.log('User got his/her password incorrect');
-					res.send({auth: result});
+					res.send({auth: result, message: 'Invalid username or password'});
 				}
 			});
 		} else {

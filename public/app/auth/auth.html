@@ -4,28 +4,23 @@
 	<h1 class="logo">society</h1>
 	<h2><a href="" ng-click="Auth.signupForm=true ; Auth.signinForm=false" class="link">Sign Up</a> | <a href="" ng-click="Auth.signinForm=true ; Auth.signupForm = false" class="link">Sign In</a></h2>
 
-	<ul ng-show="Auth.signupForm">
-		<li>
-			<input type="text" placeholder="Username" class="input" ng-model="Auth.usernameUp">
-		</li>
-		<li>
-			<input type="text" placeholder="Email" class="input" ng-model="Auth.emailUp">
-		</li>
-		<li>
-			<input type="password" placeholder="Password" class="input" ng-model="Auth.passwordUp">
-		</li>
-		<li>
-			<input type="submit" class="submit-btn" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">
-		</li>
-	</ul>
-
-	<ul ng-show='Auth.signinForm'>
-		<li><input type="text" placeholder="Username" ng-model="Auth.usernameIn"></li>
-		<li><input type="password" placeholder="Password" ng-model="Auth.passwordIn"></li>
-		<li><input type="submit" class="submit-btn" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})"></li>
-	</ul>
-
-	<div ng-if="Auth.errorMessage() && !Auth.signinForm">{{Auth.errorMessage()}}</div>
+	<form name="signupForm" method="post" ng-show="Auth.signupForm">
+		<input type="text" placeholder="Username" class="input" ng-model="Auth.usernameUp"></br>
+		<input type="text" placeholder="Email" class="input" ng-model="Auth.emailUp"></br>
+		<input type="password" placeholder="Password" class="input" ng-model="Auth.passwordUp"></br>
+		<input type="submit" class="submit-btn" class="input" ng-click="Auth.signup({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">
+	</form>
+	
+	<form ng-show='Auth.signinForm' method="post" ng-show="Auth.signinForm">
+		<input type="text" placeholder="Username" ng-model="Auth.usernameIn"></br>
+		<input type="password" placeholder="Password" ng-model="Auth.passwordIn"></br>
+		<input type="submit" class="submit-btn" ng-click="Auth.signin({username: Auth.usernameIn, password: Auth.passwordIn})">
+	</form>
+	
+	<!-- for error on signup -->
+	<div ng-if="Auth.signupErrorMessage() && !Auth.signinForm">{{Auth.signupErrorMessage()}}</div>
+	<!-- for error on signin -->
+	<div ng-if="Auth.signinErrorMessage() && Auth.signinForm">{{Auth.signinErrorMessage()}}</div>
 </div>
 
 
