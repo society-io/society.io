@@ -1,0 +1,33 @@
+.overlay {
+  background-color: rgba(0,0,0,0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  z-index: 100;
+}
+
+.round-waiting {
+  
+}
+
+.round-waiting-msg-container {
+  h1 {
+    text-align: center;
+    padding-top: 100px;
+  }
+}
+
+.animate-show {
+  opacity: 1;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.2;
+}
+
+.animate-show.ng-hide {
+  opacity: 0;
+}

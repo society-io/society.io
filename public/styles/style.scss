@@ -2,8 +2,11 @@
 
 @import 'globals';
 
-@import 'game/board';
+@import 'layout';
+
+@import 'game/overlay';
 @import 'game/layout';
 @import 'game/timer';
 @import 'game/tiles';
 @import 'game/playerStats';
+@import 'game/spinner';

@@ -2,11 +2,13 @@ angular
   .module('app')
   .factory('battlefieldFactory', bfFactoryFunction);
 
-bfFactoryFunction.$inject = ['$http', 'socketFactory', '$state', '$rootScope']; //injections go inside brackets
+bfFactoryFunction.$inject = ['$http', 'socketFactory', 'battlefieldTimerFactory', '$state'];
 
-function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
+function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state) {
 
   socketFactory.connectSocket();
+
+  var bfTimer = battlefieldTimerFactory;
 
   //flags at top and then factory, then function declarations
   var emit = socketFactory.emit;
@@ -18,7 +20,6 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
     cop: 0,
     jail: 0
   };
-  var timerTracker;
 
   var state = {
     time: 15,
@@ -28,7 +29,9 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
     roundWinner: null,
     matchOver: false,
     player: false,
-    opponent: false
+    opponent: false,
+    gameStarted: false,
+    centerMessage: 'Game starting in a few seconds...'
   };
 
   listeners();
@@ -42,6 +45,7 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
   function Player(id) {
     this.id = id;
     this.choice = '';
+    this.roundStatus = '';
     this.health = Object.assign({}, startingHealth);
   }
 
@@ -63,7 +67,7 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
   }
 
   function boardReset() {
-    state.opponentChoice = '';
+    state.opponent.choice = '';
     state.submitted = false;
     state.roundWinner = null;
     state.matchOver = false;
@@ -88,31 +92,63 @@ function bfFactoryFunction($http, socketFactory, $state, $rootScope) {
         state.opponent.health[choice] = resp.startingHealth[choice];
       }
 
+      emit('clientGameReady');
     });
 
     on('roundResult', function(resp){
       console.log("this is the round result", resp);
 
-      state.time = 15;
+      bfTimer.resetTimer();
+      bfTimer.stopTimer();
+
       state.results = resp;
-      state.opponentChoice = resp.choices[state.opponentId];
+      state.opponent.choice = resp.choices[state.opponent.id];
+      state.centerMessage = 'Waiting for next round...';
+
+      // identify winner/loser for DOM
       state.roundWinner = resp.roundWinner;
-      state.submitted = false;
-      state.player.choice = '';
-      state.opponent.choice = '';
+
+      if (resp.roundWinner === state.player.id) {
+        state.player.roundStatus = 'Win';
+        state.opponent.roundStatus = 'Lose';
+
+      } else if (resp.roundWinner === state.opponent.id) {
+        state.player.roundStatus = 'Lose';
+        state.opponent.roundStatus = 'Win';
+
+      } else {
+        state.player.roundStatus =  state.opponent.roundStatus = 'Tie';
+      }
 
       for (var choice in resp.health[1]) {
         state.player.health[choice] = resp.health[state.player.id][choice];
         state.opponent.health[choice] = resp.health[state.opponent.id][choice];
       }
+
+    });
+
+    on('newRound', function() {
+      if (!state.gameStarted) {
+        state.gameStarted = true;
+      }
+
+      console.log('new round heard');
+
+      // reset state items for next round
+      state.submitted = false;
+      state.player.choice = '';
+      state.opponent.choice = '';
+      state.roundWinner = null;
+
+      bfTimer.startTimer();
     });
 
     on('matchResult', function(resp) {
       state.matchOver = true;
-      // stopTimer();
+      state.centerMessage = 'Game Over! Headed to lobby...';
       setTimeout(function() {
-        // $state.go('lobby');
-      }, 1000);
+        $state.go('lobby');
+      }, 3000);
     });
 
     emit('newGame');

@@ -2,7 +2,7 @@ angular
   .module('app')
   .factory('battlefieldLogicFactory', bfLogicFactoryFunction);
 
-bfLogicFactoryFunction.$inject = []; //injections go inside brackets
+bfLogicFactoryFunction.$inject = [];
 
 function bfLogicFactoryFunction() {
 

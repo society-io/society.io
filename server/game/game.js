@@ -39,24 +39,26 @@ Game.prototype.init = function() {
    *  The init should be called alongside a game instantiation
    *  Sets up game logic, socket listeners, and player listeners
    */
-  this.logic = new Gamelogic(this);
+  var game = this;
+
+  game.logic = new Gamelogic(game);
 
   // socket listeners
-  this.player1.socket.on('choice', listeners.onChoice.bind(this, 'player1'));
-  this.player2.socket.on('choice', listeners.onChoice.bind(this, 'player2'));
-  this.player1.socket.on('noChoice', listeners.onNoChoice.bind(this, 'player1'));
-  this.player2.socket.on('noChoice', listeners.onNoChoice.bind(this, 'player2'));
-  this.player1.socket.on('disconnect', listeners.onDisconnect.bind(this, 'player1'));
-  this.player2.socket.on('disconnect', listeners.onDisconnect.bind(this, 'player2'));
+  ['player1', 'player2'].forEach(function(player) {
+    game[player].on('disconnect', listeners.onDisconnect.bind(game, player));
+    game[player].on('choice', listeners.onChoice.bind(game[player]));
+    game[player].on('noChoice', listeners.onNoChoice.bind(game[player]));
+    game[player].on('clientGameReady', listeners.onClientGameReady.bind(game, player));
+  });
 
   // player eventing listeners
-  this.playerOn('playerChoiceUpdated', function(player) {
-    this.logic.choiceSubmitted();
-  }.bind(this));
+  game.playerOn('playerChoiceUpdated', function(player) {
+    game.logic.choiceSubmitted();
+  });
 
   // emit game ready to start game
   console.log('emitting gameready');
-  this.emit('gameReady', null,
+  game.emit('gameReady', null,
     { playerId: this.player1.id, startingHealth: this.player1.health },
     { playerId: this.player2.id, startingHealth: this.player2.health }
   );
@@ -79,6 +81,9 @@ Game.prototype.emit = function(event, data, p1data, p2data) {
     console.error('p2data = ', p2data);
     return;
   }
+
+  console.log('inside of imit. event = ', event);
+  console.log('data = ', data);
 
   if (!data && p1data && p2data) {
     p1data.event = event;
@@ -113,6 +118,12 @@ Game.prototype.playerOn = function(event, cb) {
    *  from individual players to trigger game logic related events
    */
   this.events[event] = cb;
+};
+
+Game.prototype.newRound = function() {
+  setTimeout(function() {
+    this.emit('newRound', {});
+  }.bind(this), 3000);
 };
 
 module.exports = {
