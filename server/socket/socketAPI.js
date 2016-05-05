@@ -15,9 +15,7 @@ var SocketAPI = function(socket, userModel, token) {
 
 SocketAPI.prototype.init = function() {
   privateGameListeners(this);
-  // queueListeners(this);
 };
-
 SocketAPI.prototype.on = function(event, cb, verify) {
   if(verify) {
     this.socket.on(event, cbWrapper.bind(this));
