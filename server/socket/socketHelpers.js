@@ -1,7 +1,6 @@
 var firebase = require('../common').firebase;
-var mongoose = require('mongoose');
 
-var socketInit = function(token, socket) {
+var socketCheck = function(token, socket) {
 	return new Promise(function(resolve, reject) {
 		firebase.authWithCustomToken(token, function(err, authData)  {
 			if (err) {
@@ -18,5 +17,5 @@ var socketInit = function(token, socket) {
 };
 
 module.exports = {
-	socketInit: socketInit
+	socketCheck: socketCheck
 };

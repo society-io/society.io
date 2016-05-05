@@ -1,86 +1,82 @@
-var userFBID = require('../auth/passport').userFBID;
-var userSockets = {}; // { userFBID: socket }
-var privateGames = {}; // { joinCode: [socket1, socket2] }
+var activeSockets = require('../common').activeSockets;
+var privateGames = {}; // { joinCode: [] }
 
 var privateGameListeners = function(socket){
+  console.log('inside privateGameListeners');
 
-  socket.on('newUser', associateSocket);
+  socket.on('create room', function(data){
+    console.log('onCreateRoomData: ',data);
+    storeJoinCode(data);
+    storePlayer1(data, socket);
+  });
 
-  socket.on('create game', storePrivateUser1);
+  socket.on('join room', function(data){
+    console.log('onJoinRoomData: ',data);
+    storePlayer2AndInitiate(data, socket);
+  });
 
-  socket.on('join game', storePrivateUser2AndInitiate);
+  socket.on('joined room', function(data){
+    initiatePrivateGame(data, socket);
+  });
 
 };
 
-var associateSocket = function(){
-  usersSockets[userFBID] = socket;
-  console.log(userSockets);
-};
-
-var storePrivateUser1 = function(data){
-  // Check to see if joinCode Already Exists
-  if(!privateGames[data.joinCode]) { // if Not
-    // create a tuple for the users' sockets
+var storeJoinCode = function(data) {
+  // store joinCode in privateGames
+    // create storage for sockets
     var socketsForGame = [];
-    // Get the user's socket
-    socketsForGame[0] = retrieveSocket(data.fbid);
-    // store a privateGame ready to be initiated within the privateGames obj
-    privateGames[data.joinCode] = socketsForGame;
-    // Tell Client that the Game is waiting for player 2 to enter joinCode
-      // you could choose to show the user a "loading" view.
-    socket.emit('waiting room', {
-      message: 'Great! Waiting on Player 2 to Enter your joinCode!'
-    });
-  } else { // if Yes
-    socket.emit('error', {
-      message: 'error! joinCode in use! Please enter a unique one.'
-    });
-  }
+    // Check if joinCode already exists
+    if(!privateGames[data.joinCode]) {
+      privateGames[data.joinCode] = socketsForGame;
+      // privateGames = { joinCode: []}
+    } else {
+      socket.emit('error', {
+        message: 'joinCode exists!',
+        success: false
+      });
+    }
 };
 
-var storePrivateUser2AndInitiate = function(data){
+var storePlayer1 = function(data, socket) {
+  // Store user socket in privateGames
+  privateGames[data.joinCode][0] = socket;
+  socket.emit('room created', {
+    message: 'Player 1 inserted! Waiting on Player 2...',
+    success: true
+  });
+};
+
+var storePlayer2AndInitiate = function(data, socket) {
   // Crossreference joinCode with those in privateGames
   for(var key in privateGames){
     // if the request joinCode matches one within privateGames
     if(privateGames[data.joinCode]) {
-      // retrieve this user's socket,
-        // and store within socketsForGame of that privateGame
-      privateGames[data.joinCode][1] = retrieveSocket(data.name);
-      initiatePrivateGame();
+      // store socket within socketsForGame[1] of privateGames[joinCode]
+      privateGames[data.joinCode][1] = socket;
+      socket.emit('room exists', {success: true});
     } else { // if Not
-      socket.emit('error', {
-        message: 'error! joinCode does not match our records. Please check with your friend & try again!'
+      socket.emit('room exists', {
+        message: 'error! joinCode does not match our records. Please check with your friend & try again!',
+        success: false
       });
     }
   }
 };
 
-var retrieveSocket = function(fbid){
-  // Crossreference fbid with those in users
-  for(var key in userSockets){
-    // if the request fbid matches one in users
-    if(userSockets[key] === fbid) {
-      // get that user's socket
-      return userSockets[key];
-    } else { // if Not
-      // Tell Client that user isn't connected
-      socket.emit('error', {
-        message: 'error! User socket NOT connected!'
-      });
-    }
-  }
-};
-
-var initiatePrivateGame = function(data){
+var initiatePrivateGame = function(data, socket){
   // Create a new privateGame using the right credentials
-  var privateGame = new Game(privateGames[data.joinCode]);
-  // Use the privateGame's initialize method
-  privateGame.init();
-  // Tell the Clients that a privateGame has been created & initiated
-  socket.emit('match ready', {
-    message: '*privateGame Created & Initiated*',
-    players: privateGames[data.joinCode]
-  });
+  var players = privateGames[data.joinCode];
+  if(players.length === 2) {
+    var privateGame = new Game(players);
+    // Use the game's initialize method
+    privateGame.init();
+    // Tell the Clients that a privateGame has been created & initiated
+    socket.emit('match ready', {
+      message: '*privateGame Created & Initiated*',
+      players: players,
+      success: true
+    });
+  }
 };
 
 module.exports = {

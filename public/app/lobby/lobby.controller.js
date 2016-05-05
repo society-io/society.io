@@ -5,24 +5,25 @@
 	.module('app')
 	.controller('LobbyController', LobbyController);
 
-	LobbyController.$inject = [ 'lobbyFactory', 'socketFactory', 'authFactory'];
+	LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory'];
 
-	function LobbyController (lobbyFactory, socketFactory, authFactory) {
-		
-		authFactory.checkAuth();
-		
+	function LobbyController ($scope, lobbyFactory, socketFactory, authFactory) {
 		var vm = this;
+
+		authFactory.checkAuth();
+		var tokenObj = authFactory.attachToken({});
+
 		socketFactory.connectSocket();
 
 		vm.queue = lobbyFactory.joinQueue;
 
-		vm.createGame = lobbyFactory.newPrivateGame;
+		vm.createRoom = lobbyFactory.createRoom;
 		vm.showCreateGameInput = false;
 		vm.showCreateGameController = function () {
 			vm.showCreateGameInput = true;
 		};
-		
-		vm.joinGame = lobbyFactory.joinPrivateGame;
+
+		vm.joinRoom = lobbyFactory.joinRoom;
 		vm.showJoinGameInput = false;
 		vm.showJoinGameController = function () {
 			vm.showJoinGameInput = true;
