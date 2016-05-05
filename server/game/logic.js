@@ -46,9 +46,7 @@ Gamelogic.prototype.choiceSubmitted = function() {
     } else {
       game.player1.resetChoice();
       game.player2.resetChoice();
-      game.emit('newRound', {
-        health: game.health
-      });
+      game.newRound();
     }
   }
 };

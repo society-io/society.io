@@ -1,13 +1,24 @@
-<div ng-show="Bf.get('matchOver')" class="game-over overlay">
-  <h1>Game Over</h1>
-</div>
+<!-- <button ng-click="Bf.debugger()">click the debugger!!!</button> -->
+
 
 <div class="board">
+
+  <div class="round-waiting overlay animate-show" ng-show="!Bf.get('gameStarted') || Bf.get('roundWinner') !== null">
+    <div class="round-waiting-msg-container">
+      <h1>
+        {{Bf.get('centerMessage')}}
+      </h1>
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- Timer -->
   <div class="timer-container">
     <div class="timer">
-      <h1>10</h1>
+      <h1>{{Bf.getTime()}}</h1>
     </div>
   </div>
 
@@ -25,20 +36,26 @@
 
       <div class="status-container">
         <div class="status">
-          <h1 ng-show="Bf.get('results')">{{Bf.get('roundWinner') === Bf.get('player').id ? 'Win' : 'Lose'}}</h1>
+          <h1 ng-show="Bf.get('results')">{{Bf.get('player').roundStatus}}</h1>
         </div>
       </div>
 
       <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}">
-        <div class="health health-{{Bf.get('player').health[choice] || 0}}">
+        <div class="health health-{{Bf.get('player').health[choice] || 0}}"
+          ng-class="{
+            dark: Bf.get('player').choice !== choice && Bf.get('roundWinner')
+          }">
           <div class="tile" 
             ng-mouseenter="Bf.currentHover = choice"
             ng-mouseleave="Bf.currentHover = ''"
             ng-class="{
               dead: Bf.get('player').health[choice] === 0,
-              active: Bf.get('player').choice === choice 
+              active: Bf.get('player').choice === choice,
+              winRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('player').id,
+              lostRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
+              dark: Bf.get('roundWinner')
             }"
-            ng-click="Bf.setChoice(choice)">{{choice}}</div>
+            ng-click="!Bf.get('player').choice && Bf.setChoice(choice)">{{choice}}</div>
         </div>
       </div>
       
@@ -63,15 +80,20 @@
 
       <div class="status-container">
         <div class="status">
-          <h1 ng-show="Bf.get('results')">{{Bf.get('roundWinner') === Bf.get('opponent').id ? 'Win' : 'Lose'}}</h1>
+          <h1 ng-show="Bf.get('results')">{{Bf.get('opponent').roundStatus}}</h1>
         </div>
       </div>
 
       <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}">
-        <div class="health health-{{Bf.get('opponent').health[choice] || 0}}">
+        <div class="health health-{{Bf.get('opponent').health[choice] || 0}}"
+          ng-class="{
+            dark: Bf.get('opponent').choice !== choice && Bf.get('roundWinner')
+          }">
           <div class="tile"
             ng-class="{
-              lose: Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1]
+              lose: Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1],
+              winRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
+              lostRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id
             }"
           >{{choice}}</div>
         </div>
@@ -81,8 +103,6 @@
 
   </div>
 </div>
-
-
 
 <!-- <button ng-disabled="Bf.get('submitted') || Bf.get('matchOver')" ng-repeat="choice in Bf.choices" ng-click="Bf.setChoice(choice)">{{choice}}</button>
 

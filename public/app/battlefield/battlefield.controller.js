@@ -4,19 +4,33 @@
     .module('app')
 	  .controller('BattlefieldController', BattlefieldController);
 
-  BattlefieldController.$inject = ['battlefieldFactory', 'battlefieldLogicFactory'];
+  BattlefieldController.$inject = [
+    'battlefieldFactory',
+    'battlefieldLogicFactory',
+    'battlefieldTimerFactory',
+    '$scope'
+  ];
 
-  function BattlefieldController(battlefieldFactory, battlefieldLogicFactory, $scope) {
+  function BattlefieldController(battlefieldFactory, battlefieldLogicFactory, battlefieldTimerFactory, $scope) {
 
     // abbreviate
     var vm = this;
     var bf = battlefieldFactory;
+    var bfLogic = battlefieldLogicFactory;
+    var bfTimer = battlefieldTimerFactory;
 
-		vm.choices = bf.get('choices');
-	  vm.setChoice = bf.setChoice;
-    vm.winsAgainst = battlefieldLogicFactory.winsAgainst;
-    vm.losesAgainst = battlefieldLogicFactory.losesAgainst;
+    vm.currentHover = '';
 
+    vm.choices = bf.get('choices');
+    vm.setChoice = bf.setChoice;
+    vm.get = bf.get;
+
+    vm.winsAgainst = bfLogic.winsAgainst;
+    vm.losesAgainst = bfLogic.losesAgainst;
+
+    vm.getTime = bfTimer.getTime;
+
+    // factory functions
 
     vm.getChoice = function(person) {
       return bf.get(person + 'Choice');
@@ -26,12 +40,6 @@
       return bf.get(person + 'Health');
     };
 
-    vm.get = bf.get;
-
-    vm.currentHover = '';
-
-
-
     vm.hover = function(choice) {
       console.log('hi');
       vm.currentHover = choice;
@@ -39,6 +47,13 @@
 
     vm.unhover = function() {
       vm.currentHover = '';
+    };
+
+    vm.debugger = function() {
+      console.log('opponent choice = ', vm.get('opponent'));
+      console.log('roundWinner = ', vm.get('roundWinner'));
+      console.log('player id = ', vm.get('player').id);
+      // Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id
     };
   }
 })();

@@ -15,6 +15,9 @@ var Player = function(id, socket, events) {
 
   // reference to the user choice
   this.choice = null;
+
+  // game ready state
+  this.gameReady = false;
 };
 
 /**
@@ -68,6 +71,10 @@ Player.prototype.err = function(msg) {
 
 Player.prototype.emit = function(event, data) {
   this.socket.emit(event, data);
+};
+
+Player.prototype.on = function(event, cb) {
+  this.socket.on(event, cb);
 };
 
 // Event triggers that the game is listening to
