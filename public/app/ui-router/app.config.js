@@ -14,11 +14,11 @@ function config($stateProvider, $urlRouterProvider) {
 			controller: 'AuthController',
 			controllerAs: 'Auth'
 		})
-		.state('loading', {
-			url: '/loading',
-			templateUrl: '../app/loading/loading.html',
-			controller: 'LoadingController',
-			controllerAs: 'Loading'
+		.state('waiting', {
+			url: '/waiting',
+			templateUrl: '../app/waiting/waiting.html',
+			controller: 'WaitingController',
+			controllerAs: 'Waiting'
 		})
 	  .state('lobby', {
 	  	url: '/lobby',
