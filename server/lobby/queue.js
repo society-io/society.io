@@ -3,15 +3,16 @@ var io = require('socket.io');
 var game = require('../game/config');
 
 var queue = [];
-	
-function decideQueue(socket) {
+
+module.exports =function decideQueue(socket) {
 	if(queue.length === 0) {
 		addToQueue(socket);
+		console.log('added to queue!');
 	} else {
 		socket.emit('added to queue');
 		queueMatch(socket);
 	}
-}
+};
 
 function addToQueue(socket) {
 	queue.push(socket);
@@ -43,9 +44,9 @@ function disconnected(socket) {
 
 
 module.exports = {
-	decideQueue: decideQueue, 
-	addToQueue: addToQueue, 
-	queueMatch: queueMatch, 
+	// decideQueue: decideQueue,
+	addToQueue: addToQueue,
+	queueMatch: queueMatch,
 	gameInit: gameInit,
 	disconnected: disconnected
 };

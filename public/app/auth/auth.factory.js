@@ -88,7 +88,7 @@
         return obj;
       }
 
-      function getToken(obj) {
+      function getToken() {
         return $window.localStorage.token;
       }
 
