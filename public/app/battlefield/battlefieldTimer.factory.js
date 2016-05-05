@@ -36,8 +36,8 @@ function bfTimerFactoryFunction($rootScope, $interval) {
             console.log(time);
           } else {
             console.log('resolving');
-            stopTimer();
             resolve();
+            stopTimer();
           }
         }, 1000);
       }

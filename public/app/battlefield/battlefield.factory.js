@@ -54,8 +54,7 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
     if (userChoice) {
       emit('choice', { choice: userChoice });
     } else {
-      console.log('emitting noChoice');
-      emit('noChoice');
+      console.error('userChoice is not defined!');
     }
 
     state.player.choice = userChoice;
@@ -109,12 +108,12 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
       state.roundWinner = resp.roundWinner;
 
       if (resp.roundWinner === state.player.id) {
-        state.player.roundStatus = 'Win';
-        state.opponent.roundStatus = 'Lose';
+        state.player.roundStatus = 'Winner';
+        state.opponent.roundStatus = 'Loser';
 
       } else if (resp.roundWinner === state.opponent.id) {
-        state.player.roundStatus = 'Lose';
-        state.opponent.roundStatus = 'Win';
+        state.player.roundStatus = 'Loser';
+        state.opponent.roundStatus = 'Winner';
 
       } else {
         state.player.roundStatus =  state.opponent.roundStatus = 'Tie';
@@ -140,7 +139,13 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
       state.opponent.choice = '';
       state.roundWinner = null;
 
-      bfTimer.startTimer();
+      bfTimer.startTimer().then(function() {
+        console.log('state.player.choice = ', state.player.choice);
+        if (!state.player.choice) {
+          console.log('emitting no choice.');
+          emit('noChoice');
+        }
+      });
     });
 
     on('matchResult', function(resp) {
