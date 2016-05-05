@@ -25,6 +25,7 @@ router.post('/', function(req, res){
 			});
 		} else {
 			console.log("Username does not exist!");
+			res.send({auth: false, message: 'Invalid username or password'});
 		}
 	});
 });
