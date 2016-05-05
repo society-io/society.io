@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var socketInit = require('./socket/socketHelpers').socketInit;
 var SocketAPI = require('./socket/socketAPI').SocketAPI;
+var z = require('./z');
 
 var app = common.app;
 var server = common.server;
@@ -52,3 +53,4 @@ io.on('connection', function(socket) {
       });
   });
 });
+
