@@ -38,8 +38,8 @@
     "ghooks": {
       "pre-commit": "grunt jshint",
       "post-checkout": "grunt concat",
-      "post-merge": "echo 'running npm install' && npm install; echo 'installing bower' && bower install",
-      "post-rewrite": "echo 'running npm install' && npm install; echo 'installing bower' && bower install"
+      "post-merge": "echo 'running npm install' && npm install; echo 'running bower install' && bower install",
+      "post-rewrite": "echo 'running npm install' && npm install; echo 'running bower install' && bower install"
     }
   }
 }
