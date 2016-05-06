@@ -4,8 +4,15 @@ var Game = require('../game/game').Game;
 
 var queue = [];
 
+var queueListeners = function(socket) {
+	socket.on('queue', function () {
+		addToQueue(socket);
+	});
+};
+
 function addToQueue(socket) {
 	queue.push(socket);
+	console.log('ADDED TO QUEUE: ', queue.length);
 	socket.emit('added to queue');
 	queueMatch(socket);
 }
@@ -14,15 +21,14 @@ function queueMatch(socket) {
 	if (queue.length>=2) {
 		var player1 = queue.pop();
 		var player2= queue.pop();
+
+		var game =new Game(player1, player2)
+		game.init()
+
 		player1.emit('match ready');
 		player2.emit('match ready');
-		gameInit(player1, player2);
+		console.log('MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
 	}
-}
-
-function gameInit(socket1, socket2){
-	var game = new Game(socket1, socket2);
-	game.init();
 }
 
 function disconnected(socket) {
@@ -32,8 +38,8 @@ function disconnected(socket) {
 }
 
 module.exports = {
+	queueListeners: queueListeners,
 	addToQueue: addToQueue,
 	queueMatch: queueMatch,
-	gameInit: gameInit,
 	disconnected: disconnected
 };
