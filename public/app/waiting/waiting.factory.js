@@ -19,7 +19,8 @@
     	listeners();
     	return {
         get: get,
-        cancelRoom: cancelRoom
+        cancelRoom: cancelRoom,
+        removeFromQueue: removeFromQueue
       };
 
       function get(keyName) {
@@ -30,6 +31,12 @@
         // Send the Server Your Game's joinCode
         emit('cancel room', {joinCode: joinCode});
         $state.go('lobby');
+      }
+
+      function removeFromQueue(socketAPI) {
+        emit('remove from queue', {
+          socketAPI: socketAPI
+        });
       }
 
 		  function listeners() {
