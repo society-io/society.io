@@ -40,6 +40,7 @@ var storeJoinCode = function(data) {
 var storePlayer1 = function(data, socket) {
   // Store user socket in privateGames
   privateGames[data.joinCode][0] = socket;
+  console.log('About to emit room created...');
   socket.emit('room created', {
     message: 'Player 1 inserted! Waiting on Player 2...',
     success: true

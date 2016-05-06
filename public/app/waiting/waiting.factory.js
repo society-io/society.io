@@ -1,14 +1,14 @@
 (function (){
   angular
     .module('app')
-    .factory('loadingFactory', loadingFactory);
-    
-    loadingFactory.$inject = ['$state','socketFactory'];
-    
-    function loadingFactory($state, socketFactory) {
+    .factory('waitingFactory', waitingFactory);
+
+    waitingFactory.$inject = ['$state','socketFactory'];
+
+    function waitingFactory($state, socketFactory) {
     	var emit = socketFactory.emit;
 		  var on = socketFactory.on;
-      
+
       var playerInfo = {
       	player1Name: "Kan Adachi",
       	player1MMR: false,
@@ -18,7 +18,7 @@
 
     	listeners();
     	return {get: get};
-      
+
       function get(keyName) {
       	return playerInfo[keyName];
       }
@@ -38,7 +38,7 @@
 					// $state.go('/battlefield');
 				// });
 
-			}	
+			}
     }
 
 

@@ -18,33 +18,46 @@ angular
 		};
 
 		function joinQueue(message) {
+			// ADD LOADING SCREEN (BEN & NEIL's CUSTOM DIRECTIVE)
 			emit('queue', message);
 			console.log('queue event emitted!');
 		}
 
 		function addedToQueue() {
 			on('added to queue', function() {
-				$state.go('/loading');
+				$state.go('waiting');
 			});
 		}
 
 		function createRoom(joinCode) {
+			on('room created', function(data){
+			  $state.go('waiting');
+			});
 			emit('create room', {joinCode: joinCode});
 			console.log('create room event emitted!');
+			$state.go('loading');
 		}
 
 		function joinRoom() {
+			on('room exists', function(data){
+			  if(data.success) {
+			    $state.go('waiting');
+			  } else {
+			    $state.go('lobby');
+			  }
+			});
 			emit('join room');
 			console.log('join room event emitted!');
+			$state.go('loading');
 		}
 
 		function waitingRoom() {
 			on('room created', function(data){
-				$state.go('waitingRoom');
+				$state.go('waiting');
 			});
 			on('room exists', function(data){
 				if(data.success) {
-					$state.go('waitingRoom');
+					$state.go('waiting');
 				} else {
 					$state.go('lobby');
 				}
