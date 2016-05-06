@@ -23,10 +23,7 @@ function queueMatch(socket) {
 }
 
 function gameInit(socket1, socket2){
-	var game = new Game({
-		player1: socket1.socket,
-		player2: socket2.socket
-	});
+	var game = new Game(socket1, socket2);
 	game.init();
 }
 
