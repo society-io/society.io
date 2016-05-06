@@ -6,12 +6,12 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var SocketAPI = require('./socket/socketAPI').SocketAPI;
 var activeSockets = {};
-var currentSocket = {}; 
+var currentSocket = {};
 
 module.exports = {
   firebase: firebase,
   app: app,
   server: server,
   io: io,
-  activeSockets: activeSockets
+  activeSockets: activeSockets,
 };

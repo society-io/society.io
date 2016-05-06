@@ -15,8 +15,15 @@ var socketCheck = function(token, socket) {
 		});
 	});
 };
+var userListener = function(socket) {
+	socket.on('who am I', function () {
+	var user= this.getUserModel();
+	socket.emit('you are', {user:user});
+	});
+};
 
 module.exports = {
-	socketCheck: socketCheck
+	socketCheck: socketCheck,
+	userListener: userListener
 };
 

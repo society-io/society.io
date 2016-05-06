@@ -1,6 +1,6 @@
 var firebase = require('../common').firebase;
 var privateGameListeners = require('../lobby/privateGame').privateGameListeners;
-var addToQueue = require('../lobby/queue').addToQueue; 
+var queueListeners = require('../lobby/queue').queueListeners;
 
 var SocketAPI = function(socket, userModel, token) {
   // Take Out Password! (protected data)
@@ -15,7 +15,8 @@ var SocketAPI = function(socket, userModel, token) {
 
 SocketAPI.prototype.init = function() {
   privateGameListeners(this);
-  addToQueue(this);
+  queueListeners(this);
+  // userListeners(this)
 };
 
 
@@ -35,6 +36,10 @@ SocketAPI.prototype.on = function(event, cb, verify) {
 
 SocketAPI.prototype.emit = function(eventName, data) {
 	this.socket.emit(eventName, data);
+};
+
+SocketAPI.prototype.getUserModel = function(socket) {
+	return this.user;
 };
 
 SocketAPI.prototype.deleteEvent = function(eventName) {
