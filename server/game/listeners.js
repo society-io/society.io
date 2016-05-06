@@ -1,5 +1,5 @@
 var onDisconnect = function(player) {
-  // this is bound to the game instance
+  // this = game instance
   console.log(player + ' socket disconnected!');
   this.terminate('a player disconnected.');
 };
@@ -14,12 +14,11 @@ var onNoChoice = function() {
   this.updateChoice('noChoice');
 };
 
-var onClientGameReady = function(player) {
+var onClientGameReady = function() {
   // this = player obj
-  this[player].gameReady = true;
-  if (this.player1.gameReady && this.player2.gameReady) {
-    this.newRound();
-  }
+  console.log('heard on client game ready');
+  console.log(this.id);
+  this.ready();
 };
 
 module.exports = {

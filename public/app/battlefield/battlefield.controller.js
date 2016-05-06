@@ -8,10 +8,11 @@
     'battlefieldFactory',
     'battlefieldLogicFactory',
     'battlefieldTimerFactory',
+    'socketFactory',
     '$scope'
   ];
 
-  function BattlefieldController(battlefieldFactory, battlefieldLogicFactory, battlefieldTimerFactory, $scope) {
+  function BattlefieldController(battlefieldFactory, battlefieldLogicFactory, battlefieldTimerFactory, socketFactory, $scope) {
 
     // abbreviate
     var vm = this;
@@ -19,19 +20,24 @@
     var bfLogic = battlefieldLogicFactory;
     var bfTimer = battlefieldTimerFactory;
 
-    vm.currentHover = '';
+    // set up the document ready signal
+    angular.element(document).ready(function() {
+      setTimeout(function() {
+        console.log('emitting client ready!');
+        socketFactory.emit('client ready');
+      }, 2000);
+    });
 
+    // View State Elements
+    vm.currentHover = '';
     vm.choices = bf.get('choices');
     vm.setChoice = bf.setChoice;
     vm.get = bf.get;
-
     vm.winsAgainst = bfLogic.winsAgainst;
     vm.losesAgainst = bfLogic.losesAgainst;
-
     vm.getTime = bfTimer.getTime;
 
     // factory functions
-
     vm.getChoice = function(person) {
       return bf.get(person + 'Choice');
     };
@@ -53,7 +59,6 @@
       console.log('opponent choice = ', vm.get('opponent'));
       console.log('roundWinner = ', vm.get('roundWinner'));
       console.log('player id = ', vm.get('player').id);
-      // Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id
     };
   }
 })();
