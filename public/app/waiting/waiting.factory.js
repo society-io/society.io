@@ -10,7 +10,7 @@
 		  var on = socketFactory.on;
 
       var playerInfo = {
-      	player1Name: "Kan Adachi",
+      	player1Name: false,
       	player1MMR: false,
       	player2Name: false,
       	player2MMR: false
@@ -24,19 +24,20 @@
       }
 
 		  function listeners() {
+        emit('who am i');
 
-				// on('matchReady',function(resp){
-					/*
-					//insert $timeout here
-					resp = {
-            player1:
-            player1mmr:
-            player2:
-            player2mmr:
-					}
-					*/
-				// });
+        on('you are', function(resp) {
+          playerInfo.player1Name = resp.name;
+          playerInfo.player1MMR = resp.mmr;
+        });
 
+        on('matchReady', function(resp) {
+          playerInfo.player2Name = resp.name;
+          playerInfo.player2MMR = resp.name;
+          $timeout(function(){
+            $state.go('battlefield');
+          }, 5000);
+        });
 			}
     }
 
