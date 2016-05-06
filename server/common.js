@@ -13,5 +13,5 @@ module.exports = {
   app: app,
   server: server,
   io: io,
-  activeSockets: activeSockets,
+  activeSockets: activeSockets
 };
