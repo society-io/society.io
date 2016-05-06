@@ -53,19 +53,22 @@ Gamelogic.prototype.choiceSubmitted = function() {
 
 Gamelogic.prototype.isMatchOver = function() {
   var game = this.game;
-  var zeroCount = 0;
+  var zeroCount1 = 0;
+  var zeroCount2 = 0;
 
-  for (var id in game.health) {
-    for (var choice in game.health[id]) {
-      if (game.health[id][choice] === 0) {
-        zeroCount++;
-      }
+  for (var choice1 in game.player1.health) {
+    if (game.player1.health[choice1] === 0) {
+      zeroCount1++;
     }
   }
 
-  console.log('zeroCount = ', zeroCount);
+  for (var choice2 in game.player2.health) {
+    if (game.player2.health[choice2] === 0) {
+      zeroCount2++;
+    }
+  }
 
-  if (zeroCount >= 4) {
+  if (zeroCount1 >= 4 || zeroCount2 >= 4) {
     return true;
   }
 
