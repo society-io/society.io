@@ -158,6 +158,7 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
       }, 3000);
     });
 
+    // this line is for debugging game purposes only. Safe to ignore.
     emit('newGame');
   }
 
