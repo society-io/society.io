@@ -49,6 +49,7 @@ Game.prototype.init = function() {
     game[player].on('choice', listeners.onChoice.bind(game[player]));
     game[player].on('noChoice', listeners.onNoChoice.bind(game[player]));
     game[player].on('client ready', listeners.onClientGameReady.bind(game[player]));
+    game[player].on('forfeit', listeners.onForfeit.bind(game[player]));
   });
 
   // player eventing listeners
@@ -67,6 +68,19 @@ Game.prototype.init = function() {
       );
       game.newRound();
     }
+  });
+
+  // on forfeit
+  game.playerOn('forfeit', function(player) {
+    game.matchOver = true;
+    game.roundWinner = player.id === 1 ? 2 : 1;
+    game.matchWinner = game.roundWinner;
+
+    // emit match result
+    game.emit('forfeitedResults', {
+      winner: game.roundWinner,
+    });
+    game.terminate('gameOver');
   });
 };
 
@@ -87,9 +101,6 @@ Game.prototype.emit = function(event, data, p1data, p2data) {
     console.error('p2data = ', p2data);
     return;
   }
-
-  console.log('inside of imit. event = ', event);
-  console.log('data = ', data);
 
   if (!data && p1data && p2data) {
     p1data.event = event;

@@ -69,6 +69,10 @@ Player.prototype.ready = function() {
   this.trigger('playerReady');
 };
 
+Player.prototype.forfeit = function() {
+  this.trigger('forfeit');
+};
+
 /**
  *  Convenience wrapper functions for socket emissions
  *

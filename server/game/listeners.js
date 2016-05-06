@@ -21,9 +21,16 @@ var onClientGameReady = function() {
   this.ready();
 };
 
+var onForfeit = function() {
+  // this = player obj
+  console.log('heard on forfeit! invoking player.forfeit()');
+  this.forfeit();
+};
+
 module.exports = {
   onDisconnect: onDisconnect,
   onChoice: onChoice,
   onNoChoice: onNoChoice,
-  onClientGameReady: onClientGameReady
+  onClientGameReady: onClientGameReady,
+  onForfeit: onForfeit
 };

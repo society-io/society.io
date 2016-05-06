@@ -33,9 +33,7 @@ function bfTimerFactoryFunction($rootScope, $interval) {
         tick = $interval(function() {
           if (time > 0) {
             time--;
-            console.log(time);
           } else {
-            console.log('resolving');
             resolve();
             stopTimer();
           }
