@@ -2,7 +2,7 @@ var Gamelogic = require('./logic').Gamelogic;
 var Player = require('./player').Player;
 var listeners = require('./listeners');
 
-var Game = function(playerSockets) {
+var Game = function(player1Socket, player2Socket) {
   /**
    *  Game state properties (Constructor)
    *
@@ -14,8 +14,8 @@ var Game = function(playerSockets) {
   this.events = {};
 
   // instantiate 2 user objects with ids and socket references
-  this.player1 = new Player(1, playerSockets.player1, this.events);
-  this.player2 = new Player(2, playerSockets.player2, this.events);
+  this.player1 = new Player(1, player1Socket, this.events);
+  this.player2 = new Player(2, player2Socket, this.events);
 
   // convenience object: useful for passing health state to client (?)
   this.health = {

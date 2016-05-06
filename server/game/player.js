@@ -1,11 +1,14 @@
 var gameConfig = require('./config');
 
-var Player = function(id, socket, events) {
+var Player = function(id, socketAPI, events) {
   // id should always be 1 or 2
   this.id = id;
 
-  // reference to the underlying socket connection to user
-  this.socket = socket;
+  // reference to the socketAPI
+  this.socketAPI = socketAPI;
+
+  // reference to the underlying socket for the user
+  this.socket = socketAPI.socket;
 
   // a reference to the parents event storage
   this.events = events;

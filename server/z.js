@@ -1,5 +1,6 @@
 var io = require('./common').io;
 var Game = require('./game/game').Game;
+var SocketAPI = require('./socket/socketAPI').SocketAPI;
 
 var queue = [];
 var sockets = {};
@@ -11,10 +12,9 @@ io.on('connection', function(socket) {
     queue.push(socket);
     if (queue.length === 2) {
       console.log('instantiating game!');
-      new Game({
-        player1: queue.pop(),
-        player2: queue.pop()
-      }).init();
+      var socket1 = new SocketAPI(queue.pop());
+      var socket2 = new SocketAPI(queue.pop());
+      new Game(socket1, socket2).init();
     }
   });
 });

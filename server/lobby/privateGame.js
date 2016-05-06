@@ -2,7 +2,6 @@ var activeSockets = require('../common').activeSockets;
 var privateGames = {}; // { joinCode: [] }
 
 var privateGameListeners = function(socket){
-  console.log('inside privateGameListeners');
 
   socket.on('create room', function(data){
     console.log('onCreateRoomData: ',data);
@@ -48,6 +47,7 @@ var storePlayer1 = function(data, socket) {
 };
 
 var storePlayer2 = function(data, socket) {
+  console.log(Object.keys(socket));
   // Crossreference joinCode with those in privateGames
   for(var key in privateGames){
     // if the request joinCode matches one within privateGames
@@ -68,7 +68,7 @@ var initiatePrivateGame = function(data, socket){
   // Create a new privateGame using the right credentials
   var players = privateGames[data.joinCode];
   if(players.length === 2) {
-    var privateGame = new Game(players);
+    var privateGame = new Game(players[0], players[1]);
     // Use the game's initialize method
     privateGame.init();
     // Tell the Clients that a privateGame has been created & initiated

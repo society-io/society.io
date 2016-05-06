@@ -38,7 +38,7 @@ angular
 			$state.go('loading');
 		}
 
-		function joinRoom() {
+		function joinRoom(joinCode) {
 			on('room exists', function(data){
 			  if(data.success) {
 			    $state.go('waiting');
@@ -46,7 +46,7 @@ angular
 			    $state.go('lobby');
 			  }
 			});
-			emit('join room');
+			emit('join room', {joinCode: joinCode});
 			console.log('join room event emitted!');
 			$state.go('loading');
 		}
