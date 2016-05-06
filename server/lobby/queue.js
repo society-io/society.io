@@ -24,6 +24,7 @@ function queueMatch(socket) {
 
 		var game =new Game(player1, player2)
 		game.init()
+
 		player1.emit('match ready');
 		player2.emit('match ready');
 		console.log('MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
