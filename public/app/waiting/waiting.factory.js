@@ -35,7 +35,6 @@
             player2mmr:
 					}
 					*/
-					// $state.go('/battlefield');
 				// });
 
 			}

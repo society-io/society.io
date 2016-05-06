@@ -29,10 +29,9 @@
 			vm.showJoinGameInput = true;
 		};
 
-		vm.signOut = function() {
+		vm.signOut = function () {
 			authFactory.signOut();
 		};
-
+		
 	}
-
-})();
+	})();

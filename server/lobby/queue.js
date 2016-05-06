@@ -1,40 +1,33 @@
 var io = require('../common');
 var io = require('socket.io');
-var game = require('../game/config');
+var Game = require('../game/game').Game;
 
 var queue = [];
-//
-// function decideQueue(socket) {
-// 	if (queue.length === 0) {
-// 		addToQueue(socket);
-// 		console.log('added to queue!');
-// 	} else {
-// 		socket.emit('added to queue');
-// 		queueMatch(socket);
-// 	}
-// }
 
 function addToQueue(socket) {
 	queue.push(socket);
-	console.log('ADDED TO QUEUE:', queue);
+	console.log('ADDED TO QUEUE:', 'added to queue');
 	socket.emit('added to queue');
 	queueMatch(socket);
 }
 
 function queueMatch(socket) {
 	if (queue.length>=2) {
-		var match = queue.pop();
-
-		console.log('QUEUE MATCH: player1 = ', match,' player2 = ', socket.id);
-		socket.emit('match ready');
-		gameInit(activeSockets[match.id], socket);
+		var player1 = queue.pop();
+		var player2= queue.pop();
+		console.log('QUEUE MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
+		player1.emit('match ready');
+		player2.emit('match ready');
+		gameInit(player1, player2);
 	}
 }
 
 function gameInit(socket1, socket2){
-	var game = new Game(socket1, socket2);
+	var game = new Game({
+		player1: socket1.socket,
+		player2: socket2.socket
+	});
 	game.init();
-	socket.emit('game ready');
 }
 
 function disconnected(socket) {
@@ -44,7 +37,6 @@ function disconnected(socket) {
 }
 
 module.exports = {
-	// decideQueue: decideQueue,
 	addToQueue: addToQueue,
 	queueMatch: queueMatch,
 	gameInit: gameInit,

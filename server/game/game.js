@@ -5,7 +5,7 @@ var listeners = require('./listeners');
 var Game = function(playerSockets) {
   /**
    *  Game state properties (Constructor)
-   *  
+   *
    *  Responsible for maintaining game state across 2 clients
    *  It will be passed by reference into instantiation of game logic
    */
@@ -113,7 +113,7 @@ Game.prototype.terminate = function(reason) {
 Game.prototype.playerOn = function(event, cb) {
   /**
    *  Register a callback for the player to trigger
-   *  
+   *
    *  Utilize this custom eventing function when needing to pass information
    *  from individual players to trigger game logic related events
    */

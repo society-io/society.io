@@ -6,11 +6,10 @@ var SocketAPI = function(socket, userModel, token) {
   // Take Out Password! (protected data)
   userModel = Object.assign({}, userModel);
   delete userModel.password;
-
 	this.socket = socket;
 	this.socketId = socket.id;
 	this.user = userModel;
-		this.userId = userModel._id;
+	this.userId = userModel._id;
 	this.token = token;
 };
 
