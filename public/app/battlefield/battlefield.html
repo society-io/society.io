@@ -91,6 +91,7 @@
           }">
           <div class="tile"
             ng-class="{
+              dead: Bf.get('opponent').health[choice] === 0,
               lose: Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1],
               winRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
               lostRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id

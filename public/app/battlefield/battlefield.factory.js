@@ -136,7 +136,9 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
       // reset state items for next round
       state.submitted = false;
       state.player.choice = '';
+      state.player.roundStatus = '';
       state.opponent.choice = '';
+      state.opponent.roundStatus = '';
       state.roundWinner = null;
 
       bfTimer.startTimer().then(function() {
