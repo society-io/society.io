@@ -1,0 +1,20 @@
+.timer-container {
+  position: absolute;
+  left: 50%;
+  top: 0;
+}
+
+.timer {
+  position: relative;
+  left: -50%;
+  height: 93px;
+  width: 175px;
+  background-color: #bbb;
+  text-align: center;
+  
+  h1 {
+    margin: 0;
+    line-height: 90px;
+    vertical-align: middle;
+  }
+}

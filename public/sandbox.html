@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+  <title>Society Game</title>
+
+    <link rel="stylesheet" href="./dist/style.css">
+
+</head>
+
+<body>
+
+  <div class="board">
+
+    <!-- Timer -->
+    <div class="timer-container">
+      <div class="timer">
+        <h1>10</h1>
+      </div>
+    </div>
+
+    <!-- Board Left -->
+    <div class="board-left player">
+
+      <div class="player-stats">
+        <p class="username">JohnDoe</p>
+        <p class="stat wins"><span>Wins </span> 24,581</p>
+        <p class="stat losses"><span>Losses </span> 19,950</p>
+        <p class="stat winPerc"><span>Win % </span> 55.20%</p>
+      </div>
+      
+      <div class="tile-container">
+
+        <div class="status-container">
+          <div class="status">
+            <h1>Win</h1>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="rich">
+          <div class="health health-3">
+            <div class="tile">Rich</div>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="bum">
+          <div class="health health-2">
+            <div class="tile">Bum</div>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="tax">
+          <div class="health health-1">
+            <div class="tile">Tax</div>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="cop">
+          <div class="health health-3">
+            <div class="tile">Cop</div>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="jail">
+          <div class="health dead">
+            <div class="tile">Jail</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- 
+  
+    Board Right
+
+    DO NOT remove this comment. It will mess up the layout.
+    --><div class="board-right opponent">
+
+      <div class="player-stats">
+        <p class="username">JohnDoe</p>
+        <p class="stat wins"><span>Wins: </span> 24,581</p>
+        <p class="stat losses"><span>Losses: </span> 19,950</p>
+        <p class="stat winPerc"><span>Win %: </span>55.20%</p>
+      </div>
+      
+      <div class="tile-container">
+
+        <div class="status-container">
+          <div class="status">
+            <h1>Lose</h1>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="rich">
+          <div class="health health-3">
+            <div class="tile">Rich</div>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="bum">
+          <div class="health health-2">
+            <div class="tile">Bum</div>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="tax">
+          <div class="health health-1">
+            <div class="tile">Tax</div>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="cop">
+          <div class="health health-3">
+            <div class="tile">Cop</div>
+          </div>
+        </div>
+
+        <div class="tile-pos" id="jail">
+          <div class="health health-1">
+            <div class="tile">Jail</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="game-over overlay">
+    <h1>Game Over</h1>
+  </div>
+
+</body>
+</html>
