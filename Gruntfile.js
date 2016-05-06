@@ -21,6 +21,7 @@ module.exports = function(grunt) {
           'public/app/battlefield/**/*.js',
           'public/app/loading/**/*.js',
           'public/app/lobby/**/*.js',
+          'public/app/waiting/**/*.js',
           'public/app/ui-router/app.config.js'
         ],
         dest: 'public/dist/built.js',

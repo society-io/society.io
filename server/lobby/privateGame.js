@@ -18,6 +18,11 @@ var privateGameListeners = function(socket){
     initiatePrivateGame(data, socket);
   });
 
+  socket.on('cancel room', function(data){
+    console.log('joinCode: ',data.joinCode);
+    cancelPrivateGame(data, socket);
+  });
+
 };
 
 var storeJoinCode = function(data) {
@@ -39,7 +44,7 @@ var storeJoinCode = function(data) {
 var storePlayer1 = function(data, socket) {
   // Store user socket in privateGames
   privateGames[data.joinCode][0] = socket;
-  console.log('About to emit room created...');
+  console.log('privateGames: ',privateGames);
   socket.emit('room created', {
     message: 'Player 1 inserted! Waiting on Player 2...',
     success: true
@@ -47,7 +52,6 @@ var storePlayer1 = function(data, socket) {
 };
 
 var storePlayer2 = function(data, socket) {
-  console.log(Object.keys(socket));
   // Crossreference joinCode with those in privateGames
   for(var key in privateGames){
     // if the request joinCode matches one within privateGames
@@ -64,7 +68,7 @@ var storePlayer2 = function(data, socket) {
   }
 };
 
-var initiatePrivateGame = function(data, socket){
+var initiatePrivateGame = function(data, socket) {
   // Create a new privateGame using the right credentials
   var players = privateGames[data.joinCode];
   if(players.length === 2) {
@@ -77,6 +81,22 @@ var initiatePrivateGame = function(data, socket){
       players: players,
       success: true
     });
+  }
+};
+
+var cancelPrivateGame = function(data, socket) {
+  // Check in privateGames for the joinCode
+  console.log('canceling privateGame...');
+  for(var key in privateGames) {
+    if(data.joinCode === key) {
+      delete privateGames[key];
+      console.log('privateGames: ',privateGames);
+    } else {
+      socket.emit('err', {
+        message: 'joinCode not found! Please Try Again...',
+        success: false
+      });
+    }
   }
 };
 

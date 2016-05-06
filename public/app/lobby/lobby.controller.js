@@ -7,7 +7,7 @@
 
 	LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory'];
 
-	function LobbyController ($scope, lobbyFactory, socketFactory, authFactory) {
+	function LobbyController($scope, lobbyFactory, socketFactory, authFactory) {
 		var vm = this;
 
 		authFactory.checkAuth();
@@ -19,19 +19,19 @@
 
 		vm.createRoom = lobbyFactory.createRoom;
 		vm.showCreateGameInput = false;
-		vm.showCreateGameController = function () {
+		vm.showCreateGameController = function() {
 			vm.showCreateGameInput = true;
 		};
 
 		vm.joinRoom = lobbyFactory.joinRoom;
 		vm.showJoinGameInput = false;
-		vm.showJoinGameController = function () {
+		vm.showJoinGameController = function() {
 			vm.showJoinGameInput = true;
 		};
 
-		vm.signOut = function () {
+		vm.signOut = function() {
 			authFactory.signOut();
 		};
-		
+
 	}
 	})();
