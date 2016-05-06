@@ -22,9 +22,7 @@ function config($stateProvider, $urlRouterProvider) {
 	  })
 	  .state('loading', {
 	  	url: '/loading',
-	  	templateUrl: '../app/loading/loading.html',
-	  	controller: 'LoadingController',
-	  	controllerAs: 'Loading'
+	  	templateUrl: '../app/loading/loading.html'
 	  })
 		.state('waiting', {
 			url: '/waiting',
