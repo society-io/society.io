@@ -22,8 +22,8 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
   };
 
   var state = {
-    time: 15,
     choices: ['rich', 'bum', 'tax', 'cop', 'jail'],
+    time: 15,
     results: false,
     submitted: false,
     roundWinner: null,
@@ -31,6 +31,7 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
     player: false,
     opponent: false,
     gameStarted: false,
+    forfeited: false,
     centerMessage: 'Game starting in a few seconds...'
   };
 
@@ -39,8 +40,10 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
   return {
     emit: emit,
     setChoice: setChoice,
+    forfeit: forfeit,
     get: get
   };
+
 
   function Player(id) {
     this.id = id;
@@ -72,6 +75,10 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
     state.matchOver = false;
     state.playerHealth = Object.assign({}, startingHealth);
     state.opponentHealth = Object.assign({}, startingHealth);
+  }
+
+  function forfeit() {
+    emit('forfeit');
   }
 
   function listeners() {
@@ -153,6 +160,21 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
     on('matchResult', function(resp) {
       state.matchOver = true;
       state.centerMessage = 'Game Over! Headed to lobby...';
+      setTimeout(function() {
+        $state.go('lobby');
+      }, 3000);
+    });
+
+    on('forfeitedResults', function(resp) {
+      bfTimer.stopTimer();
+      state.forfeited = true;
+      state.matchOver = true;
+      state.roundWinner = resp.winner;
+      if (state.player.id === resp.winner) {
+        state.centerMessage = 'Looks like the other player forfeited. Redirecting to lobby...';
+      } else {
+        state.centerMessage = 'You forfeited the match. Redirecting to lobby...';
+      }
       setTimeout(function() {
         $state.go('lobby');
       }, 3000);

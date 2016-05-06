@@ -33,6 +33,7 @@
     vm.choices = bf.get('choices');
     vm.setChoice = bf.setChoice;
     vm.get = bf.get;
+    vm.forfeit = bf.forfeit;
     vm.winsAgainst = bfLogic.winsAgainst;
     vm.losesAgainst = bfLogic.losesAgainst;
     vm.getTime = bfTimer.getTime;
