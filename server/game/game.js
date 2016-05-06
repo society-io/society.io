@@ -48,7 +48,7 @@ Game.prototype.init = function() {
     game[player].on('disconnect', listeners.onDisconnect.bind(game, player));
     game[player].on('choice', listeners.onChoice.bind(game[player]));
     game[player].on('noChoice', listeners.onNoChoice.bind(game[player]));
-    game[player].on('clientGameReady', listeners.onClientGameReady.bind(game, player));
+    game[player].on('client ready', listeners.onClientGameReady.bind(game[player]));
   });
 
   // player eventing listeners
@@ -56,12 +56,18 @@ Game.prototype.init = function() {
     game.logic.choiceSubmitted();
   });
 
-  // emit game ready to start game
-  console.log('emitting gameready');
-  game.emit('gameReady', null,
-    { playerId: this.player1.id, startingHealth: this.player1.health },
-    { playerId: this.player2.id, startingHealth: this.player2.health }
-  );
+  // once both players are ready, emit gameReady to both clients.
+  game.playerOn('playerReady', function(player) {
+    console.log('readyness of players = ', game.player1.readyToPlay, game.player2.readyToPlay);
+    if (game.player1.readyToPlay && game.player2.readyToPlay) {
+      console.log('emitting gameready');
+      game.emit('gameReady', null,
+        { playerId: game.player1.id, startingHealth: game.player1.health },
+        { playerId: game.player2.id, startingHealth: game.player2.health }
+      );
+      game.newRound();
+    }
+  });
 };
 
 Game.prototype.emit = function(event, data, p1data, p2data) {

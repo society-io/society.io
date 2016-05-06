@@ -20,7 +20,7 @@ var Player = function(id, socketAPI, events) {
   this.choice = null;
 
   // game ready state
-  this.gameReady = false;
+  this.readyToPlay = false;
 };
 
 /**
@@ -29,6 +29,7 @@ var Player = function(id, socketAPI, events) {
  *  resetChoice:  resets choice - used when a round winner is determined
  *  updateChoice: stores the user choice
  *  updateHealth: subtracts 1 health from the losing choice
+ *  gameReady: invoked when the client side has emitted a 'client ready' event.
  */
 Player.prototype.resetChoice = function() {
   this.choice = null;
@@ -62,6 +63,12 @@ Player.prototype.updateHealth = function(choice) {
   }
 };
 
+Player.prototype.ready = function() {
+  console.log('triggering playerReady');
+  this.readyToPlay = true;
+  this.trigger('playerReady');
+};
+
 /**
  *  Convenience wrapper functions for socket emissions
  *
@@ -82,6 +89,7 @@ Player.prototype.on = function(event, cb) {
 
 // Event triggers that the game is listening to
 Player.prototype.trigger = function(event) {
+  console.log('trigger called. event = ', event);
   if (!this.events[event]) {
     console.error(event + ' is not a registered event.');
   } else {

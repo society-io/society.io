@@ -7,7 +7,6 @@ var sockets = {};
 
 // io.on('connection', function(socket) {
 //   socket.on('newGame', function() {
-//     console.log('hi');
 //     sockets[socket.id] = queue.length;
 //     queue.push(socket);
 //     if (queue.length === 2) {
