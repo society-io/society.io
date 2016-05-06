@@ -1,0 +1,44 @@
+.board {
+  width: 100%;
+  height: 100%;
+}
+
+.board .board-left,
+.board .board-right {
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+}
+
+.board-left {
+  background-color: #999;
+}
+
+.board-right {
+  background-color: #888;
+}
+
+.tile-container {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  top: 93px;
+  margin: auto;
+}
+
+.status-container {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+}
+
+.status {
+  position: relative;
+  left: -50%;
+
+  h1 {
+    margin: 0;
+  }
+}
