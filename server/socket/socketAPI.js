@@ -1,11 +1,11 @@
 var firebase = require('../common').firebase;
 var privateGameListeners = require('../lobby/privateGame').privateGameListeners;
+var addToQueue = require('../lobby/queue').addToQueue; 
 
 var SocketAPI = function(socket, userModel, token) {
   // Take Out Password! (protected data)
   userModel = Object.assign({}, userModel);
   delete userModel.password;
-
 	this.socket = socket;
 	this.socketId = socket.id;
 	this.user = userModel;
@@ -15,8 +15,9 @@ var SocketAPI = function(socket, userModel, token) {
 
 SocketAPI.prototype.init = function() {
   privateGameListeners(this);
-  // queueListeners(this);
+  addToQueue(this);
 };
+
 
 SocketAPI.prototype.on = function(event, cb, verify) {
   if(verify) {

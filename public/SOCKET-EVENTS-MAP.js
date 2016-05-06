@@ -10,7 +10,7 @@
 //   emit('join room', {auth-token, joinCode}
 //
 //  LISTENERS: ['waiting room', 'match ready']
-// 	on('waiting room', function(res, err) {state.go('/loading')}); 
+// 	on('waiting room', function(res, err) {state.go('/loading')});
 // 	socket.once('match ready', function (res, err) {state.go('/battlefield')});
 //
 // SERVER
@@ -66,4 +66,10 @@
 //
 //
 //
-//
+
+
+CREATE
+createRoom
+
+
+

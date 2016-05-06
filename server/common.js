@@ -4,7 +4,9 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var SocketAPI = require('./socket/socketAPI').SocketAPI;
 var activeSockets = {};
+var currentSocket = {}; 
 
 module.exports = {
   firebase: firebase,

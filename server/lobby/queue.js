@@ -1,40 +1,44 @@
-var io = require('../common').io;
+var io = require('../common');
+var io = require('socket.io');
+var Game = require('../game/game').Game;
 
-var queue = {
-  storage: [],
-  insert: function(socket) {
-    this.storage.push(socket);
-    console.log('QUEUE', this.storage.length);
-    socket.on('disconnect', function(socket) {
-      var idx = Queue.storage.indexOf(socket);
-      Queue.storage.splice(idx, 1);
-      socket.emit('added to queue');
-      console.log(Queue.storage);
-    });
-  },
-  remove: function () {
-    var socket1 = this.storage.shift();
-    var socket2 = this.storage.shift();
-    socket.emit('match ready');
-    return {player1: socket1, player2: socket2};
-  }
-};
+var queue = [];
 
-io.on('queue', function(socket) {
-  console.log('heard queue event');
-  console.log(queue);
-  // Put socket into queue
-  if(queue.storage.length < 2) {
-    queue.insert(socket);
-  }
-  // Instantiate game if more than 2 in queue
-  if (queue.storage.length >= 2) {
-    var playerSockets = queue.remove();
-    var game = new Game(playerSockets);
-    game.init();
-  }
-});
+function addToQueue(socket) {
+	queue.push(socket);
+	console.log('ADDED TO QUEUE:', 'added to queue');
+	socket.emit('added to queue');
+	queueMatch(socket);
+}
+
+function queueMatch(socket) {
+	if (queue.length>=2) {
+		var player1 = queue.pop();
+		var player2= queue.pop();
+		console.log('QUEUE MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
+		player1.emit('match ready');
+		player2.emit('match ready');
+		gameInit(player1, player2);
+	}
+}
+
+function gameInit(socket1, socket2){
+	var game = new Game({
+		player1: socket1.socket,
+		player2: socket2.socket
+	});
+	game.init();
+}
+
+function disconnected(socket) {
+	var index = queue.indexOf(socket.id);
+	queue.splice(index, 1);
+	console.log('DISCONNECTED FROM QUEUE:', queue);
+}
 
 module.exports = {
-  queue: queue
+	addToQueue: addToQueue,
+	queueMatch: queueMatch,
+	gameInit: gameInit,
+	disconnected: disconnected
 };
