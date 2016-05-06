@@ -3,9 +3,9 @@
     .module('app')
     .factory('waitingFactory', waitingFactory);
 
-    waitingFactory.$inject = ['$state','socketFactory'];
+    waitingFactory.$inject = ['socketFactory', '$state'];
 
-    function waitingFactory($state, socketFactory) {
+    function waitingFactory(socketFactory, $state) {
     	var emit = socketFactory.emit;
 		  var on = socketFactory.on;
 
@@ -17,10 +17,19 @@
       };
 
     	listeners();
-    	return {get: get};
+    	return {
+        get: get,
+        cancelRoom: cancelRoom
+      };
 
       function get(keyName) {
       	return playerInfo[keyName];
+      }
+
+      function cancelRoom(joinCode) {
+        // Send the Server Your Game's joinCode
+        emit('cancel room', {joinCode: joinCode});
+        $state.go('lobby');
       }
 
 		  function listeners() {

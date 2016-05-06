@@ -1,15 +1,20 @@
 (function(){
-
-
+'use strict';
 angular
   .module('app')
   .controller('WaitingController', WaitingController);
 
-  WaitingController.$inject = ['waitingFactory'];
+  WaitingController.$inject = ['waitingFactory', 'socketFactory'];
 
-  function WaitingController(waitingFactory) {
+  function WaitingController(waitingFactory, socketFactory) {
 
     var vm = this;
+
+    vm.cancelRoom = waitingFactory.cancelRoom;
+    vm.showCancelGameInput = false;
+    vm.showCancelGameController = function() {
+      vm.showCancelGameInput = true;
+    };
 
     vm.playerOneName = function() {
     	return waitingFactory.get('player1Name');
