@@ -7,6 +7,11 @@ var db = require('../db/userModel.js');
 var tokenGenerator = new FirebaseTokenGenerator(pI.secret);
 
 router.post('/', function(req, res){
+	
+	if(req.body.username === undefined || req.body.password === undefined || req.body.username.length < 1 || req.body.password.length < 1) {
+    res.send({credentialsMissing: true, message: "Dude, c'mon."});
+  }
+
 	db.find({username: req.body.username}, function(err, users){
 		if(users.length) {
 			bcrypt.compare(req.body.password, users[0].password, function(err, result) {
