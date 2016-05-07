@@ -3,9 +3,9 @@
     .module('app')
     .factory('authFactory', authFactory);
 
-    authFactory.$inject = ['$http', '$window', '$state', '$location'];
+    authFactory.$inject = ['$http', '$window', '$state', '$location', "$scope"];
 
-    function authFactory($http, $window, $state, $location) {
+    function authFactory($http, $window, $state, $location, $scope) {
 
       var state = {
         signupErrorMessage: '',
