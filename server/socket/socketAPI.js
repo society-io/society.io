@@ -33,6 +33,7 @@ SocketAPI.prototype.on = function(event, cb, verify) {
 };
 
 SocketAPI.prototype.emit = function(eventName, data) {
+  console.log('event name: ', eventName);
 	this.socket.emit(eventName, data);
 };
 

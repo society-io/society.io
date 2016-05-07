@@ -18,12 +18,12 @@ angular
 		};
 
 		function joinQueue(message) {
+			$state.go('loading');
 			on('added to queue', function() {
 				$state.go('waiting');
 			});
 			emit('queue', message);
 			console.log('queue event emitted!');
-			$state.go('loading');
 		}
 
 		function addedToQueue() {

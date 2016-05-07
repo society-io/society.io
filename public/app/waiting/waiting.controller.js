@@ -16,6 +16,11 @@ angular
       vm.showCancelGameInput = true;
     };
 
+    vm.removeFromQueue = function(){
+      console.log('in controller: remove from q');
+      waitingFactory.removeFromQueue();
+    };
+
     vm.playerOneName = function() {
     	return waitingFactory.get('player1Name');
     };

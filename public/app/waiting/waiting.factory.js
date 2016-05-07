@@ -3,9 +3,9 @@
     .module('app')
     .factory('waitingFactory', waitingFactory);
 
-    waitingFactory.$inject = ['socketFactory', '$state'];
+    waitingFactory.$inject = ['socketFactory', '$state', '$timeout'];
 
-    function waitingFactory(socketFactory, $state) {
+    function waitingFactory(socketFactory, $state, $timeout) {
     	var emit = socketFactory.emit;
 		  var on = socketFactory.on;
 
@@ -33,10 +33,9 @@
         $state.go('lobby');
       }
 
-      function removeFromQueue(socketAPI) {
-        emit('remove from queue', {
-          socketAPI: socketAPI
-        });
+      function removeFromQueue() {
+        console.log('leaving the q');
+        emit('remove from queue');
       }
 
 		  function listeners() {
@@ -47,12 +46,11 @@
           playerInfo.player1MMR = resp.mmr;
         });
 
-        on('matchReady', function(resp) {
-          playerInfo.player2Name = resp.name;
-          playerInfo.player2MMR = resp.name;
-          $timeout(function(){
-            $state.go('battlefield');
-          }, 5000);
+        on('match ready', function() {
+          console.log('inside match ready');
+          // playerInfo.player2Name = resp.name;
+          // playerInfo.player2MMR = resp.name;
+          $state.go('battlefield');
         });
 			}
     }
