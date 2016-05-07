@@ -25,22 +25,27 @@ function queueMatch(socket) {
 		var profile = {};
 
 		var p1 = player1.getUserModel();
-		var p2 = player2.getUserModel(); 
-		
-		profile.player1 = p1; 
-		profile.player2 = p2; 
-		
+		var p2 = player2.getUserModel();
 
-		player1.emit('profile', profile);
-		player2.emit('profile', profile);
-		
-		console.log(profile);
+		profile.player1 = p1;
+		profile.player2 = p2;
+
+
+		setTimeout(function(){
+			player1.emit('profile', profile);
+			player2.emit('profile', profile);
+		}, 1000);
+
+		console.log('PLAYER PROFILES: ', profile);
 
 		var game= new Game(player1, player2);
 		game.init();
 
-		player1.emit('match ready');
-		player2.emit('match ready');
+		setTimeout(function(){
+			player1.emit('match ready');
+			player2.emit('match ready');
+		}, 1000);
+
 
 		console.log('MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
 	}
