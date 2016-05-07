@@ -14,37 +14,35 @@ var queueListeners = function(socket) {
 	});
 };
 
-
-var userListener = function(socket) {
-	var user= this.getUserModel();
-};
-
 function addToQueue(socket) {
 	queue.push(socket);
-	console.log('Queue length: ', queue.length);
-	console.log('now this is the queue: ', queue);
+	console.log('ADDED TO QUEUE: ', queue.length);
 	socket.emit('added to queue');
 	queueMatch(socket);
 }
 
 function queueMatch(socket) {
-	if (queue.length >= 2) {
-		
-		var player1 = queue.shift();
-    var player2 = queue.shift();
+	if (queue.length>=2) {
+		var player1= queue.shift();
+		var player2= queue.shift();
 
-    // var profile = {};
-    // profile.player1.getUserModel();
-    // profile.player2.getUserModel();
+		var profile = {};
 
-    // setTimeout(function(){
-    // 	player1.emit('profile', profile);
-    // 	player2.emit('profile', profile);
-    // }, 800);
-    
+		var p1 = player1.getUserModel();
+		var p2 = player2.getUserModel();
 
-    // console.log(profile);
-		var game = new Game(player1, player2);
+		profile.player1 = p1;
+		profile.player2 = p2;
+
+
+		setTimeout(function(){
+			player1.emit('profile', profile);
+			player2.emit('profile', profile);
+		}, 1000);
+
+		console.log('PLAYER PROFILES: ', profile);
+
+		var game= new Game(player1, player2);
 		game.init();
 
 		setTimeout(function(){
@@ -57,7 +55,7 @@ function queueMatch(socket) {
 }
 
 function disconnected(socket) {
-	var index = queue.indexOf(socket.id);
+	var index= queue.indexOf(socket.id);
 	queue.splice(index, 1);
 	console.log('DISCONNECTED FROM QUEUE:', queue);
 }
@@ -68,3 +66,4 @@ module.exports = {
 	queueMatch: queueMatch,
 	disconnected: disconnected
 };
+ 
