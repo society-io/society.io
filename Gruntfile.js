@@ -31,7 +31,6 @@ module.exports = function(grunt) {
     sass: {
       options: {
         sourceMap: true,
-        sourceComments: false
       },
       dist: {
         files: {
@@ -48,3 +47,4 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['jshint', 'concat']);
 };
+
