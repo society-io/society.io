@@ -1,0 +1,30 @@
+<img src="../../styles/assets/smoke.gif" alt="" class="bg">
+
+<div class="centered">
+	<h1 class="logo">society</h1>
+	<h2><a href="" ng-click="Auth.signUpForm=true ; Auth.signInForm=false" class="link">Sign Up</a> | <a href="" ng-click="Auth.signInForm=true ; Auth.signUpForm = false" class="link">Sign In</a></h2>
+
+	<form name="signUpForm" method="post" ng-show="Auth.signUpForm">
+		<input type="text" placeholder="Username" class="input" ng-model="Auth.usernameUp"></br>
+		<input type="text" placeholder="Email" class="input" ng-model="Auth.emailUp"></br>
+		<input type="password" placeholder="Password" class="input" ng-model="Auth.passwordUp"></br>
+		<input type="submit" class="submit-btn" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">
+	</form>
+	
+	<form ng-show='Auth.signInForm' method="post" ng-show="Auth.signInForm">
+		<input type="text" placeholder="Username" ng-model="Auth.usernameIn"></br>
+		<input type="password" placeholder="Password" ng-model="Auth.passwordIn"></br>
+		<input type="submit" class="submit-btn" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})">
+	</form>
+	
+	<!-- for error on signUp -->
+	<div ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
+	<!-- for error on signIn -->
+	<div ng-if="Auth.signInErrorMessage() && Auth.signInForm">{{Auth.signInErrorMessage()}}</div>
+</div>
+
+
+
+
+
+

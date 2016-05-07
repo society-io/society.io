@@ -1,0 +1,39 @@
+.player .player-stats {
+  top: 30px;
+  left: 30px;
+}
+
+.opponent .player-stats {
+  top: 30px;
+  right: 30px;
+}
+
+.player-stats {
+  position: absolute;
+  
+  p {
+    margin: 6px;
+  }
+
+  .username {
+    font-weight: 700;
+  }
+
+  .stat span {
+    font-size: 12px;
+    color: #222;
+    display: inline-block;
+  }
+
+  .wins {
+  
+  }
+
+  .losses {
+
+  }
+
+  .winPerc {
+
+  }
+}

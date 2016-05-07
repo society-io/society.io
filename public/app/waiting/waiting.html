@@ -1,0 +1,21 @@
+<div>WAITING ROOM</div>
+
+<button ng-click="Waiting.showCancelGameController()">Cancel Your Private Game</button>
+  <div ng-show="Waiting.showCancelGameInput">
+    <label>enter join code</label>
+    <!--TODO:create model object in controller and pass to emit event on btn click-->
+    <input ng-model='joinCode'>
+    <button ng-click="Waiting.cancelRoom(joinCode)">cancel</button>
+  </div>
+
+</br>
+
+<button ng-click="Waiting.removeFromQueue()">BOUNCE THE Q</button>
+
+
+
+
+<div>PLAYER 1 NAME = {{Waiting.playerOneName()}}</div><br>
+<div>rank = {{Waiting.playerOneMMR()}}</div><br>
+<div>PLAYER 2 NAME = {{Waiting.playerTwoName()}}</div><br>
+<div>rank = {{Waiting.playerTwoMMR()}}</div><br>

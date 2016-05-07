@@ -1,0 +1,22 @@
+<h1> lobby </h1>
+
+<button ng-click="Lobby.signOut()">Sign Out</button>
+
+<button ng-click="Lobby.queue()">queue for a match</button>
+
+<button ng-click="Lobby.showCreateGameController()">create private game</button>
+	<div ng-show="Lobby.showCreateGameInput">
+	<label>create custom join code</label>
+		<!--TODO:create model object in controller and pass to emit event on btn click-->
+		<input ng-model='Lobby.joinCode'>
+		<button ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
+	</div>
+
+
+<button ng-click="Lobby.showJoinGameController()">join private game</button>
+	<div ng-show="Lobby.showJoinGameInput">
+    <label>enter join code</label>
+		<!--TODO:create model object in controller and pass to emit event on btn click-->
+		<input ng-model='joinCode'>
+	  <button ng-click="Lobby.joinRoom(joinCode)">join</button>
+	</div>

@@ -1,0 +1,45 @@
+{
+  "name": "society.io",
+  "version": "1.0.0",
+  "description": "Ultimate Rock Paper Scissors",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "grunt --verbose",
+    "start": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/society-io/society.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "bcrypt": "^0.8.6",
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "firebase": "^2.4.2",
+    "firebase-token-generator": "^2.0.0",
+    "mongodb": "^2.1.18",
+    "mongoose": "^4.4.14",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "ghooks": "^1.2.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^1.1.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "grunt jshint",
+      "post-checkout": "grunt concat",
+      "post-merge": "echo 'running npm install' && npm install; echo 'running bower install' && bower install",
+      "post-rewrite": "echo 'running npm install' && npm install; echo 'running bower install' && bower install"
+    }
+  }
+}
