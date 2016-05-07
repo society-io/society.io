@@ -9,6 +9,7 @@
 
 	function LobbyController($scope, lobbyFactory, socketFactory, authFactory) {
 		var vm = this;
+		vm.pageTitle = "Lobby";
 
 		authFactory.checkAuth();
 		var tokenObj = authFactory.attachToken({});
