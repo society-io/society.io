@@ -54,14 +54,14 @@
         });
 
         on('private match ready', function() {
+          console.log('inside private match ready');
           $state.go('battlefield');
         });
 
         on('room exists', function(data){
+          console.log('inside roomExists listener within waitingFactory, joinCode: ', data.joinCode);
           matchJoinCode = data.joinCode;
-          emit('joined room', {
-            joinCode: matchJoinCode
-          });
+          emit('joined room', {joinCode: matchJoinCode});
         });
 			}
 
