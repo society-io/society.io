@@ -13,8 +13,8 @@ body {
   // background: linear-gradient(to bottom, #4a4969 0%, #7072ab 50%, #cd82a0 100%);
 
   // blue skies:
-  background: -webkit-linear-gradient(top, #57c1eb 0%, #246fa8 100%);
-  background: linear-gradient(to bottom, #57c1eb 0%, #246fa8 100%);
+  // background: -webkit-linear-gradient(top, #57c1eb 0%, #246fa8 100%);
+  // background: linear-gradient(to bottom, #57c1eb 0%, #246fa8 100%);
 
   // early sunrise
   // background: -webkit-linear-gradient(top, #1e528e 0%, #265889 50%, #9da671 100%);
@@ -33,6 +33,21 @@ body {
   // background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
 }
 
+body.auth {
+  background: -webkit-linear-gradient(top, #57c1eb 0%, #246fa8 100%);
+  background: linear-gradient(to bottom, #57c1eb 0%, #246fa8 100%);
+}
+
+body.lobby {
+  background: -webkit-linear-gradient(top, #4a4969 0%, #7072ab 50%, #cd82a0 100%);
+  background: linear-gradient(to bottom, #4a4969 0%, #7072ab 50%, #cd82a0 100%);
+}
+
+body.battlefield {
+  background: -webkit-linear-gradient(top, #020111 10%, #3a3a52 100%);
+  background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
+}
+
 .city-overlay {
   opacity: 0.5;
   background: url('../images/bg.png') repeat-x bottom center fixed;
@@ -47,4 +62,9 @@ body {
 
 .view-container {
   height: 100%;
+}
+
+.wrapper {
+  margin: 0 3%;
+  position: relative;
 }

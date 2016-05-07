@@ -1,0 +1,33 @@
+.admin-bar, .lobby-content-container {
+  background-color: rgba(0,0,0,0.4);
+  color: #fff;
+}
+
+.lobby-content-container {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.sidebar {
+
+  button {
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  h2 {
+    margin: 0 0 15px 0;
+  }
+}
+
+.lobby-left, .lobby-right {
+  margin-top: 32px;
+  padding: 20px;
+}
+
+.lobby-right {
+
+  h1 {
+    margin-top: 0;
+  }
+}

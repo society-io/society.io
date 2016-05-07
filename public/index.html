@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app='app'>
+<html ng-app='app' ng-controller="AppController as appController">
 <head>
   <title>Society | The Game</title>
     <link rel='stylesheet' href='./dist/style.css'>
@@ -16,7 +16,7 @@
     <script src='./dist/built.js'></script>
 </head>
 
-<body>
+<body class="{{appController.bodyClasses}}">
 
   <div class="city-overlay"></div>
 
