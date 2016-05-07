@@ -22,11 +22,19 @@
       };
 
       function signUp(userObj) {
+
+
         var request = {
           method: 'POST',
           url: '/signUp',
           data: userObj
         };
+
+        if ((userObj.username === undefined) || (userObj.email === undefined) || (userObj.password === undefined)) {
+          state.signupErrorMessage = "";
+          state.signupErrorMessage += "Dude, c'mon.";
+          return;
+        }
 
         return $http(request)
           .then(success, error);
@@ -54,11 +62,21 @@
           data: userObj
         };
 
+        if ((userObj.username === undefined) || (userObj.password === undefined)) {
+          state.signupErrorMessage = "";
+          state.signupErrorMessage += "Dude, c'mon";
+          return;
+        }
+
         return $http(request)
           .then(success, error);
 
         function success(resp){
           console.log('this is resp: ', resp);
+          if (resp.data.credentialsMissing){
+            state.signinErrorMessage = "";
+            state.signinErrorMessage += resp.data.message;
+          }
           if (resp.data.auth){
             $state.go('lobby');
             saveToken(resp.data.token);
