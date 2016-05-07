@@ -37,7 +37,7 @@ SocketAPI.prototype.on = function(event, cb, auth) {
     });
   }
 	this.listeners[event]=this.socketId;
-  // console.log('LISTENERS OBJ: ', this.listeners);
+  console.log('LISTENERS OBJ: ', this.listeners);
 };
 
 SocketAPI.prototype.once= function (event, cb) {
@@ -47,31 +47,11 @@ SocketAPI.prototype.once= function (event, cb) {
 SocketAPI.prototype.emit = function(event, data) {
 	this.socket.emit(event, data);
 	this.emitters[event]=this.socketId;
-	// console.log('EMITTERS ARRAY: ', this.emitters);
+	 console.log('EMITTERS ARRAY: ', this.emitters);
 };
 
 SocketAPI.prototype.getUserModel = function() {
 	return this.user._doc;
-};
-
-//to remove a certain listener
-SocketAPI.prototype.removeListener = function(event, cb) {
-	console.log('this._events deleted AFTER DELETE: ', this.events);
-	this.socket.off(event, cb);
-	console.log('BEFORE DELETE EVENT LISTENER: ', event, this.listeners);
-};
-
-// 	delete this.listeners[event];
-// 	console.log('AFTER DELETE EVENT LISTENER: ', event, this.listeners);
-//
-// 	console.log('BEFORE DELETE EVENT EMITTER: ', event, this.emitters);
-// 	delete this.emitters[event];
-// 	console.log('AFTER DELETE EVENT EMITTER: ', event, this.emitters);
-// };
-
-//To remove all listeners of an event
-SocketAPI.prototype.removeAllListeners = function(event) {
-	this.socket.off(event);
 };
 
 SocketAPI.prototype.err = function(err) {
