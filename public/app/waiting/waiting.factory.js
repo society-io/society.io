@@ -51,6 +51,11 @@
           $timeout(function(){
             $state.go('battlefield');
           }, 5000);
+        });
+
+        on('private match ready', function() {
+          $state.go('battlefield');
+        });
 
         on('room exists', function(data){
           matchJoinCode = data.joinCode;

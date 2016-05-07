@@ -48,8 +48,7 @@ var storePlayer1 = function(data, socket) {
   console.log('privateGames: ',privateGames);
   socket.emit('room created', {
     message: 'Player 1 inserted! Waiting on Player 2...',
-    success: true,
-    joinCode: data.joinCode
+    success: true
   });
 };
 
@@ -60,12 +59,11 @@ var storePlayer2 = function(data, socket) {
     if(privateGames[data.joinCode]) {
       // store socket within socketsForGame[1] of privateGames[joinCode]
       privateGames[data.joinCode][1] = socket;
-      socket.emit('room exists', {success: true});
+      socket.emit('room exists', {success: true, joinCode: data.joinCode});
     } else { // if Not
       socket.emit('room exists', {
         message: 'error! joinCode does not match our records. Please check with your friend & try again!',
-        success: false,
-        joinCode: data.joinCode
+        success: false
       });
     }
   }
@@ -80,7 +78,7 @@ var initiatePrivateGame = function(data, socket) {
     privateGame.init();
     // Tell the Clients that a privateGame has been created & initiated
     console.log('about to emit match ready');
-    socket.emit('match ready', {
+    socket.emit('private match ready', {
       message: '*privateGame Created & Initiated*',
       players: players,
       success: true
