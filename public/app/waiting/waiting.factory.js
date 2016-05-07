@@ -8,6 +8,7 @@
     function waitingFactory(socketFactory, $state, $timeout) {
     	var emit = socketFactory.emit;
 		  var on = socketFactory.on;
+      var matchJoinCode = null;
 
       var playerInfo = {
       	player1Name: null,
@@ -39,8 +40,6 @@
       }
 
 		  function listeners() {
-
-
         on('profile', function(resp){
           playerInfo.player1Name = resp.player1.username;
           playerInfo.player1MMR = resp.player1.mmr;
@@ -50,10 +49,17 @@
 
         on('match ready', function() {
           $timeout(function(){
-            $state.go('battlefield');     
+            $state.go('battlefield');
           }, 5000);
+
+        on('room exists', function(data){
+          matchJoinCode = data.joinCode;
+          emit('joined room', {
+            joinCode: matchJoinCode
+          });
         });
 			}
+
     }
 
 

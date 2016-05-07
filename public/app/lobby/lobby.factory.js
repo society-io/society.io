@@ -12,9 +12,7 @@ angular
 			joinQueue: joinQueue,
 			addedToQueue: addedToQueue,
 			createRoom: createRoom,
-			joinRoom: joinRoom,
-			waitingRoom: waitingRoom,
-			battlefield: battlefield
+			joinRoom: joinRoom
 		};
 
 		function joinQueue(message) {
@@ -52,25 +50,6 @@ angular
 			emit('join room', {joinCode: joinCode});
 			console.log('join room event emitted!');
 			$state.go('loading');
-		}
-
-		function waitingRoom() {
-			on('room created', function(data){
-				$state.go('waiting');
-			});
-			on('room exists', function(data){
-				if(data.success) {
-					$state.go('waiting');
-				} else {
-					$state.go('lobby');
-				}
-			});
-		}
-
-		function battlefield() {
-			on('match ready', function(){
-				$state.go('Battlefield');
-			});
 		}
 
 	}
