@@ -42,8 +42,8 @@ SocketAPI.prototype.getUserModel = function() {
 };
 
 SocketAPI.prototype.deleteEvent = function(eventName) {
-
 };
+
 
 
 module.exports = {

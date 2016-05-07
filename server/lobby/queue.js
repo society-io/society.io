@@ -1,3 +1,5 @@
+var io = require('../common');
+var io = require('socket.io');
 var Game = require('../game/game').Game;
 
 var queue = [];
@@ -6,58 +8,46 @@ var queueListeners = function(socket) {
 	socket.on('queue', function () {
 		addToQueue(socket);
 	});
-	socket.on('remove from queue', function(){
-		disconnected(socket);
-	});
-	socket.on('disconnect', function(){
-		disconnected(socket);
-	});
-};
-
-
-var userListener = function(socket) {
-	var user= this.getUserModel();
 };
 
 function addToQueue(socket) {
 	queue.push(socket);
-	console.log('Queue length: ', queue.length);
-	console.log('now this is the queue: ', queue);
+	console.log('ADDED TO QUEUE: ', queue.length);
 	socket.emit('added to queue');
 	queueMatch(socket);
 }
 
 function queueMatch(socket) {
-	if (queue.length >= 2) {
+	if (queue.length>=2) {
+		var player1= queue.shift();
+		var player2= queue.shift();
+
+		var profile = {};
+
+		var p1 = player1.getUserModel();
+		var p2 = player2.getUserModel(); 
 		
-		var player1 = queue.shift();
-    var player2 = queue.shift();
+		profile.player1 = p1; 
+		profile.player2 = p2; 
+		
 
-    // var profile = {};
-    // profile.player1.getUserModel();
-    // profile.player2.getUserModel();
+		player1.emit('profile', profile);
+		player2.emit('profile', profile);
+		
+		console.log(profile);
 
-    // setTimeout(function(){
-    // 	player1.emit('profile', profile);
-    // 	player2.emit('profile', profile);
-    // }, 800);
-    
-
-    // console.log(profile);
-		var game = new Game(player1, player2);
+		var game= new Game(player1, player2);
 		game.init();
 
-		setTimeout(function(){
-			player1.emit('match ready');
-			player2.emit('match ready');
-		}, 1000);
+		player1.emit('match ready');
+		player2.emit('match ready');
 
 		console.log('MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
 	}
 }
 
 function disconnected(socket) {
-	var index = queue.indexOf(socket.id);
+	var index= queue.indexOf(socket.id);
 	queue.splice(index, 1);
 	console.log('DISCONNECTED FROM QUEUE:', queue);
 }
