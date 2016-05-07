@@ -16,7 +16,7 @@ var privateGameListeners = function(socket){
 
 
   socket.on('joined room', function(data){
-    console.log('inside joinedRoom listener, joinCode: ', data.joinCode);
+    console.log('inside joinedRoom listener, joinCode: ',data.joinCode);
     initiatePrivateGame(data, socket);
   });
 
@@ -24,7 +24,7 @@ var privateGameListeners = function(socket){
     console.log('inside cancelRoom listener, joinCode: ',data.joinCode);
     cancelPrivateGame(data, socket);
   });
-	
+
 };
 
 var storeJoinCode = function(data) {
