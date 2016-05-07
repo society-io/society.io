@@ -3,25 +3,28 @@ var Game = require('../game/game').Game;
 var queue = [];
 
 var queueListeners = function(socket) {
-	socket.on('queue', function () {
+	socket.once('queue', function () {
 		addToQueue(socket);
 	});
-	socket.on('remove from queue', function(){
+	socket.once('remove from queue', function(){
 		disconnected(socket);
 	});
 	socket.on('disconnect', function(){
 		disconnected(socket);
 	});
+
 };
 
 function addToQueue(socket) {
 	queue.push(socket);
-	console.log('ADDED TO QUEUE: ', queue.length);
 	socket.emit('added to queue');
+	console.log('ADDED TO QUEUE: ', queue.length);
+
 	queueMatch(socket);
 }
 
 function queueMatch(socket) {
+
 	if (queue.length>=2) {
 		var player1= queue.shift();
 		var player2= queue.shift();
@@ -33,7 +36,6 @@ function queueMatch(socket) {
 
 		profile.player1 = p1;
 		profile.player2 = p2;
-
 
 		setTimeout(function(){
 			player1.emit('profile', profile);
@@ -50,13 +52,17 @@ function queueMatch(socket) {
 			player2.emit('match ready');
 		}, 1000);
 
-		console.log('MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
+	console.log('MATCH READY: ' +
+							'player1: ', player1.socketId,
+							'player2: ', player2.socketId);
 	}
+
 }
 
 function disconnected(socket) {
 	var index= queue.indexOf(socket.id);
 	queue.splice(index, 1);
+	socket.disconnect();
 	console.log('DISCONNECTED FROM QUEUE:', queue);
 }
 
@@ -66,4 +72,4 @@ module.exports = {
 	queueMatch: queueMatch,
 	disconnected: disconnected
 };
- 
+

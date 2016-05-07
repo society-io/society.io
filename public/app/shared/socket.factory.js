@@ -21,8 +21,8 @@ angular
 
 		/**
 		 *	Socket Events
-		 *	
-		 *	Used to wrap the socket's native 'on' and 'emit' functions 
+		 *
+		 *	Used to wrap the socket's native 'on' and 'emit' functions
 		 *	packet envelope that we specify
 		 */
 	  function on(eventName, callback) {
