@@ -37,7 +37,7 @@ SocketAPI.prototype.emit = function(eventName, data) {
 	this.socket.emit(eventName, data);
 };
 
-SocketAPI.prototype.getUserModel = function(socket) {
+SocketAPI.prototype.getUserModel = function() {
 	return this.user;
 };
 

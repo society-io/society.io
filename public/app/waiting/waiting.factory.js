@@ -46,6 +46,10 @@
           playerInfo.player1MMR = resp.mmr;
         });
 
+        on('profile', function(){
+          console.log('inside');
+        });
+
         on('match ready', function() {
           console.log('inside match ready');
           // playerInfo.player2Name = resp.name;

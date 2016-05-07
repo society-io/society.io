@@ -29,12 +29,21 @@ function addToQueue(socket) {
 
 function queueMatch(socket) {
 	if (queue.length >= 2) {
+		
 		var player1 = queue.shift();
-		console.log('this is player1: ', player1);
-		var player2 = queue.shift();
-		console.log('this is player2: ', player2);
+    var player2 = queue.shift();
 
+    // var profile = {};
+    // profile.player1.getUserModel();
+    // profile.player2.getUserModel();
 
+    // setTimeout(function(){
+    // 	player1.emit('profile', profile);
+    // 	player2.emit('profile', profile);
+    // }, 800);
+    
+
+    // console.log(profile);
 		var game = new Game(player1, player2);
 		game.init();
 
