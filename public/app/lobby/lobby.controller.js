@@ -34,5 +34,10 @@
 			authFactory.signOut();
 		};
 
+		vm.getErrorMessage = function() {
+			var message = lobbyFactory.get('joinCodeErrorMessage');
+			return lobbyFactory.get('joinCodeErrorMessage');
+		};
+
 	}
 	})();
