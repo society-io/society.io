@@ -1,5 +1,3 @@
-var io = require('../common');
-var io = require('socket.io');
 var Game = require('../game/game').Game;
 
 var queue = [];
@@ -63,3 +61,4 @@ module.exports = {
 	queueMatch: queueMatch,
 	disconnected: disconnected
 };
+ 
