@@ -18,7 +18,10 @@ angular
 		};
 
 		function joinQueue(message) {
-			// ADD LOADING SCREEN (BEN & NEIL's CUSTOM DIRECTIVE)
+			$state.go('loading');
+			on('added to queue', function() {
+				$state.go('waiting');
+			});
 			emit('queue', message);
 			console.log('queue event emitted!');
 		}

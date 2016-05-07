@@ -3,9 +3,9 @@
     .module('app')
     .factory('waitingFactory', waitingFactory);
 
-    waitingFactory.$inject = ['socketFactory', '$state'];
+    waitingFactory.$inject = ['socketFactory', '$state', '$timeout'];
 
-    function waitingFactory(socketFactory, $state) {
+    function waitingFactory(socketFactory, $state, $timeout) {
     	var emit = socketFactory.emit;
 		  var on = socketFactory.on;
 
@@ -19,7 +19,8 @@
     	listeners();
     	return {
         get: get,
-        cancelRoom: cancelRoom
+        cancelRoom: cancelRoom,
+        removeFromQueue: removeFromQueue
       };
 
       function get(keyName) {
@@ -32,6 +33,11 @@
         $state.go('lobby');
       }
 
+      function removeFromQueue() {
+        console.log('leaving the q');
+        emit('remove from queue');
+      }
+
 		  function listeners() {
         emit('who am i');
 
@@ -40,12 +46,15 @@
           playerInfo.player1MMR = resp.mmr;
         });
 
-        on('matchReady', function(resp) {
-          playerInfo.player2Name = resp.name;
-          playerInfo.player2MMR = resp.name;
-          $timeout(function(){
-            $state.go('battlefield');
-          }, 5000);
+        on('profile', function(){
+          console.log('inside');
+        });
+
+        on('match ready', function() {
+          console.log('inside match ready');
+          // playerInfo.player2Name = resp.name;
+          // playerInfo.player2MMR = resp.name;
+          $state.go('battlefield');
         });
 			}
     }

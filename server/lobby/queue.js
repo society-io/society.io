@@ -1,5 +1,3 @@
-var io = require('../common');
-var io = require('socket.io');
 var Game = require('../game/game').Game;
 
 var queue = [];
@@ -7,6 +5,12 @@ var queue = [];
 var queueListeners = function(socket) {
 	socket.on('queue', function () {
 		addToQueue(socket);
+	});
+	socket.on('remove from queue', function(){
+		disconnected(socket);
+	});
+	socket.on('disconnect', function(){
+		disconnected(socket);
 	});
 };
 
@@ -17,28 +21,37 @@ var userListener = function(socket) {
 
 function addToQueue(socket) {
 	queue.push(socket);
-	console.log('ADDED TO QUEUE: ', queue.length);
+	console.log('Queue length: ', queue.length);
+	console.log('now this is the queue: ', queue);
 	socket.emit('added to queue');
 	queueMatch(socket);
 }
 
 function queueMatch(socket) {
-	if (queue.length>=2) {
+	if (queue.length >= 2) {
+		
 		var player1 = queue.shift();
-		var player2= queue.shift();
-		
-		var profile = {}; 
-		profile.player1.getUserModel();
-		profile.player2.getUserModel();
-	
-		console.log(profile);
-		
-		var game= new Game(player1, player2);
+    var player2 = queue.shift();
+
+    // var profile = {};
+    // profile.player1.getUserModel();
+    // profile.player2.getUserModel();
+
+    // setTimeout(function(){
+    // 	player1.emit('profile', profile);
+    // 	player2.emit('profile', profile);
+    // }, 800);
+    
+
+    // console.log(profile);
+		var game = new Game(player1, player2);
 		game.init();
 
-		player1.emit('match ready');
-		player2.emit('match ready');
-		
+		setTimeout(function(){
+			player1.emit('match ready');
+			player2.emit('match ready');
+		}, 1000);
+
 		console.log('MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
 	}
 }
