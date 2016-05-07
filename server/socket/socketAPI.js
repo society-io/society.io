@@ -62,9 +62,7 @@ SocketAPI.prototype.disconnect = function() {
 	this.socket.disconnect();
 };
 
-SocketAPI.prototype.cleanup = function(){
-	this.socket.cleanup();
-};
+
 
 module.exports = {
   SocketAPI: SocketAPI
