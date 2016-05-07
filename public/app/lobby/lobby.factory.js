@@ -41,7 +41,7 @@ angular
 
 		function joinRoom(joinCode) {
 			on('room exists', function(data){
-        console.log('inside roomExists listener within lobbyFactory, joinCode: ', data.joinCode);
+        console.log('inside roomExists listener within lobbyFactory, data: ', data.success);
 			  if(data.success) {
 			    $state.go('waiting');
 			  } else {

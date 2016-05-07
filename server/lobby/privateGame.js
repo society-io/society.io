@@ -57,14 +57,17 @@ var storePlayer1 = function(data, socket) {
 
 var storePlayer2 = function(data, socket) {
   // Crossreference joinCode with those in privateGames
-  for(var key in privateGames){
     // if the request joinCode matches one within privateGames
     if(privateGames[data.joinCode]) {
       // store socket within socketsForGame[1] of privateGames[joinCode]
       console.log('Storing player2...');
       privateGames[data.joinCode][1] = socket;
-      console.log('Emitting room exists...');
-      socket.emit('room exists', {success: true, joinCode: data.joinCode});
+      setTimeout(function(){
+        console.log('Emitting room exists...');
+        socket.emit('room exists', {success: true});
+        console.log('Emitting here is joinCode...');
+        socket.emit('here is joinCode', {joinCode: data.joinCode});
+      }, 3000);
     } else { // if Not
       console.log('Could Not Store player2');
       socket.emit('room exists', {
@@ -72,7 +75,6 @@ var storePlayer2 = function(data, socket) {
         success: false
       });
     }
-  }
 };
 
 var initiatePrivateGame = function(data, socket) {

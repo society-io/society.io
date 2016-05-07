@@ -18,6 +18,7 @@
       };
 
     	listeners();
+
     	return {
         get: get,
         cancelRoom: cancelRoom,
@@ -58,8 +59,8 @@
           $state.go('battlefield');
         });
 
-        on('room exists', function(data){
-          console.log('inside roomExists listener within waitingFactory, joinCode: ', data.joinCode);
+        on('here is joinCode', function(data){
+          console.log('inside hereIsJoinCode listener within waitingFactory, joinCode: ', data.joinCode);
           matchJoinCode = data.joinCode;
           emit('joined room', {joinCode: matchJoinCode});
         });
