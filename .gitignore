@@ -39,3 +39,6 @@ server/auth/config.js
 
 #austins firebase
 server/config/config.js
+
+#patrice socket-io object
+zz-socket-io-obj.js

@@ -2,7 +2,7 @@
 	<h1 class="logo">Society</h1>
 	<h2 class="subtitle">The Game</h2>
 	<form class="auth-form sign-up" name="signUpForm" method="post" ng-show="Auth.signUpForm">
-		<input 
+		<input
 			ng-class="{ 'form-error' : Auth.usernameUp.$invalid && !Auth.usernameUp.$pristine }"
 			ng-model="Auth.usernameUp"
 			type="text" placeholder="Username" class="input">
@@ -23,7 +23,7 @@
 			<a href="" ng-click="Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
 		</div>
 	</form>
-	
+
 	<form class="auth-form sign-in" ng-show='Auth.signInForm' method="post" ng-show="Auth.signInForm">
 		<input
 			ng-model="Auth.usernameIn" type="text" placeholder="Username">

@@ -14,6 +14,7 @@ var privateGameListeners = function(socket){
     storePlayer2(data, socket);
   });
 
+
   socket.on('joined room', function(data){
     initiatePrivateGame(data, socket);
   });
@@ -22,7 +23,7 @@ var privateGameListeners = function(socket){
     console.log('joinCode: ',data.joinCode);
     cancelPrivateGame(data, socket);
   });
-
+	
 };
 
 var storeJoinCode = function(data) {
