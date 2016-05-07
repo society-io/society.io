@@ -28,7 +28,7 @@ angular
     	return waitingFactory.get('player1MMR');
     };
     vm.playerTwoName = function() {
-    	return waitingFactory.get('player1Name');
+    	return waitingFactory.get('player2Name');
     };
     vm.playerTwoMMR = function() {
     	return waitingFactory.get('player2MMR');
