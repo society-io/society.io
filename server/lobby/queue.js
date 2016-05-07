@@ -1,5 +1,3 @@
-var io = require('../common');
-var io = require('socket.io');
 var Game = require('../game/game').Game;
 
 var queue = [];
@@ -7,6 +5,12 @@ var queue = [];
 var queueListeners = function(socket) {
 	socket.on('queue', function () {
 		addToQueue(socket);
+	});
+	socket.on('remove from queue', function(){
+		disconnected(socket);
+	});
+	socket.on('disconnect', function(){
+		disconnected(socket);
 	});
 };
 
@@ -45,7 +49,6 @@ function queueMatch(socket) {
 			player1.emit('match ready');
 			player2.emit('match ready');
 		}, 1000);
-
 
 		console.log('MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
 	}
