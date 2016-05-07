@@ -1,22 +1,47 @@
-<div class="admin-bar" ng-include="'app/layout/adminBar.html'"></div>
-
-<button ng-click="Lobby.signOut()">Sign Out</button>
-
-<button ng-click="Lobby.queue()">queue for a match</button>
-
-<button ng-click="Lobby.showCreateGameController()">create private game</button>
-	<div ng-show="Lobby.showCreateGameInput">
-	<label>create custom join code</label>
-		<!--TODO:create model object in controller and pass to emit event on btn click-->
-		<input ng-model='Lobby.joinCode'>
-		<button ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
+<div class="admin-bar">
+	<div class="wrapper">
+		<h1>{{Lobby.pageTitle}}</h1>
+		<p class="settings">
+			<i class="fa fa-user" aria-hidden="true"></i>
+			<a href="" ng-click="Lobby.signOut()">Sign Out</a>
+		</p>
 	</div>
+</div>
 
+<div class="container-fluid wrapper">
 
-<button ng-click="Lobby.showJoinGameController()">join private game</button>
-	<div ng-show="Lobby.showJoinGameInput">
-    <label>enter join code</label>
-		<!--TODO:create model object in controller and pass to emit event on btn click-->
-		<input ng-model='joinCode'>
-	  <button ng-click="Lobby.joinRoom(joinCode)">join</button>
+	<div class="col-md-4">
+		<div class="sidebar lobby-left lobby-content-container">
+			<h2>Queue</h2>
+			<button class="block red" ng-click="Lobby.queue()">Queue for a match</button>
+			<h2>Custom Game</h2>
+			<button class="block blue" ng-click="Lobby.showCreateGameController()">create private game</button>
+			<button class="block green" ng-click="Lobby.showJoinGameController()">join private game</button>
+
+			<div ng-show="Lobby.showCreateGameInput">
+				<label>Create custom join code</label>
+				<!--TODO:create model object in controller and pass to emit event on btn click-->
+				<input ng-model='Lobby.joinCode'>
+				<button class="block red" ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
+			</div>
+
+			<div ng-show="Lobby.showJoinGameInput">
+		    <label>enter join code</label>
+				<!--TODO:create model object in controller and pass to emit event on btn click-->
+				<input ng-model='joinCode'>
+			  <button class="block red" ng-click="Lobby.joinRoom(joinCode)">join</button>
+			</div>
+
+		</div><!-- End sidebar -->
+	</div><!-- End bootstrap column -->
+
+	<div class="col-md-8">
+		<div class="lobby-right lobby-content-container">
+			<h1>Player Stats</h1>
+		</div>
+
+		<div class="lobby-right lobby-content-container">
+			<h1>Leader Board</h1>
+		</div>
 	</div>
+</div>

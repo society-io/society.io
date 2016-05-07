@@ -19,6 +19,12 @@ $yellow-l1: #F7C17C;
 $yellow: #FFBC66;
 $yellow-d1: #C98B3A;
 
+$red: #DA6876;
+
+$blue: #45ABC3;
+
+$green: #45C3A1;
+
 $brown: #664923;
 
 // animations
@@ -48,6 +54,7 @@ button {
   padding: 12px 25px;
   text-transform: uppercase;
   transition: $borderTransition;
+  font-weight: 700;
 }
 
 button:hover {
@@ -60,7 +67,6 @@ button.block {
 }
 
 button.yellow {
-  font-weight: 700;
   color: $brown;
   background-color: $yellow;
   box-shadow: 0 3px 0 0 $yellow-d1;
@@ -69,4 +75,16 @@ button.yellow {
 
 button.yellow:hover {
   background-color: $yellow-l1;
+}
+
+button.red {
+  background-color: $red;
+}
+
+button.blue {
+  background-color: $blue;
+}
+
+button.green {
+  background-color: $green;
 }

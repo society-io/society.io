@@ -12,13 +12,19 @@ function config($stateProvider, $urlRouterProvider) {
 			url: '/auth',
 			templateUrl: '../app/auth/auth.html',
 			controller: 'AuthController',
-			controllerAs: 'Auth'
+			controllerAs: 'Auth',
+			data: {
+				bodyClasses: 'auth'
+			}
 		})
 	  .state('lobby', {
 	  	url: '/lobby',
 	  	templateUrl: '../app/lobby/lobby.html',
 	  	controller: 'LobbyController',
-	  	controllerAs: 'Lobby'
+	  	controllerAs: 'Lobby',
+	  	data: {
+	  		bodyClasses : 'lobby'
+	  	}
 	  })
 	  .state('loading', {
 	  	url: '/loading',
@@ -34,6 +40,9 @@ function config($stateProvider, $urlRouterProvider) {
 	  	url: '/battlefield',
 	  	templateUrl: '../app/battlefield/battlefield.html',
 	  	controller: 'BattlefieldController',
-	  	controllerAs: 'Bf'
+	  	controllerAs: 'Bf',
+	  	data: {
+	  		bodyClasses: 'battlefield'
+	  	}
 	  });
 }
