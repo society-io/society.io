@@ -10,10 +10,10 @@
 		  var on = socketFactory.on;
 
       var playerInfo = {
-      	player1Name: false,
-      	player1MMR: false,
-      	player2Name: false,
-      	player2MMR: false
+      	player1Name: null,
+      	player1MMR: null,
+      	player2Name: null,
+      	player2MMR: null
       };
 
     	listeners();
@@ -39,22 +39,19 @@
       }
 
 		  function listeners() {
-        emit('who am i');
 
-        on('you are', function(resp) {
-          playerInfo.player1Name = resp.name;
-          playerInfo.player1MMR = resp.mmr;
-        });
 
-        on('profile', function(){
-          console.log('inside');
+        on('profile', function(resp){
+          playerInfo.player1Name = resp.player1.username;
+          playerInfo.player1MMR = resp.player1.mmr;
+          playerInfo.player2Name = resp.player2.username;
+          playerInfo.player2MMR = resp.player2.mmr;
         });
 
         on('match ready', function() {
-          console.log('inside match ready');
-          // playerInfo.player2Name = resp.name;
-          // playerInfo.player2MMR = resp.name;
-          $state.go('battlefield');
+          $timeout(function(){
+            $state.go('battlefield');     
+          }, 5000);
         });
 			}
     }
