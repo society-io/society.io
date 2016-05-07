@@ -1,30 +1,42 @@
-<img src="../../styles/assets/smoke.gif" alt="" class="bg">
+<div class="auth">
+	<h1 class="logo">Society</h1>
+	<h2 class="subtitle">The Game</h2>
+	<form class="auth-form sign-up" name="signUpForm" method="post" ng-show="Auth.signUpForm">
+		<input 
+			ng-class="{ 'form-error' : Auth.usernameUp.$invalid && !Auth.usernameUp.$pristine }"
+			ng-model="Auth.usernameUp"
+			type="text" placeholder="Username" class="input">
+		<input
+			ng-class="{ 'form-error' : Auth.emailUp.$invalid && !Auth.emailUp.$pristine }"
+			ng-model="Auth.emailUp"
+			type="email" placeholder="Email" class="input">
+		<input
+			ng-class="{ 'form-error' : Auth.passwordUp.$invalid && !Auth.passwordUp.$pristine }"
+			ng-model="Auth.passwordUp"
+			type="password" placeholder="Password" class="input">
 
-<div class="centered">
-	<h1 class="logo">society</h1>
-	<h2><a href="" ng-click="Auth.signUpForm=true ; Auth.signInForm=false" class="link">Sign Up</a> | <a href="" ng-click="Auth.signInForm=true ; Auth.signUpForm = false" class="link">Sign In</a></h2>
+		<!-- for error on signUp -->
+		<div ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
 
-	<form name="signUpForm" method="post" ng-show="Auth.signUpForm">
-		<input type="text" placeholder="Username" class="input" ng-model="Auth.usernameUp"></br>
-		<input type="text" placeholder="Email" class="input" ng-model="Auth.emailUp"></br>
-		<input type="password" placeholder="Password" class="input" ng-model="Auth.passwordUp"></br>
-		<input type="submit" class="submit-btn" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">
+		<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">Sign Up</button>
+		<div class="switch-view-link">
+			<a href="" ng-click="Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
+		</div>
 	</form>
 	
-	<form ng-show='Auth.signInForm' method="post" ng-show="Auth.signInForm">
-		<input type="text" placeholder="Username" ng-model="Auth.usernameIn"></br>
-		<input type="password" placeholder="Password" ng-model="Auth.passwordIn"></br>
-		<input type="submit" class="submit-btn" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})">
+	<form class="auth-form sign-in" ng-show='Auth.signInForm' method="post" ng-show="Auth.signInForm">
+		<input
+			ng-model="Auth.usernameIn" type="text" placeholder="Username">
+		<input
+			ng-model="Auth.passwordIn" type="password" placeholder="Password">
+		<button class="block yellow" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})">Login</button>
+		<!-- for error on signIn -->
+		<div ng-if="Auth.signInErrorMessage() && Auth.signInForm">{{Auth.signInErrorMessage()}}</div>
+
+		<div class="switch-view-link">
+			<a href="" ng-click="Auth.signUpForm=true ; Auth.signInForm=false">Sign Up</a>
+		</div>
+
 	</form>
-	
-	<!-- for error on signUp -->
-	<div ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
-	<!-- for error on signIn -->
-	<div ng-if="Auth.signInErrorMessage() && Auth.signInForm">{{Auth.signInErrorMessage()}}</div>
+
 </div>
-
-
-
-
-
-

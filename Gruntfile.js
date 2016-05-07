@@ -11,7 +11,8 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['public/styles/**/*.scss', 'public/app/**/*.js', 'server/**/*.js'],
-      tasks: ['jshint', 'concat', 'sass'],
+      // tasks: ['jshint', 'concat', 'sass'],
+      tasks: ['sass']
     },
     concat: {
       dist: {
