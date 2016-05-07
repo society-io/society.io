@@ -18,7 +18,8 @@
         signOut: signOut,
         checkAuth: checkAuth,
         attachToken: attachToken,
-        get: get
+        get: get,
+        set: set
       };
 
       function signUp(userObj) {
@@ -96,6 +97,12 @@
 
       function get(name) {
         return state[name];
+      }
+
+      function set(key, value){
+        state[key] = value;
+        $scope.digest();
+        return;
       }
 
       function signOut() {

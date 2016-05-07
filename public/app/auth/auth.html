@@ -20,7 +20,7 @@
 
 		<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">Sign Up</button>
 		<div class="switch-view-link">
-			<a href="" ng-click="Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
+			<a href="" ng-click="Auth.resetMessage('signinErrorMessage', '') ; Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
 		</div>
 	</form>
 
@@ -34,7 +34,7 @@
 		<div ng-if="Auth.signInErrorMessage() && Auth.signInForm">{{Auth.signInErrorMessage()}}</div>
 
 		<div class="switch-view-link">
-			<a href="" ng-click="Auth.signUpForm=true ; Auth.signInForm=false">Sign Up</a>
+			<a href="" ng-click="Auth.resetMessage('signupErrorMessage', '') ; Auth.signUpForm=true ; Auth.signInForm=false">Sign Up</a>
 		</div>
 
 	</form>
