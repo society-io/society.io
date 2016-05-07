@@ -11,7 +11,7 @@ function AuthController(authFactory, $scope) {
 	var vm = this;
 
 	vm.signUpForm = false;
-	vm.signInForm = false;
+	vm.signInForm = true;
 	vm.signUpErrorMessage = function(){
 		return authFactory.get('signupErrorMessage');
 	};
