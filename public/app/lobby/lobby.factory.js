@@ -8,11 +8,16 @@ angular
 		var emit = socketFactory.emit;
 		var on = socketFactory.on;
 
+		var state = {
+			joinCodeErrorMessage: ''
+		};
+
 		return {
 			joinQueue: joinQueue,
 			addedToQueue: addedToQueue,
 			createRoom: createRoom,
-			joinRoom: joinRoom
+			joinRoom: joinRoom,
+			get: get
 		};
 
 		function joinQueue(message) {
@@ -31,6 +36,16 @@ angular
 		}
 
 		function createRoom(joinCode) {
+			if (joinCode === undefined || joinCode.length < 3) {
+				state.joinCodeErrorMessage = '';
+				state.joinCodeErrorMessage += 'Minimum of 3 characters required.';
+				return;
+			}
+
+			on('err', function(data){
+				state.joinCodeErrorMessage = '';
+				state.joinCodeErrorMessage += data.message;
+			});
 			on('private game created', function(data){
 			  $state.go('waiting');
 			});
@@ -51,6 +66,10 @@ angular
 			emit('attempt to join private game', {joinCode: joinCode});
 			console.log('join room event emitted!');
 			$state.go('loading');
+		}
+
+		function get(key){
+			return state[key];
 		}
 
 	}

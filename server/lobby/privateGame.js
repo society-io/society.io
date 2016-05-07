@@ -32,6 +32,16 @@ var storeJoinCode = function(data) {
   // store joinCode in privateGames
     // create storage for sockets
     var socketsForGame = [];
+
+    // check if join code is undefined or under 3 characters
+
+    if(data.joinCode === undefined || data.joinCode.length < 3){
+      socket.emit('err', {
+        message: 'Minimum of 3 characters required.',
+        success: false
+      });
+    }
+
     // Check if joinCode already exists
     if(!privateGames[data.joinCode]) {
       console.log('Storing joinCode...');

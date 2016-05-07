@@ -23,6 +23,7 @@
 				<!--TODO:create model object in controller and pass to emit event on btn click-->
 				<input ng-model='Lobby.joinCode'>
 				<button class="block red" ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
+				<div ng-if="Lobby.getErrorMessage()">{{Lobby.getErrorMessage()}}</div>
 			</div>
 
 			<div ng-show="Lobby.showJoinGameInput">
@@ -34,6 +35,7 @@
 
 		</div><!-- End sidebar -->
 	</div><!-- End bootstrap column -->
+
 
 	<div class="col-md-8">
 		<div class="lobby-right lobby-content-container">
