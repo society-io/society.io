@@ -17,6 +17,7 @@
       };
 
     	listeners();
+
     	return {
         get: get,
         cancelRoom: cancelRoom,
@@ -39,8 +40,6 @@
       }
 
 		  function listeners() {
-
-
         on('profile', function(resp){
           playerInfo.player1Name = resp.player1.username;
           playerInfo.player1MMR = resp.player1.mmr;
@@ -50,10 +49,26 @@
 
         on('match ready', function() {
           $timeout(function(){
-            $state.go('battlefield');     
+            $state.go('battlefield');
           }, 5000);
         });
+
+        on('join code to initialize battlefield', function(data){
+          console.log('inside joinCode listener within waitingFactory, joinCode: ', data.joinCode);
+          emit('initialize battlefield', {joinCode: data.joinCode});
+        });
+
+        on('player 1 enter battlefield', function() {
+          console.log('inside player1EnterBattlefield');
+          $state.go('battlefield');
+        });
+
+        on('player 2 enter battlefield', function() {
+          console.log('inside player2EnterBattlefield');
+          $state.go('battlefield');
+        });
 			}
+
     }
 
 
