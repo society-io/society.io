@@ -2,7 +2,9 @@ var firebase = require('../common').firebase;
 var privateGameListeners = require('../lobby/privateGame').privateGameListeners;
 var queueListeners = require('../lobby/queue').queueListeners;
 var SocketAPI = function(socket, userModel, token) {
-  this.socket = socket;
+  // Take Out Password! (protected data)
+  userModel = Object.assign({}, userModel);
+	this.socket = socket;
 	this.socketId = socket.id;
 	this.user = userModel;
 	this.userId = userModel._id;
