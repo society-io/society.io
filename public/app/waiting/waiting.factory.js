@@ -8,7 +8,6 @@
     function waitingFactory(socketFactory, $state, $timeout) {
     	var emit = socketFactory.emit;
 		  var on = socketFactory.on;
-      var matchJoinCode = null;
 
       var playerInfo = {
       	player1Name: null,
@@ -54,15 +53,19 @@
           }, 5000);
         });
 
-        on('private match ready', function() {
-          console.log('inside private match ready');
+        on('join code to initialize battlefield', function(data){
+          console.log('inside joinCode listener within waitingFactory, joinCode: ', data.joinCode);
+          emit('initialize battlefield', {joinCode: data.joinCode});
+        });
+
+        on('player 1 enter battlefield', function() {
+          console.log('inside player1EnterBattlefield');
           $state.go('battlefield');
         });
 
-        on('here is joinCode', function(data){
-          console.log('inside hereIsJoinCode listener within waitingFactory, joinCode: ', data.joinCode);
-          matchJoinCode = data.joinCode;
-          emit('joined room', {joinCode: matchJoinCode});
+        on('player 2 enter battlefield', function() {
+          console.log('inside player2EnterBattlefield');
+          $state.go('battlefield');
         });
 			}
 

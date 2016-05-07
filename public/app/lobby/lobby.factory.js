@@ -31,16 +31,16 @@ angular
 		}
 
 		function createRoom(joinCode) {
-			on('room created', function(data){
+			on('private game created', function(data){
 			  $state.go('waiting');
 			});
-			emit('create room', {joinCode: joinCode});
-			console.log('create room event emitted!');
+			emit('create private game', {joinCode: joinCode});
+			console.log('createPrivateGame event emitted!');
 			$state.go('loading');
 		}
 
 		function joinRoom(joinCode) {
-			on('room exists', function(data){
+			on('private game exists', function(data){
         console.log('inside roomExists listener within lobbyFactory, data: ', data.success);
 			  if(data.success) {
 			    $state.go('waiting');
@@ -48,7 +48,7 @@ angular
 			    $state.go('lobby');
 			  }
 			});
-			emit('join room', {joinCode: joinCode});
+			emit('attempt to join private game', {joinCode: joinCode});
 			console.log('join room event emitted!');
 			$state.go('loading');
 		}
