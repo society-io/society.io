@@ -10,6 +10,11 @@ var queueListeners = function(socket) {
 	});
 };
 
+
+var userListener = function(socket) {
+	var user= this.getUserModel();
+};
+
 function addToQueue(socket) {
 	queue.push(socket);
 	console.log('ADDED TO QUEUE: ', queue.length);
@@ -19,14 +24,21 @@ function addToQueue(socket) {
 
 function queueMatch(socket) {
 	if (queue.length>=2) {
-		var player1 = queue.pop();
-		var player2= queue.pop();
-
-		var game =new Game(player1, player2);
+		var player1 = queue.shift();
+		var player2= queue.shift();
+		
+		var profile = {}; 
+		profile.player1.getUserModel();
+		profile.player2.getUserModel();
+	
+		console.log(profile);
+		
+		var game= new Game(player1, player2);
 		game.init();
 
 		player1.emit('match ready');
 		player2.emit('match ready');
+		
 		console.log('MATCH: player1 = ', player1.socketId, 'player2 = ', player2.socketId);
 	}
 }
