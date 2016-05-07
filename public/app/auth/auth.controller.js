@@ -18,7 +18,7 @@ function AuthController(authFactory, $scope) {
 	vm.signInErrorMessage = function(){
 		return authFactory.get('signinErrorMessage');
 	};
-	vm.resetMessage = function(key, value){
+	vm.set = function(key, value){
 		authFactory.set(key, value);
 	};
 
