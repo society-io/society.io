@@ -25,9 +25,15 @@ function addToQueue(socket) {
 
 function queueMatch(socket) {
 
+  setInterval(function(){
+    queue.sort(function(a,b) {
+      return a.mmr - b.mmr;
+    });
+  }, 5000);
+
 	if (queue.length>=2) {
-		var player1= queue.shift();
-		var player2= queue.shift();
+		var player1= queue.pop();
+		var player2= queue.pop();
 
 		var profile = {};
 
