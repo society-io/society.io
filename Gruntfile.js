@@ -11,18 +11,31 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['public/styles/**/*.scss', 'public/app/**/*.js', 'server/**/*.js'],
-      // tasks: ['jshint', 'concat', 'sass'],
-      tasks: ['sass']
+      tasks: ['jshint', 'concat', 'sass']
+      // tasks: ['sass']
     },
     concat: {
       dist: {
         src: ['public/app/app.module.js',
-          'public/app/shared/**/*.js',
-          'public/app/auth/**/*.js',
-          'public/app/battlefield/**/*.js',
-          'public/app/loading/**/*.js',
-          'public/app/lobby/**/*.js',
-          'public/app/waiting/**/*.js',
+
+          'public/app/auth/**/*.factory.js',
+          'public/app/auth/**/*.controller.js',
+
+          'public/app/shared/**/*.factory.js',
+          'public/app/shared/**/*.controller.js',
+
+          'public/app/battlefield/**/*.factory.js',
+          'public/app/battlefield/**/*.controller.js',
+
+          'public/app/loading/**/*.factory.js',
+          'public/app/loading/**/*.controller.js',
+
+          'public/app/lobby/**/*.factory.js',
+          'public/app/lobby/**/*.controller.js',
+
+          'public/app/waiting/**/*.factory.js',
+          'public/app/waiting/**/*.controller.js',
+          
           'public/app/ui-router/app.config.js'
         ],
         dest: 'public/dist/built.js',

@@ -14,7 +14,6 @@ body {
 
 $white: #fff;
 
-
 $yellow-l2: #FCD197;
 $yellow-l1: #F7C17C;
 $yellow: #FFBC66;
@@ -48,7 +47,6 @@ button {
   border-radius: 3px;
   padding: 12px 25px;
   text-transform: uppercase;
-  text-shadow: 0 1px 0 $yellow-l2;
   transition: $borderTransition;
 }
 
@@ -66,6 +64,7 @@ button.yellow {
   color: $brown;
   background-color: $yellow;
   box-shadow: 0 3px 0 0 $yellow-d1;
+  text-shadow: 0 1px 0 $yellow-l2;
 }
 
 button.yellow:hover {
