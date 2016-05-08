@@ -15,18 +15,18 @@
 
   h2 {
     font-size: 30px;
-    margin: 12px 0 45px 0;
+    margin-bottom: 45px;
     text-shadow: 0 3px 3px rgba(0,0,0,0.3);
   }
 }
 
 .auth-form {
   display: block;
-  width: 400px;
   background-color: rgba(0,0,0,0.4);
   border-radius: 6px;
   margin: 0 auto;
   padding: 30px;
+  max-width: 400px;
 
   .switch-view-link {
     display: block;
@@ -67,6 +67,12 @@
   input[type="email"]:focus {
     background-color: rgba(255,255,255,1);
     box-shadow: 0 0 4px 2px rgba(255,255,255,0.2);
+  }
+
+  .error-message {
+    text-align: center;
+    margin-top: 20px;
+    color: $red;
   }
 }
 

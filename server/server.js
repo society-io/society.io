@@ -7,7 +7,6 @@ var Game = require('./game/game').Game;
 var queue = require('./lobby/queue');
 var socketCheck = require('./socket/socketHelpers').socketCheck;
 var SocketAPI = require('./socket/socketAPI').SocketAPI;
-var z = require('./z');
 
 var app = common.app;
 var server = common.server;
@@ -33,24 +32,24 @@ server.listen(port);
 console.log('Server Running, Port: ', port);
 
 io.on('connection', function(socket) {
-	console.log('*New Client Connected*');
-	socket.on('init', function(data) {
+  console.log('*New Client Connected*');
+  socket.on('init', function(data) {
 
-		socketCheck(data.token, socket)
-		.then(function(data) {
-		  var uid = data.uid;
-		  var socket = data.socket;
-		  var token = data.token;
-		  db.findById(uid, function(err, user) {
-		    if (err) {
-		      throw err;
-		    } else {
-		      activeSockets[socket.id] = new SocketAPI(socket, user, token);
-		      activeSockets[socket.id].init();
-		    }
-		  });
-	}, function(err) {
-	    console.error(err);
-		});
-	});
+    socketCheck(data.token, socket)
+      .then(function(data) {
+        var uid = data.uid;
+        var socket = data.socket;
+        var token = data.token;
+        db.findById(uid, function(err, user) {
+          if (err) {
+            throw err;
+          } else {
+            activeSockets[socket.id] = new SocketAPI(socket, user, token);
+            activeSockets[socket.id].init();
+          }
+        });
+      }, function(err) {
+        console.error(err);
+      });
+  });
 });
