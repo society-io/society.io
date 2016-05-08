@@ -123,8 +123,8 @@ Game.prototype.terminate = function(reason) {
   this.emit('matchTerminated', {
     reason: reason
   });
-  this.player1.socket.disconnect();
-  this.player2.socket.disconnect();
+  // this.player1.socket.disconnect();
+  // this.player2.socket.disconnect();
 };
 
 Game.prototype.playerOn = function(event, cb) {
@@ -140,7 +140,7 @@ Game.prototype.playerOn = function(event, cb) {
 Game.prototype.newRound = function() {
   setTimeout(function() {
     this.emit('newRound', {});
-  }.bind(this), 3000);
+  }.bind(this), 2500);
 };
 
 module.exports = {

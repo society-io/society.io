@@ -24,7 +24,7 @@ var Player = function(id, socketAPI, events) {
 };
 
 /**
- *  Choices / Health
+ *  Player Helpers
  *
  *  resetChoice:  resets choice - used when a round winner is determined
  *  updateChoice: stores the user choice
@@ -49,11 +49,9 @@ Player.prototype.updateChoice = function(choice) {
 };
 
 Player.prototype.updateHealth = function(choice) {
-  console.log('updateHealth called. choice = ', choice);
   if (!choice || choice === 'noChoice') {
     for (var option in this.health) {
       if (this.health[option] > 0) {
-        console.log('subtracing ' + option + ' from health.');
         this.health[option]--;
         return;
       }
@@ -64,7 +62,6 @@ Player.prototype.updateHealth = function(choice) {
 };
 
 Player.prototype.ready = function() {
-  console.log('triggering playerReady');
   this.readyToPlay = true;
   this.trigger('playerReady');
 };
