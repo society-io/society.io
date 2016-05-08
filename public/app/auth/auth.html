@@ -2,18 +2,27 @@
 	<h1 class="logo">Society</h1>
 	<h2 class="subtitle">The Game</h2>
 	<form class="auth-form sign-up" name="signUpForm" method="post" ng-show="Auth.signUpForm">
-		<input
-			ng-class="{ 'form-error' : Auth.usernameUp.$invalid && !Auth.usernameUp.$pristine }"
-			ng-model="Auth.usernameUp"
-			type="text" placeholder="Username" class="input">
-		<input
-			ng-class="{ 'form-error' : Auth.emailUp.$invalid && !Auth.emailUp.$pristine }"
-			ng-model="Auth.emailUp"
-			type="email" placeholder="Email" class="input">
-		<input
-			ng-class="{ 'form-error' : Auth.passwordUp.$invalid && !Auth.passwordUp.$pristine }"
-			ng-model="Auth.passwordUp"
-			type="password" placeholder="Password" class="input">
+		<div class="input-container">
+			<input
+				ng-class="{ 'form-error' : Auth.usernameUp.$invalid && !Auth.usernameUp.$pristine }"
+				ng-model="Auth.usernameUp"
+				type="text" placeholder="Username" class="input">
+			<i class="fa fa-user" aria-hidden="true"></i>	
+		</div>
+		<div class="input-container">
+			<input
+				ng-class="{ 'form-error' : Auth.emailUp.$invalid && !Auth.emailUp.$pristine }"
+				ng-model="Auth.emailUp"
+				type="email" placeholder="Email" class="input">
+			<i class="fa fa-envelope" aria-hidden="true"></i>
+		</div>
+		<div class="input-container">
+			<input
+				ng-class="{ 'form-error' : Auth.passwordUp.$invalid && !Auth.passwordUp.$pristine }"
+				ng-model="Auth.passwordUp"
+				type="password" placeholder="Password" class="input">
+			<i class="fa fa-lock" aria-hidden="true"></i>
+		</div>
 
 		<!-- for error on signUp -->
 		<div ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
@@ -25,10 +34,16 @@
 	</form>
 
 	<form class="auth-form sign-in" ng-show='Auth.signInForm' method="post" ng-show="Auth.signInForm">
-		<input
+		<div class="input-container">
+			<input
 			ng-model="Auth.usernameIn" type="text" placeholder="Username">
-		<input
-			ng-model="Auth.passwordIn" type="password" placeholder="Password">
+			<i class="fa fa-user" aria-hidden="true"></i>	
+		</div>
+		<div class="input-container">
+			<input
+				ng-model="Auth.passwordIn" type="password" placeholder="Password">
+			<i class="fa fa-lock" aria-hidden="true"></i>	
+		</div>
 		<button class="block yellow" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})">Login</button>
 		<!-- for error on signIn -->
 		<div ng-if="Auth.signInErrorMessage() && Auth.signInForm">{{Auth.signInErrorMessage()}}</div>
