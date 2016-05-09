@@ -37,7 +37,9 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
     centerMessage: 'Game starting in a few seconds...'
   };
 
-  listeners();
+  if (socketFactory.isConnected()) {
+    listeners();
+  }
 
   return {
     emit: emit,
@@ -187,9 +189,6 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
         $state.go('lobby');
       }, 3000);
     });
-
-    // this line is for debugging game purposes only. Safe to ignore.
-    emit('newGame');
   }
 
 }

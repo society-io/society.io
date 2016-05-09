@@ -21,12 +21,14 @@
     var bfTimer = battlefieldTimerFactory;
 
     // set up the document ready signal
-    angular.element(document).ready(function() {
-      setTimeout(function() {
-        console.log('emitting client ready!');
-        socketFactory.emit('client ready');
-      }, 2000);
-    });
+    if (socketFactory.isConnected()) {
+      angular.element(document).ready(function() {
+        setTimeout(function() {
+          console.log('emitting client ready!');
+          socketFactory.emit('client ready');
+        }, 2000);
+      });
+    }
 
     // View State Elements
     vm.currentHover = '';

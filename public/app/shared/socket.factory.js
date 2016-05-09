@@ -16,11 +16,12 @@ angular
     };
 
     function isConnected() {
+      console.log('socket connection = ', !!socket);
       return !!socket;
     }
 
     function connectSocket() {
-      if (!socket) {
+      if (!socket && authFactory.isAuthed()) {
         socket = io.connect();
         socket.emit('init', authFactory.attachToken({}));
       }

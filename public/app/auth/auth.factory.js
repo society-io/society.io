@@ -17,6 +17,7 @@
         signIn: signIn,
         signOut: signOut,
         checkAuth: checkAuth,
+        isAuthed: isAuthed,
         attachToken: attachToken,
         get: get,
         set: set
