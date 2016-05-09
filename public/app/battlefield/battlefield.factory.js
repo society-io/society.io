@@ -6,6 +6,9 @@ bfFactoryFunction.$inject = ['socketFactory', 'battlefieldTimerFactory', '$state
 
 function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
 
+  // DEBUGGING PURPOSES ONLY:
+  // socketFactory.connectSocket();
+
   var bfTimer = battlefieldTimerFactory;
 
   //flags at top and then factory, then function declarations
@@ -113,7 +116,6 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
 
       state.results = resp;
       state.opponent.choice = resp.choices[state.opponent.id];
-      state.centerMessage = 'Waiting for next round...';
 
       // identify winner/loser for DOM
       state.roundWinner = resp.roundWinner;
@@ -150,11 +152,13 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
       state.player.roundStatus = '';
       state.opponent.choice = '';
       state.opponent.roundStatus = '';
+      state.opponentPlayed = false;
       state.roundWinner = null;
 
       bfTimer.startTimer().then(function() {
         console.log('state.player.choice = ', state.player.choice);
         if (!state.player.choice) {
+          state.player.choice = 'noChoice';
           console.log('emitting no choice.');
           emit('noChoice');
         }
@@ -175,7 +179,7 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
       state.matchOver = true;
       state.roundWinner = resp.winner;
       if (state.player.id === resp.winner) {
-        state.centerMessage = 'Looks like the other player forfeited. Redirecting to lobby...';
+        state.centerMessage = 'Opponent Forfeited. Redirecting to lobby...';
       } else {
         state.centerMessage = 'You forfeited the match. Redirecting to lobby...';
       }
