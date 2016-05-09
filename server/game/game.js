@@ -134,7 +134,11 @@ Game.prototype.terminate = function(reason) {
   } else {
     winner = 0;
   }
-  formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
+
+  // formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
+
+  // this.player1.socket.disconnect();
+  // this.player2.socket.disconnect();
 };
 
 Game.prototype.playerOn = function(event, cb) {
