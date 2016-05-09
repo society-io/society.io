@@ -20,15 +20,11 @@
 
 		vm.createRoom = lobbyFactory.createRoom;
 		vm.showCreateGameInput = false;
-		vm.showCreateGameController = function() {
-			vm.showCreateGameInput = true;
-		};
+		vm.showCreateGameController = false;
 
 		vm.joinRoom = lobbyFactory.joinRoom;
 		vm.showJoinGameInput = false;
-		vm.showJoinGameController = function() {
-			vm.showJoinGameInput = true;
-		};
+		vm.showJoinGameController = false;
 
 		vm.signOut = function() {
 			authFactory.signOut();
