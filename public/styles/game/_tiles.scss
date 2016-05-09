@@ -1,99 +1,131 @@
-.tile-pos {
-  position: absolute;
-}
-
-.health-3 {
-  background-image: url('../images/game/health-3.png');
-}
-
-.health-2 {
-  background-image: url('../images/game/health-2.png');
-}
-
-.health-1 {
-  background-image: url('../images/game/health-1.png');
-}
-
-.tile {
-  width: 174px;
-  height: 174px;
-  background-image: url('../images/game/tile.png');
+.tile-container {
   text-align: center;
-  line-height: 174px;
 }
 
-.player .tile:hover {
-  background-image: url('../images/game/tile-active.png');
-  cursor: pointer;
+$tileMobile: 50px;
+$tilePawn: 65px;
+$tileKnight: 100px;
+
+.tile-pos {
+  display: inline-block;
+  margin-right: 10px;
 }
 
-.tile.active {
-  background-image: url('../images/game/tile-active.png');
+.tile-pos:last-child {
+  margin-right: 0;
 }
 
-.tile.win {
-  background-image: url('../images/game/tile-win.png');
-}
+.health {
+  position: relative;
+  padding: 8px;
 
-.tile.lose {
-  background-image: url('../images/game/tile-lose.png');
-}
+  // mobile
+  width: $tileMobile;
+  height: $tileMobile;
 
-.dead {
-  opacity: 0.2;
-}
+  @include bp(pawn) {
+    width: $tilePawn;
+    height: $tilePawn;
+  }
 
-.dead.tile:hover {
-  background-image: url('../images/game/tile.png');
-  cursor: not-allowed;
-}
-
-.dark {
-  opacity: 0.2;
-}
-
-.winRound {
-  opacity: 1!important;
-  background-image: url('../images/game/tile-win.png')!important;
-  z-index: 200;
-}
-
-.lostRound {
-  opacity: 1!important;
-  background-image: url('../images/game/tile-lose.png')!important;
-  z-index: 200;
-}
-
-#rich {
-  left: 50%;
-  top: 0;
-
-  .health {
-    position: relative;
-    left: -50%;
+  @include bp(knight) {
+    width: $tileKnight;
+    height: $tileKnight;
   }
 }
 
-#bum {
+.health-3 .health-spinner {
+  background-image: url('../images/game/health-green.png');
+  animation: rotation 8s infinite linear;
+}
+
+.health-2 .health-spinner {
+  background-image: url('../images/game/health-yellow.png');
+  animation: rotation 5s infinite linear;
+}
+
+.health-1 .health-spinner {
+  background-image: url('../images/game/health-red.png');
+  animation: rotation 2s infinite linear;
+}
+
+// debugging purpose only
+// .health-0 .health-spinner {
+//   background-image: url('../images/game/health-green.png');
+//   animation: rotation 4s infinite linear;
+// }
+
+.health-spinner {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
   left: 0;
-  top: 137px;
+  top: 0;
+  position: absolute;
 }
 
-#jail {
-  right: 0;
-  top: 137px;
+@-webkit-keyframes rotation {
+  from {-webkit-transform: rotate(0deg);}
+  to   {-webkit-transform: rotate(359deg);}
 }
 
-#tax {
-  left: 61px;
-  bottom: 0;
+.tile {
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #375675;
+  color: #fff;
+  position: relative;
+  width: 86%;
+  height: 86%;
+  top: 7%;
+  left: 1%;
+  transition: background-color linear 0.2s;
 }
 
-#cop {
-  right: 61px;
-  bottom: 0;
+.player .tile:hover {
+  background-color: #658BB1;
+  cursor: pointer;
 }
 
-.opponent #bum {
+.tile.lose {
+  background-color: #CC5151;
+}
 
+.tile.active {
+
+}
+
+.tile-inner {
+  text-align: center;
+  margin-top: 8px;
+
+  @include bp(pawn) {
+    margin-top: 13px
+  }
+
+  @include bp(knight) {
+    margin-top: 16px;
+  }
+}
+
+.tile-inner .fa-lg {
+  display: block;
+  margin-bottom: 5px;
+
+  @include bp(pawn) {
+    font-size: 22px;
+  }
+
+  @include bp(knight) {
+    font-size: 28px;
+  }
+}
+
+.choice-text {
+  display: none;
+
+  @include bp(knight) {
+    margin-top: 0;
+    display: block;
+  }
 }

@@ -1,0 +1,127 @@
+<!-- <button ng-click="Bf.debugger()">click the debugger!!!</button> -->
+<div class="board">
+  
+  <!-- Round waiting -->
+<!--   <div class="round-waiting overlay animate-show" ng-show="!Bf.get('gameStarted') || Bf.get('roundWinner') !== null || Bf.get('forfeited')">
+    <div class="round-waiting-msg-container">
+      <h1>
+        {{Bf.get('centerMessage')}}
+      </h1>
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Timer -->
+<!--   <div class="timer-container">
+    <div class="timer">
+      <h1>{{Bf.getTime()}}</h1>
+    </div>
+  </div> -->
+
+  <!-- Forfeit -->
+<!--   <div class="forfeit-container">
+    <div class="forfeit">
+      <button ng-click="Bf.forfeit()">Forfeit</button>
+    </div>
+  </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <!-- Board Left -->
+  <div class="board-left player">
+
+    <div class="player-stats">
+      <p class="username">JohnDoe</p>
+      <p class="stat wins"><span>Wins </span> 24,581</p>
+      <p class="stat losses"><span>Losses </span> 19,950</p>
+      <p class="stat winPerc"><span>Win % </span> 55.20%</p>
+    </div>
+    
+    <div class="tile-container">
+
+      <div class="status-container">
+        <div class="status">
+          <h1 ng-show="Bf.get('results')">{{Bf.get('player').roundStatus}}</h1>
+        </div>
+      </div>
+
+      <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}">
+        <div class="health health-{{Bf.get('player').health[choice] || 0}}"
+          ng-class="{
+            dark: Bf.get('player').choice !== choice && Bf.get('roundWinner')
+          }">
+          <div class="tile" 
+            ng-mouseenter="Bf.currentHover = choice"
+            ng-mouseleave="Bf.currentHover = ''"
+            ng-class="{
+              dead: Bf.get('player').health[choice] === 0,
+              active: Bf.get('player').choice === choice,
+              winRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('player').id,
+              lostRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
+              dark: Bf.get('roundWinner')
+            }"
+            ng-click="Bf.get('player').health[choice] && !Bf.get('player').choice && Bf.setChoice(choice)">{{choice}}</div>
+        </div>
+      </div>
+      
+    </div><!-- end tile-container -->
+
+  </div><!-- 
+
+  Board Right
+
+  DO NOT remove this comment. It will mess up the layout.
+  
+  --><div class="board-right opponent">
+
+    <div class="player-stats">
+      <p class="username">JohnDoe</p>
+      <p class="stat wins"><span>Wins: </span>24,581</p>
+      <p class="stat losses"><span>Losses: </span>19,950</p>
+      <p class="stat winPerc"><span>Win %: </span>55.20%</p>
+    </div>
+    
+    <div class="tile-container">
+
+      <div class="status-container">
+        <div class="status">
+          <h1 ng-show="Bf.get('results')">{{Bf.get('opponent').roundStatus}}</h1>
+        </div>
+      </div>
+
+      <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}">
+        <div class="health health-{{Bf.get('opponent').health[choice] || 0}}"
+          ng-class="{
+            dark: Bf.get('opponent').choice !== choice && Bf.get('roundWinner')
+          }">
+          <div class="tile"
+            ng-class="{
+              dead: Bf.get('opponent').health[choice] === 0,
+              lose: Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1],
+              winRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
+              lostRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id
+            }"
+          >{{choice}}</div>
+        </div>
+      </div>
+
+    </div><!-- end tile-container -->
+
+  </div><!-- end board-right -->
+</div><!-- end board -->

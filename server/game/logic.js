@@ -48,6 +48,18 @@ Gamelogic.prototype.choiceSubmitted = function() {
       game.player2.resetChoice();
       game.newRound();
     }
+
+  // if either player has not submitted a choice yet
+  } else {
+    console.log('player1 choice ### ', game.player1.choice);
+    console.log('player2 choice ### ', game.player2.choice);
+    if (!game.player1.choice) {
+      console.log('emitting opponent played');
+      game.player1.emit('opponentPlayed');
+    } else if (!game.player2.choice) {
+      console.log('emitting opponent played');
+      game.player2.emit('opponentPlayed');
+    }
   }
 };
 

@@ -1,6 +1,8 @@
 @import 'vendor/normalize';
 @import 'vendor/bootstrapGrid';
 
+@import 'mixins';
+
 @import 'globals';
 
 @import 'buttons';
@@ -17,5 +19,6 @@
 @import 'game/timer';
 @import 'game/forfeit';
 @import 'game/tiles';
+@import 'game/playingField';
 @import 'game/playerStats';
 @import 'game/spinner';

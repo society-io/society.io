@@ -12,20 +12,8 @@
   display: inline-block;
 }
 
-.board-left {
-  background-color: #999;
-}
-
-.board-right {
-  background-color: #888;
-}
-
 .tile-container {
-  width: 500px;
-  height: 500px;
-  position: relative;
-  top: 93px;
-  margin: auto;
+
 }
 
 .status-container {
@@ -41,4 +29,31 @@
   h1 {
     margin: 0;
   }
+}
+
+.opponent,
+.player {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: #fff;
+}
+.opponent {
+  top: 15px;
+}
+
+.player {
+  bottom: 15px;
+}
+
+.player-label, .opponent-label {
+  text-align: center;
+}
+
+.player-label {
+  margin-top: 15px;
+}
+
+.opponent-label {
+  margin-bottom: 15px;
 }

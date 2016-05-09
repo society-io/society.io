@@ -33,6 +33,7 @@ var Game = function(player1Socket, player2Socket) {
 };
 
 Game.prototype.init = function() {
+  console.log('game initialized was called.');
   /**
    *  Game Initialization
    *
@@ -54,6 +55,7 @@ Game.prototype.init = function() {
 
   // player eventing listeners
   game.playerOn('playerChoiceUpdated', function(player) {
+    console.log('invoking game.logic.choiceSubmitted()');
     game.logic.choiceSubmitted();
   });
 

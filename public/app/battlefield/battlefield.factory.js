@@ -2,11 +2,9 @@ angular
   .module('app')
   .factory('battlefieldFactory', bfFactoryFunction);
 
-bfFactoryFunction.$inject = ['$http', 'socketFactory', 'battlefieldTimerFactory', '$state'];
+bfFactoryFunction.$inject = ['socketFactory', 'battlefieldTimerFactory', '$state'];
 
-function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state) {
-
-  socketFactory.connectSocket();
+function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
 
   var bfTimer = battlefieldTimerFactory;
 
@@ -30,6 +28,7 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
     matchOver: false,
     player: false,
     opponent: false,
+    opponentPlayed: false,
     gameStarted: false,
     forfeited: false,
     centerMessage: 'Game starting in a few seconds...'
@@ -99,6 +98,11 @@ function bfFactoryFunction($http, socketFactory, battlefieldTimerFactory, $state
       }
 
       emit('clientGameReady');
+    });
+
+    on('opponentPlayed', function(resp) {
+      console.log('opponent played heard!');
+      state.opponentPlayed = true;
     });
 
     on('roundResult', function(resp){
