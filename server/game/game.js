@@ -1,6 +1,7 @@
 var Gamelogic = require('./logic').Gamelogic;
 var Player = require('./player').Player;
 var listeners = require('./listeners');
+var formatMMR = require('../profile/updateProfile').formatMMR;
 
 var Game = function(player1Socket, player2Socket) {
   /**
@@ -125,8 +126,15 @@ Game.prototype.terminate = function(reason) {
   this.emit('matchTerminated', {
     reason: reason
   });
-  // this.player1.socket.disconnect();
-  // this.player2.socket.disconnect();
+
+  var winner;
+
+  if (this.matchWinner === this.player1.id) {
+    winner = 1;
+  } else {
+    winner = 0;
+  }
+  formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
 };
 
 Game.prototype.playerOn = function(event, cb) {
