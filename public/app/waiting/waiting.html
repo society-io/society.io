@@ -1,7 +1,7 @@
 <div>WAITING ROOM</div>
 
-<button ng-click="Waiting.showCancelGameController()">Cancel Your Private Game</button>
-  <div ng-show="Waiting.showCancelGameInput">
+<button ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm">Cancel Your Private Game</button>
+  <div ng-show="Waiting.showCancelGameForm">
     <label>enter join code</label>
     <!--TODO:create model object in controller and pass to emit event on btn click-->
     <input ng-model='joinCode'>
