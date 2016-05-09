@@ -16,7 +16,9 @@
         player2MMR: null
       };
 
-      listeners();
+      if (socketFactory.isConnected()) {
+        listeners();
+      }
 
       return {
         get: get,
