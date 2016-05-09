@@ -28,6 +28,7 @@ app.use(cors());
 
 app.use('/signup', signUp);
 app.use('/signin', signIn);
+app.use('/leaderboard', leaderboard);
 
 server.listen(port);
 console.log('Server Running, Port: ', port);
