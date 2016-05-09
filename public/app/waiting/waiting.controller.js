@@ -4,9 +4,9 @@ angular
   .module('app')
   .controller('WaitingController', WaitingController);
 
-  WaitingController.$inject = ['waitingFactory', 'socketFactory'];
+  WaitingController.$inject = ['waitingFactory', 'socketFactory', '$state'];
 
-  function WaitingController(waitingFactory, socketFactory) {
+  function WaitingController(waitingFactory, socketFactory, $state) {
 
     var vm = this;
 
