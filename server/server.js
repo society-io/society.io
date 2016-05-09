@@ -15,6 +15,7 @@ var activeSockets = common.activeSockets;
 
 var signUp = require('./routes/signup.js');
 var signIn = require('./routes/signin.js');
+var leaderboard = require('./routes/leaderboard.js');
 
 var port = process.env.PORT || 3000;
 
