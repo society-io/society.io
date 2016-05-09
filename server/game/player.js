@@ -29,7 +29,6 @@ var Player = function(id, socketAPI, events) {
  *  resetChoice:  resets choice - used when a round winner is determined
  *  updateChoice: stores the user choice
  *  updateHealth: subtracts 1 health from the losing choice
- *  gameReady: invoked when the client side has emitted a 'client ready' event.
  */
 Player.prototype.resetChoice = function() {
   this.choice = null;
