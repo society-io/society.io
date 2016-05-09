@@ -72,7 +72,7 @@ $tileKnight: 100px;
 .tile {
   display: inline-block;
   border-radius: 50%;
-  background-color: #375675;
+  background-color: $tileBlue;
   color: #fff;
   position: relative;
   width: 86%;
@@ -83,16 +83,39 @@ $tileKnight: 100px;
 }
 
 .player .tile:hover {
-  background-color: #658BB1;
+  background-color: $tileLightBlue;
   cursor: pointer;
 }
 
 .tile.lose {
-  background-color: #CC5151;
+  background-color: $tileRed;
 }
 
 .tile.active {
+  opacity: 1;
+}
 
+.tile.dead {
+  opacity: 0.5;
+}
+
+.tile.dead:hover {
+  background-color: $tileBlue;
+  cursor: not-allowed;
+}
+
+.tile.dark,
+.health.dark, {
+  opacity: 0.4;
+}
+
+.tile.lostRound {
+  opacity: 1;
+  animation: blinker 0.2s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0.0; }
 }
 
 .tile-inner {

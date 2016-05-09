@@ -1,0 +1,47 @@
+.side-controls {
+  position: absolute;
+  right: 0;
+  bottom: -63px;
+  z-index: 1000;
+  
+  @include bp(pawn) {
+    bottom: -68px;
+  }
+
+  @include bp(knight) {
+    bottom: -77px;
+  }
+}
+
+.timer {
+  text-align: center;
+  color: #fff;
+
+  p {
+    margin: 0;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 32px;
+
+    @include bp(pawn) {
+      font-size: 42px;
+    }
+
+    @include bp(knight) {
+      font-size: 52px;
+    }
+  }
+}
+
+.forfeit {
+  button {
+    padding: 10px;
+    color: #fff;
+  }
+
+  p {
+    margin: 0;
+  }
+}

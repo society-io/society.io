@@ -2,7 +2,7 @@
 <div class="board">
   
   <!-- Round waiting -->
-<!--   <div class="round-waiting overlay animate-show" ng-show="!Bf.get('gameStarted') || Bf.get('roundWinner') !== null || Bf.get('forfeited')">
+  <div class="round-waiting overlay animate-show" ng-show="!Bf.get('gameStarted') || Bf.get('matchOver')">
     <div class="round-waiting-msg-container">
       <h1>
         {{Bf.get('centerMessage')}}
@@ -12,21 +12,7 @@
         <div class="double-bounce2"></div>
       </div>
     </div>
-  </div> -->
-
-  <!-- Timer -->
-<!--   <div class="timer-container">
-    <div class="timer">
-      <h1>{{Bf.getTime()}}</h1>
-    </div>
-  </div> -->
-
-  <!-- Forfeit -->
-<!--   <div class="forfeit-container">
-    <div class="forfeit">
-      <button ng-click="Bf.forfeit()">Forfeit</button>
-    </div>
-  </div> -->
+  </div>
 
   <div class="opponent">
     <div class="fluid-container">
@@ -45,7 +31,8 @@
                 dead: Bf.get('opponent').health[choice] === 0,
                 lose: Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1],
                 winRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
-                lostRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id
+                lostRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id,
+                dark: Bf.get('opponentPlayed')
               }"
             ><div class="tile-inner">
               <i class="bg-icon fa fa-lg" ng-class="{
@@ -67,25 +54,70 @@
     </div>
 
   </div><!-- End Opponent -->
-
+  
+  <!-- Playing battlefield -->
   <div class="playing-field container-fluid">
     
     <div class="playing-opponent col-md-4 col-md-offset-4">
       <div class="opponent-player-choice">
-        <p ng-show="Bf.get('opponentPlayed')">Opponent Played</p>
+        <div class="big-tile" ng-class="{
+          played: Bf.get('opponentPlayed') || Bf.get('opponent').choice,
+          win: Bf.get('opponent').id === Bf.get('roundWinner'),
+          lose: Bf.get('player').id === Bf.get('roundWinner')
+        }">
+          <i class="bg-icon fa fa-2x" ng-class="{
+              'fa-gavel': Bf.get('opponent').choice === 'jail',
+              'fa-taxi': Bf.get('opponent').choice === 'cop',
+              'fa-file-text': Bf.get('opponent').choice === 'tax',
+              'fa-rocket': Bf.get('opponent').choice === 'rich',
+              'fa-trash': Bf.get('opponent').choice === 'bum'
+            }" aria-hidden="true"></i>
+          <p ng-show="Bf.get('opponentPlayed') && Bf.get('roundWinner') === null">Opponent Played</p>
+          <p ng-show="Bf.get('roundWinner') === 0">Tie</p>
+          <p ng-show="Bf.get('roundWinner')">{{Bf.get('opponent').choice}}</p>
+        </div>
       </div>
-    </div>
+
+      <div class="side-controls">
+        <!-- Timer -->
+        <div class="timer-container">
+          <div class="timer">
+            <p>Round Timer:</p>
+            <h1>{{Bf.getTime()}}</h1>
+          </div>
+        </div>
+
+        <!-- Forfeit -->
+        <div class="forfeit-container">
+          <div class="forfeit">
+
+            <button class="red" ng-click="Bf.forfeit()">
+              <i class="fa fa-hand-peace-o fa-lg" aria-hidden="true"></i>
+              <p>Forfeit</p>
+            </button>
+          </div>
+        </div>
+      </div><!-- Playing Opponent End -->
+      </div>
 
     <div class="playing-player col-md-4 col-md-offset-4">
       <div class="current-player-choice">
-        <i class="bg-icon fa fa-lg" ng-class="{
-            'fa-gavel': Bf.get('player').choice === 'jail',
-            'fa-taxi': Bf.get('player').choice === 'cop',
-            'fa-file-text': Bf.get('player').choice === 'tax',
-            'fa-rocket': Bf.get('player').choice === 'rich',
-            'fa-trash': Bf.get('player').choice === 'bum'
-          }" aria-hidden="true"></i>
-        {{Bf.get('player').choice}}
+          <div class="big-tile" ng-class="{
+            played: Bf.get('player').choice,
+            win: Bf.get('player').id === Bf.get('roundWinner'),
+            lose: Bf.get('opponent').id === Bf.get('roundWinner')
+          }">
+            <i class="bg-icon fa fa-2x" ng-class="{
+                'fa-gavel': Bf.get('player').choice === 'jail',
+                'fa-taxi': Bf.get('player').choice === 'cop',
+                'fa-file-text': Bf.get('player').choice === 'tax',
+                'fa-rocket': Bf.get('player').choice === 'rich',
+                'fa-trash': Bf.get('player').choice === 'bum'
+              }" aria-hidden="true"></i>
+            <p ng-show="Bf.get('roundWinner') === null">{{Bf.get('player').choice}}</p>
+            <p ng-show="Bf.get('roundWinner') === 0">Tie</p>
+            <p ng-show="Bf.get('roundWinner')">{{Bf.get('player').choice}}</p>
+          </div>
       </div>
     </div>
 
@@ -110,7 +142,7 @@
                 active: Bf.get('player').choice === choice,
                 winRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('player').id,
                 lostRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
-                dark: Bf.get('roundWinner')
+                dark: Bf.get('submitted')
               }"
               ng-click="Bf.get('player').health[choice] && !Bf.get('player').choice && Bf.setChoice(choice)">
               <div class="tile-inner">
@@ -129,7 +161,7 @@
           </div>
         </div><!-- End (tiles) -->
 
-      </div>
+      </div><!-- End Tile Container -->
       <div class="player-label col-md-12">You</div>
     </div>
 

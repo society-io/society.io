@@ -6,6 +6,79 @@
   text-align: center;
 }
 
+.playing-player {
+  margin-top: 20px;
+}
+
 .current-player-choice {
   color: #fff;
+}
+
+@keyframes borderFadeRepeat {
+  0%   { border: 8px solid rgba(255,255,255,0); }
+  50%  { border: 8px solid rgba(255,255,255,0.3); }
+  100% { border: 8px solid rgba(255,255,255,0); }
+}
+
+.big-tile {
+  position: relative;
+  margin: 0 auto;
+  border: 8px solid rgba(255,255,255,0.1);
+  animation: borderFadeRepeat 3s infinite;
+  border-radius: 50%;
+  color: #fff;
+
+  // mobile
+  width: 80px;
+  height: 80px;
+
+  @include bp(pawn) {
+    font-size: 16px;
+    width: 100px;
+    height: 100px;
+  }
+
+  @include bp(knight) {
+    font-size: 20px;
+    width: 130px;
+    height: 130px;
+  }
+}
+
+.big-tile p {
+  margin: 0;
+
+  @include bp(pawn) {
+    margin-top: 2px;
+  }
+
+  @include bp(knight) {
+    margin-top: 4px;
+  }
+}
+
+.big-tile .fa-2x {
+  margin-top: 7px;
+
+  @include bp(pawn) {
+    margin-top: 11px;
+    font-size: 38px;
+  }
+
+  @include bp(knight) {
+    margin-top: 13px;
+    font-size: 52px;
+  }
+}
+
+.big-tile.played {
+  background-color: rgba(255,255,255,0.3);
+}
+
+.big-tile.win {
+  background-color: $tileGreen;
+}
+
+.big-tile.lose {
+  background-color: $tileRed;
 }
