@@ -6,40 +6,41 @@
     waitingFactory.$inject = ['socketFactory', '$state', '$timeout'];
 
     function waitingFactory(socketFactory, $state, $timeout) {
-    	var emit = socketFactory.emit;
-		  var on = socketFactory.on;
+      var emit = socketFactory.emit;
+      var on = socketFactory.on;
 
       var playerInfo = {
-      	player1Name: null,
-      	player1MMR: null,
-      	player2Name: null,
-      	player2MMR: null
+        player1Name: null,
+        player1MMR: null,
+        player2Name: null,
+        player2MMR: null
       };
 
-    	listeners();
+      listeners();
 
-    	return {
+      return {
         get: get,
         cancelRoom: cancelRoom,
         removeFromQueue: removeFromQueue
       };
 
       function get(keyName) {
-      	return playerInfo[keyName];
+        return playerInfo[keyName];
       }
 
       function cancelRoom(joinCode) {
-        // Send the Server Your Game's joinCode
+        console.log('Canceling privateGame...');
         emit('cancel room', {joinCode: joinCode});
         $state.go('lobby');
       }
 
       function removeFromQueue() {
-        console.log('leaving the q');
+        console.log('Removing Player From Queue...');
         emit('remove from queue');
+        $state.go('lobby');
       }
 
-		  function listeners() {
+      function listeners() {
         on('profile', function(resp){
           playerInfo.player1Name = resp.player1.username;
           playerInfo.player1MMR = resp.player1.mmr;
@@ -67,7 +68,7 @@
           console.log('inside player2EnterBattlefield');
           $state.go('battlefield');
         });
-			}
+      }
 
     }
 

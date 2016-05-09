@@ -9,17 +9,18 @@ var queueListeners = function(socket) {
 	});
 
 	socket.once('remove from queue', function(){
-		disconnected(socket);
+		removeFromQueue(socket);
 	});
+
 	socket.on('disconnect', function(){
-		disconnected(socket);
+		disconnect(socket);
 	});
 };
 
 function addToQueue(socket) {
 	queue.push(socket);
 	socket.emit('added to queue');
-	console.log('ADDED TO QUEUE: ', queue.length);
+	console.log('Added To Queue: ',queue);
 	queueMatch(socket);
 }
 
@@ -48,7 +49,7 @@ function queueMatch(socket) {
 			player2.emit('profile', profile);
 		}, 1000);
 
-		console.log('PLAYER PROFILES: ', profile);
+		console.log('PLAYER PROFILES: ',profile);
 
 		var game= new Game(player1, player2);
 		game.init();
@@ -64,17 +65,23 @@ function queueMatch(socket) {
 	}
 }
 
-function disconnected(socket) {
+function removeFromQueue(socket) {
 	var index= queue.indexOf(socket.id);
 	queue.splice(index, 1);
+	console.log('Removed From Queue:',queue);
 	socket.disconnect();
-	console.log('DISCONNECTED FROM QUEUE:', queue);
+}
+
+function disconnect(socket) {
+	socket.disconnect();
 }
 
 module.exports = {
 	queueListeners: queueListeners,
-	addToQueue: addToQueue,
 	queueMatch: queueMatch,
-	disconnected: disconnected
+	addToQueue: addToQueue,
+	removeFromQueue: removeFromQueue,
+	disconnect: disconnect
 };
+
 
