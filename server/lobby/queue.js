@@ -8,7 +8,7 @@ var queueListeners = function(socket) {
 		addToQueue(socket);
 	});
 
-	socket.once('remove from queue', function(){
+	socket.on('remove from queue', function(){
 		removeFromQueue(socket);
 	});
 
