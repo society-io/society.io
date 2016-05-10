@@ -1,4 +1,3 @@
-var common = ('../common');
 var game = require('../game/game');
 var db = require('../db/userModel.js');
 var sockCheck= require('../socket/socketHelpers');
