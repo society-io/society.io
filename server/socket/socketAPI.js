@@ -52,6 +52,12 @@ SocketAPI.prototype.getUserModel = function() {
 	return this.user._doc;
 };
 
+SocketAPI.prototype.updateStats = function(obj) {
+  this.user._doc.mmr = obj.mmr;
+  this.user._doc.wins = obj.wins;
+  this.user._doc.losses = obj.losses;
+};
+
 SocketAPI.prototype.err = function(err) {
 	this.socket.error(err);
 };
