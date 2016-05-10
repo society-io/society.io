@@ -8,7 +8,8 @@ function bfLogicFactoryFunction() {
 
   return {
     winsAgainst: winsAgainst,
-    losesAgainst: losesAgainst
+    losesAgainst: losesAgainst,
+    calcWinRate: calcWinRate
   };
 
   function winsAgainst(choice) {
@@ -109,5 +110,14 @@ function bfLogicFactoryFunction() {
     }
 
     return result;
+  }
+
+  function calcWinRate(w, l) {
+    if (w + l === 0) {
+      return 'N/A';
+    } else {
+      var perc = w / (w + l);
+      return Math.round((perc + 0.00001) * 100) / 100;
+    }
   }
 }

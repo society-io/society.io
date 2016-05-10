@@ -2,16 +2,12 @@ angular
   .module('app')
   .factory('battlefieldFactory', bfFactoryFunction);
 
-bfFactoryFunction.$inject = ['socketFactory', 'battlefieldTimerFactory', '$state'];
+bfFactoryFunction.$inject = ['socketFactory', 'battlefieldTimerFactory', 'battlefieldLogicFactory', '$state'];
 
-function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
+function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLogicFactory, $state) {
 
-  // DEBUGGING PURPOSES ONLY:
-  // socketFactory.connectSocket();
-
+  var bfLogic = battlefieldLogicFactory;
   var bfTimer = battlefieldTimerFactory;
-
-  //flags at top and then factory, then function declarations
   var emit = socketFactory.emit;
   var on = socketFactory.on;
   var startingHealth = {
@@ -24,7 +20,6 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
 
   var state = {
     choices: ['rich', 'bum', 'tax', 'cop', 'jail'],
-    time: 15,
     results: false,
     submitted: false,
     roundWinner: null,
@@ -48,11 +43,11 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
     get: get
   };
 
-
-  function Player(id) {
+  function Player(id, profile) {
     this.id = id;
     this.choice = '';
     this.roundStatus = '';
+    this.profile = profile;
     this.health = Object.assign({}, startingHealth);
   }
 
@@ -73,10 +68,15 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
   }
 
   function boardReset() {
-    state.opponent.choice = '';
+    state.results = false;
     state.submitted = false;
     state.roundWinner = null;
     state.matchOver = false;
+    state.player = false;
+    state.opponent = false;
+    state.opponentPlayed = false;
+    state.gameStarted = false;
+    state.forfeited = false;
     state.playerHealth = Object.assign({}, startingHealth);
     state.opponentHealth = Object.assign({}, startingHealth);
   }
@@ -88,13 +88,15 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
   function listeners() {
 
     on('gameReady', function(resp) {
-      console.log('gameReady: ', resp);
-
-      boardReset();
-
       // store player IDs in state
-      state.player = new Player(resp.playerId);
-      state.opponent = new Player(resp.playerId === 1 ? 2 : 1);
+      state.player = new Player(resp.playerId, resp.playerProfile);
+      state.opponent = new Player(resp.playerId === 1 ? 2 : 1, resp.opponentProfile);
+
+      // calculate win rates
+      state.player.profile.winrate = bfLogic.calcWinRate(state.player.profile.wins, state.player.profile.losses);
+      state.opponent.profile.winrate = bfLogic.calcWinRate(state.opponent.profile.wins, state.opponent.profile.losses);
+
+      console.log(state.player.profile);
 
       // store the starting health as given by the server
       for (var choice in resp.startingHealth) {
@@ -169,8 +171,10 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
     on('matchResult', function(resp) {
       state.matchOver = true;
       state.centerMessage = 'Game Over! Headed to lobby...';
+
       setTimeout(function() {
         $state.go('lobby');
+        boardReset();
       }, 3000);
     });
 
@@ -186,6 +190,7 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
       }
       setTimeout(function() {
         $state.go('lobby');
+        boardReset();
       }, 3000);
     });
   }

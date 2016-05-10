@@ -16,7 +16,27 @@
 
   <div class="opponent">
     <div class="fluid-container">
-      <div class="opponent-label col-md-12">Opponent</div>
+      <div class="opponent-label col-md-12">
+        <p>
+          <span class="player-stat-group">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span class="player-stat player-stat-un">{{Bf.get('opponent').profile.username}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-trophy" aria-hidden="true"></i> MMR:
+            <span class="player-stat player-stat-mmr">{{Bf.get('opponent').profile.mmr}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-bolt" aria-hidden="true"></i> Win Rate:
+            <span class="player-stat player-stat-winrate">{{Bf.get('opponent').profile.winrate}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i> Win/Loss:
+            <span class="player-stat player-stat-wins">{{Bf.get('opponent').profile.wins}}</span>/
+            <span class="player-stat player-stat-wins">{{Bf.get('opponent').profile.losses}}</span>
+          </span>
+        </p>
+      </div>
       <div class="tile-container col-md-12">
         
         <!-- Individual Tiles -->
@@ -162,7 +182,27 @@
         </div><!-- End (tiles) -->
 
       </div><!-- End Tile Container -->
-      <div class="player-label col-md-12">You</div>
+      <div class="player-label col-md-12">
+        <p>
+          <span class="player-stat-group">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span class="player-stat player-stat-un">{{Bf.get('player').profile.username}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-trophy" aria-hidden="true"></i> MMR:
+            <span class="player-stat player-stat-mmr">{{Bf.get('player').profile.mmr}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-bolt" aria-hidden="true"></i> Win Rate:
+            <span class="player-stat player-stat-winrate">{{Bf.get('player').profile.winrate}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i> Win/Loss:
+            <span class="player-stat player-stat-wins">{{Bf.get('player').profile.wins}}</span>/
+            <span class="player-stat player-stat-wins">{{Bf.get('player').profile.losses}}</span>
+          </span>
+        </p>
+      </div>
     </div>
 
   </div><!-- End Player -->
