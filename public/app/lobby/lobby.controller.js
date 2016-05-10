@@ -15,7 +15,9 @@
 		var tokenObj = authFactory.attachToken({});
 
 		socketFactory.connectSocket();
+		lobbyFactory.getPlayer();
 
+    vm.get = lobbyFactory.get;
 		vm.queue = lobbyFactory.joinQueue;
 
 		vm.createRoom = lobbyFactory.createRoom;

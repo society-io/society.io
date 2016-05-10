@@ -2,6 +2,7 @@ var firebase = require('../common').firebase;
 var privateGameListeners = require('../lobby/privateGame').privateGameListeners;
 var queueListeners = require('../lobby/queue').queueListeners;
 var eventEmitter = require('events');
+var lobbyListeners = require('../lobby/lobby').lobbyListeners;
 
 var SocketAPI = function(socket, userModel, token) {
 // socket
@@ -20,6 +21,7 @@ var SocketAPI = function(socket, userModel, token) {
 
 SocketAPI.prototype.init = function() {
 	delete this.user._doc.password;
+	lobbyListeners(this);
   queueListeners(this);
   privateGameListeners(this);
 };
@@ -50,6 +52,12 @@ SocketAPI.prototype.emit = function(event, data) {
 
 SocketAPI.prototype.getUserModel = function() {
 	return this.user._doc;
+};
+
+SocketAPI.prototype.updateStats = function(obj) {
+  this.user._doc.mmr = obj.mmr;
+  this.user._doc.wins = obj.wins;
+  this.user._doc.losses = obj.losses;
 };
 
 SocketAPI.prototype.err = function(err) {
