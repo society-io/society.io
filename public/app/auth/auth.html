@@ -11,6 +11,7 @@
 					type="text" placeholder="Username" class="input">
 				<i class="fa fa-user" aria-hidden="true"></i>	
 			</div>
+
 			<div class="input-container">
 				<input
 					ng-class="{ 'form-error' : Auth.emailUp.$invalid && !Auth.emailUp.$pristine }"
@@ -18,6 +19,7 @@
 					type="email" placeholder="Email" class="input">
 				<i class="fa fa-envelope" aria-hidden="true"></i>
 			</div>
+
 			<div class="input-container">
 				<input
 					ng-class="{ 'form-error' : Auth.passwordUp.$invalid && !Auth.passwordUp.$pristine }"
@@ -26,10 +28,13 @@
 				<i class="fa fa-lock" aria-hidden="true"></i>
 			</div>
 
-			<!-- for error on signUp -->
-			<div class="error-message" ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
+			
 
 			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">Sign Up</button>
+			
+			<!-- for error on signUp -->
+			<div class="error-message" ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
+			
 			<div class="switch-view-link">
 				<a href="" ng-click="Auth.set('signinErrorMessage', '') ; Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
 			</div>
