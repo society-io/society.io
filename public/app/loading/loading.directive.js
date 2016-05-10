@@ -18,10 +18,8 @@ angular
       "</div>",
       replace: true,
       link: function(scope, elem, attrs) {
-        console.log(socketFactory);
         var on = socketFactory.on;
         scope.isStateLoading = true;
-        console.log('LOADING SCREEN');
       }
     };
   }

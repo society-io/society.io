@@ -57,11 +57,11 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
   }
 
   function setChoice(userChoice) {
-    console.log('setChoice called. userChoice = ', userChoice);
+    console.log('userChoice = ', userChoice);
     if (userChoice) {
       emit('choice', { choice: userChoice });
     } else {
-      console.error('userChoice is not defined!');
+      console.error('userChoice NOT defined!');
     }
 
     state.player.choice = userChoice;
@@ -88,7 +88,7 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
   function listeners() {
 
     on('gameReady', function(resp) {
-      console.log('Game ready: ', resp);
+      console.log('gameReady: ', resp);
 
       boardReset();
 
@@ -106,12 +106,11 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
     });
 
     on('opponentPlayed', function(resp) {
-      console.log('opponent played heard!');
       state.opponentPlayed = true;
     });
 
     on('roundResult', function(resp){
-      console.log("this is the round result", resp);
+      console.log("roundResult: ", resp);
 
       bfTimer.resetTimer();
       bfTimer.stopTimer();
@@ -146,7 +145,7 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
         state.gameStarted = true;
       }
 
-      console.log('new round heard');
+      console.log('newRound! Starting Game...');
 
       // reset state items for next round
       state.submitted = false;
@@ -161,8 +160,8 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, $state) {
         console.log('state.player.choice = ', state.player.choice);
         if (!state.player.choice) {
           state.player.choice = 'noChoice';
-          console.log('emitting no choice.');
           emit('noChoice');
+          console.log('Emitted: noChoice');
         }
       });
     });

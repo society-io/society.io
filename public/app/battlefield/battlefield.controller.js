@@ -24,7 +24,7 @@
     if (socketFactory.isConnected()) {
       angular.element(document).ready(function() {
         setTimeout(function() {
-          console.log('emitting client ready!');
+          console.log('Emitted: clientReady');
           socketFactory.emit('client ready');
         }, 2000);
       });
@@ -59,9 +59,9 @@
     };
 
     vm.debugger = function() {
-      console.log('opponent choice = ', vm.get('opponent'));
+      console.log('opponentChoice = ', vm.get('opponent'));
       console.log('roundWinner = ', vm.get('roundWinner'));
-      console.log('player id = ', vm.get('player').id);
+      console.log('playerID = ', vm.get('player').id);
     };
   }
 })();

@@ -20,7 +20,7 @@ var queueListeners = function(socket) {
 function addToQueue(socket) {
 	queue.push(socket);
 	socket.emit('added to queue');
-	console.log('Added To Queue: ',queue);
+	console.log('Added: ',queue);
 	queueMatch(socket);
 }
 
@@ -49,8 +49,6 @@ function queueMatch(socket) {
 			player2.emit('profile', profile);
 		}, 1000);
 
-		console.log('PLAYER PROFILES: ',profile);
-
 		var game= new Game(player1, player2);
 		game.init();
 
@@ -60,15 +58,15 @@ function queueMatch(socket) {
 		}, 1000);
 
 	console.log('MATCH READY: ' +
-							'player1: ', player1.socketId,
-							'player2: ', player2.socketId);
+							'player1: ', player1.socketId +
+							' & player2: ', player2.socketId);
 	}
 }
 
 function removeFromQueue(socket) {
 	var index= queue.indexOf(socket.id);
 	queue.splice(index, 1);
-	console.log('Removed From Queue:',queue);
+	console.log('Removed From Queue!');
 	socket.disconnect();
 }
 
