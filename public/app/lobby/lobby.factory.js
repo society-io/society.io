@@ -92,4 +92,11 @@ angular
       emit('who am i');
 		}
 
+		function updateAvatar() {
+			emit('update avatar', {
+				email: (/*user email*/),
+				avatar: (/*user choice translated into String*/)
+			});
+		}
+
 	}
