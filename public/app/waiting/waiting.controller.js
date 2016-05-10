@@ -4,11 +4,14 @@ angular
   .module('app')
   .controller('WaitingController', WaitingController);
 
-  WaitingController.$inject = ['waitingFactory', 'socketFactory', '$state'];
+  WaitingController.$inject = ['waitingFactory', 'lobbyFactory', 'socketFactory', '$state'];
 
-  function WaitingController(waitingFactory, socketFactory, $state) {
+  function WaitingController(waitingFactory, lobbyFactory, socketFactory, $state) {
 
     var vm = this;
+    var lf = lobbyFactory;
+
+    vm.lfGet = lf.get;
 
     vm.cancelRoom = waitingFactory.cancelRoom;
     vm.showCancelGameInput = false;

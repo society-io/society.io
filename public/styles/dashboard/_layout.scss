@@ -1,4 +1,4 @@
-.admin-bar, .lobby-content-container {
+.admin-bar, .lobby-content-container, .waiting-content-container {
   background-color: rgba(0,0,0,0.4);
   color: #fff;
 }
@@ -8,7 +8,7 @@
   padding-bottom: 10px;
 }
 
-.lobby-content-container {
+.lobby-content-container, .waiting-content-container {
   border-radius: 5px;
   background-color: rgba(0,0,0,0.4);
 
