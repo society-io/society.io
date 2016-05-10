@@ -54,7 +54,13 @@
 
 		<div class="lobby-right lobby-content-container">
 			<h1>Leader Board</h1>
-			<div>{{Lobby.getLeaderboard()}}</div>
+
+			<div ng-repeat="users in Lobby.getLeaderboard()">
+			<div>username:{{users.username}}</div>
+			<div>mmr:{{users.mmr}}</div>
+			<div>wins:{{users.wins}}</div>
+			<div>losses:{{users.losses}}</div>
+			</div>
 		</div>
 	</div>
 </div>
