@@ -5,9 +5,9 @@
 	.module('app')
 	.controller('LobbyController', LobbyController);
 
-	LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory'];
+	LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory'];
 
-	function LobbyController($scope, lobbyFactory, socketFactory, authFactory) {
+	function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory) {
 		var vm = this;
 		vm.pageTitle = "Lobby";
 
@@ -33,6 +33,10 @@
 		vm.getErrorMessage = function() {
 			var message = lobbyFactory.get('joinCodeErrorMessage');
 			return lobbyFactory.get('joinCodeErrorMessage');
+		};
+
+		vm.getLeaderboard = function() {
+      return statsFactory.get('leaderboard');
 		};
 
 	}
