@@ -24,6 +24,9 @@ SocketAPI.prototype.init = function() {
 	lobbyListeners(this);
   queueListeners(this);
   privateGameListeners(this);
+
+  console.log('emitting socket initialized');
+  this.emit('socket initialized');
 };
 
 SocketAPI.prototype.on = function(event, cb, auth) {

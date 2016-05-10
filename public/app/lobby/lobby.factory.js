@@ -84,6 +84,7 @@ angular
 		}
 
 		function getPlayer() {
+			console.log('running getPlayer');
       on('you are', function(resp) {
         console.log('this is resp hi', resp);
         state.player = resp;
