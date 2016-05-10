@@ -9,12 +9,12 @@ angular
 		var on = socketFactory.on;
 
 		var state = {
-			joinCodeErrorMessage: ''
+			joinCodeErrorMessage: '',
+			whereTo: null
 		};
 
 		return {
 			joinQueue: joinQueue,
-			addedToQueue: addedToQueue,
 			createRoom: createRoom,
 			joinRoom: joinRoom,
 			get: get
@@ -23,16 +23,11 @@ angular
 		function joinQueue(message) {
 			$state.go('loading');
 			on('added to queue', function() {
+				state.whereTo = 'queue';
 				$state.go('waiting');
 			});
 			emit('queue', message);
 			console.log('Emitted: joinQueue');
-		}
-
-		function addedToQueue() {
-			on('added to queue', function() {
-				$state.go('waiting');
-			});
 		}
 
 		function createRoom(joinCode) {
@@ -46,9 +41,12 @@ angular
 				state.joinCodeErrorMessage = '';
 				state.joinCodeErrorMessage += data.message;
 			});
+
 			on('private game created', function(data){
+				state.whereTo = 'private';
 			  $state.go('waiting');
 			});
+
 			emit('create private game', {joinCode: joinCode});
 			console.log('Emitted: create privateGame');
 			$state.go('loading');
@@ -57,11 +55,13 @@ angular
 		function joinRoom(joinCode) {
 			on('private game exists', function(data){
 			  if(data.success) {
+			  	state.whereTo = 'private';
 			    $state.go('waiting');
 			  } else {
 			    $state.go('lobby');
 			  }
 			});
+
 			emit('attempt to join private game', {joinCode: joinCode});
 			console.log('Emitted: join privateGame');
 			$state.go('loading');

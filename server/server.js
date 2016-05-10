@@ -19,7 +19,6 @@ var leaderboard = require('./routes/leaderboard.js');
 
 var port = process.env.PORT || 3000;
 
-
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));

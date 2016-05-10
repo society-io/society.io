@@ -34,7 +34,10 @@ function config($stateProvider, $urlRouterProvider) {
 			url: '/waiting',
 			templateUrl: '../app/waiting/waiting.html',
 			controller: 'WaitingController',
-			controllerAs: 'Waiting'
+			controllerAs: 'Waiting',
+			data: {
+				bodyClasses: 'waiting'
+			}
 		})
 	  .state('battlefield', {
 	  	url: '/battlefield',
