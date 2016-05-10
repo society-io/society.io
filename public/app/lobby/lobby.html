@@ -19,12 +19,12 @@
 			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
 			<h2>Custom Game</h2>
 			<button class="block blue" ng-click="Lobby.showCreateGameController = !Lobby.showCreateGameController">create private game</button>
-			
+
 			<form>
 				<div ng-show="Lobby.showCreateGameController">
 					<!--TODO:create model object in controller and pass to emit event on btn click-->
 					<div class="input-wrapper">
-						<input class="code-input" ng-model='Lobby.joinCode' placeholder="Enter Custom Code"> 
+						<input class="code-input" ng-model='Lobby.joinCode' placeholder="Enter Custom Code">
 						<button class="inline-block red" ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
 						<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage')">{{Lobby.getErrorMessage('joinCodeErrorMessage')}}</div>
 					</div>

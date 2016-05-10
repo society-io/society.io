@@ -19,4 +19,3 @@ function socketCheck(token, socket) {
 module.exports = {
 	socketCheck: socketCheck
 };
-

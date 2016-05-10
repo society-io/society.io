@@ -21,7 +21,7 @@ function AuthController(authFactory, $scope) {
 	vm.set = function(key, value){
 		authFactory.set(key, value);
 	};
-	
+
 
 	vm.signUp = function(obj){
 		authFactory.signUp(obj);
