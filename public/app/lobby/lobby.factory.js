@@ -7,17 +7,18 @@ angular
 	function lobbyFactory(socketFactory, $state) {
 		var emit = socketFactory.emit;
 		var on = socketFactory.on;
-
 		var state = {
 			joinCodeErrorMessage: '',
-			whereTo: null
+			whereTo: null,
+			player: {}
 		};
 
 		return {
 			joinQueue: joinQueue,
 			createRoom: createRoom,
 			joinRoom: joinRoom,
-			get: get
+			get: get,
+			getPlayer: getPlayer
 		};
 
 		function joinQueue(message) {
@@ -69,6 +70,14 @@ angular
 
 		function get(key){
 			return state[key];
+		}
+
+		function getPlayer() {
+      on('you are', function(resp) {
+        console.log('this is resp hi', resp);
+        state.player = resp;
+      });
+      emit('who am i');
 		}
 
 	}

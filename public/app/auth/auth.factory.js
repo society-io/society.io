@@ -77,7 +77,6 @@
           .then(success, error);
 
         function success(resp){
-          console.log('this is resp: ', resp);
           if (resp.data.credentialsMissing){
             state.signinErrorMessage = "";
             state.signinErrorMessage += resp.data.message;
