@@ -62,7 +62,7 @@ Game.prototype.init = function() {
 
   // once both players are ready, emit gameReady to both clients.
   game.playerOn('playerReady', function(player) {
-    console.log('readyness of players = ', game.player1.readyToPlay, game.player2.readyToPlay);
+    console.log('readiness of players = ', game.player1.readyToPlay, game.player2.readyToPlay);
     if (game.player1.readyToPlay && game.player2.readyToPlay) {
       game.emit('gameReady', null,
         { playerId: game.player1.id, startingHealth: game.player1.health },
@@ -134,9 +134,8 @@ Game.prototype.terminate = function(reason) {
   } else {
     winner = 0;
   }
-
-  // formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
-
+	console.log('HELLO');
+  formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
   // this.player1.socket.disconnect();
   // this.player2.socket.disconnect();
 };
