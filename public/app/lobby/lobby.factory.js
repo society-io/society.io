@@ -9,6 +9,7 @@ angular
 		var on = socketFactory.on;
 		var state = {
 			joinCodeErrorMessage: '',
+			joinQueueErrorMessage: '',
 			whereTo: null,
 			player: {}
 		};
@@ -22,14 +23,16 @@ angular
 		};
 
 		function joinQueue(message) {
-			$state.go('loading');
 			on('player already in queue', function(data){
 				$state.go('lobby');
+				state.joinQueueErrorMessage = '';
+				state.joinQueueErrorMessage += 'User already in queue.';
 			});
 			on('added to queue', function() {
 				state.whereTo = 'queue';
 				$state.go('waiting');
 			});
+			$state.go('loading');
 			emit('queue', message);
 			console.log('Emitted: joinQueue');
 		}

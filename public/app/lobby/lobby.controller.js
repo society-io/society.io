@@ -32,9 +32,9 @@
 			authFactory.signOut();
 		};
 
-		vm.getErrorMessage = function() {
-			var message = lobbyFactory.get('joinCodeErrorMessage');
-			return lobbyFactory.get('joinCodeErrorMessage');
+		vm.getErrorMessage = function(val) {
+			var message = lobbyFactory.get(val);
+			return lobbyFactory.get(val);
 		};
 
 		vm.getLeaderboard = function() {
