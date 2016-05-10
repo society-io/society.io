@@ -5,9 +5,9 @@
 	.module('app')
 	.controller('LobbyController', LobbyController);
 
-	LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory'];
+	LobbyController.$inject = ['$scope', 'lobbyFactory', 'statsFactory', 'socketFactory', 'authFactory'];
 
-	function LobbyController($scope, lobbyFactory, socketFactory, authFactory) {
+	function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory) {
 		var vm = this;
 		vm.pageTitle = "Lobby";
 
