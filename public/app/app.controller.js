@@ -13,26 +13,19 @@
     // this'll be called on every state change in the app
     $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
 
-      console.log('is going to auth?', toState.name === 'auth');
-      console.log('is going to lobby?', toState.name === 'lobby');
-
       if (toState.name !== 'auth' && toState.name !== 'lobby') {
         if (!socketFactory.isConnected()) {
-          console.log('connection does not exist.');
-          console.log('socketFactory.isConnected = ', socketFactory.isConnected());
-          console.log('going to lobby');
           $state.go('lobby');
         }
       }
 
-      // // if the toState is not auth or lobby
-      // if (toState.name !== 'auth' || toState.name !== 'lobby') {
+      if(fromState.name === 'waiting' && toState.name !== 'battlefield') {
+        $state.go('lobby');
+      }
 
-      //   // check if a socket connection exists
-      //   if (!socketFactory.isConnected()) {
-      //     $state.go('lobby');
-      //   }
-      // }
+      if(fromState.name === 'battlefield' && toState.name !== 'lobby') {
+        $state.go('lobby');
+      }
 
       if (angular.isDefined(toState.data)) {
         if (angular.isDefined(toState.data.bodyClasses)) {

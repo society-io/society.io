@@ -26,7 +26,7 @@ angular
 				$state.go('waiting');
 			});
 			emit('queue', message);
-			console.log('queue event emitted!');
+			console.log('Emitted: joinQueue');
 		}
 
 		function addedToQueue() {
@@ -50,13 +50,12 @@ angular
 			  $state.go('waiting');
 			});
 			emit('create private game', {joinCode: joinCode});
-			console.log('createPrivateGame event emitted!');
+			console.log('Emitted: create privateGame');
 			$state.go('loading');
 		}
 
 		function joinRoom(joinCode) {
 			on('private game exists', function(data){
-        console.log('inside roomExists listener within lobbyFactory, data: ', data.success);
 			  if(data.success) {
 			    $state.go('waiting');
 			  } else {
@@ -64,7 +63,7 @@ angular
 			  }
 			});
 			emit('attempt to join private game', {joinCode: joinCode});
-			console.log('join room event emitted!');
+			console.log('Emitted: join privateGame');
 			$state.go('loading');
 		}
 

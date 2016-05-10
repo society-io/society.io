@@ -37,7 +37,6 @@ SocketAPI.prototype.on = function(event, cb, auth) {
     });
   }
 	this.listeners[event]=this.socketId;
-  // console.log('LISTENERS OBJ: ', this.listeners);
 };
 
 SocketAPI.prototype.once= function (event, cb) {
@@ -47,7 +46,6 @@ SocketAPI.prototype.once= function (event, cb) {
 SocketAPI.prototype.emit = function(event, data) {
 	this.socket.emit(event, data);
 	this.emitters[event]=this.socketId;
-	 // console.log('EMITTERS ARRAY: ', this.emitters);
 };
 
 SocketAPI.prototype.getUserModel = function() {

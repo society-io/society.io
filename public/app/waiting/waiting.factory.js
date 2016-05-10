@@ -17,6 +17,7 @@
       };
 
       if (socketFactory.isConnected()) {
+        console.log('socket connected = ', socketFactory.isConnected());
         listeners();
       }
 
@@ -37,7 +38,7 @@
       }
 
       function removeFromQueue() {
-        console.log('Removing Player From Queue...');
+        console.log('Removing From Queue...');
         emit('remove from queue');
         $state.go('lobby');
       }
@@ -57,7 +58,7 @@
         });
 
         on('join code to initialize battlefield', function(data){
-          console.log('inside joinCode listener within waitingFactory, joinCode: ', data.joinCode);
+          console.log('joinCode: ', data.joinCode);
           emit('initialize battlefield', {joinCode: data.joinCode});
         });
 
