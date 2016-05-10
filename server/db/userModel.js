@@ -12,6 +12,7 @@ var usersSchema = new Schema({
   email: String,
   username: String,
   password: String,
+  avatar: String,
   mmr: Number,
   wins: Number,
   losses: Number

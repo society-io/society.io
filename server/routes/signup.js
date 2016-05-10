@@ -10,13 +10,13 @@ var saltRounds = 10;
 
 router.post('/', function(req, res){
 	var userInputPassword = req.body.password;
-  if(req.body.username === undefined || req.body.password === undefined || req.body.email === undefined || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
+  if(req.body.username === undefined || req.body.password === undefined || req.body.email === undefined || req.body.avatar === undefined || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
     res.send({credentialsMissing: true, message: "Dude, c'mon."});
   } else {
     newUser.find({username: req.body.username}, function(err, users) {
     	if(users.length === 0){
     		bcrypt.hash(userInputPassword, saltRounds, function(err, hash) {
-    			new newUser({email: req.body.email, username: req.body.username, password: hash, mmr: 1600, wins: 0, losses: 0})
+    			new newUser({email: req.body.email, username: req.body.username, password: hash, avatar: req.body.avatar, mmr: 1600, wins: 0, losses: 0})
     			  .save(function(err, post) {
     			  	if(err){
     			  		console.log('User NOT Saved in DB! ', err);
