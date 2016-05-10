@@ -19,8 +19,8 @@ var queueListeners = function(socket) {
 
 function addToQueue(socket) {
 	queue.push(socket);
-	console.log('Added To Queue: ', queue.length);
 	socket.emit('added to queue');
+	console.log('ADDED TO QUEUE: ', queue.length);
 	queueMatch(socket);
 }
 

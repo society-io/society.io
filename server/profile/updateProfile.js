@@ -3,7 +3,7 @@ var game = require('../game/game');
 var db = require('../db/userModel.js');
 var sockCheck= require('../socket/socketHelpers');
 
-function formatMMR (player1, player2, num) {
+function formatMMR(player1, player2, num) {
 	var p1mmr = player1.user._doc.mmr;
 	var p1wins = player1.user._doc.wins;
 	var p1losses = player1.user._doc.losses;
@@ -11,8 +11,7 @@ function formatMMR (player1, player2, num) {
 	var p2mmr = player2.user._doc.mmr;
 	var p2wins = player2.user._doc.wins;
 	var p2losses = player2.user._doc.losses;
-
-
+	
 	var newMMR = ELOResults(p1mmr, p2mmr, num);
 
 	var query1 = {};
@@ -20,8 +19,7 @@ function formatMMR (player1, player2, num) {
 
 	var db1 = {};
 	db1.mmr = newMMR.player1NewELO;
-
-
+	
 	var query2 = {};
 	query2._id = player2.user._doc._id;
 
@@ -40,7 +38,6 @@ function formatMMR (player1, player2, num) {
 	console.log('player1: object', db1, 'id', query1);
 	console.log('player2: object', db2, 'id', query2);
 
-
 	db.findOneAndUpdate(query1, {'$set': db1}, function (err, success) {
 		if (err) {
 			console.log("Error in Updating: ", err);
@@ -49,6 +46,13 @@ function formatMMR (player1, player2, num) {
 		}
 	});
 
+	db.findOneAndUpdate(query2, {'$set': db2}, function (err, success) {
+		if (err) {
+			console.log("Error in Updating: ", err);
+		} else {
+			console.log('success!');
+		}
+	});
 
 }
 
