@@ -19,8 +19,7 @@ var queueListeners = function(socket) {
 
 function addToQueue(socket) {
 	queue.push(socket);
-	socket.emit('added to queue');
-	console.log('Added: ',queue);
+	console.log('Added To Queue: ', queue.length);
 	queueMatch(socket);
 }
 
@@ -66,7 +65,8 @@ function queueMatch(socket) {
 function removeFromQueue(socket) {
 	var index= queue.indexOf(socket.id);
 	queue.splice(index, 1);
-	console.log('Removed From Queue!');
+
+	console.log('Removed From Queue:', socket.id, ":",  queue.length );
 	socket.disconnect();
 }
 

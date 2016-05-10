@@ -60,8 +60,6 @@ SocketAPI.prototype.disconnect = function() {
 	this.socket.disconnect();
 };
 
-
-
 module.exports = {
   SocketAPI: SocketAPI
 };
