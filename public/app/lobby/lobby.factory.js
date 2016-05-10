@@ -22,6 +22,9 @@ angular
 
 		function joinQueue(message) {
 			$state.go('loading');
+			on('player already in queue', function(data){
+				$state.go('lobby');
+			});
 			on('added to queue', function() {
 				state.whereTo = 'queue';
 				$state.go('waiting');
