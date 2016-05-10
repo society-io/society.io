@@ -53,6 +53,11 @@ angular
 		}
 
 		function joinRoom(joinCode) {
+			if (joinCode === undefined || joinCode.length < 3) {
+				state.joinCodeErrorMessage = '';
+				state.joinCodeErrorMessage += 'Minimum of 3 characters required.';
+				return;
+			}
 			on('private game exists', function(data){
 			  if(data.success) {
 			  	state.whereTo = 'private';

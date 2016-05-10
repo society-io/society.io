@@ -38,6 +38,7 @@
 					<div class="input-wrapper">
 						<input class="code-input" ng-model='joinCode' placeholder="Enter Join Code">
 				  	<button class="inline-block red" ng-click="Lobby.joinRoom(joinCode)">join</button>
+				  	<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage()">{{Lobby.getErrorMessage()}}</div>
 					</div>
 				</div>
 			</form>
