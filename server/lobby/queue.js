@@ -46,7 +46,7 @@ function queueMatch(socket) {
 
   setInterval(function(){
     queue.sort(function(a,b) {
-      return a.mmr - b.mmr;
+      return a.getUserModel().mmr - b.getUserModel().mmr;
     });
   }, 5000);
 

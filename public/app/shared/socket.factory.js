@@ -21,10 +21,17 @@ angular
     }
 
     function connectSocket() {
-      if (!socket && authFactory.isAuthed()) {
-        socket = io.connect();
-        socket.emit('init', authFactory.attachToken({}));
-      }
+      return new Promise(function(resolve, reject) {
+        if (!socket && authFactory.isAuthed()) {
+          console.log('connecting socket');
+          socket = io.connect();
+          socket.on('socket initialized', function() {
+            console.log('socket initialized heard. Resolving!');
+            resolve();
+          });
+          socket.emit('init', authFactory.attachToken({}));
+        }
+      });
     }
 
     /**

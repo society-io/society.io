@@ -8,7 +8,16 @@
         queue
       </div>
       <div class="private-controls" ng-show="Waiting.lfGet('whereTo') === 'private'">
-        private
+        <button ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm">Cancel Your Private Game</button>
+
+        <form>
+          <div ng-show="Waiting.showCancelGameForm">
+            <label>enter join code</label>
+            <!--TODO:create model object in controller and pass to emit event on btn click-->
+            <input ng-model='joinCode'>
+            <button type="submit" ng-click="Waiting.cancelRoom(joinCode)">enter</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -28,15 +37,6 @@
   </div><!-- End player2 -->
 </div>
 
-<button ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm">Cancel Your Private Game</button>
-	<form>
-    <div ng-show="Waiting.showCancelGameForm">
-      <label>enter join code</label>
-      <!--TODO:create model object in controller and pass to emit event on btn click-->
-      <input ng-model='joinCode'>
-      <button type="submit" ng-click="Waiting.cancelRoom(joinCode)">enter</button>
-    </div>
-  </form>
 
 </br>
 
