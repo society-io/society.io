@@ -2,6 +2,14 @@ var Game = require('../game/game').Game;
 
 var queue = [];
 
+setInterval(function(){
+	console.log("sorting");
+  queue.sort(function(a,b) {
+    return a.getUserModel().mmr - b.getUserModel().mmr;
+  });
+  queueMatch();
+}, 5000);
+
 var queueListeners = function(socket) {
 
 	socket.on('queue', function () {
@@ -37,20 +45,14 @@ function addToQueue(socket) {
 	} else {
 		queue.push(socket);
 		socket.emit('added to queue');
-		queueMatch(socket);
 	}
 
 }
 
-function queueMatch(socket) {
 
-  setInterval(function(){
-    queue.sort(function(a,b) {
-      return a.getUserModel().mmr - b.getUserModel().mmr;
-    });
-  }, 5000);
+function queueMatch() {
 
-	if (queue.length>=2) {
+	while (queue.length >= 2) {
 		var player1= queue.pop();
 		var player2= queue.pop();
 
@@ -62,22 +64,22 @@ function queueMatch(socket) {
 		profile.player1 = p1;
 		profile.player2 = p2;
 
-		setTimeout(function(){
-			player1.emit('profile', profile);
-			player2.emit('profile', profile);
-		}, 1000);
+		setTimeout(emitProfiles, 1000);
 
 		var game= new Game(player1, player2);
 		game.init();
 
-		setTimeout(function(){
-			player1.emit('match ready');
-			player2.emit('match ready');
-		}, 1000);
+		setTimeout(emitMatchReady, 1000);
+	}
 
-	console.log('MATCH READY: ' +
-							'player1: ', player1.socketId +
-							' & player2: ', player2.socketId);
+  function emitMatchReady() {
+	  player1.emit('match ready');
+	  player2.emit('match ready');
+	}
+
+	function emitProfiles() {
+		player1.emit('profile', profile);
+		player2.emit('profile', profile);
 	}
 }
 
@@ -100,5 +102,3 @@ module.exports = {
 	removeFromQueue: removeFromQueue,
 	disconnect: disconnect
 };
-
-
