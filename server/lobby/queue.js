@@ -18,10 +18,29 @@ var queueListeners = function(socket) {
 };
 
 function addToQueue(socket) {
-	queue.push(socket);
-	socket.emit('added to queue');
-	console.log('ADDED TO QUEUE: ', queue.length);
-	queueMatch(socket);
+
+	var isQueued = queue.forEach(checkUser);
+
+	if(isQueued) {
+		socket.emit('err', {
+			message: 'Player Already In Queue',
+			success: false
+		});
+	} else {
+		queue.push(socket);
+		console.log('addToQueue: ', queue.length);
+		socket.emit('added to queue');
+		queueMatch(socket);
+	}
+
+	function checkUser(element, socket) {
+		if (socket.user.email === element.user.email) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
 
 function queueMatch(socket) {
