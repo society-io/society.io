@@ -89,7 +89,7 @@ Player.prototype.on = function(event, cb) {
 
 // Event triggers that the game is listening to
 Player.prototype.trigger = function(event) {
-  console.log('trigger called. event = ', event);
+  console.log('Trigger Event = ', event);
   if (!this.events[event]) {
     console.error(event + ' is not a registered event.');
   } else {

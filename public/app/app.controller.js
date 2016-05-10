@@ -7,6 +7,9 @@
   appController.$inject = ['$scope', '$state', 'socketFactory'];
 
   function appController($scope, $state, socketFactory) {
+    var emit = socketFactory.emit;
+    var on = socketFactory.on;
+
     var vm = this;
     vm.bodyClasses = 'default';
 
@@ -20,6 +23,7 @@
       }
 
       if(fromState.name === 'waiting' && toState.name !== 'battlefield') {
+        emit('remove from queue');
         $state.go('lobby');
       }
 

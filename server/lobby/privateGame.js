@@ -5,24 +5,24 @@ var privateGames = {}; // { joinCode: [] }
 var privateGameListeners = function(socket){
 
   socket.on('create private game', function(data){
-    console.log('inside createPrivateGame listener, joinCode: ',data.joinCode);
+    console.log('createPrivateGame listener, joinCode: ',data.joinCode);
     storeJoinCode(data);
     storePlayer1(data, socket);
   });
 
   socket.on('attempt to join private game', function(data){
-    console.log('inside joinPrivateGame listener, joinCode: ',data.joinCode);
+    console.log('joinPrivateGame listener, joinCode: ',data.joinCode);
     storePlayer2(data, socket);
   });
 
 
   socket.on('initialize battlefield', function(data){
-    console.log('inside initializeBattlefield listener, joinCode: ',data.joinCode);
+    console.log('initializeBattlefield listener, joinCode: ',data.joinCode);
     initiatePrivateGame(data, socket);
   });
 
   socket.on('cancel private game', function(data){
-    console.log('inside cancelPrivateGame lisstener, joinCode: ',data.joinCode);
+    console.log('cancelPrivateGame listener, joinCode: ',data.joinCode);
     cancelPrivateGame(data, socket);
   });
 
@@ -90,7 +90,7 @@ var storePlayer2 = function(data, socket) {
 var initiatePrivateGame = function(data, socket) {
   // Create a new privateGame using the right credentials
   var players = privateGames[data.joinCode];
-  console.log('privateGame players: ',players);
+  console.log('privateGame Players: ',players);
   var player1 = players[0];
   var player2 = players[1];
   if(players.length === 2) {
@@ -99,7 +99,6 @@ var initiatePrivateGame = function(data, socket) {
     // Use the game's initialize method
     privateGame.init();
     // Tell the Clients that a privateGame has been initiated
-    console.log('Emitting private match ready...');
     player1.emit('player 1 enter battlefield', {
       message: '*privateGame Created & Initiated*',
       success: true
@@ -113,7 +112,7 @@ var initiatePrivateGame = function(data, socket) {
 
 var cancelPrivateGame = function(data, socket) {
   // Check in privateGames for the joinCode
-  console.log('canceling privateGame...');
+  console.log('Canceling privateGame...');
   for(var key in privateGames) {
     if(data.joinCode === key) {
       delete privateGames[key];

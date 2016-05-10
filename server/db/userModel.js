@@ -3,15 +3,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var env = process.env.NODE_ENV || "development" ;
+var env = process.env.NODE_ENV;
 
-if (env === "development"){
-  mongoose.connect('mongodb://localhost/society');
-  console.log('MongoDB Connection is Open!');
-} else {
-  mongoose.connect('MLAB URL');
-  console.log("MongoDB is Connected!");
-}
+mongoose.connect('mongodb://localhost/society');
+console.log('MongoDB Connection is Open!');
 
 var usersSchema = new Schema({
   email: String,

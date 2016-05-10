@@ -95,7 +95,7 @@ var evalRound = function(choice1, choice2) {
       break;
   }
 
-  console.log('returning result. result = ', result);
+  console.log('result = ', result);
   return result;
 };
 

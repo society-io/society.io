@@ -10,10 +10,10 @@ io.on('connection', function(socket) {
     sockets[socket.id] = queue.length;
     queue.push(socket);
     if (queue.length === 2) {
-      console.log('instantiating game!');
       var socket1 = new SocketAPI(queue.pop());
       var socket2 = new SocketAPI(queue.pop());
       new Game(socket1, socket2).init();
+      console.log('*Game Instantiated*');
     }
   });
 });

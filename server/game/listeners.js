@@ -16,14 +16,14 @@ var onNoChoice = function() {
 
 var onClientGameReady = function() {
   // this = player obj
-  console.log('heard on client game ready');
+  console.log('onClientGameReady Listener');
   console.log(this.id);
   this.ready();
 };
 
 var onForfeit = function() {
   // this = player obj
-  console.log('heard on forfeit! invoking player.forfeit()');
+  console.log('onForfeit Listener');
   this.forfeit();
 };
 
