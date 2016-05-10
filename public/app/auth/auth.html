@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="col-md-6 col-md-offset-3">
-		
+
 		<h1 class="logo">Society</h1>
 		<h2 class="subtitle">The Game</h2>
 		<form class="auth-form sign-up" name="signUpForm" method="post" ng-show="Auth.signUpForm">
@@ -9,7 +9,7 @@
 					ng-class="{ 'form-error' : Auth.usernameUp.$invalid && !Auth.usernameUp.$pristine }"
 					ng-model="Auth.usernameUp"
 					type="text" placeholder="Username" class="input">
-				<i class="fa fa-user" aria-hidden="true"></i>	
+				<i class="fa fa-user" aria-hidden="true"></i>
 			</div>
 
 			<div class="input-container">
@@ -28,13 +28,13 @@
 				<i class="fa fa-lock" aria-hidden="true"></i>
 			</div>
 
-			
+
 
 			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">Sign Up</button>
-			
+
 			<!-- for error on signUp -->
 			<div class="error-message" ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
-			
+
 			<div class="switch-view-link">
 				<a href="" ng-click="Auth.set('signinErrorMessage', '') ; Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
 			</div>
@@ -44,12 +44,12 @@
 			<div class="input-container">
 				<input
 				ng-model="Auth.usernameIn" type="text" placeholder="Username">
-				<i class="fa fa-user" aria-hidden="true"></i>	
+				<i class="fa fa-user" aria-hidden="true"></i>
 			</div>
 			<div class="input-container">
 				<input
 					ng-model="Auth.passwordIn" type="password" placeholder="Password">
-				<i class="fa fa-lock" aria-hidden="true"></i>	
+				<i class="fa fa-lock" aria-hidden="true"></i>
 			</div>
 			<button class="block yellow" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})">Login</button>
 

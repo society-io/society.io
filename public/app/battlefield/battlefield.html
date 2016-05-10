@@ -1,6 +1,6 @@
 <!-- <button ng-click="Bf.debugger()">click the debugger!!!</button> -->
 <div class="board">
-  
+
   <!-- Round waiting -->
   <div class="round-waiting overlay animate-show" ng-show="!Bf.get('gameStarted') || Bf.get('matchOver')">
     <div class="round-waiting-msg-container">
@@ -38,7 +38,7 @@
         </p>
       </div>
       <div class="tile-container col-md-12">
-        
+
         <!-- Individual Tiles -->
         <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}">
           <div class="health health-{{Bf.get('opponent').health[choice] || 0}}"
@@ -74,10 +74,10 @@
     </div>
 
   </div><!-- End Opponent -->
-  
+
   <!-- Playing battlefield -->
   <div class="playing-field container-fluid">
-    
+
     <div class="playing-opponent col-md-4 col-md-offset-4">
       <div class="opponent-player-choice">
         <div class="big-tile" ng-class="{
@@ -154,7 +154,7 @@
               dark: Bf.get('player').choice !== choice && Bf.get('roundWinner')
             }">
             <div class="health-spinner"></div>
-            <div class="tile" 
+            <div class="tile"
               ng-mouseenter="Bf.currentHover = choice"
               ng-mouseleave="Bf.currentHover = ''"
               ng-class="{

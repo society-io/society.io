@@ -109,7 +109,7 @@
         delete $window.localStorage.token;
         $location.url('/');
       }
-      
+
       function attachToken(obj) {
         obj.token = $window.localStorage.token;
         return obj;
