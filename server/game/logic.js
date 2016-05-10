@@ -52,11 +52,11 @@ Gamelogic.prototype.choiceSubmitted = function() {
   // if either player has not submitted a choice yet
   } else {
     if (!game.player1.choice) {
-      console.log('emitting opponent played');
       game.player1.emit('opponentPlayed');
+      console.log('Player 1 Emitted: opponentPlayed');
     } else if (!game.player2.choice) {
-      console.log('emitting opponent played');
       game.player2.emit('opponentPlayed');
+      console.log('Player 2 Emitted: opponentPlayed');
     }
   }
 };
@@ -86,5 +86,5 @@ Gamelogic.prototype.isMatchOver = function() {
 };
 
 module.exports = {
-  Gamelogic: Gamelogic, 
+  Gamelogic: Gamelogic,
 };

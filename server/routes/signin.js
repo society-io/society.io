@@ -7,7 +7,7 @@ var db = require('../db/userModel.js');
 var tokenGenerator = new FirebaseTokenGenerator(pI.secret);
 
 router.post('/', function(req, res){
-	
+
 	if(req.body.username === undefined || req.body.password === undefined || req.body.username.length < 1 || req.body.password.length < 1) {
     res.send({credentialsMissing: true, message: "Dude, c'mon."});
   }
@@ -16,20 +16,20 @@ router.post('/', function(req, res){
 		if(users.length) {
 			bcrypt.compare(req.body.password, users[0].password, function(err, result) {
 				if(err){
-					console.log('Compare function had this error:  ', err);
+					console.log('bcryptError:  ', err);
 				}
 				if(result) {
-					console.log('User got his/her password correct');
+					console.log('passwordCorrect');
 					var stringUID = users[0]._id.toString();
 					var token = tokenGenerator.createToken({uid: stringUID, username: users[0].username});
 					res.send({token: token, auth: result});
 				} else {
-					console.log('User got his/her password incorrect');
+					console.log('passwordIncorrect');
 					res.send({auth: result, message: 'Invalid username or password'});
 				}
 			});
 		} else {
-			console.log("Username does not exist!");
+			console.log("Username Does Not Exist!");
 			res.send({auth: false, message: 'Invalid username or password'});
 		}
 	});

@@ -34,7 +34,7 @@ var Game = function(player1Socket, player2Socket) {
 };
 
 Game.prototype.init = function() {
-  console.log('game initialized was called.');
+  console.log('Game.init Called');
   /**
    *  Game Initialization
    *
@@ -64,11 +64,11 @@ Game.prototype.init = function() {
   game.playerOn('playerReady', function(player) {
     console.log('readyness of players = ', game.player1.readyToPlay, game.player2.readyToPlay);
     if (game.player1.readyToPlay && game.player2.readyToPlay) {
-      console.log('emitting gameready');
       game.emit('gameReady', null,
         { playerId: game.player1.id, startingHealth: game.player1.health },
         { playerId: game.player2.id, startingHealth: game.player2.health }
       );
+      console.log('Emitted: gameready');
       game.newRound();
     }
   });
