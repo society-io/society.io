@@ -94,8 +94,8 @@ angular
 
 		function updateAvatar() {
 			emit('update avatar', {
-				email: (/*user email*/),
-				avatar: (/*user choice translated into String*/)
+				email: 'user email',
+				avatar: 'user choice translated into String'
 			});
 		}
 
