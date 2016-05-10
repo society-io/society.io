@@ -10,6 +10,11 @@ var Player = function(id, socketAPI, events) {
   // reference to the underlying socket for the user
   this.socket = socketAPI.socket;
 
+  // reference to the players game stats
+  this.profile = Object.assign({}, socketAPI.getUserModel());
+  delete this.profile.email;
+  delete this.profile._id;
+  
   // a reference to the parents event storage
   this.events = events;
 

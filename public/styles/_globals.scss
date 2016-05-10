@@ -47,8 +47,11 @@ $borderTransition: background-color linear 0.2s;
 a {
   opacity: 0.8;
   transition: $defaultTransition;
+  color: #fff;
 }
 
 a:hover {
   opacity: 1;
+  color: $blue;
+  text-decoration: none;
 }

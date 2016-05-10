@@ -62,13 +62,22 @@ Game.prototype.init = function() {
 
   // once both players are ready, emit gameReady to both clients.
   game.playerOn('playerReady', function(player) {
-    console.log('readiness of players = ', game.player1.readyToPlay, game.player2.readyToPlay);
     if (game.player1.readyToPlay && game.player2.readyToPlay) {
-      game.emit('gameReady', null,
-        { playerId: game.player1.id, startingHealth: game.player1.health },
-        { playerId: game.player2.id, startingHealth: game.player2.health }
-      );
-      console.log('Emitted: gameready');
+
+      game.emit('gameReady', null, {
+          // player 1
+          playerId: game.player1.id,
+          startingHealth: game.player1.health,
+          playerProfile: game.player1.profile,
+          opponentProfile: game.player2.profile
+        }, {
+          // player 2
+          playerId: game.player2.id,
+          startingHealth: game.player2.health,
+          playerProfile: game.player2.profile,
+          opponentProfile: game.player1.profile
+        });
+
       game.newRound();
     }
   });
