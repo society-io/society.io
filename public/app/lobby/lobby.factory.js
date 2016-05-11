@@ -12,7 +12,7 @@ angular
 			joinQueueErrorMessage: '',
 			whereTo: null,
 			player: {},
-			joinCode: ''
+			joinCode: '',
 			avatar: ''
 		};
 
