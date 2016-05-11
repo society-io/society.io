@@ -9,10 +9,10 @@ var tokenGenerator = new FirebaseTokenGenerator(pI.secret);
 var saltRounds = 10;
 
 router.post('/', function(req, res){
-	var userInputPassword = req.body.password;
-  if(req.body.username === undefined || req.body.password === undefined || req.body.email === undefined || req.body.avatar === undefined || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
+    var userInputPassword = req.body.password;
+    if(req.body.username === undefined || req.body.password === undefined || req.body.email === undefined || req.body.avatar === undefined || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
     res.send({credentialsMissing: true, message: "Dude, c'mon."});
-  } else {
+    } else {
     newUser.find({username: req.body.username}, function(err, users) {
     	if(users.length === 0){
     		bcrypt.hash(userInputPassword, saltRounds, function(err, hash) {
