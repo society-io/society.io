@@ -53,10 +53,31 @@ $tileKnight: 100px;
   animation: rotation 2s infinite linear;
 }
 
+// damaged health spinners
 .health-3 .health-spinner.health-damage {
   opacity: 1;
   background-image: url('../images/game/health-yellow.png');
   animation: rotation 8s infinite linear, blinker 0.8s linear infinite;
+}
+
+.health-2 .health-spinner.health-damage {
+  opacity: 1;
+  background-image: url('../images/game/health-red.png');
+  animation: rotation 8s infinite linear, blinker 0.8s linear infinite;
+}
+
+.health-1 .health-spinner.health-damage {
+  opacity: 1;
+  background-image: none;
+  animation: rotation 8s infinite linear, blinker 0.8s linear infinite;
+
+  .tile {
+    animation: blinker 0.8s linear infinite;
+  }
+}
+
+.health-spinner.health-dim {
+  opacity: 0.3;
 }
 
 // debugging purpose only
