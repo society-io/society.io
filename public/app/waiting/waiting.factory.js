@@ -39,7 +39,7 @@
 
       function removeFromQueue() {
         console.log('Removing From Queue...');
-        emit('remove from queue');
+        emit('disconnect');
         $state.go('lobby');
       }
 

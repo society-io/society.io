@@ -5,6 +5,7 @@ var eventEmitter = require('events');
 var lobbyListeners = require('../lobby/lobby').lobbyListeners;
 
 var SocketAPI = function(socket, userModel, token) {
+
 // socket
   this.socket = socket;
   this.socketId = socket.id;
@@ -12,6 +13,7 @@ var SocketAPI = function(socket, userModel, token) {
   this.eventsCount = socket._eventsCount;
   this.listeners = {};
   this.emitters = {};
+
 // user
 	userModel = Object.assign({}, userModel);
 	this.user = userModel;
@@ -53,6 +55,15 @@ SocketAPI.prototype.emit = function(event, data) {
 	this.emitters[event]=this.socketId;
 };
 
+
+SocketAPI.prototype.delayEmit = function(event, data, wait){
+	var sock = this;
+	setTimeout(function () {
+		sock.emit(event, data);
+  }, wait);
+};
+
+
 SocketAPI.prototype.getUserModel = function() {
 	return this.user._doc;
 };
@@ -61,6 +72,10 @@ SocketAPI.prototype.updateStats = function(obj) {
   this.user._doc.mmr = obj.mmr;
   this.user._doc.wins = obj.wins;
   this.user._doc.losses = obj.losses;
+};
+
+SocketAPI.prototype.getUserEmail = function() {
+	return this.user._doc.email;
 };
 
 SocketAPI.prototype.err = function(err) {
