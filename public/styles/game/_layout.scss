@@ -1,0 +1,59 @@
+.board {
+  width: 100%;
+  height: 100%;
+}
+
+.board .board-left,
+.board .board-right {
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+}
+
+.tile-container {
+
+}
+
+.status-container {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+}
+
+.status {
+  position: relative;
+  left: -50%;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.opponent,
+.player {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: #fff;
+}
+.opponent {
+  top: 15px;
+}
+
+.player {
+  bottom: 15px;
+}
+
+.player-label, .opponent-label {
+  text-align: center;
+}
+
+.player-label {
+  margin-top: 15px;
+}
+
+.opponent-label {
+  margin-bottom: 15px;
+}
