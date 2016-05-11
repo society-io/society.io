@@ -3,11 +3,12 @@ var Game = require('../game/game').Game;
 var queue = [];
 
 setInterval(function(){
-	console.log("sorting");
+	console.log("sorting the queue");
   queue.sort(function(a,b) {
     return a.getUserModel().mmr - b.getUserModel().mmr;
   });
   queueMatch();
+  console.log('this is the queue array', queue);
 }, 5000);
 
 var queueListeners = function(socket) {
