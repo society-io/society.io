@@ -41,7 +41,7 @@ function formatMMR(player1, player2, num) {
 		if (err) {
 			console.log("Error in Updating: ", err);
 		} else {
-			console.log('success!');
+			console.log('UPDATED player1 MMR IN DB!');
 			player1.updateStats(db1);
 		}
 	});
@@ -50,7 +50,7 @@ function formatMMR(player1, player2, num) {
 		if (err) {
 			console.log("Error in Updating: ", err);
 		} else {
-			console.log('success!');
+			console.log('UPDATED Player2 MMR IN DB!');
 			player2.updateStats(db2);
 		}
 	});

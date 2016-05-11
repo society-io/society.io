@@ -1,3 +1,4 @@
+var colors = require('colors');
 var Game = require('../game/game').Game;
 var activeSockets = require('../common').activeSockets;
 var privateGames = {}; // { joinCode: [] }
@@ -6,24 +7,24 @@ var socketToCode = {}; // { socketId: joinCode }
 var privateGameListeners = function(socket){
 
   socket.on('create private game', function(data){
-    console.log('createPrivateGame listener, joinCode: ',data.joinCode);
+    console.warn('createPrivateGame listener, joinCode: ',data.joinCode);
     storeJoinCode(data, socket);
     storePlayer1(data, socket);
   });
 
   socket.on('attempt to join private game', function(data){
-    console.log('joinPrivateGame listener, joinCode: ',data.joinCode);
+    console.warn('joinPrivateGame listener, joinCode: ',data.joinCode);
     storePlayer2(data, socket);
   });
 
 
   socket.on('initialize battlefield', function(data){
-    console.log('initializeBattlefield listener, joinCode: ',data.joinCode);
+    console.warn('initializeBattlefield listener, joinCode: ',data.joinCode);
     initiatePrivateGame(data, socket);
   });
 
   socket.on('cancel private game', function(data){
-    console.log('cancelPrivateGame listener, joinCode: ',data.joinCode);
+    console.warn('cancelPrivateGame listener, joinCode: ',data.joinCode);
     cancelPrivateGame(data, socket);
   });
 
@@ -102,7 +103,7 @@ var storePlayer2 = function(data, socket) {
 var initiatePrivateGame = function(data, socket) {
   // Create a new privateGame using the right credentials
   var players = privateGames[data.joinCode];
-  console.log('privateGame Players: ',players);
+  console.log('privateGame Players: ',players.id);
   var player1 = players[0];
   var player2 = players[1];
   if(players.length === 2) {
