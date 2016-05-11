@@ -56,7 +56,7 @@ function queueMatch() {
 	while (queue.length >= 2) {
 		var player1= queue.pop();
 		var player2= queue.pop();
-
+    console.log('two people from queued popped!');
 		var profile = {};
 
 		var p1 = player1.getUserModel();
