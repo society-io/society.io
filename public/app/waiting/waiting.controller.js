@@ -10,8 +10,9 @@ angular
 
     var vm = this;
     var lf = lobbyFactory;
-
     vm.lfGet = lf.get;
+
+    vm.getJoinCode = lf.getJoinCode;
 
     vm.cancelRoom = waitingFactory.cancelRoom;
     vm.showCancelGameInput = false;

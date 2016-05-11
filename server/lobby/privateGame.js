@@ -23,6 +23,14 @@ var privateGameListeners = function(socket){
     initiatePrivateGame(data, socket);
   });
 
+  socket.on('get joinCode', function(){
+    var id = socket.getSocketId();
+    var yourJoinCode = socketToCode[id];
+    socket.emit('joinCode is', {
+      yourJoinCode: yourJoinCode
+    });
+  });
+
   socket.on('cancel private game', function(data){
     console.warn('cancelPrivateGame listener, joinCode: ',data.joinCode);
     cancelPrivateGame(data, socket);

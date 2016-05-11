@@ -44,6 +44,10 @@
       }
 
       function listeners() {
+        on('joinCode is', function(data){
+          joinCode = data.joinCode;
+        });
+
         on('profile', function(resp){
           playerInfo.player1Name = resp.player1.username;
           playerInfo.player1MMR = resp.player1.mmr;

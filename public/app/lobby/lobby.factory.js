@@ -11,7 +11,8 @@ angular
 			joinCodeErrorMessage: '',
 			joinQueueErrorMessage: '',
 			whereTo: null,
-			player: {}
+			player: {},
+			joinCode: ''
 		};
 
 		return {
@@ -19,7 +20,8 @@ angular
 			createRoom: createRoom,
 			joinRoom: joinRoom,
 			get: get,
-			getPlayer: getPlayer
+			getPlayer: getPlayer,
+			getJoinCode: getJoinCode
 		};
 
 		function joinQueue(message) {
@@ -90,6 +92,13 @@ angular
         state.player = resp;
       });
       emit('who am i');
+		}
+
+		function getJoinCode() {
+		  on('joinCode is', function(data){
+		    state.joinCode = data.yourJoinCode;
+		  });
+		  emit('get joinCode');
 		}
 
 		function updateAvatar() {
