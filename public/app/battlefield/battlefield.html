@@ -11,6 +11,11 @@
         <div class="double-bounce1"></div>
         <div class="double-bounce2"></div>
       </div>
+      <h2 class="instructions-label" ng-hide="Bf.get('gameStarted')">
+        <i class="fa fa-hand-o-down" aria-hidden="true"></i> 
+        Mouseover an option to view how it affects your opponent. 
+        <i class="fa fa-hand-o-down" aria-hidden="true"></i>
+      </h2>
     </div>
   </div>
 
@@ -47,14 +52,12 @@
             ng-class="{
               dark: Bf.get('opponent').choice !== choice && Bf.get('roundWinner')
             }">
-            <div class="health-spinner" ng-class="{
-              'health-damage' : Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1],
-              'health-dim' : Bf.currentHover === Bf.winsAgainst(choice)[0] || Bf.currentHover === Bf.winsAgainst(choice)[1]
-            }"></div>
+            <div class="health-spinner"></div>
             <div class="tile"
               ng-class="{
                 dead: Bf.get('opponent').health[choice] === 0,
                 lose: Bf.currentHover === Bf.winsAgainst(choice)[0] || Bf.currentHover === Bf.winsAgainst(choice)[1],
+                win: Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1],
                 winRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
                 lostRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id,
                 dark: Bf.get('opponentPlayed')
@@ -103,7 +106,7 @@
         </div>
       </div>
 
-      <div class="side-controls">
+      <div class="side-controls right-side-control">
         <!-- Timer -->
         <div class="timer-container">
           <div class="timer">
@@ -122,8 +125,17 @@
             </button>
           </div>
         </div>
-      </div><!-- Playing Opponent End -->
+      </div><!-- side controls end -->
+
+      <div class="side-controls left-side-control">
+        <div class="game-key">
+          <h2>
+            <span class="red">Red</span> beats you.<br>
+            You beat <span class="green">green.</span>
+          </h2>
+        </div>
       </div>
+    </div><!-- Playing Opponent End -->
 
     <div class="playing-player col-md-4 col-md-offset-4">
       <div class="current-player-choice">
@@ -151,7 +163,7 @@
   <div class="player">
     <div class="fluid-container">
 
-      <!-- Emotes -->
+      <!-- Emotes 
       <div class="container emote-container">
         
         <div class="emote-toggle" ng-click="Bf.emoteToggle()">
@@ -168,7 +180,7 @@
             Good Luck | Sorry | Well Played | Oops <span ng-click="Bf.emoteToggle()">Toggle Emotes</span>
           </p>
         </div>
-      </div><!-- End Emotes -->
+      </div> End Emotes -->
 
       <!-- Tile Container -->
       <div class="tile-container col-md-12 bounceInDown animated" ng-show="Bf.player.showOptions">
