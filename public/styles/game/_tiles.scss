@@ -122,6 +122,10 @@ $tileKnight: 100px;
   background-color: $tileRed;
 }
 
+.tile.win {
+  background-color: $tileGreen;
+}
+
 .tile.active {
   opacity: 1;
 }

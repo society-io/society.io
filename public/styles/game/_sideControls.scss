@@ -1,5 +1,31 @@
 .side-controls {
   position: absolute;
+  z-index: 1000;
+}
+
+.side-controls.left-side-control {
+  color: #fff;
+  left: 0;
+  bottom: -55px;
+
+  @include bp(pawn) {
+    bottom: -60px;
+  }
+
+  @include bp(knight) {
+    bottom: -69px;
+  }
+
+  .red {
+    color: $tileRed;
+  }
+
+  .green {
+    color: $tileGreen;
+  }
+}
+
+.side-controls.right-side-control {
   right: 0;
   bottom: -63px;
   z-index: 1000;

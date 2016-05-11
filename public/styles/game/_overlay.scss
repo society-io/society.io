@@ -1,5 +1,5 @@
 .overlay {
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.6);
   position: absolute;
   top: 0;
   left: 0;
@@ -9,8 +9,9 @@
   z-index: 100;
 }
 
-.round-waiting {
- 
+.instructions-label {
+  margin-top: 70px;
+  text-align: center;
 }
 
 .round-waiting-msg-container {
