@@ -3,7 +3,7 @@ var Game = require('../game/game').Game;
 var queue = [];
 
 setInterval(function(){
-	console.log("sorting the queue");
+
   queue.sort(function(a,b) {
     return a.getUserModel().mmr - b.getUserModel().mmr;
   });
@@ -22,7 +22,7 @@ var queueListeners = function(socket) {
 	});
 
 	socket.on('disconnect', function(){
-		disconnect(socket);
+		removeFromQueue(socket);
 	});
 };
 
@@ -92,14 +92,9 @@ function removeFromQueue(socket) {
 	socket.disconnect();
 }
 
-function disconnect(socket) {
-	socket.disconnect();
-}
-
 module.exports = {
 	queueListeners: queueListeners,
 	queueMatch: queueMatch,
 	addToQueue: addToQueue,
-	removeFromQueue: removeFromQueue,
-	disconnect: disconnect
+	removeFromQueue: removeFromQueue
 };
