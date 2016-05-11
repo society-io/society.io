@@ -11,6 +11,10 @@ $tileKnight: 100px;
   margin-right: 10px;
 }
 
+.tile-pos.ties {
+  opacity: 0.3;
+}
+
 .tile-pos:last-child {
   margin-right: 0;
 }
@@ -47,6 +51,12 @@ $tileKnight: 100px;
 .health-1 .health-spinner {
   background-image: url('../images/game/health-red.png');
   animation: rotation 2s infinite linear;
+}
+
+.health-3 .health-spinner.health-damage {
+  opacity: 1;
+  background-image: url('../images/game/health-yellow.png');
+  animation: rotation 8s infinite linear, blinker 0.8s linear infinite;
 }
 
 // debugging purpose only
@@ -112,10 +122,6 @@ $tileKnight: 100px;
 .tile.lostRound {
   opacity: 1;
   animation: blinker 0.2s linear infinite;
-}
-
-@keyframes blinker {  
-  50% { opacity: 0.0; }
 }
 
 .tile-inner {

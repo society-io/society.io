@@ -30,6 +30,8 @@
       });
     }
 
+    $scope.$on('runAnimations', runAnimations);
+
     // View State Elements
     vm.currentHover = '';
     vm.showEmotes = false;
@@ -40,6 +42,12 @@
     vm.winsAgainst = bfLogic.winsAgainst;
     vm.losesAgainst = bfLogic.losesAgainst;
     vm.getTime = bfTimer.getTime;
+    vm.player = {
+      showOptions: false
+    };
+    vm.opponent = {
+      showOptions: false
+    };
 
     // factory functions
     vm.emoteToggle = function() {
@@ -69,5 +77,12 @@
       console.log('roundWinner = ', vm.get('roundWinner'));
       console.log('playerID = ', vm.get('player').id);
     };
-  }
+
+    function runAnimations() {
+      vm.player.showOptions = true;
+      setTimeout(function() {
+        vm.opponent.showOptions = true;
+      }, 500);
+    }
+  } // end of controller function
 })();
