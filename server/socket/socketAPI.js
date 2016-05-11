@@ -78,6 +78,10 @@ SocketAPI.prototype.getUserEmail = function() {
 	return this.user._doc.email;
 };
 
+SocketAPI.prototype.getSocketId = function () {
+    return this.socketId;
+};
+
 SocketAPI.prototype.err = function(err) {
 	this.socket.error(err);
 };
