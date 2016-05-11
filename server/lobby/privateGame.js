@@ -64,6 +64,7 @@ var storeJoinCode = function(data, socket) {
 var removeJoinCodeOf = function(socketId) {
   var joinCode = socketToCode[socketId];
   delete privateGames[joinCode];
+  delete socketToCode[socketId];
 };
 
 var storePlayer1 = function(data, socket) {
