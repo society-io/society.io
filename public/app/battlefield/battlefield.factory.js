@@ -2,9 +2,9 @@ angular
   .module('app')
   .factory('battlefieldFactory', bfFactoryFunction);
 
-bfFactoryFunction.$inject = ['socketFactory', 'battlefieldTimerFactory', 'battlefieldLogicFactory', '$state'];
+bfFactoryFunction.$inject = ['socketFactory', 'battlefieldTimerFactory', 'battlefieldLogicFactory', '$state', '$window'];
 
-function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLogicFactory, $state) {
+function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLogicFactory, $state, $window) {
 
   var bfLogic = battlefieldLogicFactory;
   var bfTimer = battlefieldTimerFactory;

@@ -7,6 +7,8 @@
 
     function authFactory($http, $window, $state, $location) {
 
+      console.log('factory is run');
+
       var state = {
         signupErrorMessage: '',
         signinErrorMessage: '',
@@ -109,7 +111,7 @@
       function signOut() {
         $window.localStorage.removeItem('token');
         delete $window.localStorage.token;
-        $location.url('/');
+        $window.location.href = '/';
       }
 
       function attachToken(obj) {
