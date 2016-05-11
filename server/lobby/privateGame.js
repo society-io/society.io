@@ -1,12 +1,13 @@
 var Game = require('../game/game').Game;
 var activeSockets = require('../common').activeSockets;
 var privateGames = {}; // { joinCode: [] }
+var socketToCode = {}; // { socketId: joinCode }
 
 var privateGameListeners = function(socket){
 
   socket.on('create private game', function(data){
     console.log('createPrivateGame listener, joinCode: ',data.joinCode);
-    storeJoinCode(data);
+    storeJoinCode(data, socket);
     storePlayer1(data, socket);
   });
 
@@ -26,9 +27,13 @@ var privateGameListeners = function(socket){
     cancelPrivateGame(data, socket);
   });
 
+  socket.on('disconnect', function() {
+    removeJoinCodeOf(socket.socketId);
+  });
+
 };
 
-var storeJoinCode = function(data) {
+var storeJoinCode = function(data, socket) {
   // store joinCode in privateGames
     // create storage for sockets
     var socketsForGame = [];
@@ -46,6 +51,7 @@ var storeJoinCode = function(data) {
     if(!privateGames[data.joinCode]) {
       console.log('Storing joinCode...');
       privateGames[data.joinCode] = socketsForGame;
+      socketToCode[socket.socketId] = data.joinCode;
     } else {
       console.log('Could Not Store joinCode');
       socket.emit('err', {
@@ -53,6 +59,11 @@ var storeJoinCode = function(data) {
         success: false
       });
     }
+};
+
+var removeJoinCodeOf = function(socketId) {
+  var joinCode = socketToCode[socketId];
+  delete privateGames[joinCode];
 };
 
 var storePlayer1 = function(data, socket) {

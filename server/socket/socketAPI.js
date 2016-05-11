@@ -6,14 +6,14 @@ var lobbyListeners = require('../lobby/lobby').lobbyListeners;
 
 var SocketAPI = function(socket, userModel, token) {
 // socket
-	userModel = Object.assign({}, userModel);
-	this.socket = socket;
-	this.socketId = socket.id;
-	this.events = socket._events;
-	this.eventsCount = socket._eventsCount;
-	this.listeners = {};
-	this.emitters = {};
+  this.socket = socket;
+  this.socketId = socket.id;
+  this.events = socket._events;
+  this.eventsCount = socket._eventsCount;
+  this.listeners = {};
+  this.emitters = {};
 // user
+	userModel = Object.assign({}, userModel);
 	this.user = userModel;
 	this.userId = userModel._id;
 	this.token = token;
