@@ -143,7 +143,11 @@ Game.prototype.terminate = function(reason) {
   } else {
     winner = 0;
   }
-	console.log('HELLO');
+
+  if (reason === 'a player disconnected') {
+    console.log('reason is = ', reason);
+  }
+
   formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
   // this.player1.socket.disconnect();
   // this.player2.socket.disconnect();
