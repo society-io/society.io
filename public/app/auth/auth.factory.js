@@ -9,7 +9,8 @@
 
       var state = {
         signupErrorMessage: '',
-        signinErrorMessage: ''
+        signinErrorMessage: '',
+        avatarClicked: ''
       };
 
       return {
@@ -20,7 +21,8 @@
         isAuthed: isAuthed,
         attachToken: attachToken,
         get: get,
-        set: set
+        set: set,
+        selectAvatar: selectAvatar
       };
 
       function signUp(userObj) {
@@ -31,7 +33,7 @@
           data: userObj
         };
 
-        if ((userObj.username === undefined) || (userObj.email === undefined) || (userObj.password === undefined) || (userObj.username.length < 1) || (userObj.password.length < 1) || (userObj.email.length < 1)) {
+        if ((userObj.username === undefined) || (userObj.email === undefined) || (userObj.password === undefined) || (userObj.username.length < 1) || (userObj.password.length < 1) || (userObj.email.length < 1) || (userObj.avatar === undefined || false)) {
           state.signupErrorMessage = "";
           state.signupErrorMessage += "Dude, c'mon.";
           return;
@@ -131,6 +133,15 @@
         if(!isAuthed()) {
           $state.go('auth');
         }
+      }
+
+      function selectAvatar(avatar){
+        if (avatar === undefined){
+          console.log('undefined avatar');
+          return;
+        }
+        state.avatarClicked = avatar;
+        console.log('this is state.avatarclicked: ', state.avatarClicked);
       }
     }
 })();

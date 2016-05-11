@@ -24,6 +24,7 @@ function AuthController(authFactory, $scope) {
 
 
 	vm.signUp = function(obj){
+		console.log('this is sign up obj: ', obj);
 		authFactory.signUp(obj);
 		vm.usernameUp = '';
 		vm.emailUp = '';
@@ -34,6 +35,14 @@ function AuthController(authFactory, $scope) {
 		authFactory.signIn(obj);
 		vm.usernameIn = '';
 		vm.passwordIn = '';
+	};
+
+	vm.avatarSelected = false;
+	vm.avatarsMuted = false;
+	vm.get = authFactory.get;
+
+	vm.selectAvatar = function(avatar){
+		authFactory.selectAvatar(avatar);
 	};
 
 }
