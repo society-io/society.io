@@ -21,6 +21,10 @@
     "angular-socket-io": "^0.7.0",
     "angular-animate": "^1.5.5",
     "angular-spinkit": "^0.3.4",
-    "components-font-awesome": "^4.6.1"
+    "components-font-awesome": "^4.6.1",
+    "angular-audio": "^1.7.2"
+  },
+  "resolutions": {
+    "angular": "1.2.x"
   }
 }

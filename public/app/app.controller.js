@@ -2,11 +2,12 @@
 
   angular
     .module('app')
-    .controller('AppController', appController);
+    .controller('AppController', appController)
+    .controller('AudioController', audioController);
 
-  appController.$inject = ['$scope', '$state', '$window', 'socketFactory'];
+  appController.$inject = ['$scope', '$state', '$window', 'socketFactory', 'ngAudio'];
 
-  function appController($scope, $state, $window, socketFactory) {
+  function appController($scope, $state, $window, socketFactory, ngAudio) {
     var emit = socketFactory.emit;
     var on = socketFactory.on;
 
@@ -17,6 +18,13 @@
       $state.go('lobby');
       $window.location.reload();
     }
+
+    (function musicPlayer() {
+      var playlist = ['../audio/NVOY-AllNight.mp3', '../audio/Kartell-Attracted.mp3'];
+      for(var i=0; i<playlist.length; i++) {
+        ngAudio.play(playlist[i]);
+      }
+    })();
 
     // this'll be called on every state change in the app
     $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
