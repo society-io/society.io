@@ -58,6 +58,5 @@
    */
 
   // Suppress warnings about == null comparisons.
-  "eqnull": true,
-  "expr":true
+  "eqnull": true
 }
