@@ -13,6 +13,7 @@ angular
 			whereTo: null,
 			player: {},
 			joinCode: ''
+			avatar: ''
 		};
 
 		return {
@@ -88,8 +89,10 @@ angular
 		function getPlayer() {
 			console.log('running getPlayer');
       on('you are', function(resp) {
-        console.log('this is resp hi', resp);
+        console.log('this is user:', resp);
         state.player = resp;
+        state.avatar = '';
+        state.avatar += resp.avatar;
       });
       emit('who am i');
 		}
@@ -101,11 +104,9 @@ angular
 		  emit('get joinCode');
 		}
 
-		function updateAvatar() {
-			emit('update avatar', {
-				email: 'user email',
-				avatar: 'user choice translated into String'
-			});
+		function updateAvatar(obj) {
+			// obj consists of avatar and email
+			emit('update avatar', obj);
 		}
 
 	}
