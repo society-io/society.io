@@ -45,6 +45,48 @@
 			</form>
 
 		</div><!-- End sidebar -->
+
+		<div class="sidebar lobby-left lobby-content-container">
+			
+			<h2>My Avatar</h2>
+			<div class="my-avatar">
+				<i class="fa fa-hand-{{Lobby.myAvatar()}}-o fa-lg" aria-hidden="true"></i>
+			</div>
+			
+
+			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars">Change Avatar</button>
+
+			<div ng-show="Lobby.showAvatars">
+				<h2>Options</h2>
+				<div class="avatar-container">
+					<div class="avatar" id="rock" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatarClicked') === 'rock'}" ng-show="'rock' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatar" id="paper" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'paper'}" ng-show="'paper' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatar" id="scissors" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'scissors'}" ng-show="'scissors' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatar" id="lizard" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'lizard'}" ng-show="'lizard' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatar" id="spock" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'spock'}" ng-show="'spock' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
+					</div>
+				</div>
+
+				<button class="block red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.myAvatar()})">Update Avatar</button>
+
+				<!-- CHANGE MY AVATAR TO THE ONE CLICKED -->
+
+			</div>
+		</div>
+		
 	</div><!-- End bootstrap column -->
 
 

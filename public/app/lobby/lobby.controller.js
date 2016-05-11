@@ -31,6 +31,8 @@
     vm.showJoinGameInput = false;
     vm.showJoinGameController = false;
 
+    vm.showAvatars = false;
+
     vm.signOut = function() {
       console.log('signing out');
       authFactory.signOut();
@@ -43,6 +45,21 @@
 
     vm.getLeaderboard = function() {
       return statsFactory.get('leaderboard');
+    };
+
+    vm.myAvatar = function(){
+      return vm.get('avatar');
+    };
+
+    vm.getAvatar = function(){
+      var player = vm.get('player');
+      vm.myAvatar = player.avatar;
+      console.log('my avatar is: ', vm.myAvatar);
+    };
+
+    vm.updateAvatar = function(obj){
+      console.log('this is update avatar: ', obj);
+      lobbyFactory(obj);
     };
 
   }
