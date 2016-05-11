@@ -2,8 +2,7 @@
 
   angular
     .module('app')
-    .controller('AppController', appController)
-    .controller('AudioController', audioController);
+    .controller('AppController', appController);
 
   appController.$inject = ['$scope', '$state', '$window', 'socketFactory', 'ngAudio'];
 
@@ -20,7 +19,7 @@
     }
 
     (function musicPlayer() {
-      var playlist = ['../audio/NVOY-AllNight.mp3', '../audio/Kartell-Attracted.mp3'];
+      var playlist = ['../audio/NVOY-AllNight.mp3'];
       for(var i=0; i<playlist.length; i++) {
         ngAudio.play(playlist[i]);
       }
