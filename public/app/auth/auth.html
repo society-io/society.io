@@ -1,8 +1,9 @@
 <div class="container">
 	<div class="col-md-6 col-md-offset-3">
-
-		<h1 class="logo">Society</h1>
-		<h2 class="subtitle">The Game</h2>
+		<div class="logo-container">
+			<h1 class="logo">Society</h1>
+			<h2 class="subtitle">The Game</h2>
+		</div>
 		<form class="auth-form sign-up" name="signUpForm" method="post" ng-show="Auth.signUpForm">
 			<div class="input-container">
 				<input
@@ -27,11 +28,30 @@
 					type="password" placeholder="Password" class="input">
 				<i class="fa fa-lock" aria-hidden="true"></i>
 			</div>
+		
+			<div class="message"><h2>Select an avatar:</h2></div>
+			
+			<div class="avatar-container">
+				<div class="avatar" id="rock" ng-click="Auth.selectAvatar('rock')" ng-model="Auth.rock" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'rock'}">
+					<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
+				</div>
+				<div class="avatar" id="paper" ng-click="Auth.selectAvatar('paper')" ng-model="Auth.paper" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'paper'}">
+					<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
+				</div>
+				<div class="avatar" id="scissors" ng-click="Auth.selectAvatar('scissors')" ng-model="Auth.scissors" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'scissors'}">
+					<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
+				</div>
+				<div class="avatar" id="lizard" ng-click="Auth.selectAvatar('lizard')" ng-model="Auth.lizard" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'lizard'}">
+					<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
+				</div>
+				<div class="avatar" id="spock" ng-click="Auth.selectAvatar('spock')" ng-model="Auth.spock" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'spock'}">
+					<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
+				</div>
+			</div>
 
 
-
-			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp})">Sign Up</button>
-
+			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp, avatar: Auth.get('avatarClicked')})">Sign Up</button>
+			
 			<!-- for error on signUp -->
 			<div class="error-message" ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
 

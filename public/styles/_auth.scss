@@ -1,6 +1,8 @@
 .auth {
   padding-top: 40px;
+}
 
+.logo-container {
   h1, h2 {
     text-align: center;
     margin: 0;
@@ -90,3 +92,46 @@
     left: 20px;
   }
 }
+
+.avatar-container {
+  width: 100%;
+  margin: auto;
+  position: relative;
+  font-size: 0;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 19%;
+  height: 100%;
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  margin-right: 1.25%;
+  border-radius: 3px;
+  position: relative;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.avatar:hover{
+  color: $red;
+}
+
+.avatar-clicked {
+  color: $red;
+}
+
+.avatar:last-child {
+  margin-right: 0;
+}
+
+.message {
+  text-align: center;
+  color: white;
+}
+
+
+
