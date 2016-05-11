@@ -49,10 +49,11 @@
         });
 
         on('profile', function(resp){
-          playerInfo.player1Name = resp.player1.username;
-          playerInfo.player1MMR = resp.player1.mmr;
-          playerInfo.player2Name = resp.player2.username;
-          playerInfo.player2MMR = resp.player2.mmr;
+          console.log('this is whats wrong, expecting resp', resp);
+          playerInfo.player1Name = resp.p1.username;
+          playerInfo.player1MMR = resp.p1.mmr;
+          playerInfo.player2Name = resp.p2.username;
+          playerInfo.player2MMR = resp.p2.mmr;
         });
 
         on('match ready', function() {
