@@ -32,6 +32,7 @@
 
     // View State Elements
     vm.currentHover = '';
+    vm.showEmotes = false;
     vm.choices = bf.get('choices');
     vm.setChoice = bf.setChoice;
     vm.get = bf.get;
@@ -41,6 +42,11 @@
     vm.getTime = bfTimer.getTime;
 
     // factory functions
+    vm.emoteToggle = function() {
+      console.log('running emoteToggle');
+      vm.showEmotes = !vm.showEmotes;
+    };
+
     vm.getChoice = function(person) {
       return bf.get(person + 'Choice');
     };

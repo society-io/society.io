@@ -32,6 +32,7 @@
     vm.showJoinGameController = false;
 
     vm.signOut = function() {
+      console.log('signing out');
       authFactory.signOut();
     };
 
