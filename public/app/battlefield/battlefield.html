@@ -2,7 +2,7 @@
 <div class="board">
 
   <!-- Round waiting -->
-  <div class="round-waiting overlay animate-show" ng-show="!Bf.get('gameStarted') || Bf.get('matchOver')">
+  <div class="round-waiting overlay overlay-show" ng-show="!Bf.get('gameStarted') || Bf.get('matchOver')">
     <div class="round-waiting-msg-container">
       <h1>
         {{Bf.get('centerMessage')}}
@@ -37,19 +37,23 @@
           </span>
         </p>
       </div>
-      <div class="tile-container col-md-12">
+      <div class="tile-container col-md-12 animated fadeIn" ng-show="Bf.opponent.showOptions">
 
         <!-- Individual Tiles -->
-        <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}">
+        <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}" ng-class="{
+          ties : Bf.currentHover === choice
+        }">
           <div class="health health-{{Bf.get('opponent').health[choice] || 0}}"
             ng-class="{
               dark: Bf.get('opponent').choice !== choice && Bf.get('roundWinner')
             }">
-            <div class="health-spinner"></div>
+            <div class="health-spinner" ng-class="{
+              'health-damage' : Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1]
+            }"></div>
             <div class="tile"
               ng-class="{
                 dead: Bf.get('opponent').health[choice] === 0,
-                lose: Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1],
+                lose: false,
                 winRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
                 lostRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id,
                 dark: Bf.get('opponentPlayed')
@@ -166,7 +170,7 @@
       </div><!-- End Emotes -->
 
       <!-- Tile Container -->
-      <div class="tile-container col-md-12">
+      <div class="tile-container col-md-12 bounceInDown animated" ng-show="Bf.player.showOptions">
         <!-- Individual Tiles -->
         <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}">
           <div class="health health-{{Bf.get('player').health[choice] || 0}}"

@@ -2,9 +2,14 @@ angular
   .module('app')
   .factory('battlefieldFactory', bfFactoryFunction);
 
-bfFactoryFunction.$inject = ['socketFactory', 'battlefieldTimerFactory', 'battlefieldLogicFactory', '$state', '$window'];
+bfFactoryFunction.$inject = ['socketFactory', 
+'battlefieldTimerFactory', 
+'battlefieldLogicFactory', 
+'$state', 
+'$window',
+'$rootScope'];
 
-function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLogicFactory, $state, $window) {
+function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLogicFactory, $state, $window, $rootScope) {
 
   var bfLogic = battlefieldLogicFactory;
   var bfTimer = battlefieldTimerFactory;
@@ -103,8 +108,8 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
         state.player.health[choice] = resp.startingHealth[choice];
         state.opponent.health[choice] = resp.startingHealth[choice];
       }
-
-      emit('clientGameReady');
+      
+      $rootScope.$broadcast('runAnimations');
     });
 
     on('opponentPlayed', function(resp) {
