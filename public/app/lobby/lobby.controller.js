@@ -20,6 +20,11 @@
       lobbyFactory.getPlayer();
     });
 
+    $scope.options = {
+      playlist: ['../audio/NVOY-AllNight.mp3'],
+      loop: true
+    };
+
     vm.get = lobbyFactory.get;
     vm.queue = lobbyFactory.joinQueue;
 
@@ -52,20 +57,20 @@
       return statsFactory.get('leaderboard');
     };
 
-    vm.myAvatar = function(){
+    vm.myAvatar = function() {
       return vm.get('avatar');
     };
 
-    vm.getAvatar = function(){
+    vm.getAvatar = function() {
       var player = vm.get('player');
       vm.myAvatar = player.avatar;
       console.log('my avatar is: ', vm.myAvatar);
     };
 
-    vm.updateAvatar = function(obj){
+    vm.updateAvatar = function(obj) {
       console.log('this is update avatar: ', obj);
       lobbyFactory(obj);
     };
 
   }
-  })();
+})();
