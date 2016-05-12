@@ -106,13 +106,23 @@ var storePlayer2 = function(data, socket) {
     }
 };
 
-
 var initiatePrivateGame = function(data, socket) {
   // Create a new privateGame using the right credentials
   var players = privateGames[data.joinCode];
-  console.log('privateGame Players: ',players);
-  var player1 = players[0];
+
+  // console.log('privateGame Players:'.green, 'player1:'.green, player1.socketId, 'player2', player2.socketId);
+
+	var player1 = players[0];
   var player2 = players[1];
+
+	var profile = {p1: player1.getUserModel(), p2: player2.getUserModel()};
+
+	console.log('PROFILES'.red, profile);
+
+	player1.delayEmit('profile', profile, 1000);
+	player2.delayEmit('profile', profile, 1000);
+
+
   if(players.length === 2) {
     console.log('Initiating privateGame...');
     var privateGame = new Game(players[0], players[1]);
@@ -145,8 +155,6 @@ var cancelPrivateGame = function(data, socket) {
     }
   }
 };
-
-
 
 module.exports = {
   privateGameListeners: privateGameListeners

@@ -45,7 +45,7 @@
 
       if (moving('battlefield', 'lobby')) {
         goToLobby();
-      }
+      } 
 
       // if (fromState.name === 'battlefield' && toState.name === 'lobby') {
       //   $window.location.reload();
