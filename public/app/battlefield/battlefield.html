@@ -4,18 +4,16 @@
   <!-- Round waiting -->
   <div class="round-waiting overlay overlay-show" ng-show="!Bf.get('gameStarted') || Bf.get('matchOver')">
     <div class="round-waiting-msg-container">
-      <h1>
-        {{Bf.get('centerMessage')}}
-      </h1>
-      <div class="spinner">
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
-      </div>
-      <h2 class="instructions-label" ng-hide="Bf.get('gameStarted')">
-        <i class="fa fa-hand-o-down" aria-hidden="true"></i> 
-        Mouseover an option to view how it affects your opponent. 
+      <h1 ng-show="Bf.get('gameStarted')">{{Bf.get('centerMessage')}}</h1>
+      <h1 class="instructions-label" ng-hide="Bf.get('gameStarted')">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div><br>
+        Mouseover an option to view how it affects your opponent.<br>
         <i class="fa fa-hand-o-down" aria-hidden="true"></i>
-      </h2>
+        <i class="fa fa-hand-o-down" aria-hidden="true"></i>
+      </h1>
     </div>
   </div>
 
@@ -100,13 +98,14 @@
               'fa-rocket': Bf.get('opponent').choice === 'rich',
               'fa-trash': Bf.get('opponent').choice === 'bum'
             }" aria-hidden="true"></i>
+          <p class="big-player-label" ng-show="!Bf.get('opponentPlayed') && Bf.get('roundWinner') === null">Opponent</p>
           <p ng-show="Bf.get('opponentPlayed') && Bf.get('roundWinner') === null">Opponent Played</p>
           <p ng-show="Bf.get('roundWinner') === 0">Tie</p>
           <p ng-show="Bf.get('roundWinner')">{{Bf.get('opponent').choice}}</p>
         </div>
       </div>
 
-      <div class="side-controls right-side-control">
+      <div class="side-controls right-side-control" ng-show="Bf.showSideControls">
         <!-- Timer -->
         <div class="timer-container">
           <div class="timer">
@@ -127,7 +126,7 @@
         </div>
       </div><!-- side controls end -->
 
-      <div class="side-controls left-side-control">
+      <div class="side-controls left-side-control" ng-show="Bf.showSideControls">
         <div class="game-key">
           <h2>
             <span class="red">Red</span> beats you.<br>
@@ -151,6 +150,7 @@
                 'fa-rocket': Bf.get('player').choice === 'rich',
                 'fa-trash': Bf.get('player').choice === 'bum'
               }" aria-hidden="true"></i>
+            <p ng-show="!Bf.get('player').choice" class="big-player-label">You</p>
             <p ng-show="Bf.get('roundWinner') === null">{{Bf.get('player').choice}}</p>
             <p ng-show="Bf.get('roundWinner') === 0">Tie</p>
             <p ng-show="Bf.get('roundWinner')">{{Bf.get('player').choice}}</p>
