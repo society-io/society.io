@@ -31,6 +31,7 @@ var Game = function(player1Socket, player2Socket) {
   // match state
   this.matchOver = false;
   this.matchWinner = null;
+  this.updateMMR = false;
 };
 
 Game.prototype.init = function() {
@@ -148,9 +149,10 @@ Game.prototype.terminate = function(reason) {
     console.log('reason is = ', reason);
   }
 
-  formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
-  // this.player1.socket.disconnect();
-  // this.player2.socket.disconnect();
+if (!this.updateMMR) {
+	formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
+	this.updateMMR = true;
+	}
 };
 
 Game.prototype.playerOn = function(event, cb) {

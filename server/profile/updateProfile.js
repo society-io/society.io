@@ -30,7 +30,7 @@ function formatMMR(player1, player2, num) {
 		db2.wins = ++p2wins;
 	}
 	else {
-		db1.wins = ++p1wins;
+		db1.wins = p1wins;
 		db2.losses = ++p2losses;
 	}
 

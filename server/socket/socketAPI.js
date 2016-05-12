@@ -19,6 +19,7 @@ var SocketAPI = function(socket, userModel, token) {
 	this.user = userModel;
 	this.userId = userModel._id;
 	this.token = token;
+	this.rooms = null;
 };
 
 SocketAPI.prototype.init = function() {
@@ -30,6 +31,7 @@ SocketAPI.prototype.init = function() {
   console.log('emitting socket initialized');
   this.emit('socket initialized');
 };
+
 
 SocketAPI.prototype.on = function(event, cb, auth) {
   if (auth) {
@@ -55,14 +57,12 @@ SocketAPI.prototype.emit = function(event, data) {
 	this.emitters[event]=this.socketId;
 };
 
-
 SocketAPI.prototype.delayEmit = function(event, data, wait){
 	var sock = this;
 	setTimeout(function () {
 		sock.emit(event, data);
   }, wait);
 };
-
 
 SocketAPI.prototype.getUserModel = function() {
 	return this.user._doc;
@@ -89,6 +89,8 @@ SocketAPI.prototype.err = function(err) {
 SocketAPI.prototype.disconnect = function() {
 	this.socket.disconnect();
 };
+
+
 
 module.exports = {
   SocketAPI: SocketAPI
