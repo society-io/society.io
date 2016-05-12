@@ -15,8 +15,8 @@ var queue = [];
 var queueObj = {};
 
 setInterval(function() {
+  console.warn('queue.length-->', queue.length)
   queue.sort(function(a,b) {
-  // console.warn('queue.length-->' , queue.length)
     return a.getUserModel().mmr - b.getUserModel().mmr;
   });
   queueMatch();
@@ -32,7 +32,6 @@ var queueListeners = function(socket) {
 		removeFromQueue(socket);
 	});
 };
-
 
 function decideQueue(socket) {
 	var decide = queueObj[socket.getUserEmail()] ?
