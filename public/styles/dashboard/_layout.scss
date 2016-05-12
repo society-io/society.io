@@ -118,6 +118,7 @@
   display: inline-block;
   position: absolute;
   font-size: 15px;
+}
 
 .code-input {
   padding: 13px;
@@ -138,16 +139,6 @@
   @include bp(king) {
     width: 64%;
   }
-}
-
-.inline-block {
-  // width: 30%;
-  // height: 35px;
-  // padding: 0px;
-  // margin: 0px;
-  // padding-top: 3.5px;
-  // padding-bottom: 3.5px;
-  // display: inline-block;
 }
 
 .error-message {
