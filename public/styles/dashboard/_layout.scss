@@ -160,7 +160,6 @@
 
 .lobby-sidebar-code {
   position: relative;
-  height: 46px;
   opacity: 1;
   top: 0;
 }
@@ -172,4 +171,9 @@
 
 .lobby-sidebar-code.ng-hide-add, .lobby-sidebar-code.ng-hide-remove {
   transition: all linear 0.2s;
+}
+
+.input-wrapper.error-message {
+  color: $red;
+  margin-top: 11px;
 }

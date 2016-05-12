@@ -9,6 +9,7 @@ angular
 		var on = socketFactory.on;
 		var state = {
 			joinCodeErrorMessage: '',
+			joinCodeErrorMessage2: '',
 			joinQueueErrorMessage: '',
 			whereTo: null,
 			player: {},
@@ -32,34 +33,29 @@ angular
 		function joinQueue(message) {
 			on('player already in queue', function(data){
 				$state.go('lobby');
-				state.joinQueueErrorMessage = '';
-				state.joinQueueErrorMessage += 'User already in queue.';
+				state.joinQueueErrorMessage = 'User already in queue.';
 			});
 			on('added to queue', function() {
 				state.whereTo = 'queue';
 				$state.go('waiting');
 			});
-			$state.go('loading');
 			emit('queue', message);
 			console.log('Emitted: joinQueue');
 		}
 
 		function createRoom(joinCode) {
 			if (joinCode === undefined || joinCode.length < 3) {
-				state.joinCodeErrorMessage = '';
-				state.joinCodeErrorMessage += 'Minimum of 3 characters required.';
+				state.joinCodeErrorMessage ='Minimum of 3 characters required.';
 				return;
 			}
 
 			on('join code invalid', function(data){
-				state.joinCodeErrorMessage = '';
-				state.joinCodeErrorMessage += data.message;
+				state.joinCodeErrorMessage = data.message;
 			});
 
 			on('join code exists', function(data){
 				console.log('joinCode exists listener',data.message);
-				$state.go('lobby');
-				state.joinCodeErrorMessage += data.message;
+				state.joinCodeErrorMessage = data.message;
 			});
 
 			on('private game created', function(data){
@@ -67,15 +63,16 @@ angular
 			  $state.go('waiting');
 			});
 
-			emit('create private game', {joinCode: joinCode});
+			emit('create private game', {joinCode: joinCode.toLowerCase()});
 			console.log('Emitted: create privateGame');
-			$state.go('loading');
 		}
 
 		function joinRoom(joinCode) {
+
+			console.log("joincode kan", joinCode);
+
 			if (joinCode === undefined || joinCode.length < 3) {
-				state.joinCodeErrorMessage = '';
-				state.joinCodeErrorMessage += 'Minimum 3 characters required!';
+				state.joinCodeErrorMessage2 = 'Minimum 3 characters required!';
 				return;
 			}
 			on('private game exists', function(){
@@ -85,12 +82,9 @@ angular
 			});
 			on('private game doesnt exist', function(data) {
 				console.log('privateGame doesnt exist listener',data.message);
-				state.joinCodeErrorMessage += data.message;
-			 	$state.go('lobby');
+				state.joinCodeErrorMessage2 = data.message;
 			});
-			emit('attempt to join private game', {joinCode: joinCode});
-			console.log('Emitted: join privateGame');
-			$state.go('loading');
+			emit('attempt to join private game', {joinCode: joinCode.toLowerCase()});
 		}
 
 		function get(key){
