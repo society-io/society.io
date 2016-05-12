@@ -15,10 +15,10 @@
     var tokenObj = authFactory.attachToken({});
 
     socketFactory.connectSocket()
-      .then(function() {
-        console.log('promise resolved');
-        lobbyFactory.getPlayer();
-      });
+    .then(function() {
+      console.log('promise resolved');
+      lobbyFactory.getPlayer();
+    });
 
     vm.get = lobbyFactory.get;
     vm.queue = lobbyFactory.joinQueue;
@@ -42,7 +42,12 @@
       var message = lobbyFactory.get(val);
       return lobbyFactory.get(val);
     };
-
+	
+	
+	
+	
+		
+	
     vm.getLeaderboard = function() {
       return statsFactory.get('leaderboard');
     };

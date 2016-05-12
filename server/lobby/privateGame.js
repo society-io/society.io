@@ -38,7 +38,7 @@ var privateGameListeners = function(socket){
 
   socket.on('disconnect', function() {
     removeJoinCodeOf(socket.socketId);
-  });
+  })
 
 };
 
@@ -61,6 +61,7 @@ var storeJoinCode = function(data, socket) {
       console.log('Storing joinCode...');
       privateGames[data.joinCode] = socketsForGame;
       socketToCode[socket.socketId] = data.joinCode;
+      socket.updateRoom(data.joinCode);
     } else {
       console.log('Could Not Store joinCode');
       socket.emit('err', {
@@ -108,6 +109,7 @@ var storePlayer2 = function(data, socket) {
     }
 };
 
+
 var initiatePrivateGame = function(data, socket) {
   // Create a new privateGame using the right credentials
   var players = privateGames[data.joinCode];
@@ -146,6 +148,8 @@ var cancelPrivateGame = function(data, socket) {
     }
   }
 };
+
+
 
 module.exports = {
   privateGameListeners: privateGameListeners
