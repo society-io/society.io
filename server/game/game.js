@@ -148,11 +148,7 @@ Game.prototype.terminate = function(reason) {
   } else {
     winner = 0;
   }
-
-  if (reason === 'a player disconnected') {
-    console.log('reason is = ', reason);
-  }
-
+  
   if (!this.updatedMMR) {
     formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
     this.updatedMMR = true;
