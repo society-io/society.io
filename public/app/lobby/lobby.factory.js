@@ -120,10 +120,6 @@ angular
 			emit('update avatar', obj);
 		}
 
-		function addToJoincode(){
-			socket.emit('getJoinCode');
-		}
-
 		function listenFor(socket) {
 			socket.on('joinCode is', function(socket) {
 				return data;

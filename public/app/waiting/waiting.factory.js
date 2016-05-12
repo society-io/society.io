@@ -39,7 +39,7 @@
       function listeners() {
         on('joinCode is', function(data) {
           joinCode = data.joinCode;
-        console.log('ON JOIN CODE IS');
+          console.log('joinCode is listener',data.joinCode);
         });
 
         on('profile', function(resp){

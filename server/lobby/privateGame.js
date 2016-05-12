@@ -92,6 +92,7 @@ var storePlayer2 = function(data, socket) {
       // store socket within socketsForGame[1] of privateGames[joinCode]
       console.log('Storing player2...');
       privateGames[data.joinCode][1] = socket;
+      socketToCode[socket.socketId] = data.joinCode;
       console.log('Emitting private game exists...');
       socket.emit('private game exists');
       setTimeout(function(){
