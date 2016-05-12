@@ -32,9 +32,7 @@
 
     $scope.$on('runAnimations', runAnimations);
 
-    // View State Elements
-    vm.currentHover = '';
-    vm.showEmotes = false;
+    // factory getters
     vm.choices = bf.get('choices');
     vm.setChoice = bf.setChoice;
     vm.get = bf.get;
@@ -42,6 +40,11 @@
     vm.winsAgainst = bfLogic.winsAgainst;
     vm.losesAgainst = bfLogic.losesAgainst;
     vm.getTime = bfTimer.getTime;
+    
+    // View State Elements
+    vm.currentHover = '';
+    vm.showEmotes = false;
+    vm.showSideControls = false;
     vm.player = {
       showOptions: false
     };
@@ -82,6 +85,7 @@
       vm.player.showOptions = true;
       setTimeout(function() {
         vm.opponent.showOptions = true;
+        vm.showSideControls = true;
       }, 500);
     }
   } // end of controller function
