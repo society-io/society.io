@@ -166,7 +166,7 @@ Game.prototype.playerOn = function(event, cb) {
    *  from individual players to trigger game logic related events
    */
    
-  console.log('GAME PLAYERON '.cyan, event);
+  console.log('GAME PLAYERON'.yellow, event);
   this.events[event] = cb;
 };
 
