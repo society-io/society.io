@@ -23,8 +23,7 @@
 
       return {
         get: get,
-        cancelRoom: cancelRoom,
-        removeFromQueue: removeFromQueue
+        cancelRoom: cancelRoom
       };
 
       function get(keyName) {
