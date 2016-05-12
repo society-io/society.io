@@ -53,7 +53,7 @@
 
 			<h2>My Avatar</h2>
 			<div class="my-avatar">
-				<i class="fa fa-hand-{{Lobby.myAvatar()}}-o fa-lg" aria-hidden="true"></i>
+				<i class="fa fa-hand-{{Lobby.get('avatar')}}-o fa-lg" aria-hidden="true"></i>
 			</div>
 
 
@@ -61,29 +61,31 @@
 
 			<div ng-show="Lobby.showAvatars">
 				<h2>Options</h2>
-				<div class="avatar-container">
-					<div class="avatar" id="rock" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatarClicked') === 'rock'}" ng-show="'rock' !== Lobby.myAvatar()" ng-click="">
+				<div class="change-avatar-container">
+					<div class="avatars-available" id="rock" ng-click="Lobby.setNewAvatar('rock')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'rock'}" ng-show="'rock' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<div class="avatar" id="paper" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'paper'}" ng-show="'paper' !== Lobby.myAvatar()" ng-click="">
+					<div class="avatars-available" id="paper" ng-click="Lobby.setNewAvatar('paper')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'paper'}" ng-show="'paper' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<div class="avatar" id="scissors" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'scissors'}" ng-show="'scissors' !== Lobby.myAvatar()" ng-click="">
+					<div class="avatars-available" id="scissors" ng-click="Lobby.setNewAvatar('scissors')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'scissors'}" ng-show="'scissors' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<div class="avatar" id="lizard" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'lizard'}" ng-show="'lizard' !== Lobby.myAvatar()" ng-click="">
+					<div class="avatars-available" id="lizard" ng-click="Lobby.setNewAvatar('lizard')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'lizard'}" ng-show="'lizard' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<div class="avatar" id="spock" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'spock'}" ng-show="'spock' !== Lobby.myAvatar()" ng-click="">
+					<div class="avatars-available" id="spock" ng-click="Lobby.setNewAvatar('spock')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'spock'}" ng-show="'spock' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
 					</div>
+
+					<button class="inline-block-small red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')})">Update</button>
 				</div>
 
-				<button class="block red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.myAvatar()})">Update Avatar</button>
+				
 
 				<!-- CHANGE MY AVATAR TO THE ONE CLICKED -->
 

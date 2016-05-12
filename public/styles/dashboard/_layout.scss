@@ -59,4 +59,53 @@
   // margin-bottom: 10px;
 }
 
+.change-avatar-container {
+  width: 100%;
+  margin: auto;
+  position: relative;
+  font-size: 0;
+  display: inline-block;
+  height: 100px;
+  // margin-bottom: 20px;
+}
+
+.avatars-available {
+  width: 15%;
+  height: 100%;
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  margin-right: 1.5%;
+  border-radius: 3px;
+  position: relative;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+  margin-bottom: 10px;
+  padding-right: 18%;
+}
+
+.avatars-available:hover{
+  color: $red;
+}
+
+.avatar-clicked {
+  color: $red;
+}
+
+.avatars-available:last-child {
+  margin-right: 0;
+}
+
+.inline-block-small {
+  width: 23%;
+  height: 45px;
+  padding: 0px;
+  margin: 0px;
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  display: inline-block;
+  position: absolute;
+  font-size: 15px;
+}
 
