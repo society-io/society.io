@@ -1,0 +1,119 @@
+<div class="admin-bar">
+	<div class="container">
+		<div class="col-md-12">
+			<h1>Society <span>The Game</span></h1>
+			<!--START Music Control -->
+    	<div audio options="options"></div>
+			<!--END Music Control -->
+			<div class="admin-bar-right">
+				<i class="fa fa-user" aria-hidden="true"></i>
+				<a href="" ng-click="Lobby.signOut()">Sign Out</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+
+	<div class="col-md-4">
+		<div class="sidebar lobby-left lobby-content-container">
+			<h2>Queue</h2>
+			<button class="block red" ng-click="Lobby.queue()">Queue for a match</button>
+			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
+			<h2>Custom Game</h2>
+			<button class="block blue" ng-click="Lobby.showCreateGameController = !Lobby.showCreateGameController">create private game</button>
+
+			<form>
+				<div ng-show="Lobby.showCreateGameController">
+					<!--TODO:create model object in controller and pass to emit event on btn click-->
+					<div class="input-wrapper">
+						<input class="code-input" ng-model='Lobby.joinCode' placeholder="Enter Custom Code">
+						<button class="inline-block red" ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
+						<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage')">{{Lobby.getErrorMessage('joinCodeErrorMessage')}}</div>
+					</div>
+				</div>
+			</form>
+
+			<button class="block green" ng-click="Lobby.showJoinGameController = !Lobby.showJoinGameController">join private game</button>
+
+			<form>
+				<div ng-show="Lobby.showJoinGameController">
+					<!--TODO:create model object in controller and pass to emit event on btn click-->
+					<div class="input-wrapper">
+						<input class="code-input" ng-model='joinCode' placeholder="Enter Join Code">
+				  	<button class="inline-block red" ng-click="Lobby.joinRoom(joinCode)">join</button>
+				  	<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage()">{{Lobby.getErrorMessage()}}</div>
+					</div>
+				</div>
+			</form>
+
+		</div><!-- End sidebar -->
+
+		<div class="sidebar lobby-left lobby-content-container">
+
+			<h2>My Avatar</h2>
+			<div class="my-avatar">
+				<i class="fa fa-hand-{{Lobby.myAvatar()}}-o fa-lg" aria-hidden="true"></i>
+			</div>
+
+
+			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars">Change Avatar</button>
+
+			<div ng-show="Lobby.showAvatars">
+				<h2>Options</h2>
+				<div class="avatar-container">
+					<div class="avatar" id="rock" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatarClicked') === 'rock'}" ng-show="'rock' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatar" id="paper" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'paper'}" ng-show="'paper' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatar" id="scissors" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'scissors'}" ng-show="'scissors' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatar" id="lizard" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'lizard'}" ng-show="'lizard' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatar" id="spock" ng-click=""  ng-class="{'avatar-clicked': Lobby.get('avatar') === 'spock'}" ng-show="'spock' !== Lobby.myAvatar()" ng-click="">
+						<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
+					</div>
+				</div>
+
+				<button class="block red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.myAvatar()})">Update Avatar</button>
+
+				<!-- CHANGE MY AVATAR TO THE ONE CLICKED -->
+
+			</div>
+		</div>
+
+	</div><!-- End bootstrap column -->
+
+	<div class="col-md-8">
+		<div class="lobby-right lobby-content-container">
+			<h1>Player Stats</h1>
+
+			<div>
+				{{Lobby.get('player')}}
+				<p>username</p>
+				<p>mmr</p>
+				<p>wins</p>
+				<p>losses</p>
+			</div>
+		</div>
+
+		<div class="lobby-right lobby-content-container">
+			<h1>Leader Board</h1>
+
+			<div ng-repeat="users in Lobby.getLeaderboard()">
+			<div>username:{{users.username}}</div>
+			<div>mmr:{{users.mmr}}</div>
+			<div>wins:{{users.wins}}</div>
+			<div>losses:{{users.losses}}</div>
+			</div>
+		</div>
+	</div>
+</div>

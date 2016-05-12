@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app='app' ng-controller="AppController as appController">
+<head>
+  <title>Society | The Game</title>
+    <link rel='stylesheet' href='./dist/style.css'>
+    <link rel='stylesheet' href='./bower_components/angular-spinkit/build/angular-spinkit.min.css'>
+    <link rel="stylesheet" href="./bower_components/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="./audio/ng-audio/ng-audio.min.css">
+
+    <script src='./bower_components/angular/angular.min.js'></script>
+    <script src='./bower_components/angular-ui-router/release/angular-ui-router.min.js'></script>
+    <script src='./bower_components/angular-animate/angular-animate.min.js'></script>
+    <script src='./bower_components/angular-socket-io/socket.min.js'></script>
+    <script src='./bower_components/socket.io-client/socket.io.js'></script>
+    <script src='./bower_components/angular-spinkit/build/angular-spinkit.min.js'></script>
+    <script type="text/javascript" src="./audio/ng-audio/ng-audio.min.js"></script>
+
+    <script src='./dist/built.js'></script>
+</head>
+
+<body class="{{appController.bodyClasses}}">
+
+  <div class="view-container" ui-view></div>
+  <div audio options="options"></div>
+
+</body>
+</html>

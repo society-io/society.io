@@ -1,0 +1,86 @@
+<div class="container">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="logo-container">
+			<h1 class="logo">Society</h1>
+			<h2 class="subtitle">The Game</h2>
+		</div>
+		<form class="auth-form sign-up" name="signUpForm" method="post" ng-show="Auth.signUpForm">
+			<div class="input-container">
+				<input
+					ng-class="{ 'form-error' : Auth.usernameUp.$invalid && !Auth.usernameUp.$pristine }"
+					ng-model="Auth.usernameUp"
+					type="text" placeholder="Username" class="input">
+				<i class="fa fa-user" aria-hidden="true"></i>
+			</div>
+
+			<div class="input-container">
+				<input
+					ng-class="{ 'form-error' : Auth.emailUp.$invalid && !Auth.emailUp.$pristine }"
+					ng-model="Auth.emailUp"
+					type="email" placeholder="Email" class="input">
+				<i class="fa fa-envelope" aria-hidden="true"></i>
+			</div>
+
+			<div class="input-container">
+				<input
+					ng-class="{ 'form-error' : Auth.passwordUp.$invalid && !Auth.passwordUp.$pristine }"
+					ng-model="Auth.passwordUp"
+					type="password" placeholder="Password" class="input">
+				<i class="fa fa-lock" aria-hidden="true"></i>
+			</div>
+		
+			<div class="message"><h2>Select an avatar:</h2></div>
+			
+			<div class="avatar-container">
+				<div class="avatar" id="rock" ng-click="Auth.selectAvatar('rock')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'rock'}">
+					<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
+				</div>
+				<div class="avatar" id="paper" ng-click="Auth.selectAvatar('paper')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'paper'}">
+					<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
+				</div>
+				<div class="avatar" id="scissors" ng-click="Auth.selectAvatar('scissors')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'scissors'}">
+					<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
+				</div>
+				<div class="avatar" id="lizard" ng-click="Auth.selectAvatar('lizard')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'lizard'}">
+					<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
+				</div>
+				<div class="avatar" id="spock" ng-click="Auth.selectAvatar('spock')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'spock'}">
+					<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
+				</div>
+			</div>
+
+
+			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp, avatar: Auth.get('avatarClicked')})">Sign Up</button>
+			
+			<!-- for error on signUp -->
+			<div class="error-message" ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
+
+			<div class="switch-view-link">
+				<a href="" ng-click="Auth.set('signinErrorMessage', '') ; Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
+			</div>
+		</form>
+
+		<form class="auth-form sign-in" ng-show='Auth.signInForm' method="post" ng-show="Auth.signInForm">
+			<div class="input-container">
+				<input
+				ng-model="Auth.usernameIn" type="text" placeholder="Username">
+				<i class="fa fa-user" aria-hidden="true"></i>
+			</div>
+			<div class="input-container">
+				<input
+					ng-model="Auth.passwordIn" type="password" placeholder="Password">
+				<i class="fa fa-lock" aria-hidden="true"></i>
+			</div>
+			<button class="block yellow" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})">Login</button>
+
+			<!-- for error on signIn -->
+			<div class="error-message" ng-if="Auth.signInErrorMessage() && Auth.signInForm">{{Auth.signInErrorMessage()}}</div>
+
+			<div class="switch-view-link">
+				<a href="" ng-click="Auth.set('signupErrorMessage', '') ; Auth.signUpForm = true ; Auth.signInForm = false">Sign Up</a>
+			</div>
+
+		</form>
+
+	</div>
+</div>

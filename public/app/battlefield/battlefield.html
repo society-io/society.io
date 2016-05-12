@@ -1,0 +1,247 @@
+<!-- <button ng-click="Bf.debugger()">click the debugger!!!</button> -->
+<div class="board">
+
+  <!-- Round waiting -->
+  <div class="round-waiting overlay overlay-show" ng-show="!Bf.get('gameStarted') || Bf.get('matchOver')">
+    <div class="round-waiting-msg-container">
+      <h1>
+        {{Bf.get('centerMessage')}}
+      </h1>
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+      <h2 class="instructions-label" ng-hide="Bf.get('gameStarted')">
+        <i class="fa fa-hand-o-down" aria-hidden="true"></i> 
+        Mouseover an option to view how it affects your opponent. 
+        <i class="fa fa-hand-o-down" aria-hidden="true"></i>
+      </h2>
+    </div>
+  </div>
+
+  <div class="opponent">
+    <div class="fluid-container">
+      <div class="opponent-label col-md-12">
+        <p>
+          <span class="player-stat-group">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span class="player-stat player-stat-un">{{Bf.get('opponent').profile.username}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-trophy" aria-hidden="true"></i> MMR:
+            <span class="player-stat player-stat-mmr">{{Bf.get('opponent').profile.mmr}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-bolt" aria-hidden="true"></i> Win Rate:
+            <span class="player-stat player-stat-winrate">{{Bf.get('opponent').profile.winrate}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i> Win/Loss:
+            <span class="player-stat player-stat-wins">{{Bf.get('opponent').profile.wins}}</span>/
+            <span class="player-stat player-stat-wins">{{Bf.get('opponent').profile.losses}}</span>
+          </span>
+        </p>
+      </div>
+      <div class="tile-container col-md-12 animated fadeIn" ng-show="Bf.opponent.showOptions">
+
+        <!-- Individual Tiles -->
+        <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}" ng-class="{
+          ties : Bf.currentHover === choice
+        }">
+          <div class="health health-{{Bf.get('opponent').health[choice] || 0}}"
+            ng-class="{
+              dark: Bf.get('opponent').choice !== choice && Bf.get('roundWinner')
+            }">
+            <div class="health-spinner"></div>
+            <div class="tile"
+              ng-class="{
+                dead: Bf.get('opponent').health[choice] === 0,
+                lose: Bf.currentHover === Bf.winsAgainst(choice)[0] || Bf.currentHover === Bf.winsAgainst(choice)[1],
+                win: Bf.currentHover === Bf.losesAgainst(choice)[0] || Bf.currentHover === Bf.losesAgainst(choice)[1],
+                winRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
+                lostRound: Bf.get('opponent').choice === choice && Bf.get('roundWinner') === Bf.get('player').id,
+                dark: Bf.get('opponentPlayed')
+              }"
+            ><div class="tile-inner">
+              <i class="bg-icon fa fa-lg" ng-class="{
+                  'fa-gavel': choice === 'jail',
+                  'fa-taxi': choice === 'cop',
+                  'fa-file-text': choice === 'tax',
+                  'fa-rocket': choice === 'rich',
+                  'fa-trash': choice === 'bum'
+                }" aria-hidden="true"></i>
+                <p class="choice-text">
+                  {{choice}}
+                </p>
+            </div>
+            </div>
+          </div>
+        </div><!-- End Tiles -->
+
+      </div>
+    </div>
+
+  </div><!-- End Opponent -->
+
+  <!-- Playing battlefield -->
+  <div class="playing-field container-fluid">
+  
+    <div class="playing-opponent col-md-6 col-md-offset-3">
+      <div class="opponent-player-choice">
+        <div class="big-tile" ng-class="{
+          played: Bf.get('opponentPlayed') || Bf.get('opponent').choice,
+          win: Bf.get('opponent').id === Bf.get('roundWinner'),
+          lose: Bf.get('player').id === Bf.get('roundWinner')
+        }">
+          <i class="bg-icon fa fa-2x" ng-class="{
+              'fa-gavel': Bf.get('opponent').choice === 'jail',
+              'fa-taxi': Bf.get('opponent').choice === 'cop',
+              'fa-file-text': Bf.get('opponent').choice === 'tax',
+              'fa-rocket': Bf.get('opponent').choice === 'rich',
+              'fa-trash': Bf.get('opponent').choice === 'bum'
+            }" aria-hidden="true"></i>
+          <p ng-show="Bf.get('opponentPlayed') && Bf.get('roundWinner') === null">Opponent Played</p>
+          <p ng-show="Bf.get('roundWinner') === 0">Tie</p>
+          <p ng-show="Bf.get('roundWinner')">{{Bf.get('opponent').choice}}</p>
+        </div>
+      </div>
+
+      <div class="side-controls right-side-control">
+        <!-- Timer -->
+        <div class="timer-container">
+          <div class="timer">
+            <p>Round Timer:</p>
+            <h1>{{Bf.getTime()}}</h1>
+          </div>
+        </div>
+
+        <!-- Forfeit -->
+        <div class="forfeit-container">
+          <div class="forfeit">
+
+            <button class="red" ng-click="Bf.forfeit()">
+              <i class="fa fa-hand-peace-o fa-lg" aria-hidden="true"></i>
+              <p>Forfeit</p>
+            </button>
+          </div>
+        </div>
+      </div><!-- side controls end -->
+
+      <div class="side-controls left-side-control">
+        <div class="game-key">
+          <h2>
+            <span class="red">Red</span> beats you.<br>
+            You beat <span class="green">green.</span>
+          </h2>
+        </div>
+      </div>
+    </div><!-- Playing Opponent End -->
+
+    <div class="playing-player col-md-4 col-md-offset-4">
+      <div class="current-player-choice">
+          <div class="big-tile" ng-class="{
+            played: Bf.get('player').choice,
+            win: Bf.get('player').id === Bf.get('roundWinner'),
+            lose: Bf.get('opponent').id === Bf.get('roundWinner')
+          }">
+            <i class="bg-icon fa fa-2x" ng-class="{
+                'fa-gavel': Bf.get('player').choice === 'jail',
+                'fa-taxi': Bf.get('player').choice === 'cop',
+                'fa-file-text': Bf.get('player').choice === 'tax',
+                'fa-rocket': Bf.get('player').choice === 'rich',
+                'fa-trash': Bf.get('player').choice === 'bum'
+              }" aria-hidden="true"></i>
+            <p ng-show="Bf.get('roundWinner') === null">{{Bf.get('player').choice}}</p>
+            <p ng-show="Bf.get('roundWinner') === 0">Tie</p>
+            <p ng-show="Bf.get('roundWinner')">{{Bf.get('player').choice}}</p>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="player">
+    <div class="fluid-container">
+
+      <!-- Emotes 
+      <div class="container emote-container">
+        
+        <div class="emote-toggle" ng-click="Bf.emoteToggle()">
+          <i class="fa fa-commenting fa-lg" aria-hidden="true"
+            ng-class="{
+              'fa-commenting': !Bf.showEmotes,
+              'fa-times': Bf.showEmotes
+            }"
+          ></i>
+        </div>
+
+        <div class="emote-choices" ng-show="Bf.showEmotes">
+          <p>
+            Good Luck | Sorry | Well Played | Oops <span ng-click="Bf.emoteToggle()">Toggle Emotes</span>
+          </p>
+        </div>
+      </div> End Emotes -->
+
+      <!-- Tile Container -->
+      <div class="tile-container col-md-12 bounceInDown animated" ng-show="Bf.player.showOptions">
+        <!-- Individual Tiles -->
+        <div ng-repeat="choice in Bf.choices" class="tile-pos" id="{{choice}}">
+          <div class="health health-{{Bf.get('player').health[choice] || 0}}"
+            ng-class="{
+              dark: Bf.get('player').choice !== choice && Bf.get('roundWinner')
+            }">
+            <div class="health-spinner"></div>
+            <div class="tile"
+              ng-mouseenter="Bf.currentHover = choice"
+              ng-mouseleave="Bf.currentHover = ''"
+              ng-class="{
+                dead: Bf.get('player').health[choice] === 0,
+                active: Bf.get('player').choice === choice,
+                winRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('player').id,
+                lostRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
+                dark: Bf.get('submitted')
+              }"
+              ng-click="Bf.get('player').health[choice] && !Bf.get('player').choice && Bf.setChoice(choice)">
+              <div class="tile-inner">
+                <i class="bg-icon fa fa-lg" ng-class="{
+                  'fa-gavel': choice === 'jail',
+                  'fa-taxi': choice === 'cop',
+                  'fa-file-text': choice === 'tax',
+                  'fa-rocket': choice === 'rich',
+                  'fa-trash': choice === 'bum'
+                }" aria-hidden="true"></i>
+                <p class="choice-text">
+                  {{choice}}
+                </p>
+              </div>
+              </div>
+          </div>
+        </div><!-- End (tiles) -->
+
+      </div><!-- End Tile Container -->
+      <div class="player-label col-md-12">
+        <p>
+          <span class="player-stat-group">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span class="player-stat player-stat-un">{{Bf.get('player').profile.username}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-trophy" aria-hidden="true"></i> MMR:
+            <span class="player-stat player-stat-mmr">{{Bf.get('player').profile.mmr}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-bolt" aria-hidden="true"></i> Win Rate:
+            <span class="player-stat player-stat-winrate">{{Bf.get('player').profile.winrate}}</span>
+          </span>
+          <span class="player-stat-group">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i> Win/Loss:
+            <span class="player-stat player-stat-wins">{{Bf.get('player').profile.wins}}</span>/
+            <span class="player-stat player-stat-wins">{{Bf.get('player').profile.losses}}</span>
+          </span>
+        </p>
+      </div>
+    </div>
+
+  </div><!-- End Player -->
+
+</div><!-- End Board -->

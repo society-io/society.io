@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+//colors
+
+$white: #fff;
+
+$darkgray: #2d2d2d;
+
+$yellow-l2: #FCD197;
+$yellow-l1: #F7C17C;
+$yellow: #FFBC66;
+$yellow-d1: #C98B3A;
+$yellow-d2: #AD7731;
+
+$red: #DA6876;
+
+$blue: #45ABC3;
+
+$green: #45C3A1;
+
+$brown: #664923;
+
+$tileLightBlue: #658BB1;
+$tileBlue: #375675;
+$tileRed: #CC5151;
+$tileGreen: #3BED68;
+$tilePurple: #9966AD;
+
+// animations
+
+$defaultTransition: all linear 0.2s;
+$fastTransition: all linear 0.05s;
+
+$borderTransition: background-color linear 0.2s;
+
+// hyperlinks
+
+a {
+  opacity: 0.8;
+  transition: $defaultTransition;
+  color: #fff;
+}
+
+a:hover {
+  opacity: 1;
+  color: $blue;
+  text-decoration: none;
+}
