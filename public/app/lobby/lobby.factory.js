@@ -13,7 +13,8 @@ angular
 			whereTo: null,
 			player: {},
 			joinCode: '',
-			avatar: ''
+			avatar: '',
+			tempAvatar: ''
 		};
 
 		return {
@@ -22,7 +23,10 @@ angular
 			joinRoom: joinRoom,
 			get: get,
 			getPlayer: getPlayer,
-			getJoinCode: getJoinCode
+			getJoinCode: getJoinCode,
+			set: set,
+			setNewAvatar: setNewAvatar,
+			updateAvatar: updateAvatar
 		};
 
 		function joinQueue(message) {
@@ -91,8 +95,7 @@ angular
       on('you are', function(resp) {
         console.log('this is user:', resp);
         state.player = resp;
-        state.avatar = '';
-        state.avatar += resp.avatar;
+        state.avatar = resp.avatar;
       });
       emit('who am i');
 		}
@@ -104,28 +107,30 @@ angular
 		  emit('get joinCode');
 		}
 
+		function setNewAvatar(avatar){
+			state.tempAvatar = '';
+			state.tempAvatar += avatar;
+		}
+
 		function updateAvatar(obj) {
 			// obj consists of avatar and email
+			console.log('this is temp variable: ', obj);
+			state.avatar = obj.avatar;
 			emit('update avatar', obj);
 		}
 
+		function addToJoincode(){
+			socket.emit('getJoinCode');
+		}
+			
+		function listenFor(socket) {
+			socket.on('joinCode is', function(socket) {
+				return data;
+			}); 
+		}
+
+		function set(key, value){
+			state[key] = value;
+		}
+
 	}
-
-function addToJoincode(){
-	socket.emit('getJoinCode');
-		
-		
-	}
-	
-function listenFor(socket) {
-	socket.on('joinCode is', function(socket) {
-		return data;
-	}); 
-}
-
-
-
-
- 
-	
-	

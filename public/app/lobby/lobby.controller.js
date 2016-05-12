@@ -26,7 +26,9 @@
     };
 
     vm.get = lobbyFactory.get;
+    vm.set = lobbyFactory.set;
     vm.queue = lobbyFactory.joinQueue;
+
 
     vm.createRoom = lobbyFactory.createRoom;
     vm.showCreateGameInput = false;
@@ -69,8 +71,10 @@
 
     vm.updateAvatar = function(obj) {
       console.log('this is update avatar: ', obj);
-      lobbyFactory(obj);
+      lobbyFactory.updateAvatar(obj);
     };
+
+    vm.setNewAvatar = lobbyFactory.setNewAvatar;
 
   }
 })();
