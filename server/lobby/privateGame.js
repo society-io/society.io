@@ -38,7 +38,6 @@ var privateGameListeners = function(socket){
   socket.on('disconnect', function() {
     removeJoinCodeOf(socket.socketId);
   });
-
 };
 
 var storeJoinCode = function(data, socket) {
@@ -94,13 +93,23 @@ var storePlayer2 = function(data, socket) {
       privateGames[data.joinCode][1] = socket;
       socketToCode[socket.socketId] = data.joinCode;
       console.log('Emitting private game exists...');
+
+
+
+
+
       socket.emit('private game exists');
+
+
+
       setTimeout(function(){
         socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
       }, 3000);
+
+
     } else { // if Not
       console.log('Could Not Store player2');
-      socket.emit('private game doesnt exist', {
+      socket.emit('private game does not exist', {
         message: 'Wrong join code, try again.'
       });
     }
@@ -115,13 +124,16 @@ var initiatePrivateGame = function(data, socket) {
 	var player1 = players[0];
   var player2 = players[1];
 
-	var profile = {p1: player1.getUserModel(), p2: player2.getUserModel()};
+  console.log('PLAYER1', player1);
+	console.log('PLAYER2', player2);
 
-	console.log('PROFILES'.red, profile);
-
-	player1.delayEmit('profile', profile, 1000);
-	player2.delayEmit('profile', profile, 1000);
-
+	// var profile = {p1: player1.getUserModel(), p2: player2.getUserModel()};
+	//
+	// console.log('PROFILES'.red, profile);
+	//
+	// player1.delayEmit('profile', profile, 1000);
+	// player2.delayEmit('profile', profile, 1000);
+	//
 
   if(players.length === 2) {
     console.log('Initiating privateGame...');
