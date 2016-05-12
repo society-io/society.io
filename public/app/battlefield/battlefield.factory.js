@@ -34,7 +34,7 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
     opponentPlayed: false,
     gameStarted: false,
     forfeited: false,
-    centerMessage: 'Game starting in a few seconds...'
+    centerMessage: ''
   };
 
   if (socketFactory.isConnected()) {

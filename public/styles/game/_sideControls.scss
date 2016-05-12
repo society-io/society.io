@@ -7,6 +7,7 @@
   color: #fff;
   left: 0;
   bottom: -55px;
+  transition: all linear 1s;
 
   @include bp(pawn) {
     bottom: -60px;
@@ -29,6 +30,7 @@
   right: 0;
   bottom: -63px;
   z-index: 1000;
+  transition: all linear 1s;
   
   @include bp(pawn) {
     bottom: -68px;
