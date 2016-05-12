@@ -23,8 +23,7 @@
 
       return {
         get: get,
-        cancelRoom: cancelRoom,
-        removeFromQueue: removeFromQueue
+        cancelRoom: cancelRoom
       };
 
       function get(keyName) {
@@ -34,12 +33,6 @@
       function cancelRoom(joinCode) {
         console.log('Canceling privateGame...');
         emit('cancel room', {joinCode: joinCode});
-        $state.go('lobby');
-      }
-
-      function removeFromQueue() {
-        console.log('Removing From Queue...');
-        emit('disconnect');
         $state.go('lobby');
       }
 
