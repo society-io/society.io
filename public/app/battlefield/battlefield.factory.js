@@ -92,7 +92,8 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
   }
 
   function listeners() {
-	console.log('REGISTERING LISTENERS');
+
+    console.log('REGISTERING LISTENERS');
     on('gameReady', function(resp) {
       // store player IDs in state
       state.player = new Player(resp.playerId, resp.playerProfile);
@@ -199,6 +200,22 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
         $state.go('lobby');
         boardReset();
       }, 3000);
+    });
+
+
+    on('matchTerminated', function(resp) {
+      if (resp.reason === 'playerDisconnected') {
+        bfTimer.stopTimer();
+        state.forfeited = true;
+        state.matchOver = true;
+        state.roundWinner = state.player.id;
+        state.centerMessage = 'Opponent Disconnected. Redirecting to lobby...';
+
+        setTimeout(function() {
+          $state.go('lobby');
+          boardReset();
+        }, 3000);
+      }
     });
   }
 
