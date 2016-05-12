@@ -38,6 +38,8 @@
     vm.showJoinGameInput = false;
     vm.showJoinGameController = false;
 
+    vm.showPreQueueWarning = false;
+
     vm.showAvatars = false;
 
     vm.signOut = function() {
@@ -50,10 +52,14 @@
       return lobbyFactory.get(val);
     };
 	
-	
-	
-	
-		
+    vm.toggleQueueWarning = function() {
+      console.log("inside toggleQueueWarning()");
+      if(vm.showPreQueueWarning) {
+        vm.showPreQueueWarning = false;
+      } else {
+        vm.showPreQueueWarning = true;
+      }
+    };
 	
     vm.getLeaderboard = function() {
       return statsFactory.get('leaderboard');

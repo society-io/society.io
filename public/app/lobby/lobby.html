@@ -18,7 +18,12 @@
 	<div class="col-md-4">
 		<div class="sidebar lobby-left lobby-content-container">
 			<h2>Queue</h2>
-			<button class="block red" ng-click="Lobby.queue()">Queue for a match</button>
+			<button class="block red" ng-click="Lobby.toggleQueueWarning()">Queue for a match</button>
+			<div ng-show="Lobby.showPreQueueWarning">
+			WARNING:  You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players. 
+			<button ng-click="Lobby.queue()">Confirm</button>
+			<button ng-click="Lobby.toggleQueueWarning()">Decline</button>
+			</div>
 			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
 			<h2>Custom Game</h2>
 			<button class="block blue" ng-click="Lobby.showCreateGameController = !Lobby.showCreateGameController">create private game</button>
