@@ -37,12 +37,13 @@
       }
 
       function listeners() {
-        on('joinCode is', function(data){
+        on('joinCode is', function(data) {
           joinCode = data.joinCode;
+        console.log('ON JOIN CODE IS');
         });
 
         on('profile', function(resp){
-          console.log('this is whats wrong, expecting resp', resp);
+	        console.log('ON PROFILE');
           playerInfo.player1Name = resp.p1.username;
           playerInfo.player1MMR = resp.p1.mmr;
           playerInfo.player2Name = resp.p2.username;
@@ -50,7 +51,9 @@
         });
 
         on('match ready', function() {
+        console.log('ON MATCH READY --> GO TO BF');
           $timeout(function(){
+          console.log('match ready about to state.go to battlefield');
             $state.go('battlefield');
           }, 5000);
         });

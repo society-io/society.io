@@ -37,6 +37,7 @@ SocketAPI.prototype.on = function(event, cb, auth) {
   if (auth) {
     this.socket.on(event, authenticate.bind(this));
   } else {
+    console.log('ON -->: '.magenta, event);
     this.socket.on(event, cb);
   }
 	function authenticate(data) {
@@ -54,6 +55,7 @@ SocketAPI.prototype.once= function (event, cb) {
 
 SocketAPI.prototype.emit = function(event, data) {
 	this.socket.emit(event, data);
+	console.log('EMIT -->: '.cyan, event, data);
 	this.emitters[event]=this.socketId;
 };
 
@@ -61,6 +63,7 @@ SocketAPI.prototype.delayEmit = function(event, data, wait){
 	var sock = this;
 	setTimeout(function () {
 		sock.emit(event, data);
+		console.log('DELAYED  EMIT'.yellow, event, 'DATA SENT'.yellow, data);
   }, wait);
 };
 
@@ -74,8 +77,8 @@ SocketAPI.prototype.updateStats = function(obj) {
   this.user._doc.losses = obj.losses;
 };
 
-SocketAPI.prototype.getUserEmail = function() {
-	return this.user._doc.email;
+SocketAPI.prototype.getUsername = function() {
+	return this.user._doc.username;
 };
 
 SocketAPI.prototype.getSocketId = function () {
