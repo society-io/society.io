@@ -2,7 +2,7 @@ var onDisconnect = function(player) {
   // this = game instance
   console.log(player + ' socket disconnected!');
   console.log('inside onDisconnect. args[1] = ', arguments[1]);
-  this.terminate('a player disconnected.');
+  this.terminate('playerDisconnected');
 };
 
 var onChoice = function(data) {
