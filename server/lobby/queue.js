@@ -62,7 +62,7 @@ function queueMatch() {
 		player2.delayEmit('profile', profile, 1000);
 
 		new Game(player1, player2).init();
-		console.log('INITIATED NEW GAME')
+		console.log('INITIATED NEW GAME');
 		player1.delayEmit('match ready', 1000);
 		player2.delayEmit('match ready', 1000);
 	}

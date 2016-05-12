@@ -13,7 +13,7 @@ var Game = function(player1Socket, player2Socket) {
 
   // event listener/trigger storage
   this.events = {};
-	console.log('GAME EVENTS: '.red, this.events)
+	console.log('GAME EVENTS: '.red, this.events);
   // instantiate 2 user objects with ids and socket references
   this.player1 = new Player(1, player1Socket, this.events);
   this.player2 = new Player(2, player2Socket, this.events);
@@ -126,7 +126,7 @@ Game.prototype.emit = function(event, data, p1data, p2data) {
     data = data || {};
     data.event = event;
     this.player1.socket.emit(event, data);
-    console.log('GAME PLAYER1 EMIT'.cyan, event, data)
+    console.log('GAME PLAYER1 EMIT'.cyan, event, data);
     this.player2.socket.emit('GAME PLAYER2 EMIT'.cyan, event, data);
   }
 };

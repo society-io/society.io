@@ -13,7 +13,7 @@ var onChoice = function(data) {
 var onNoChoice = function() {
   // this = player obj
   this.updateChoice('noChoice');
-  console.log('NO CHOICE')
+  console.log('NO CHOICE');
 };
 
 var onClientGameReady = function() {
