@@ -13,7 +13,7 @@ var Game = function(player1Socket, player2Socket) {
 
   // event listener/trigger storage
   this.events = {};
-
+	console.log('GAME EVENTS: '.red, this.events)
   // instantiate 2 user objects with ids and socket references
   this.player1 = new Player(1, player1Socket, this.events);
   this.player2 = new Player(2, player2Socket, this.events);
@@ -64,6 +64,7 @@ Game.prototype.init = function() {
   // once both players are ready, emit gameReady to both clients.
   game.playerOn('playerReady', function(player) {
     if (game.player1.readyToPlay && game.player2.readyToPlay) {
+	    console.log('PLAYER PLAYER READY EMIT'.red);
 
       game.emit('gameReady', null, {
           // player 1
@@ -78,6 +79,7 @@ Game.prototype.init = function() {
           playerProfile: game.player2.profile,
           opponentProfile: game.player1.profile
         });
+	    console.log('GAME READY EMIT'.yellow);
 
       game.newRound();
     }
@@ -108,10 +110,10 @@ Game.prototype.emit = function(event, data, p1data, p2data) {
   // validation: make sure that either data OR p1data&p2data is defined
   if ( (data && (p1data || p2data)) ||
        (!data && (!p1data || !p2data))) {
-    console.error('Game emission called with invalid arguments. game/game.js');
-    console.error('data = ', data);
-    console.error('p1data = ', p1data);
-    console.error('p2data = ', p2data);
+    console.log('Game emission called with invalid arguments. game/game.js');
+    console.log('data = ', data);
+    console.log('p1data = ', p1data);
+    console.log('p2data = ', p2data);
     return;
   }
 
@@ -124,7 +126,8 @@ Game.prototype.emit = function(event, data, p1data, p2data) {
     data = data || {};
     data.event = event;
     this.player1.socket.emit(event, data);
-    this.player2.socket.emit(event, data);
+    console.log('GAME PLAYER1 EMIT'.cyan, event, data)
+    this.player2.socket.emit('GAME PLAYER2 EMIT'.cyan, event, data);
   }
 };
 
@@ -162,6 +165,8 @@ Game.prototype.playerOn = function(event, cb) {
    *  Utilize this custom eventing function when needing to pass information
    *  from individual players to trigger game logic related events
    */
+   
+  console.log('GAME PLAYERON '.cyan, event);
   this.events[event] = cb;
 };
 

@@ -34,14 +34,14 @@ var queueListeners = function(socket) {
 };
 
 function decideQueue(socket) {
-	var decide = queueObj[socket.getUserEmail()] ?
+	var decide = queueObj[socket.getUsername()] ?
 	socket.emit('player already in queue') :
 	addToQueue(socket);
 }
 
 function addToQueue(socket) {
 	queue.push(socket);
-	queueObj[socket.getUserEmail()] = true;
+	queueObj[socket.getUsername()] = true;
 	socket.emit('added to queue');
 	logger('ADDED TO QUEUE');
 }
@@ -51,8 +51,8 @@ function queueMatch() {
 		var player1 = queue.pop();
 		var player2 = queue.pop();
 
-		delete queueObj[player1.getUserEmail()];
-		delete queueObj[player2.getUserEmail()];
+		delete queueObj[player1.getUsername()];
+		delete queueObj[player2.getUsername()];
 		logger('POPPED FROM QUEUE'.red);
 
 		var profile = {p1: player1.getUserModel(), p2: player2.getUserModel()};
@@ -62,15 +62,18 @@ function queueMatch() {
 		player2.delayEmit('profile', profile, 1000);
 
 		new Game(player1, player2).init();
-
+		console.log('INITIATED NEW GAME')
 		player1.delayEmit('match ready', 1000);
 		player2.delayEmit('match ready', 1000);
 	}
 }
 
 function removeFromQueue (socket) {
-	queue.splice(queue.indexOf(socket.id), 1);
-	delete queueObj[socket.getUserEmail()];
+	var idx = queue.indexof(socket.id);
+	socket.splice(idx, 1)
+
+	(queue.indexOf(socket.id), 1);
+	delete queueObj[socket.getUsername()];
 	// socket.disconnect();
 	logger('REMOVED FROM QUEUE');
 }

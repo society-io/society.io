@@ -13,12 +13,13 @@ var onChoice = function(data) {
 var onNoChoice = function() {
   // this = player obj
   this.updateChoice('noChoice');
+  console.log('NO CHOICE')
 };
 
 var onClientGameReady = function() {
   // this = player obj
   console.log('onClientGameReady Listener');
-  console.log(this.id);
+  console.log('GAME: ID', this.id);
   this.ready();
 };
 

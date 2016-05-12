@@ -2,10 +2,10 @@ angular
   .module('app')
   .factory('battlefieldFactory', bfFactoryFunction);
 
-bfFactoryFunction.$inject = ['socketFactory', 
-'battlefieldTimerFactory', 
-'battlefieldLogicFactory', 
-'$state', 
+bfFactoryFunction.$inject = ['socketFactory',
+'battlefieldTimerFactory',
+'battlefieldLogicFactory',
+'$state',
 '$window',
 '$rootScope'];
 
@@ -87,11 +87,12 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
   }
 
   function forfeit() {
+  console.log('EMIT FORFEIT');
     emit('forfeit');
   }
 
   function listeners() {
-
+	console.log('REGISTERING LISTENERS');
     on('gameReady', function(resp) {
       // store player IDs in state
       state.player = new Player(resp.playerId, resp.playerProfile);
@@ -108,8 +109,9 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
         state.player.health[choice] = resp.startingHealth[choice];
         state.opponent.health[choice] = resp.startingHealth[choice];
       }
-      
+
       $rootScope.$broadcast('runAnimations');
+      console.log('BROADCASTING ANIMATIONS');
     });
 
     on('opponentPlayed', function(resp) {
