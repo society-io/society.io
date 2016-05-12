@@ -61,7 +61,6 @@ var storeJoinCode = function(data, socket) {
       console.log('Storing joinCode...');
       privateGames[data.joinCode] = socketsForGame;
       socketToCode[socket.socketId] = data.joinCode;
-      socket.updateRoom(data.joinCode);
     } else {
       console.log('Could Not Store joinCode');
       socket.emit('err', {
