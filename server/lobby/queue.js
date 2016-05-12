@@ -15,7 +15,7 @@ var queue = [];
 var queueObj = {};
 
 setInterval(function() {
-  console.warn('queue.length-->', queue.length);
+  // console.warn('queue.length-->', queue.length);
   queue.sort(function(a,b) {
     return a.getUserModel().mmr - b.getUserModel().mmr;
   });

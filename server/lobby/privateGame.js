@@ -7,19 +7,18 @@ var socketToCode = {}; // { socketId: joinCode }
 var privateGameListeners = function(socket){
 
   socket.on('create private game', function(data){
-    console.warn('createPrivateGame listener, joinCode: ',data.joinCode);
+    console.log('createPrivateGame listener, joinCode: ',data.joinCode);
     storeJoinCode(data, socket);
-    storePlayer1(data, socket);
   });
 
   socket.on('attempt to join private game', function(data){
-    console.warn('joinPrivateGame listener, joinCode: ',data.joinCode);
+    console.log('joinPrivateGame listener, joinCode: ',data.joinCode);
     storePlayer2(data, socket);
   });
 
 
   socket.on('initialize battlefield', function(data){
-    console.warn('initializeBattlefield listener, joinCode: ',data.joinCode);
+    console.log('initializeBattlefield listener, joinCode: ',data.joinCode);
     initiatePrivateGame(data, socket);
   });
 
@@ -32,7 +31,7 @@ var privateGameListeners = function(socket){
   });
 
   socket.on('cancel private game', function(data){
-    console.warn('cancelPrivateGame listener, joinCode: ',data.joinCode);
+    console.log('cancelPrivateGame listener, joinCode: ',data.joinCode);
     cancelPrivateGame(data, socket);
   });
 
@@ -50,9 +49,8 @@ var storeJoinCode = function(data, socket) {
     // check if join code is undefined or under 3 characters
 
     if(data.joinCode === undefined || data.joinCode.length < 3){
-      socket.emit('err', {
-        message: 'Minimum of 3 characters required.',
-        success: false
+      socket.emit('join code invalid', {
+        message: 'Minimum 3 characters required.'
       });
     }
 
@@ -61,11 +59,11 @@ var storeJoinCode = function(data, socket) {
       console.log('Storing joinCode...');
       privateGames[data.joinCode] = socketsForGame;
       socketToCode[socket.socketId] = data.joinCode;
+      storePlayer1(data, socket);
     } else {
       console.log('Could Not Store joinCode');
-      socket.emit('err', {
-        message: 'joinCode exists!',
-        success: false
+      socket.emit('join code exists', {
+        message: 'join code exists!'
       });
     }
 };
@@ -95,15 +93,14 @@ var storePlayer2 = function(data, socket) {
       console.log('Storing player2...');
       privateGames[data.joinCode][1] = socket;
       console.log('Emitting private game exists...');
-      socket.emit('private game exists', {success: true});
+      socket.emit('private game exists');
       setTimeout(function(){
         socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
       }, 3000);
     } else { // if Not
       console.log('Could Not Store player2');
-      socket.emit('private game exists', {
-        message: 'Error! Wrong joinCode, please try again.',
-        success: false
+      socket.emit('private game doesnt exist', {
+        message: 'Wrong join code, try again.'
       });
     }
 };
@@ -112,7 +109,7 @@ var storePlayer2 = function(data, socket) {
 var initiatePrivateGame = function(data, socket) {
   // Create a new privateGame using the right credentials
   var players = privateGames[data.joinCode];
-  console.log('privateGame Players: ',players.id);
+  console.log('privateGame Players: ',players);
   var player1 = players[0];
   var player2 = players[1];
   if(players.length === 2) {
