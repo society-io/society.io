@@ -31,7 +31,7 @@ var Game = function(player1Socket, player2Socket) {
   // match state
   this.matchOver = false;
   this.matchWinner = null;
-  this.updateMMR = false;
+  this.updatedMMR = false;
 };
 
 Game.prototype.init = function() {
@@ -125,9 +125,10 @@ Game.prototype.emit = function(event, data, p1data, p2data) {
   } else {
     data = data || {};
     data.event = event;
-    this.player1.socket.emit(event, data);
     console.log('GAME PLAYER1 EMIT'.cyan, event, data);
-    this.player2.socket.emit('GAME PLAYER2 EMIT'.cyan, event, data);
+    console.log('GAME PLAYER2 EMIT'.cyan, event, data);
+    this.player1.socket.emit(event, data);
+    this.player2.socket.emit(event, data);
   }
 };
 
@@ -152,9 +153,9 @@ Game.prototype.terminate = function(reason) {
     console.log('reason is = ', reason);
   }
 
-if (!this.updateMMR) {
-	formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
-	this.updateMMR = true;
+  if (!this.updatedMMR) {
+    formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
+    this.updatedMMR = true;
 	}
 };
 
