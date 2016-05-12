@@ -13,7 +13,7 @@ router.post('/', function(req, res){
     if(req.body.username === undefined || req.body.password === undefined || req.body.email === undefined || req.body.avatar === undefined || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
     res.send({credentialsMissing: true, message: "Dude, c'mon."});
     } else {
-    newUser.find({username: req.body.username}, function(err, users) {
+    newUser.find({email: req.body.email}, function(err, users) {
     	if(users.length === 0){
     		bcrypt.hash(userInputPassword, saltRounds, function(err, hash) {
     			new newUser({email: req.body.email, username: req.body.username, password: hash, avatar: req.body.avatar, mmr: 1600, wins: 0, losses: 0})
@@ -34,8 +34,8 @@ router.post('/', function(req, res){
     			  });
     		});
     	} else {
-    		console.log("Username taken!");
-        res.send({nameExists: true, message: 'Username already exists!'}); //if username already in database upon signup
+    		console.log("Email taken!");
+        res.send({emailExists: true, message: 'Email already exists!'}); //if username already in database upon signup
     	}
     });
   }

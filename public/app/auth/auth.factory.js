@@ -53,7 +53,7 @@
             $state.go('lobby');
             saveToken(resp.data.token);
           }
-          if (resp.data.nameExists) {
+          if (resp.data.emailExists) {
             state.signupErrorMessage = "";
             state.signupErrorMessage += resp.data.message;
           }
