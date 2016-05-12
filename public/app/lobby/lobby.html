@@ -82,7 +82,7 @@
 						<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<button class="inline-block-small red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')})">Update</button>
+					<button class="inline-block-small red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')}); Lobby.showAvatars = !Lobby.showAvatars">Update</button>
 				</div>
 
 				
