@@ -2,6 +2,9 @@
 	<div class="container">
 		<div class="col-md-12">
 			<h1>Society <span>The Game</span></h1>
+			<!--START Music Control -->
+    	<div audio options="options"></div>
+			<!--END Music Control -->
 			<div class="admin-bar-right">
 				<i class="fa fa-user" aria-hidden="true"></i>
 				<a href="" ng-click="Lobby.signOut()">Sign Out</a>
@@ -47,12 +50,12 @@
 		</div><!-- End sidebar -->
 
 		<div class="sidebar lobby-left lobby-content-container">
-			
+
 			<h2>My Avatar</h2>
 			<div class="my-avatar">
 				<i class="fa fa-hand-{{Lobby.myAvatar()}}-o fa-lg" aria-hidden="true"></i>
 			</div>
-			
+
 
 			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars">Change Avatar</button>
 
@@ -86,9 +89,8 @@
 
 			</div>
 		</div>
-		
-	</div><!-- End bootstrap column -->
 
+	</div><!-- End bootstrap column -->
 
 	<div class="col-md-8">
 		<div class="lobby-right lobby-content-container">
