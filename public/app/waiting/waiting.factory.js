@@ -37,12 +37,6 @@
         $state.go('lobby');
       }
 
-      function removeFromQueue() {
-        console.log('Removing From Queue...');
-        emit('disconnect');
-        $state.go('lobby');
-      }
-
       function listeners() {
         on('joinCode is', function(data){
           joinCode = data.joinCode;
