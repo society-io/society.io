@@ -21,6 +21,17 @@
 
   button {
     margin-bottom: 18px;
+
+    .fa {
+      position: relative;
+      display: inline-block;
+      top: -2px;
+      margin-right: 10px;
+    }
+
+    .fa-bolt {
+      top: 0px;
+    }
   }
 
   h2 {
@@ -107,5 +118,67 @@
   display: inline-block;
   position: absolute;
   font-size: 15px;
+
+.code-input {
+  padding: 13px;
+  width: 50%;
+
+  @include bp(pawn) {
+    width: 60%;
+  }
+
+  @include bp(knight) {
+    width: 75%;
+  }
+
+  @include bp(queen) {
+    width: 55%;
+  }
+
+  @include bp(king) {
+    width: 64%;
+  }
 }
 
+.inline-block {
+  // width: 30%;
+  // height: 35px;
+  // padding: 0px;
+  // margin: 0px;
+  // padding-top: 3.5px;
+  // padding-bottom: 3.5px;
+  // display: inline-block;
+}
+
+.error-message {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.input-wrapper {
+  
+  button {
+    float: right;
+  }
+}
+
+.input-wrapper > * {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.lobby-sidebar-code {
+  position: relative;
+  height: 46px;
+  opacity: 1;
+  top: 0;
+}
+
+.lobby-sidebar-code.ng-hide {
+  opacity: 0;
+  top: -10px;
+}
+
+.lobby-sidebar-code.ng-hide-add, .lobby-sidebar-code.ng-hide-remove {
+  transition: all linear 0.2s;
+}

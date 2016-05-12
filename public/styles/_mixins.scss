@@ -1,6 +1,9 @@
 @mixin bp($point) {
-  @if $point == queen {
-    @media (min-width: 1000px) { @content; }
+  @if $point == king {
+    @media (min-width: 1200px) { @content; }
+  }
+  @else if $point == queen {
+    @media (min-width: 992px) { @content; }
   }
   @else if $point == knight {
     @media (min-width: 768px) { @content; }

@@ -81,32 +81,3 @@ button.green:active {
   background-color: $green-d1;
   box-shadow: 0 -3px 0 0 $green-d2;
 }
-
-div.input-wrapper {
-  width: 100%;
-  display: inline-block;
-}
-
-.code-input {
-  width: 65%;
-  height: 35px;
-  border-radius: 3px;
-  display: inline-block;
-  background-color: white;
-  margin-right: 5px;
-}
-
-.inline-block {
-  width: 30%;
-  height: 35px;
-  padding: 0px;
-  margin: 0px;
-  padding-top: 3.5px;
-  padding-bottom: 3.5px;
-  display: inline-block;
-}
-
-.error-message {
-  text-align: center;
-  margin-bottom: 10px;
-}

@@ -17,19 +17,28 @@
 
 	<div class="col-md-4">
 		<div class="sidebar lobby-left lobby-content-container">
+
+			<!-- ranked -->
 			<h2>Ranked</h2>
-			<button class="block red" ng-click="Lobby.toggleQueueWarning()">Queue for a ranked match</button>
+
+			<button class="block red" ng-click="Lobby.toggleQueueWarning()"><i class="fa fa-bolt" aria-hidden="true"></i> Queue for a ranked match</button>
+
 			<div ng-show="Lobby.showPreQueueWarning">
-			WARNING:  You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players.
-			<button ng-click="Lobby.queue()">Confirm</button>
-			<button ng-click="Lobby.toggleQueueWarning()">Decline</button>
+				WARNING:  You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players.
+				<button ng-click="Lobby.queue()">Confirm</button>
+				<button ng-click="Lobby.toggleQueueWarning()">Decline</button>
 			</div>
+			
 			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
+
+			<!-- Custom Game -->
 			<h2>Casual</h2>
-			<button class="block blue" ng-click="Lobby.showCreateGameController = !Lobby.showCreateGameController">create private game</button>
+
+			<button class="block blue" ng-click="Lobby.showCreateGameController = !Lobby.showCreateGameController">
+			<i class="fa fa-chevron-{{Lobby.showCreateGameController ? 'up' : 'down'}}" aria-hidden="true"></i> create private game</button>
 
 			<form>
-				<div ng-show="Lobby.showCreateGameController">
+				<div class="lobby-sidebar-code" ng-show="Lobby.showCreateGameController">
 					<!--TODO:create model object in controller and pass to emit event on btn click-->
 					<div class="input-wrapper">
 						<input class="code-input" ng-model='Lobby.joinCode' placeholder="Custom Code (Case-Sensitive)">
@@ -39,10 +48,11 @@
 				</div>
 			</form>
 
-			<button class="block green" ng-click="Lobby.showJoinGameController = !Lobby.showJoinGameController">join private game</button>
+			<button class="block green" ng-click="Lobby.showJoinGameController = !Lobby.showJoinGameController">
+			<i class="fa fa-chevron-{{Lobby.showJoinGameController ? 'up' : 'down'}}" aria-hidden="true"></i> join private game</button>
 
 			<form>
-				<div ng-show="Lobby.showJoinGameController">
+				<div class="lobby-sidebar-code" ng-show="Lobby.showJoinGameController">
 					<!--TODO:create model object in controller and pass to emit event on btn click-->
 					<div class="input-wrapper">
 						<input class="code-input" ng-model='joinCode' placeholder="Enter Join Code">
