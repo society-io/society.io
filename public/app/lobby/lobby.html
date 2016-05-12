@@ -24,9 +24,9 @@
 			<button class="block red" ng-click="Lobby.toggleQueueWarning()"><i class="fa fa-bolt" aria-hidden="true"></i> Queue for a ranked match</button>
 
 			<div ng-show="Lobby.showPreQueueWarning">
-				WARNING:  You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players.
-				<button ng-click="Lobby.queue()">Confirm</button>
-				<button ng-click="Lobby.toggleQueueWarning()">Decline</button>
+				<p>WARNING: You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players.</p>
+				<button class="green" ng-click="Lobby.queue()">Confirm</button>
+				<button class="red" ng-click="Lobby.toggleQueueWarning()">Decline</button>
 			</div>
 			
 			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
@@ -41,8 +41,8 @@
 				<div class="lobby-sidebar-code" ng-show="Lobby.showCreateGameController">
 					<!--TODO:create model object in controller and pass to emit event on btn click-->
 					<div class="input-wrapper">
-						<input class="code-input" ng-model='Lobby.joinCode' placeholder="Custom Code (Case-Sensitive)">
-						<button class="inline-block red" placeholder="Custom Code (Case-Sensitive)" ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
+						<input class="code-input" ng-model='Lobby.joinCode' placeholder="Enter Join Code">
+						<button class="inline-block red" ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
 						<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage')">{{Lobby.getErrorMessage('joinCodeErrorMessage')}}</div>
 					</div>
 				</div>
@@ -55,9 +55,9 @@
 				<div class="lobby-sidebar-code" ng-show="Lobby.showJoinGameController">
 					<!--TODO:create model object in controller and pass to emit event on btn click-->
 					<div class="input-wrapper">
-						<input class="code-input" ng-model='joinCode' placeholder="Enter Join Code">
-				  	<button class="inline-block red" ng-click="Lobby.joinRoom(joinCode)">join</button>
-				  	<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage')">{{Lobby.getErrorMessage('joinCodeErrorMessage')}}</div>
+						<input class="code-input" ng-model='Lobby.joinCode2' placeholder="Enter Join Code">
+				  	<button class="inline-block red" ng-click="Lobby.joinRoom(Lobby.joinCode2)">join</button>
+				  	<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage2')">{{Lobby.getErrorMessage('joinCodeErrorMessage2')}}</div>
 					</div>
 				</div>
 			</form>
