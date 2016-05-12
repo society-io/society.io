@@ -35,9 +35,9 @@
           data: userObj
         };
 
-        if ((userObj.username === undefined) || (userObj.email === undefined) || (userObj.password === undefined) || (userObj.username.length < 1) || (userObj.password.length < 1) || (userObj.email.length < 1) || (userObj.avatar === undefined || false)) {
+        if ((userObj.username === undefined) || (userObj.username.length > 13) || (userObj.email === undefined) || (userObj.password === undefined) || (userObj.password.length < 4) || (userObj.username.length < 1) || (userObj.email.length < 1) || (userObj.avatar === undefined || false)) {
           state.signupErrorMessage = "";
-          state.signupErrorMessage += "Dude, c'mon.";
+          state.signupErrorMessage += "Error! Invalid Input.";
           return;
         }
 
@@ -53,7 +53,7 @@
             $state.go('lobby');
             saveToken(resp.data.token);
           }
-          if (resp.data.emailExists) {
+          if (resp.data.exists) {
             state.signupErrorMessage = "";
             state.signupErrorMessage += resp.data.message;
           }

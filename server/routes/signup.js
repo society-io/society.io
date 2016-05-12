@@ -10,10 +10,10 @@ var saltRounds = 10;
 
 router.post('/', function(req, res){
     var userInputPassword = req.body.password;
-    if(req.body.username === undefined || req.body.password === undefined || req.body.email === undefined || req.body.avatar === undefined || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
-    res.send({credentialsMissing: true, message: "Dude, c'mon."});
+    if(req.body.username === undefined || req.body.username.length > 13 || req.body.password === undefined || req.body.password < 4 || req.body.email === undefined || req.body.avatar === undefined || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
+    res.send({credentialsMissing: true, message: "Error! Invalid Input."});
     } else {
-    newUser.find({email: req.body.email}, function(err, users) {
+    newUser.find({$or: [{email: req.body.email}, {username: req.body.username}]}, function(err, users) {
     	if(users.length === 0){
     		bcrypt.hash(userInputPassword, saltRounds, function(err, hash) {
     			new newUser({email: req.body.email, username: req.body.username, password: hash, avatar: req.body.avatar, mmr: 1600, wins: 0, losses: 0})
@@ -34,8 +34,8 @@ router.post('/', function(req, res){
     			  });
     		});
     	} else {
-    		console.log("Email taken!");
-        res.send({emailExists: true, message: 'Email already exists!'}); //if username already in database upon signup
+    	    console.log("Email or username taken!");
+            res.send({exists: true, message: 'Email or username taken!'}); //if username/email already in database upon signup
     	}
     });
   }

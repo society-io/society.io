@@ -9,7 +9,7 @@
 				<input
 					ng-class="{ 'form-error' : Auth.usernameUp.$invalid && !Auth.usernameUp.$pristine }"
 					ng-model="Auth.usernameUp"
-					type="text" placeholder="Username" class="input">
+					type="text" placeholder="Username (13 Character Max)" class="input">
 				<i class="fa fa-user" aria-hidden="true"></i>
 			</div>
 
@@ -25,12 +25,12 @@
 				<input
 					ng-class="{ 'form-error' : Auth.passwordUp.$invalid && !Auth.passwordUp.$pristine }"
 					ng-model="Auth.passwordUp"
-					type="password" placeholder="Password" class="input">
+					type="password" placeholder="Password (4 Character Min)" class="input">
 				<i class="fa fa-lock" aria-hidden="true"></i>
 			</div>
-		
+
 			<div class="message"><h2>Select an avatar:</h2></div>
-			
+
 			<div class="avatar-container">
 				<div class="avatar" id="rock" ng-click="Auth.selectAvatar('rock')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'rock'}">
 					<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
@@ -51,7 +51,7 @@
 
 
 			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp, avatar: Auth.get('avatarClicked')})">Sign Up</button>
-			
+
 			<!-- for error on signUp -->
 			<div class="error-message" ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
 
