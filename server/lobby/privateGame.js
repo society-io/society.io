@@ -38,7 +38,7 @@ var privateGameListeners = function(socket){
 
   socket.on('disconnect', function() {
     removeJoinCodeOf(socket.socketId);
-  })
+  });
 
 };
 

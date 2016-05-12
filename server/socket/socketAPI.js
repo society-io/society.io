@@ -32,6 +32,7 @@ SocketAPI.prototype.init = function() {
   this.emit('socket initialized');
 };
 
+
 SocketAPI.prototype.on = function(event, cb, auth) {
   if (auth) {
     this.socket.on(event, authenticate.bind(this));
