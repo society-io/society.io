@@ -51,8 +51,14 @@ angular
 				return;
 			}
 
-			on('err', function(data){
+			on('join code invalid', function(data){
 				state.joinCodeErrorMessage = '';
+				state.joinCodeErrorMessage += data.message;
+			});
+
+			on('join code exists', function(data){
+				console.log('joinCode exists listener',data.message);
+				$state.go('lobby');
 				state.joinCodeErrorMessage += data.message;
 			});
 
@@ -69,18 +75,19 @@ angular
 		function joinRoom(joinCode) {
 			if (joinCode === undefined || joinCode.length < 3) {
 				state.joinCodeErrorMessage = '';
-				state.joinCodeErrorMessage += 'Minimum of 3 characters required.';
+				state.joinCodeErrorMessage += 'Minimum 3 characters required!';
 				return;
 			}
-			on('private game exists', function(data){
-			  if(data.success) {
-			  	state.whereTo = 'private';
-			    $state.go('waiting');
-			  } else {
-			    $state.go('lobby');
-			  }
+			on('private game exists', function(){
+				console.log('privateGame exists');
+				state.whereTo = 'private';
+				$state.go('waiting');
 			});
-
+			on('private game doesnt exist', function(data) {
+				console.log('privateGame doesnt exist listener',data.message);
+				state.joinCodeErrorMessage += data.message;
+			 	$state.go('lobby');
+			});
 			emit('attempt to join private game', {joinCode: joinCode});
 			console.log('Emitted: join privateGame');
 			$state.go('loading');
@@ -122,11 +129,11 @@ angular
 		function addToJoincode(){
 			socket.emit('getJoinCode');
 		}
-			
+
 		function listenFor(socket) {
 			socket.on('joinCode is', function(socket) {
 				return data;
-			}); 
+			});
 		}
 
 		function set(key, value){
