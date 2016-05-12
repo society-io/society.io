@@ -69,13 +69,10 @@ function queueMatch() {
 }
 
 function removeFromQueue (socket) {
-	var idx = queue.indexof(socket.id);
-	socket.splice(idx, 1)
-
-	(queue.indexOf(socket.id), 1);
+	queue.splice(queue.indexOf(socket.id), 1);
 	delete queueObj[socket.getUsername()];
-	// socket.disconnect();
 	logger('REMOVED FROM QUEUE');
+	// socket.disconnect();
 }
 
 module.exports = {
