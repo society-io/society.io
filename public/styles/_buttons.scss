@@ -39,14 +39,47 @@ button.yellow:active {
 
 button.red {
   background-color: $red;
+  box-shadow: 0 3px 0 0 $red-d1;
+  text-shadow: 0 -1px 0 $red-d2;
+}
+
+button.red:hover {
+  background-color: $red-l1;
+}
+
+button.red:active {
+  background-color: $red-d1;
+  box-shadow: 0 -3px 0 0 $red-d2;
 }
 
 button.blue {
   background-color: $blue;
+  box-shadow: 0 3px 0 0 $blue-d1;
+  text-shadow: 0 -1px 0 $blue-d2;
+}
+
+button.blue:hover {
+  background-color: $blue-l1;
+}
+
+button.blue:active {
+  background-color: $blue-d1;
+  box-shadow: 0 -3px 0 0 $blue-d2;
 }
 
 button.green {
   background-color: $green;
+  box-shadow: 0 3px 0 0 $green-d1;
+  text-shadow: 0 -1px 0 $green-d2;
+}
+
+button.green:hover {
+  background-color: $green-l1;
+}
+
+button.green:active {
+  background-color: $green-d1;
+  box-shadow: 0 -3px 0 0 $green-d2;
 }
 
 div.input-wrapper {
