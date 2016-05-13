@@ -34,9 +34,11 @@ var queueListeners = function(socket) {
 };
 
 function decideQueue(socket) {
-	var decide = queueObj[socket.getUsername()] ?
-	socket.emit('player already in queue') :
-	addToQueue(socket);
+	if (queueObj[socket.getUsername()]) {
+		socket.emit('player already in queue');
+	} else {
+		addToQueue(socket);
+	}
 }
 
 function addToQueue(socket) {
@@ -70,6 +72,8 @@ function queueMatch() {
 
 function removeFromQueue (socket) {
 	queue.splice(queue.indexOf(socket.id), 1);
+	console.log('=====');
+	console.log('socket.getUsername() =', socket.getUsername());
 	delete queueObj[socket.getUsername()];
 	logger('REMOVED FROM QUEUE');
 	// socket.disconnect();

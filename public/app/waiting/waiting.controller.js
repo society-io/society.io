@@ -4,15 +4,13 @@ angular
   .module('app')
   .controller('WaitingController', WaitingController);
 
-  WaitingController.$inject = ['waitingFactory', 'lobbyFactory', 'socketFactory', '$state'];
+  WaitingController.$inject = ['waitingFactory', 'lobbyFactory', '$state'];
 
-  function WaitingController(waitingFactory, lobbyFactory, socketFactory, $state) {
+  function WaitingController(waitingFactory, lobbyFactory, $state) {
 
     var vm = this;
     var lf = lobbyFactory;
     vm.lfGet = lf.get;
-
-    vm.getJoinCode = lf.getJoinCode;
 
     vm.cancelRoom = waitingFactory.cancelRoom;
     vm.showCancelGameInput = false;

@@ -23,7 +23,6 @@ angular
 			createRoom: createRoom,
 			joinRoom: joinRoom,
 			getPlayer: getPlayer,
-			getJoinCode: getJoinCode,
 			setNewAvatar: setNewAvatar,
 			updateAvatar: updateAvatar,
 			get: get,
@@ -32,7 +31,6 @@ angular
 
 		function joinQueue(message) {
 			on('player already in queue', function(data){
-				$state.go('lobby');
 				state.joinQueueErrorMessage = 'User already in queue.';
 			});
 			on('added to queue', function() {
@@ -49,6 +47,7 @@ angular
 				return;
 			}
 
+
 			on('join code invalid', function(data){
 				state.joinCodeErrorMessage = data.message;
 			});
@@ -60,6 +59,7 @@ angular
 
 			on('private game created', function(data){
 				state.whereTo = 'private';
+				state.joinCode = joinCode;
 			  $state.go('waiting');
 			});
 
@@ -69,21 +69,22 @@ angular
 
 		function joinRoom(joinCode) {
 
-			console.log("joincode kan", joinCode);
-
 			if (joinCode === undefined || joinCode.length < 3) {
 				state.joinCodeErrorMessage2 = 'Minimum 3 characters required!';
 				return;
 			}
+
 			on('private game exists', function(){
 				console.log('privateGame exists');
 				state.whereTo = 'private';
 				$state.go('waiting');
 			});
+
 			on('private game doesnt exist', function(data) {
 				console.log('privateGame doesnt exist listener',data.message);
 				state.joinCodeErrorMessage2 = data.message;
 			});
+
 			emit('attempt to join private game', {joinCode: joinCode.toLowerCase()});
 		}
 
@@ -101,13 +102,6 @@ angular
       emit('who am i');
 		}
 
-		function getJoinCode() {
-		  on('joinCode is', function(data){
-		    state.joinCode = data.yourJoinCode;
-		  });
-		  emit('get joinCode');
-		}
-
 		function setNewAvatar(avatar){
 			state.tempAvatar = '';
 			state.tempAvatar += avatar;
@@ -118,12 +112,6 @@ angular
 			console.log('this is temp variable: ', obj);
 			state.avatar = obj.avatar;
 			emit('update avatar', obj);
-		}
-
-		function listenFor(socket) {
-			socket.on('joinCode is', function(socket) {
-				return data;
-			});
 		}
 
 		function set(key, value){

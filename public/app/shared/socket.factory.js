@@ -41,6 +41,7 @@ angular
      *  packet envelope that we specify
      */
     function on(eventName, callback) {
+      console.log('on was called. inside socket factory, eventName = ', eventName);
       socket.on(eventName, function() {
         var args = arguments;
         $rootScope.$apply(function() {
@@ -54,6 +55,7 @@ angular
         data = data || {};
         data = authFactory.attachToken(data);
       }
+      console.log('emit was called. inside socket facotry, eventName = ', eventName);
       socket.emit(eventName, data, function() {
         var args = arguments;
         $rootScope.$apply(function() {
