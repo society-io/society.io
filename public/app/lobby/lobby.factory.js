@@ -101,7 +101,15 @@ angular
       });
       emit('who am i');
 		}
-			
+
+
+
+		function setNewAvatar(avatar){
+			state.tempAvatar = '';
+			state.tempAvatar += avatar;
+		}
+
+
 		function updateAvatar(obj) {
 			// obj consists of avatar and email
 			console.log('this is temp variable: ', obj);
