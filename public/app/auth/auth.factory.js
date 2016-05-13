@@ -35,7 +35,7 @@
           data: userObj
         };
 
-        if ((userObj.username === undefined) || (userObj.username.length > 13) || (userObj.email === undefined) || (userObj.password === undefined) || (userObj.password.length < 4) || (userObj.username.length < 1) || (userObj.email.length < 1) || (userObj.avatar === undefined || false)) {
+        if ((userObj.username === undefined) || (userObj.username.length > 13) || (userObj.email === undefined) || (userObj.password === undefined) || (userObj.password.length < 4) || (userObj.username.length < 1) || (userObj.email.length < 1) || (userObj.avatar === undefined || userObj.avatar === '')) {
           state.signupErrorMessage = "";
           state.signupErrorMessage += "Error! Invalid Input.";
           return;

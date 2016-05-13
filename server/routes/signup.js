@@ -10,7 +10,7 @@ var saltRounds = 10;
 
 router.post('/', function(req, res){
     var userInputPassword = req.body.password;
-    if(req.body.username === undefined || req.body.username.length > 13 || req.body.password === undefined || req.body.password < 4 || req.body.email === undefined || req.body.avatar === undefined || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
+    if(req.body.username === undefined || req.body.username.length > 13 || req.body.password === undefined || req.body.password < 4 || req.body.email === undefined || req.body.avatar === '' || req.body.username.length < 1 || req.body.email.length < 1 || req.body.password.length < 1) {
     res.send({credentialsMissing: true, message: "Error! Invalid Input."});
     } else {
     newUser.find({$or: [{email: req.body.email}, {username: req.body.username}]}, function(err, users) {
