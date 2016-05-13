@@ -16,7 +16,7 @@ function log_PG (string) {
 function log_sockId_JC(string) {
 	string = string || '';
 	var arrow = '-->';
-	var socketId_joinCode_string = 'sockId_joinCode'.bgMagenta;
+	var socketId_joinCode_string = 'sockId_joinCode'.cyan;
 	console.log(string, socketId_joinCode_string, sockId_joinCode);
 }
 
@@ -38,9 +38,9 @@ function privateGameListeners(socket) {
     cancelPrivateGame(socket, data);
   });
 
-//   socket.on('disconnect', function() {
-// 	  cancelPrivateGame(socket.socketId);
-//   });
+	socket.on('disconnect', function() {
+ 	  cancelPrivateGame(socket);
+ 	  });
 }
 
 function storeJoinCode(socket, data) {
@@ -116,12 +116,12 @@ function initiatePrivateGame(data) {
 
 
 function cancelPrivateGame (socket) {
-	var joinCode = sockId_joinCode[socket];
+	var joinCode = sockId_joinCode[socket.socketId];
 
 	log_PG('BEFORE DELETE');
 	log_sockId_JC();
 
-  delete sockId_joinCode[socket];
+  delete sockId_joinCode[socket.socketId];
   delete privateGames[joinCode];
 
 	log_PG('AFTER DELETE');

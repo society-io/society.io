@@ -71,18 +71,18 @@ function queueMatch () {
 		player2.delayEmit('profile', profile, 1000);
 
 		new Game(player1, player2).init();
-		console.log('INITIATED NEW GAME');
+		console.log('INITIATED NEW GAME'.green);
 		player1.delayEmit('match ready', 1000);
 		player2.delayEmit('match ready', 1000);
 	}
 }
 
 
-	function removeFromQueue (socket) {
-		queue.splice(queue.indexOf(socket), 1);
-		delete queueObj[socket.username];
-		logger('REMOVED FROM QUEUE');
-		// socket.disconnect();
+function removeFromQueue (socket) {
+	queue.splice(queue.indexOf(socket), 1);
+	delete queueObj[socket.username];
+	logger('REMOVED FROM QUEUE');
+// socket.disconnect();
 }
 
 module.exports = {
