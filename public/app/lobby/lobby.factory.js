@@ -51,7 +51,6 @@ angular
 				return;
 			}
 
-
 			on('join code invalid', function(data){
 				state.joinCodeErrorMessage = data.message;
 			});
@@ -77,6 +76,7 @@ angular
 			on('join code found', function(){
 				console.log('join code found --> state.go waiting');
 				state.whereTo = 'private';
+				state.joinCode = joinCode;
 				$state.go('waiting');
 			});
 
@@ -102,13 +102,10 @@ angular
       emit('who am i');
 		}
 
-
-
 		function setNewAvatar(avatar){
 			state.tempAvatar = '';
 			state.tempAvatar += avatar;
 		}
-
 
 		function updateAvatar(obj) {
 			// obj consists of avatar and email
