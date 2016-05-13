@@ -15,6 +15,7 @@
     soundFactory.loadSounds();
     authFactory.checkAuth();
 
+    from active socket list
     vm.get = lobbyFactory.get;
     vm.set = lobbyFactory.set;
 

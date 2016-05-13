@@ -78,7 +78,7 @@ function storePlayer2(socket, data) {
 		setTimeout(function(){
       socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
     }, 3000);
-    
+
 	} else {
 	socket.emit('join code not found', {message: 'join code not found'});
 	}
@@ -126,5 +126,7 @@ function cancelPrivateGame (socket) {
 
 
 module.exports = {
-  privateGameListeners: privateGameListeners
+	privateGameListeners: privateGameListeners,
+  privateGames: privateGames,
+  sockId_joinCode: sockId_joinCode
 };

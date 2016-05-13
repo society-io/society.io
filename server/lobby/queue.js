@@ -1,5 +1,6 @@
 var colors = require('colors');
 var Game = require('../game/game').Game;
+var socketCheck = require('./socket/socketHelpers').disconnectListeners;
 
 // console.log colorize utility
 function logger (string, color) {
@@ -22,8 +23,7 @@ setInterval(function() {
   queueMatch();
 }, 5000);
 
-
-var queueListeners = function(socket) {
+function queueListeners(socket) {
 	socket.on('queue', function () {
 		decideQueue(socket);
 	});
@@ -31,7 +31,7 @@ var queueListeners = function(socket) {
 	socket.on('disconnect', function() {
 		removeFromQueue(socket);
 	});
-};
+}
 
 function decideQueue(socket) {
 	if (queueObj[socket.username]) {
