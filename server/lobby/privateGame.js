@@ -62,7 +62,7 @@ function storeJoinCode(socket, data) {
 function storePlayer1(socket, data) {
 	privateGames[data.joinCode][0] = socket;
 	log_PG();
-	socket.delayEmit('join code added', 1000);
+	socket.emit('join code added');
 }
 
 function storePlayer2(socket, data) {
@@ -73,8 +73,12 @@ function storePlayer2(socket, data) {
 		log_PG('PLAYER 2 STORED to ');
 		log_sockId_JC();
 
-	socket.delayEmit('join code to initialize battlefield', {joinCode: data.joinCode}, 3000);
+		socket.emit('join code found');
 
+		setTimeout(function(){
+      socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
+    }, 3000);
+    
 	} else {
 	socket.emit('join code not found', {message: 'join code not found'});
 	}
@@ -86,6 +90,7 @@ function initiatePrivateGame(data) {
 	var player1 = players[0];
 	var player2 = players[1];
 	console.log('PLAYER1 '.green, player1);
+
 	console.log('PLAYER2 '.magenta, player2);
 
 	var profile = {};
