@@ -29,7 +29,6 @@
     vm.set = lobbyFactory.set;
     vm.queue = lobbyFactory.joinQueue;
 
-
     vm.createRoom = lobbyFactory.createRoom;
     vm.showCreateGameInput = false;
     vm.showCreateGameController = false;

@@ -22,12 +22,12 @@ angular
 			joinQueue: joinQueue,
 			createRoom: createRoom,
 			joinRoom: joinRoom,
-			get: get,
 			getPlayer: getPlayer,
 			getJoinCode: getJoinCode,
-			set: set,
 			setNewAvatar: setNewAvatar,
-			updateAvatar: updateAvatar
+			updateAvatar: updateAvatar,
+			get: get,
+			set: set
 		};
 
 		function joinQueue(message) {
