@@ -19,7 +19,6 @@
       $timeout(function() {
         $window.location.reload();
       }, 0);
-
     }
 
     // this'll be called on every state change in the app
@@ -41,6 +40,10 @@
       }
 
       if (moving('lobby', 'battlefield')) {
+        goToLobby();
+      }
+
+      if (moving('battlefield', 'lobby')) {
         goToLobby();
       }
 
