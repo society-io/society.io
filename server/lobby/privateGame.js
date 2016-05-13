@@ -1,151 +1,137 @@
 var colors = require('colors');
 var Game = require('../game/game').Game;
-var activeSockets = require('../common').activeSockets;
-var privateGames = {}; // { joinCode: [] }
-var socketToCode = {}; // { socketId: joinCode }
+// var activeSockets = require('../common').activeSockets;
+var privateGames = {}; // { joinCode: [{sock1}, {sock2}] }
+var sockId_joinCode = {}; // { socketId: joinCode }
 
-var privateGameListeners = function(socket){
+// console.log privateGames object
+function log_PG (string) {
+	string = string || '';
+	var arrow = '-->';
+	var privateGames_string = 'privateGames'.yellow + arrow;
+	console.log(string, privateGames_string, privateGames);
+}
 
-  socket.on('create private game', function(data){
-    console.log('createPrivateGame listener, joinCode: ',data.joinCode);
-    storeJoinCode(data, socket);
+// console.log sockId_joinCode object
+function log_sockId_JC(string) {
+	string = string || '';
+	var arrow = '-->';
+	var socketId_joinCode_string = 'sockId_joinCode'.cyan;
+	console.log(string, socketId_joinCode_string, sockId_joinCode);
+}
+
+function privateGameListeners(socket) {
+
+  socket.on('create private game', function(data) {
+    storeJoinCode(socket, data);
   });
 
-  socket.on('attempt to join private game', function(data){
-    console.log('joinPrivateGame listener, joinCode: ',data.joinCode);
-    storePlayer2(data, socket);
+  socket.on('join private game', function(data){
+    storePlayer2(socket, data);
   });
-
 
   socket.on('initialize battlefield', function(data){
-    console.log('initializeBattlefield listener, joinCode: ',data.joinCode);
-    initiatePrivateGame(data, socket);
-  });
-
-  socket.on('get joinCode', function(){
-    var id = socket.getSocketId();
-    var yourJoinCode = socketToCode[id];
-    socket.emit('joinCode is', {
-      yourJoinCode: yourJoinCode
-    });
+    initiatePrivateGame(data);
   });
 
   socket.on('cancel private game', function(data){
-    console.log('cancelPrivateGame listener, joinCode: ',data.joinCode);
-    cancelPrivateGame(data, socket);
+    cancelPrivateGame(socket, data);
   });
 
-  socket.on('disconnect', function() {
-    removeJoinCodeOf(socket.socketId);
-  });
+	socket.on('disconnect', function() {
+ 	  cancelPrivateGame(socket);
+ 	  });
+}
 
-};
+function storeJoinCode(socket, data) {
+	if(!privateGames[data.joinCode]) {
 
-var storeJoinCode = function(data, socket) {
-  // store joinCode in privateGames
-    // create storage for sockets
-    var socketsForGame = [];
+	  privateGames[data.joinCode] = [];
+		log_PG();
 
-    // check if join code is undefined or under 3 characters
+		sockId_joinCode[socket.socketId] = data.joinCode;
+		log_sockId_JC();
 
-    if(data.joinCode === undefined || data.joinCode.length < 3){
-      socket.emit('join code invalid', {
-        message: 'Minimum 3 characters required.'
-      });
-    }
+	  storePlayer1(socket, data);
 
-    // Check if joinCode already exists
-    if(!privateGames[data.joinCode]) {
-      console.log('Storing joinCode...');
-      privateGames[data.joinCode] = socketsForGame;
-      socketToCode[socket.socketId] = data.joinCode;
-      storePlayer1(data, socket);
-    } else {
-      console.log('Could Not Store joinCode');
-      socket.emit('join code exists', {
-        message: 'join code exists!'
-      });
-    }
-};
+	} else {
+		socket.emit('join code invalid', {message: 'join code invalid!'});
+  }
+}
 
-var removeJoinCodeOf = function(socketId) {
-  var joinCode = socketToCode[socketId];
-  delete privateGames[joinCode];
-  delete socketToCode[socketId];
-};
+function storePlayer1(socket, data) {
+	privateGames[data.joinCode][0] = socket;
+	log_PG();
+	socket.emit('join code added');
+}
 
-var storePlayer1 = function(data, socket) {
-  // Store user socket in privateGames
-  console.log('Storing player1...');
-  privateGames[data.joinCode][0] = socket;
-  console.log('Emitting private game created...');
-  socket.emit('private game created', {
-    message: 'Player 1 inserted! Waiting on Player 2...',
-    success: true
-  });
-};
+function storePlayer2(socket, data) {
+	if(privateGames[data.joinCode]) {
 
-var storePlayer2 = function(data, socket) {
-  // Crossreference joinCode with those in privateGames
-    // if the request joinCode matches one within privateGames
-    if(privateGames[data.joinCode]) {
-      // store socket within socketsForGame[1] of privateGames[joinCode]
-      console.log('Storing player2...');
-      privateGames[data.joinCode][1] = socket;
-      socketToCode[socket.socketId] = data.joinCode;
-      console.log('Emitting private game exists...');
-      socket.emit('private game exists');
-      setTimeout(function(){
-        socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
-      }, 3000);
-    } else { // if Not
-      console.log('Could Not Store player2');
-      socket.emit('private game doesnt exist', {
-        message: 'Wrong join code, try again.'
-      });
-    }
-};
+		privateGames[data.joinCode][1] = socket;
+		sockId_joinCode[socket.socketId] = data.joinCode;
+		log_PG('PLAYER 2 STORED to ');
+		log_sockId_JC();
 
+		socket.emit('join code found');
 
-var initiatePrivateGame = function(data, socket) {
-  // Create a new privateGame using the right credentials
+		setTimeout(function(){
+      socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
+    }, 3000);
+    
+	} else {
+	socket.emit('join code not found', {message: 'join code not found'});
+	}
+}
+
+function initiatePrivateGame(data) {
   var players = privateGames[data.joinCode];
-  console.log('privateGame Players: ',players);
-  var player1 = players[0];
-  var player2 = players[1];
-  if(players.length === 2) {
-    console.log('Initiating privateGame...');
-    var privateGame = new Game(players[0], players[1]);
-    // Use the game's initialize method
-    privateGame.init();
-    // Tell the Clients that a privateGame has been initiated
-    player1.emit('player 1 enter battlefield', {
-      message: '*privateGame Created & Initiated*',
-      success: true
-    });
-    player2.emit('player 2 enter battlefield', {
-      message: '*privateGame Created & Initiated*',
-      success: true
-    });
-  }
-};
 
-var cancelPrivateGame = function(data, socket) {
-  // Check in privateGames for the joinCode
-  console.log('Canceling privateGame...');
-  for(var key in privateGames) {
-    if(data.joinCode === key) {
-      delete privateGames[key];
-    } else {
-      console.log('Could Not Cancel privateGame');
-      socket.emit('err', {
-        message: 'joinCode not found! Please Try Again.',
-        success: false
-      });
-    }
-  }
-};
+	var player1 = players[0];
+	var player2 = players[1];
+	console.log('PLAYER1 '.green, player1);
 
+	console.log('PLAYER2 '.magenta, player2);
+
+	var profile = {};
+
+	profile.p1 = player1.getUserModel();
+	profile.p2 =player2.getUserModel();
+
+	player1.delayEmit('profile', profile, 1000);
+	player2.delayEmit('profile', profile, 1000);
+
+	console.log('PROFILE'.red, profile);
+
+	new Game(player1, player2).init();
+
+	console.log('NEW GAME PRIVATE GAME INSTANTIATED'.bgBlue);
+
+	player1.emit('match ready');
+	player2.emit('match ready');
+}
+
+//sockId_joinCode
+// function cancelPrivateGame(data) {
+// console.log('BEFORE CANCEL privateGames'.cyan, privateGames);
+// delete privateGames[joinCode];
+// delete sockId_joinCode[socket.socketId];
+// console.log('AFTER REMOVE JOIN CODE'.red, privateGames, sockId_joinCode);
+//
+
+
+function cancelPrivateGame (socket) {
+	var joinCode = sockId_joinCode[socket.socketId];
+
+	log_PG('BEFORE DELETE');
+	log_sockId_JC();
+
+  delete sockId_joinCode[socket.socketId];
+  delete privateGames[joinCode];
+
+	log_PG('AFTER DELETE');
+	log_sockId_JC();
+}
 
 
 module.exports = {

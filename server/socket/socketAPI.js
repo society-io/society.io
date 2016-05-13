@@ -1,14 +1,14 @@
+// var eventEmitter = require('events');
 var firebase = require('../common').firebase;
 var privateGameListeners = require('../lobby/privateGame').privateGameListeners;
 var queueListeners = require('../lobby/queue').queueListeners;
-var eventEmitter = require('events');
 var lobbyListeners = require('../lobby/lobby').lobbyListeners;
 
 var SocketAPI = function(socket, userModel, token) {
 
 // socket
   this.socket = socket;
-  this.socketId = socket.id;
+  this.socketId = this.socket.id;
   this.events = socket._events;
   this.eventsCount = socket._eventsCount;
   this.listeners = {};
@@ -17,9 +17,9 @@ var SocketAPI = function(socket, userModel, token) {
 // user
 	userModel = Object.assign({}, userModel);
 	this.user = userModel;
-	this.userId = userModel._id;
+	this.userId = this.user._doc._id;
 	this.token = token;
-	this.rooms = null;
+	this.username =this.user._doc.username;
 };
 
 SocketAPI.prototype.init = function() {
@@ -27,18 +27,15 @@ SocketAPI.prototype.init = function() {
 	lobbyListeners(this);
   queueListeners(this);
   privateGameListeners(this);
-
-  console.log('emitting socket initialized');
-  this.emit('socket initialized');
+	this.emit('socket initialized');
 };
-
 
 SocketAPI.prototype.on = function(event, cb, auth) {
   if (auth) {
     this.socket.on(event, authenticate.bind(this));
   } else {
-    console.log('ON -->: '.magenta, event);
     this.socket.on(event, cb);
+	  console.log('ON:'.bgMagenta,'-->'.magenta, event);
   }
 	function authenticate(data) {
     firebase.authWithCustomToken(data.token, function(err, authData) {
@@ -55,7 +52,7 @@ SocketAPI.prototype.once= function (event, cb) {
 
 SocketAPI.prototype.emit = function(event, data) {
 	this.socket.emit(event, data);
-	console.log('EMIT -->: '.cyan, event, data);
+	console.log('EMIT:'.bgCyan,'-->'.cyan, event, data);
 	this.emitters[event]=this.socketId;
 };
 
@@ -63,8 +60,8 @@ SocketAPI.prototype.delayEmit = function(event, data, wait){
 	var sock = this;
 	setTimeout(function () {
 		sock.emit(event, data);
-		console.log('DELAYED  EMIT'.yellow, event, 'DATA SENT'.yellow, data);
-  }, wait);
+		console.log('DELAYED EMIT'.bgYellow, event,'DATA SENT'.bgYellow, data);
+	});
 };
 
 SocketAPI.prototype.getUserModel = function() {

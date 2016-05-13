@@ -3,6 +3,9 @@ var Player = require('./player').Player;
 var listeners = require('./listeners');
 var formatMMR = require('../profile/updateProfile').formatMMR;
 
+
+
+
 var Game = function(player1Socket, player2Socket) {
   /**
    *  Game state properties (Constructor)
@@ -124,9 +127,9 @@ Game.prototype.emit = function(event, data, p1data, p2data) {
     this.player2.socket.emit(event, p2data);
   } else {
     data = data || {};
-    data.event = event;
-    console.log('GAME PLAYER1 EMIT'.cyan, event, data);
-    console.log('GAME PLAYER2 EMIT'.cyan, event, data);
+    // data.event = event;
+    // console.log('GAME PLAYER1 EMIT'.cyan, event, data);
+    // console.log('GAME PLAYER2 EMIT'.cyan, event, data);
     this.player1.socket.emit(event, data);
     this.player2.socket.emit(event, data);
   }
@@ -162,7 +165,7 @@ Game.prototype.playerOn = function(event, cb) {
    *  Utilize this custom eventing function when needing to pass information
    *  from individual players to trigger game logic related events
    */
-   
+
   console.log('GAME PLAYERON'.yellow, event);
   this.events[event] = cb;
 };
