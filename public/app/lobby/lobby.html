@@ -4,6 +4,7 @@
 			<h1>Society <span>The Game</span></h1>
 			<div class="admin-bar-right">
 				<i class="fa fa-user" aria-hidden="true"></i>
+				<span>{{Lobby.get('player').username}}</span>
 				<a href="" ng-click="Lobby.signOut()">Sign Out</a>
 				<!--START Music Control -->
 	    	<div audio options="options"></div>
@@ -28,7 +29,7 @@
 				<button class="green" ng-click="Lobby.queue()"><i class="fa fa-check" aria-hidden="true"></i> Confirm</button>
 				<button class="red" ng-click="Lobby.toggleQueueWarning()"><i class="fa fa-times" aria-hidden="true"></i> Decline</button>
 			</div>
-			
+
 			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
 
 			<!-- Custom Game -->
@@ -124,7 +125,7 @@
 
 		<div class="lobby-right lobby-content-container">
 			<h1>Leader Board</h1>
-			
+
 			<table>
 				<tr>
 					<td>Rank</td>

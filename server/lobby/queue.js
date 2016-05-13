@@ -2,12 +2,12 @@ var colors = require('colors');
 var Game = require('../game/game').Game;
 
 // console.log colorize utility
-function logger (string, color){
-	var str = string.cyan;
+function logger (string, color) {
+	var str = string.grey;
 	var arrow = '-->';
 	var eq = '=';
-	var len = 'QUEUE LENGTH'.yellow + eq;
-	var qObj = '; QUEUE OBJECT'.yellow + eq;
+	var len = 'QUEUE LENGTH'.bgYellow + eq;
+	var qObj = 'QUEUE OBJECT'.bgRed + eq;
 	console.log(str, arrow, len, queue.length, qObj, queueObj);
 }
 
@@ -34,28 +34,35 @@ var queueListeners = function(socket) {
 };
 
 function decideQueue(socket) {
-	if (queueObj[socket.getUsername()]) {
+	if (queueObj[socket.username]) {
 		socket.emit('player already in queue');
 	} else {
 		addToQueue(socket);
 	}
 }
 
-function addToQueue(socket) {
+function addToQueue (socket) {
 	queue.push(socket);
-	queueObj[socket.getUsername()] = true;
+	queueObj[socket.username] = true;
 	socket.emit('added to queue');
 	logger('ADDED TO QUEUE');
 }
 
-function queueMatch() {
+
+function queueMatch () {
 	while (queue.length >= 2) {
 		var player1 = queue.pop();
-		var player2 = queue.pop();
+		logger('POPPED FROM QUEUE ARRAY');
 
-		delete queueObj[player1.getUsername()];
-		delete queueObj[player2.getUsername()];
-		logger('POPPED FROM QUEUE'.red);
+		var player2 = queue.pop();
+		logger('POPPED FROM QUEUE ARRAY');
+
+
+		delete queueObj[player1.username];
+		logger('DELETED FROM QUEUE OBJECT');
+
+		delete queueObj[player2.username];
+		logger('DELETED FROM QUEUE OBJECT');
 
 		var profile = {p1: player1.getUserModel(), p2: player2.getUserModel()};
 		console.log('PROFILE:'.green, profile);
@@ -70,13 +77,12 @@ function queueMatch() {
 	}
 }
 
-function removeFromQueue (socket) {
-	queue.splice(queue.indexOf(socket.id), 1);
-	console.log('=====');
-	console.log('socket.getUsername() =', socket.getUsername());
-	delete queueObj[socket.getUsername()];
-	logger('REMOVED FROM QUEUE');
-	// socket.disconnect();
+
+	function removeFromQueue (socket) {
+		queue.splice(queue.indexOf(socket), 1);
+		delete queueObj[socket.username];
+		logger('REMOVED FROM QUEUE');
+		// socket.disconnect();
 }
 
 module.exports = {

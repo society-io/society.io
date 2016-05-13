@@ -32,13 +32,13 @@
 
       function cancelRoom(joinCode) {
         console.log('Canceling privateGame...');
-        emit('cancel room', {joinCode: joinCode});
+        emit('cancel private game', {joinCode: joinCode});
         $state.go('lobby');
       }
 
       function listeners() {
         console.log('running listeners inside waiting factory');
-
+     
         on('profile', function(resp){
 	        console.log('ON PROFILE');
           playerInfo.player1Name = resp.p1.username;
@@ -49,9 +49,9 @@
 
         on('match ready', function() {
         console.log('ON MATCH READY --> GO TO BF');
-          $timeout(function(){
-          console.log('match ready about to state.go to battlefield');
-            $state.go('battlefield');
+          $timeout(function() {
+        console.log('$TIMEOUT MATCH READY ABOUT TO GO TO BF');
+	          $state.go('battlefield');
           }, 5000);
         });
 
@@ -59,16 +59,20 @@
           console.log('joinCode: ', data.joinCode);
           emit('initialize battlefield', {joinCode: data.joinCode});
         });
-
-        on('player 1 enter battlefield', function() {
-          console.log('inside player1EnterBattlefield');
-          $state.go('battlefield');
-        });
-
-        on('player 2 enter battlefield', function() {
-          console.log('inside player2EnterBattlefield');
-          $state.go('battlefield');
-        });
+        //
+        // on('player 1 enter battlefield', function() {
+	       //  $timeout(function () {
+		     //    console.log('P1 ABOUT TO GO TO BF');
+		     //    $state.go('battlefield');
+	       //  }, 5000);
+        // });
+        //
+        // on('player 2 enter battlefield', function() {
+        //   $timeout(function () {
+        //     console.log('P2 ABOUT TO GO TO BF');
+        //     $state.go('battlefield');
+        //     }, 5000);
+        // });
       }
 
     }
