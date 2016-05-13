@@ -9,7 +9,7 @@ angular
 
     var state = {leaderboard: false};
     
-    getUsersFromDB().then(function(users) {
+    getUsersFromDB().then(function(users) {      
       var storage = [];
       for(var i = 0; i < users.data.length; i++){
         storage.push(users.data[i]);

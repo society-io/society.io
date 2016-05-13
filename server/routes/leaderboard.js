@@ -5,7 +5,14 @@ router.get('/', function(req, res){
   db.find({}, function(err, users) {
   	var userMap = [];
   	users.forEach(function(user) {
-  		userMap.push({id: user._id, username: user.username, wins: user.wins, losses: user.losses, mmr: user.mmr});
+  		userMap.push({
+        id: user._id,
+        username: user.username,
+        wins: user.wins,
+        losses: user.losses,
+        mmr: user.mmr,
+        avatar: user.avatar
+      });
   	});
   	res.send(userMap);
   });

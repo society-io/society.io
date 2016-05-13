@@ -23,10 +23,10 @@
 
 			<button class="block red" ng-click="Lobby.toggleQueueWarning()"><i class="fa fa-bolt" aria-hidden="true"></i> Queue for a ranked match</button>
 
-			<div ng-show="Lobby.showPreQueueWarning">
+			<div class="lobby-sidebar-code" ng-show="Lobby.showPreQueueWarning">
 				<p>WARNING: You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players.</p>
-				<button class="green" ng-click="Lobby.queue()">Confirm</button>
-				<button class="red" ng-click="Lobby.toggleQueueWarning()">Decline</button>
+				<button class="green" ng-click="Lobby.queue()"><i class="fa fa-check" aria-hidden="true"></i> Confirm</button>
+				<button class="red" ng-click="Lobby.toggleQueueWarning()"><i class="fa fa-times" aria-hidden="true"></i> Decline</button>
 			</div>
 			
 			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
@@ -114,23 +114,33 @@
 			<h1>Player Stats</h1>
 
 			<div>
-				{{Lobby.get('player')}}
-				<p>username</p>
-				<p>mmr</p>
-				<p>wins</p>
-				<p>losses</p>
+				<p>{{Lobby.get('player').username}}</p>
+				<p>{{Lobby.get('player').mmr}}</p>
+				<p>{{Lobby.get('player').wins}}</p>
+				<p>{{Lobby.get('player').losses}}</p>
+				<p>{{Lobby.get('player').avatar}}</p>
 			</div>
 		</div>
 
 		<div class="lobby-right lobby-content-container">
 			<h1>Leader Board</h1>
-
-			<div ng-repeat="users in Lobby.getLeaderboard()">
-			<div>username:{{users.username}}</div>
-			<div>mmr:{{users.mmr}}</div>
-			<div>wins:{{users.wins}}</div>
-			<div>losses:{{users.losses}}</div>
-			</div>
+			
+			<table>
+				<tr>
+					<td>Rank</td>
+					<td>Username</td>
+					<td>Coins</td>
+					<td>Wins</td>
+					<td>Losses</td>
+				</tr>
+			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()">
+				<td>{{index}}</td>
+				<td><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> {{users.username}}</td>
+				<td>{{users.mmr}}</td>
+				<td>{{users.wins}}</td>
+				<td>{{users.losses}}</td>
+			</tr>
+			</table>
 		</div>
 	</div>
 </div>
