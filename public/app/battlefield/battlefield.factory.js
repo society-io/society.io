@@ -38,7 +38,10 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
   };
 
   if (socketFactory.isConnected()) {
+    console.log('listeners is being invoked:');
     listeners();
+  } else {
+    $state.go('lobby');
   }
 
   return {

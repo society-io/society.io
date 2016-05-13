@@ -37,10 +37,7 @@
       }
 
       function listeners() {
-        on('joinCode is', function(data) {
-          joinCode = data.joinCode;
-          console.log('joinCode is listener',data.joinCode);
-        });
+        console.log('running listeners inside waiting factory');
 
         on('profile', function(resp){
 	        console.log('ON PROFILE');

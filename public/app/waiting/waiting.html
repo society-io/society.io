@@ -8,7 +8,7 @@
         queue
       </div>
       <div class="private-controls" ng-show="Waiting.lfGet('whereTo') === 'private'">
-        <div ng-init='Waiting.getJoinCode()'>Your Join Code: {{Waiting.lfGet('joinCode')}}</div>
+        <div>Your Join Code: {{Waiting.lfGet('joinCode')}}</div>
         <button ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm">Cancel Your Private Game</button>
 
         <form>
