@@ -83,7 +83,7 @@
 
   <!-- Playing battlefield -->
   <div class="playing-field container-fluid">
-  
+
     <div class="playing-opponent col-md-6 col-md-offset-3">
       <div class="opponent-player-choice">
         <div class="big-tile" ng-class="{
@@ -118,7 +118,7 @@
         <div class="forfeit-container">
           <div class="forfeit">
 
-            <button class="red" ng-click="Bf.forfeit()">
+            <button class="red" ng-click="Bf.forfeit(); Bf.playClick()">
               <i class="fa fa-hand-peace-o fa-lg" aria-hidden="true"></i>
               <p>Forfeit</p>
             </button>
@@ -163,9 +163,9 @@
   <div class="player">
     <div class="fluid-container">
 
-      <!-- Emotes 
+      <!-- Emotes
       <div class="container emote-container">
-        
+
         <div class="emote-toggle" ng-click="Bf.emoteToggle()">
           <i class="fa fa-commenting fa-lg" aria-hidden="true"
             ng-class="{
@@ -201,7 +201,7 @@
                 lostRound: Bf.get('player').choice === choice && Bf.get('roundWinner') === Bf.get('opponent').id,
                 dark: Bf.get('submitted')
               }"
-              ng-click="Bf.get('player').health[choice] && !Bf.get('player').choice && Bf.setChoice(choice)">
+              ng-click="Bf.get('player').health[choice] && !Bf.get('player').choice && Bf.setChoice(choice); Bf.playClick()">
               <div class="tile-inner">
                 <i class="bg-icon fa fa-lg" ng-class="{
                   'fa-gavel': choice === 'jail',

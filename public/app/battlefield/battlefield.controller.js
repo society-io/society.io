@@ -5,14 +5,15 @@
 	  .controller('BattlefieldController', BattlefieldController);
 
   BattlefieldController.$inject = [
+    '$scope',
     'battlefieldFactory',
     'battlefieldLogicFactory',
     'battlefieldTimerFactory',
     'socketFactory',
-    '$scope'
+    'soundFactory'
   ];
 
-  function BattlefieldController(battlefieldFactory, battlefieldLogicFactory, battlefieldTimerFactory, socketFactory, $scope) {
+  function BattlefieldController($scope, battlefieldFactory, battlefieldLogicFactory, battlefieldTimerFactory, socketFactory, soundFactory) {
 
     // abbreviate
     var vm = this;
@@ -31,6 +32,7 @@
     }
 
     $scope.$on('runAnimations', runAnimations);
+    soundFactory.loadSounds();
 
     // factory getters
     vm.choices = bf.get('choices');
@@ -40,7 +42,7 @@
     vm.winsAgainst = bfLogic.winsAgainst;
     vm.losesAgainst = bfLogic.losesAgainst;
     vm.getTime = bfTimer.getTime;
-    
+
     // View State Elements
     vm.currentHover = '';
     vm.showEmotes = false;
@@ -88,5 +90,22 @@
         vm.showSideControls = true;
       }, 500);
     }
+
+    vm.playClick = function() {
+      console.log('BattlefieldController playClick');
+      soundFactory.playClick();
+    };
+    vm.playConfirm = function() {
+      console.log('BattlefieldController playConfirm');
+      soundFactory.playConfirm();
+    };
+    vm.playDamage = function() {
+      console.log('BattlefieldController playDamage');
+      soundFactory.playDamage();
+    };
+    vm.playDeath = function() {
+      console.log('BattlefieldController playDeath');
+      soundFactory.playDeath();
+    };
   } // end of controller function
 })();
