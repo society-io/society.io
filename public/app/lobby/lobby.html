@@ -3,14 +3,9 @@
 		<div class="col-md-12">
 			<h1>Society <span>The Game</span></h1>
 			<div class="admin-bar-right">
-				<div class="player-name">
-					<i class="fa fa-user" aria-hidden="true"></i>
-					{{Lobby.get('player').username}}
-				</div>
-				<a href="" ng-click="Lobby.signOut()">Sign Out</a>
-				<!--START Music Control -->
-	    		<div audio options="options"></div>
-					<!--END Music Control -->
+				<i class="fa fa-user" aria-hidden="true"></i>
+				<span>{{Lobby.get('player').username}}</span>
+				<a href="" class="signout" ng-click="Lobby.signOut()">Sign Out</a>
 			</div>
 		</div>
 	</div>
@@ -114,28 +109,37 @@
 
 	<div class="col-md-8">
 		<div class="lobby-right lobby-content-container">
-			<h1>Player Stats</h1>
+			<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
 
 			<div class="user-profile">
 				<div class="pf-avatar-container">
 					<i class="fa fa-hand-{{Lobby.get('player').avatar}}-o" aria-hidden="true"></i>
 				</div>
 				<div class="pf-info-container">
-					<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
 					<div class="pf-bit">
 						<p class="pf-coins">
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-circle fa-stack-2x"></i>
 								<i class="fa fa-usd fa-stack-1x fa-inverse"></i>
-							</span>	
-							{{Lobby.get('player').mmr}}
+							</span>
+							<span class="stat-label">
+								Coins: 
+							</span>
+							<span class="stat-val coins">
+								{{Lobby.get('player').mmr}}
+							</span>
 						</p>
 					</div>
 					<div class="pf-bit">
 						<p class="pf-record">
-							<i class="fa fa-trophy" aria-hidden="true"></i>
-							<span class="record-wins">{{Lobby.get('player').wins}}</span> / 
-							<span class="record-losses">{{Lobby.get('player').losses}}</span>
+							<span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-trophy fa-stack-1x fa-inverse"></i>
+							</span>
+							<span class="stat-val">
+								W <span class="record-wins">{{Lobby.get('player').wins}}</span> 
+								L <span class="record-losses">{{Lobby.get('player').losses}}</span>
+							</span>
 						</p>
 					</div>
 				</div>
