@@ -46,7 +46,7 @@
 				</div>
 			</form>
 
-			<button class="block green" ng-click="Lobby.showJoinGameController = !Lobby.showJoinGameController">
+			<button class="block green" ng-click="Lobby.showJoinGameController = !Lobby.showJoinGameController; Lobby.playClick()">
 			<i class="fa fa-chevron-{{Lobby.showJoinGameController ? 'up' : 'down'}}" aria-hidden="true"></i> join private game</button>
 
 			<form>
