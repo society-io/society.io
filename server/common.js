@@ -6,7 +6,6 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 var activeSockets = {};
-var currentSocket = {};
 
 module.exports = {
   firebase: firebase,
@@ -14,5 +13,4 @@ module.exports = {
   server: server,
   io: io,
   activeSockets: activeSockets,
-  currentSocket: currentSocket
 };

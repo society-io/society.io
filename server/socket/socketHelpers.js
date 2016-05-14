@@ -17,39 +17,8 @@ function socketCheck(token, socket) {
 	});
 }
 
-function disconnectListeners(socket) {
-	socket.on('disconnect', function () {
-		checkQueue(socket);
-		checkPrivateGames(socket);
-	});
-}
-
-function queueDisconnect (socket) {
-	if(queueObj[socket.username]) {
-		queue.splice(queue.indexOf(socket), 1);
-		delete queueObj[socket.username];
-		delete	activeSockets[socket.socketId];
-		socket.disconnect( );
-	}
-}
-
-function checkPrivateGames  (socket) {
-	if (sockId_joinCode[socket.socketId]) {
-		delete  privateGames[sockId_joinCode[socket.socketId]];
-		delete sockId_joinCode[socket.socketId];
-		delete  activeSockets[socket.socketId];
-		socket.disconnect();
-	}
-}
-
-
-
-
 module.exports = {
 	socketCheck: socketCheck,
-	disconnectListeners:disconnectListeners, 
-	queueDisconnect:queueDisconnect, 
-	privateGameDisconnect: privateGameDisconnect
 };
 
 

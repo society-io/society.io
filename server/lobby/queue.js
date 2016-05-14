@@ -1,6 +1,6 @@
 var colors = require('colors');
 var Game = require('../game/game').Game;
-var socketCheck = require('./socket/socketHelpers').disconnectListeners;
+var firebase = require('../common').activeSockets;
 
 // console.log colorize utility
 function logger (string, color) {
@@ -83,6 +83,7 @@ function removeFromQueue (socket) {
 		queue.splice(position, 1);	
 	}
 	delete queueObj[socket.username];
+	delete activeSockets[socket.socketId];
 	logger('REMOVED FROM QUEUE');
 }
 

@@ -8,14 +8,13 @@
   LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory', 'soundFactory'];
 
   function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory, soundFactory) {
-    
+
     var socket = socketFactory;
     var vm = this;
 
     soundFactory.loadSounds();
     authFactory.checkAuth();
-
-    from active socket list
+    
     vm.get = lobbyFactory.get;
     vm.set = lobbyFactory.set;
 
