@@ -176,3 +176,23 @@
   color: $red;
   margin-top: 11px;
 }
+
+.table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 10px;
+  border-color: grey;
+  border-radius: 3px;
+  border: 1px solid;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  background-color: transparent;
+  text-align: center;
+  padding-left: 10px;
+}
+
+.titles {
+  border-bottom: 1px solid grey;
+  background-color: transparent;
+}
