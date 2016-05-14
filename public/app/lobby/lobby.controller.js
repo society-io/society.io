@@ -88,5 +88,10 @@
       soundFactory.playClick();
     };
 
+    vm.playConfirm = function() {
+      console.log('LobbyController playConfirm');
+      soundFactory.playConfirm();
+    };
+
   }
 })();

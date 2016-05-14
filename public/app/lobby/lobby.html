@@ -5,7 +5,7 @@
 			<div class="admin-bar-right">
 				<i class="fa fa-user" aria-hidden="true"></i>
 				<span>{{Lobby.get('player').username}}</span>
-				<a href="" class="signout" ng-click="Lobby.signOut(); Lobby.playClick()">Sign Out</a>
+				<a href="" class="signout" ng-click="Lobby.playClick(); Lobby.signOut()">Sign Out</a>
 			</div>
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 
 			<div class="lobby-sidebar-code" ng-show="Lobby.showPreQueueWarning">
 				<p>WARNING: You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players.</p>
-				<button class="green" ng-click="Lobby.queue(); Lobby.playClick()"><i class="fa fa-check" aria-hidden="true"></i> Confirm</button>
+				<button class="green" ng-click="Lobby.queue(); Lobby.playConfirm()"><i class="fa fa-check" aria-hidden="true"></i> Confirm</button>
 				<button class="red" ng-click="Lobby.toggleQueueWarning(); Lobby.playClick()"><i class="fa fa-times" aria-hidden="true"></i> Decline</button>
 			</div>
 
