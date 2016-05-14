@@ -4,8 +4,8 @@
 			<h1>Society <span>The Game</span></h1>
 			<div class="admin-bar-right">
 				<i class="fa fa-user" aria-hidden="true"></i>
-				<span>{{Lobby.get('player').username}}</span>
-				<a href="" class="signout" ng-click="Lobby.playClick(); Lobby.signOut()">Sign Out</a>
+				<span class="username">{{Lobby.get('player').username}}</span>
+				<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="" class="signout" ng-click="Lobby.signOut()">Sign Out</a>
 			</div>
 		</div>
 	</div>
@@ -110,11 +110,40 @@
 	<div class="col-md-8">
 		<div class="lobby-right lobby-content-container">
 			<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
-
 			<div class="user-profile">
 				<div class="pf-avatar-container">
-					<i class="fa fa-hand-{{Lobby.get('player').avatar}}-o" aria-hidden="true"></i>
+					<div class="pf-avatar-inner back">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(1px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(2px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(3px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(4px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(5px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(6px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(7px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(8px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner front" style="transform: translateZ(9px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
 				</div>
+
 				<div class="pf-info-container">
 					<div class="pf-bit">
 						<p class="pf-coins">

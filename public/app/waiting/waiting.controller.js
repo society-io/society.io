@@ -14,6 +14,7 @@ angular
 
     var lf = lobbyFactory;
     vm.lfGet = lf.get;
+    vm.get = waitingFactory.get;
 
     vm.cancelRoom = waitingFactory.cancelRoom;
     vm.showCancelGameInput = false;
@@ -25,24 +26,6 @@ angular
 
     vm.removeFromQueue = function(){
       waitingFactory.removeFromQueue();
-    };
-
-    vm.playerOneName = function() {
-    	return waitingFactory.get('player1Name');
-    };
-    vm.playerOneMMR = function() {
-    	return waitingFactory.get('player1MMR');
-    };
-    vm.playerTwoName = function() {
-    	return waitingFactory.get('player2Name');
-    };
-    vm.playerTwoMMR = function() {
-    	return waitingFactory.get('player2MMR');
-    };
-
-    vm.playClick = function() {
-      console.log('WaitingController playClick');
-      soundFactory.playClick();
     };
   }
 
