@@ -9,11 +9,11 @@
       var emit = socketFactory.emit;
       var on = socketFactory.on;
 
-      var playerInfo = {
-        player1Name: null,
-        player1MMR: null,
-        player2Name: null,
-        player2MMR: null
+      var state = {
+        player1: null,
+        player2: null,
+        centerMessage: 'Waiting for opponent',
+        waiting: true
       };
 
       if (socketFactory.isConnected()) {
@@ -27,7 +27,7 @@
       };
 
       function get(keyName) {
-        return playerInfo[keyName];
+        return state[keyName];
       }
 
       function cancelRoom(joinCode) {
@@ -41,16 +41,22 @@
      
         on('profile', function(resp){
 	        console.log('ON PROFILE');
-          playerInfo.player1Name = resp.p1.username;
-          playerInfo.player1MMR = resp.p1.mmr;
-          playerInfo.player2Name = resp.p2.username;
-          playerInfo.player2MMR = resp.p2.mmr;
+          console.log('resp = ', resp);
+
+          state.player1 = resp.p1;
+          state.player2 = resp.p2;
+
+          state.waiting = false;
         });
 
         on('match ready', function() {
-        console.log('ON MATCH READY --> GO TO BF');
+          console.log('ON MATCH READY --> GO TO BF');
+          state.centerMessage = 'Opponent Found.';
           $timeout(function() {
-        console.log('$TIMEOUT MATCH READY ABOUT TO GO TO BF');
+            state.centerMessage = 'Entering Battlefield...';
+          }, 2500);
+          $timeout(function() {
+          console.log('$TIMEOUT MATCH READY ABOUT TO GO TO BF');
 	          $state.go('battlefield');
           }, 5000);
         });
@@ -59,20 +65,6 @@
           console.log('joinCode: ', data.joinCode);
           emit('initialize battlefield', {joinCode: data.joinCode});
         });
-        //
-        // on('player 1 enter battlefield', function() {
-	       //  $timeout(function () {
-		     //    console.log('P1 ABOUT TO GO TO BF');
-		     //    $state.go('battlefield');
-	       //  }, 5000);
-        // });
-        //
-        // on('player 2 enter battlefield', function() {
-        //   $timeout(function () {
-        //     console.log('P2 ABOUT TO GO TO BF');
-        //     $state.go('battlefield');
-        //     }, 5000);
-        // });
       }
 
     }

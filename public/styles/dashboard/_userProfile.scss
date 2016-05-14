@@ -5,16 +5,46 @@
 .pf-avatar-container {
   width: 100px;
   height: 100px;
-  margin-right: 20px;
-  background-color: $red;
-  border-radius: 50%;
-  text-align: center;
   display: inline-block;
+  transform-style: preserve-3d;
+  animation: spin 3.5s linear infinite;
+  margin-right: 40px;
+}
+
+.pf-avatar-container > div {
+  background-color: #323240;
+  border-radius: 50%;
+  border: $blue solid 4px;
+  text-align: center;
+}
+
+.pf-avatar-inner {
+  width: 100px;
+  height: 100px;
 
   .fa {
-    margin-top: 30px;
+    margin-top: 26px;
     font-size: 42px;
   }
+}
+
+.pf-avatar-inner.front {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+}
+
+.pf-avatar-inner.middle {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+}
+
+.pf-avatar-inner.back {
+  width: 100px;
+  height: 100px;
 }
 
 .pf-info-container {
