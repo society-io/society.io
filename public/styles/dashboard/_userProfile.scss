@@ -1,10 +1,11 @@
 .user-profile > * {
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .pf-avatar-container {
   width: 100px;
   height: 100px;
+  margin-right: 20px;
   background-color: $red;
   border-radius: 50%;
   text-align: center;
@@ -25,7 +26,16 @@
 }
 
 .pf-bit {
+  font-size: 21px;
+  display: inline-block;
 
+  p {
+    margin: 0;
+  }
+}
+
+.pf-bit:first-child {
+  margin-right: 20px;
 }
 
 .pf-coins {
@@ -39,13 +49,31 @@
 }
 
 .pf-record {
+  font-size: 21px;
 
+  .fa-circle {
+    color: $blue;
+  }
+
+  .fa-usd {
+    color: $white;
+  }
+}
+
+.stat-label, 
+.stat-val {
+  position: relative;
+  top: 4px;
+}
+
+.stat-val.coins {
+  color: $blue;
 }
 
 .record-wins {
-
+  color: $green;
 }
 
 .record-losses {
-
+  color: $red;
 }
