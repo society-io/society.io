@@ -3,12 +3,14 @@
 		<div class="col-md-12">
 			<h1>Society <span>The Game</span></h1>
 			<div class="admin-bar-right">
-				<i class="fa fa-user" aria-hidden="true"></i>
-				<span>{{Lobby.get('player').username}}</span>
+				<div class="player-name">
+					<i class="fa fa-user" aria-hidden="true"></i>
+					{{Lobby.get('player').username}}
+				</div>
 				<a href="" ng-click="Lobby.signOut()">Sign Out</a>
 				<!--START Music Control -->
-	    	<div audio options="options"></div>
-				<!--END Music Control -->
+	    		<div audio options="options"></div>
+					<!--END Music Control -->
 			</div>
 		</div>
 	</div>
@@ -141,7 +143,7 @@
 		</div>
 
 		<div class="lobby-right lobby-content-container">
-			<h1>Leader Board</h1>
+			<h1 class="leaderboard-title">Leader Board</h1>
 
 			<table class="table table-hover table-mc-light-blue table-bordered">
 				<thead class="titles">
@@ -153,7 +155,7 @@
 						<td>Losses</td>
 					</tr>
 				</thead>
-			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()">
+			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()" class="rows">
 				<td>{{index}}</td>
 				<td><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> {{users.username}}</td>
 				<td>{{users.mmr}}</td>
