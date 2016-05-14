@@ -5,7 +5,7 @@ var privateGames = {}; // { joinCode: [{sock1}, {sock2}] }
 var sockId_joinCode = {}; // { socketId: joinCode }
 
 // console.log privateGames object
-function log_PG (string) {
+function log_PG(string) {
 	string = string || '';
 	var arrow = '-->';
 	var privateGames_string = 'privateGames'.yellow + arrow;
@@ -66,7 +66,7 @@ function storePlayer1(socket, data) {
 }
 
 function storePlayer2(socket, data) {
-	if(privateGames[data.joinCode]) {
+	if(privateGames[data.joinCode] && !privateGames[data.joinCode][1]) {
 
 		privateGames[data.joinCode][1] = socket;
 		sockId_joinCode[socket.socketId] = data.joinCode;
