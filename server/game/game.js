@@ -3,9 +3,6 @@ var Player = require('./player').Player;
 var listeners = require('./listeners');
 var formatMMR = require('../profile/updateProfile').formatMMR;
 
-
-
-
 var Game = function(player1Socket, player2Socket) {
   /**
    *  Game state properties (Constructor)
@@ -153,6 +150,7 @@ Game.prototype.terminate = function(reason) {
   }
   
   if (!this.updatedMMR) {
+    console.log('winner = ', winner);
     formatMMR(this.player1.socketAPI, this.player2.socketAPI, winner);
     this.updatedMMR = true;
 	}
