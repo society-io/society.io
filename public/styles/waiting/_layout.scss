@@ -5,13 +5,6 @@
   h1 {
     margin-top: 0;
   }
-}
-
-.waiting-message {
-  text-align: center;
-}
-
-.waiting-content-container {
 
   .spinner {
     margin: 20px auto;
@@ -61,9 +54,62 @@
       -webkit-transform: scale(1.0);
     }
   }
+}
+
+.waiting-message {
+  text-align: center;
+}
+
+.joincode-label {
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 18px;
+}
+
+.joincode-container {
+  background-color: rgba(0,0,0,0.2);
+  padding: 10px 0;
+  border-radius: 3px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 400;
+  }
+}
+
+.waiting-player-profile {
+
+  p {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  h1 {
+    display: inline-block;
+  }
+
+  .username {
+    margin-right: 30px;
+  }
+
+  .stats {
+
+    span.wins {
+      color: $green;
+    }
+
+    span.losses {
+      color: $red;
+    }
+  }
 
 }
 
 .waiting-player-profile {
   
 }
+

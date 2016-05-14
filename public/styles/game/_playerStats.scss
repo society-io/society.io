@@ -8,32 +8,11 @@
   right: 30px;
 }
 
-.player-stats {
-  position: absolute;
-  
-  p {
-    margin: 6px;
-  }
+.player-stat-group {
+  margin: 0 6px;
+  color: rgba(255,255,255,0.5);
+}
 
-  .username {
-    font-weight: 700;
-  }
-
-  .stat span {
-    font-size: 12px;
-    color: #222;
-    display: inline-block;
-  }
-
-  .wins {
-  
-  }
-
-  .losses {
-
-  }
-
-  .winPerc {
-
-  }
+.player-stat {
+  color: $white;
 }
