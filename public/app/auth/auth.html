@@ -50,13 +50,13 @@
 			</div>
 
 
-			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp, avatar: Auth.get('avatarClicked')})">Sign Up</button>
+			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp, avatar: Auth.get('avatarClicked')}); Auth.playClick()">Sign Up</button>
 
 			<!-- for error on signUp -->
 			<div class="error-message" ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
 
 			<div class="switch-view-link">
-				<a href="" ng-click="Auth.set('signinErrorMessage', '') ; Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
+				<a href="" ng-click="Auth.set('signinErrorMessage', ''); Auth.playClick() ; Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
 			</div>
 		</form>
 
@@ -71,13 +71,13 @@
 					ng-model="Auth.passwordIn" type="password" placeholder="Password">
 				<i class="fa fa-lock" aria-hidden="true"></i>
 			</div>
-			<button class="block yellow" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn})">Login</button>
+			<button class="block yellow" ng-click="Auth.signIn({username: Auth.usernameIn, password: Auth.passwordIn}); Auth.playClick()">Login</button>
 
 			<!-- for error on signIn -->
 			<div class="error-message" ng-if="Auth.signInErrorMessage() && Auth.signInForm">{{Auth.signInErrorMessage()}}</div>
 
 			<div class="switch-view-link">
-				<a href="" ng-click="Auth.set('signupErrorMessage', '') ; Auth.signUpForm = true ; Auth.signInForm = false">Sign Up</a>
+				<a href="" ng-click="Auth.set('signupErrorMessage', ''); Auth.playClick() ; Auth.signUpForm = true ; Auth.signInForm = false">Sign Up</a>
 			</div>
 
 		</form>
