@@ -1,5 +1,4 @@
 var firebase = require('../common').firebase;
-var firebase = require('../common').activeSockets;
 
 function socketCheck(token, socket) {
 	return new Promise(function(resolve, reject) {
@@ -18,8 +17,5 @@ function socketCheck(token, socket) {
 }
 
 module.exports = {
-	socketCheck: socketCheck,
+	socketCheck: socketCheck
 };
-
-
-

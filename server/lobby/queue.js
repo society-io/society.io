@@ -1,6 +1,6 @@
 var colors = require('colors');
 var Game = require('../game/game').Game;
-var firebase = require('../common').activeSockets;
+var activeSockets = require('../common').activeSockets;
 
 // console.log colorize utility
 function logger (string, color) {
@@ -46,6 +46,7 @@ function addToQueue (socket) {
 	queueObj[socket.username] = true;
 	socket.emit('added to queue');
 	logger('ADDED TO QUEUE');
+	console.log('ACTIVE SOCKETS'.cyan, activeSockets);
 }
 
 
@@ -80,10 +81,10 @@ function queueMatch () {
 function removeFromQueue (socket) {
 	var position = queue.indexOf(socket);
 	if (position >= 0) {
-		queue.splice(position, 1);	
+		queue.splice(position, 1);
 	}
 	delete queueObj[socket.username];
-	delete activeSockets[socket.socketId];
+	// delete activeSockets[socket.socketId];
 	logger('REMOVED FROM QUEUE');
 }
 

@@ -65,6 +65,7 @@ angular
         data = authFactory.attachToken(data);
       }
       console.log('emit was called. inside socket facotry, eventName = ', eventName);
+      console.log('socketID', socket.id);
       socket.emit(eventName, data, function() {
         var args = arguments;
         $rootScope.$apply(function() {
