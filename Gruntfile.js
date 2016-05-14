@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         src: [
           'public/app/app.module.js',
           'public/app/app.controller.js',
-          
+
           'public/app/auth/**/*.factory.js',
           'public/app/auth/**/*.controller.js',
 
@@ -37,7 +37,9 @@ module.exports = function(grunt) {
 
           'public/app/waiting/**/*.factory.js',
           'public/app/waiting/**/*.controller.js',
-          
+
+          'public/app/sound/**/*.factory.js',
+
           'public/app/ui-router/app.config.js'
         ],
         dest: 'public/dist/built.js',

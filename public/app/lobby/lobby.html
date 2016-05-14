@@ -5,7 +5,7 @@
 			<div class="admin-bar-right">
 				<i class="fa fa-user" aria-hidden="true"></i>
 				<span>{{Lobby.get('player').username}}</span>
-				<a href="" class="signout" ng-click="Lobby.signOut()">Sign Out</a>
+				<a href="" class="signout" ng-click="Lobby.playClick(); Lobby.signOut()">Sign Out</a>
 			</div>
 		</div>
 	</div>
@@ -19,12 +19,12 @@
 			<!-- ranked -->
 			<h2>Ranked</h2>
 
-			<button class="block red" ng-click="Lobby.toggleQueueWarning()"><i class="fa fa-bolt" aria-hidden="true"></i> Queue for a ranked match</button>
+			<button class="block red" ng-click="Lobby.toggleQueueWarning(); Lobby.playClick()"><i class="fa fa-bolt" aria-hidden="true"></i> Queue for a ranked match</button>
 
 			<div class="lobby-sidebar-code" ng-show="Lobby.showPreQueueWarning">
 				<p>WARNING: You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players.</p>
-				<button class="green" ng-click="Lobby.queue()"><i class="fa fa-check" aria-hidden="true"></i> Confirm</button>
-				<button class="red" ng-click="Lobby.toggleQueueWarning()"><i class="fa fa-times" aria-hidden="true"></i> Decline</button>
+				<button class="green" ng-click="Lobby.queue(); Lobby.playConfirm()"><i class="fa fa-check" aria-hidden="true"></i> Confirm</button>
+				<button class="red" ng-click="Lobby.toggleQueueWarning(); Lobby.playClick()"><i class="fa fa-times" aria-hidden="true"></i> Decline</button>
 			</div>
 
 			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
@@ -32,7 +32,7 @@
 			<!-- Custom Game -->
 			<h2>Casual</h2>
 
-			<button class="block blue" ng-click="Lobby.showCreateGameController = !Lobby.showCreateGameController">
+			<button class="block blue" ng-click="Lobby.showCreateGameController = !Lobby.showCreateGameController; Lobby.playClick()">
 			<i class="fa fa-chevron-{{Lobby.showCreateGameController ? 'up' : 'down'}}" aria-hidden="true"></i> create private game</button>
 
 			<form>
@@ -40,7 +40,7 @@
 					<!--TODO:create model object in controller and pass to emit event on btn click-->
 					<div class="input-wrapper">
 						<input class="code-input" ng-model='Lobby.joinCode' placeholder="Enter Join Code">
-						<button class="inline-block red" ng-click="Lobby.createRoom(Lobby.joinCode)">create</button>
+						<button class="inline-block red" ng-click="Lobby.createRoom(Lobby.joinCode); Lobby.playClick()">create</button>
 						<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage')">{{Lobby.getErrorMessage('joinCodeErrorMessage')}}</div>
 					</div>
 				</div>
@@ -54,7 +54,7 @@
 					<!--TODO:create model object in controller and pass to emit event on btn click-->
 					<div class="input-wrapper">
 						<input class="code-input" ng-model='Lobby.joinCode2' placeholder="Enter Join Code">
-				  	<button class="inline-block red" ng-click="Lobby.joinRoom(Lobby.joinCode2)">join</button>
+				  	<button class="inline-block red" ng-click="Lobby.joinRoom(Lobby.joinCode2); Lobby.playClick()">join</button>
 				  	<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage2')">{{Lobby.getErrorMessage('joinCodeErrorMessage2')}}</div>
 					</div>
 				</div>
@@ -70,32 +70,32 @@
 			</div>
 
 
-			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars">Change Team</button>
+			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars; Lobby.playClick()">Change Team</button>
 
 			<div ng-show="Lobby.showAvatars">
 				<h2>Options</h2>
 				<div class="change-avatar-container">
-					<div class="avatars-available" id="rock" ng-click="Lobby.setNewAvatar('rock')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'rock'}" ng-show="'rock' !== Lobby.myAvatar()">
+					<div class="avatars-available" id="rock" ng-click="Lobby.setNewAvatar('rock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'rock'}" ng-show="'rock' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<div class="avatars-available" id="paper" ng-click="Lobby.setNewAvatar('paper')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'paper'}" ng-show="'paper' !== Lobby.myAvatar()">
+					<div class="avatars-available" id="paper" ng-click="Lobby.setNewAvatar('paper'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'paper'}" ng-show="'paper' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<div class="avatars-available" id="scissors" ng-click="Lobby.setNewAvatar('scissors')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'scissors'}" ng-show="'scissors' !== Lobby.myAvatar()">
+					<div class="avatars-available" id="scissors" ng-click="Lobby.setNewAvatar('scissors'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'scissors'}" ng-show="'scissors' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<div class="avatars-available" id="lizard" ng-click="Lobby.setNewAvatar('lizard')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'lizard'}" ng-show="'lizard' !== Lobby.myAvatar()">
+					<div class="avatars-available" id="lizard" ng-click="Lobby.setNewAvatar('lizard'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'lizard'}" ng-show="'lizard' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<div class="avatars-available" id="spock" ng-click="Lobby.setNewAvatar('spock')"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'spock'}" ng-show="'spock' !== Lobby.myAvatar()">
+					<div class="avatars-available" id="spock" ng-click="Lobby.setNewAvatar('spock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'spock'}" ng-show="'spock' !== Lobby.myAvatar()">
 						<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
 					</div>
 
-					<button class="inline-block-small red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')}); Lobby.showAvatars = !Lobby.showAvatars">Update</button>
+					<button class="inline-block-small red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')}); Lobby.playClick(); Lobby.showAvatars = !Lobby.showAvatars">Update</button>
 				</div>
 
 
@@ -123,7 +123,7 @@
 								<i class="fa fa-usd fa-stack-1x fa-inverse"></i>
 							</span>
 							<span class="stat-label">
-								Coins: 
+								Coins:
 							</span>
 							<span class="stat-val coins">
 								{{Lobby.get('player').mmr}}
@@ -137,7 +137,7 @@
 									<i class="fa fa-trophy fa-stack-1x fa-inverse"></i>
 							</span>
 							<span class="stat-val">
-								W <span class="record-wins">{{Lobby.get('player').wins}}</span> 
+								W <span class="record-wins">{{Lobby.get('player').wins}}</span>
 								L <span class="record-losses">{{Lobby.get('player').losses}}</span>
 							</span>
 						</p>

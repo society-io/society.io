@@ -5,11 +5,13 @@
   .module('app')
   .controller('LobbyController', LobbyController);
 
-  LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory'];
+  LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory', 'soundFactory'];
 
-  function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory) {
+  function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory, soundFactory) {
     var vm = this;
     vm.pageTitle = "Lobby";
+
+    soundFactory.loadSounds();
 
     authFactory.checkAuth();
     var tokenObj = authFactory.attachToken({});
@@ -50,7 +52,7 @@
       var message = lobbyFactory.get(val);
       return lobbyFactory.get(val);
     };
-	
+
     vm.toggleQueueWarning = function() {
       console.log("inside toggleQueueWarning()");
       if(vm.showPreQueueWarning) {
@@ -59,7 +61,7 @@
         vm.showPreQueueWarning = true;
       }
     };
-	
+
     vm.getLeaderboard = function() {
       return statsFactory.get('leaderboard');
     };
@@ -80,6 +82,16 @@
     };
 
     vm.setNewAvatar = lobbyFactory.setNewAvatar;
+
+    vm.playClick = function() {
+      console.log('LobbyController playClick');
+      soundFactory.playClick();
+    };
+
+    vm.playConfirm = function() {
+      console.log('LobbyController playConfirm');
+      soundFactory.playConfirm();
+    };
 
   }
 })();

@@ -4,11 +4,14 @@ angular
   .module('app')
   .controller('WaitingController', WaitingController);
 
-  WaitingController.$inject = ['waitingFactory', 'lobbyFactory', '$state'];
+  WaitingController.$inject = ['$state', 'waitingFactory', 'lobbyFactory', 'soundFactory'];
 
-  function WaitingController(waitingFactory, lobbyFactory, $state) {
+  function WaitingController($state, waitingFactory, lobbyFactory, soundFactory) {
 
     var vm = this;
+
+    soundFactory.loadSounds();
+
     var lf = lobbyFactory;
     vm.lfGet = lf.get;
 
@@ -35,6 +38,11 @@ angular
     };
     vm.playerTwoMMR = function() {
     	return waitingFactory.get('player2MMR');
+    };
+
+    vm.playClick = function() {
+      console.log('WaitingController playClick');
+      soundFactory.playClick();
     };
   }
 
