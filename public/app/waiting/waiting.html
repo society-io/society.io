@@ -9,14 +9,14 @@
       </div>
       <div class="private-controls" ng-show="Waiting.lfGet('whereTo') === 'private'">
         <div>Your Join Code: {{Waiting.lfGet('joinCode')}}</div>
-        <button ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm">Cancel Your Private Game</button>
+        <button ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm; Waiting.playClick()">Cancel Your Private Game</button>
 
         <form>
           <div ng-show="Waiting.showCancelGameForm">
             <label>enter join code</label>
             <!--TODO:create model object in controller and pass to emit event on btn click-->
             <input ng-model='joinCode'>
-            <button type="submit" ng-click="Waiting.cancelRoom(joinCode)">enter</button>
+            <button type="submit" ng-click="Waiting.cancelRoom(joinCode); Waiting.playClick()">enter</button>
           </div>
         </form>
       </div>

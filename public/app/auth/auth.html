@@ -32,19 +32,19 @@
 			<div class="message"><h2>Select a team:</h2></div>
 
 			<div class="avatar-container">
-				<div class="avatar" id="rock" ng-click="Auth.selectAvatar('rock')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'rock'}">
+				<div class="avatar" id="rock" ng-click="Auth.selectAvatar('rock'); Auth.playClick()" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'rock'}">
 					<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
 				</div>
-				<div class="avatar" id="paper" ng-click="Auth.selectAvatar('paper')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'paper'}">
+				<div class="avatar" id="paper" ng-click="Auth.selectAvatar('paper'); Auth.playClick()" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'paper'}">
 					<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
 				</div>
-				<div class="avatar" id="scissors" ng-click="Auth.selectAvatar('scissors')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'scissors'}">
+				<div class="avatar" id="scissors" ng-click="Auth.selectAvatar('scissors'); Auth.playClick()" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'scissors'}">
 					<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
 				</div>
-				<div class="avatar" id="lizard" ng-click="Auth.selectAvatar('lizard')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'lizard'}">
+				<div class="avatar" id="lizard" ng-click="Auth.selectAvatar('lizard'); Auth.playClick()" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'lizard'}">
 					<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
 				</div>
-				<div class="avatar" id="spock" ng-click="Auth.selectAvatar('spock')" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'spock'}">
+				<div class="avatar" id="spock" ng-click="Auth.selectAvatar('spock'); Auth.playClick()" ng-class="{'avatar-clicked': Auth.get('avatarClicked') === 'spock'}">
 					<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
 				</div>
 			</div>
