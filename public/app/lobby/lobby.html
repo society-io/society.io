@@ -143,14 +143,16 @@
 		<div class="lobby-right lobby-content-container">
 			<h1>Leader Board</h1>
 
-			<table>
-				<tr>
-					<td>Rank</td>
-					<td>Username</td>
-					<td>Coins</td>
-					<td>Wins</td>
-					<td>Losses</td>
-				</tr>
+			<table class="table table-hover table-mc-light-blue table-bordered">
+				<thead class="titles">
+					<tr>
+						<td>Rank</td>
+						<td>Username</td>
+						<td>Coins</td>
+						<td>Wins</td>
+						<td>Losses</td>
+					</tr>
+				</thead>
 			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()">
 				<td>{{index}}</td>
 				<td><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> {{users.username}}</td>
