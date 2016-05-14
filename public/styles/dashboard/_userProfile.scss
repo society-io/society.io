@@ -1,0 +1,51 @@
+.user-profile > * {
+  vertical-align: top;
+}
+
+.pf-avatar-container {
+  width: 100px;
+  height: 100px;
+  background-color: $red;
+  border-radius: 50%;
+  text-align: center;
+  display: inline-block;
+
+  .fa {
+    margin-top: 30px;
+    font-size: 42px;
+  }
+}
+
+.pf-info-container {
+  display: inline-block;
+}
+
+.pf-username {
+
+}
+
+.pf-bit {
+
+}
+
+.pf-coins {
+
+  .fa-circle {
+    color: $blue;
+  }
+  .fa-usd {
+    color: $white;
+  }
+}
+
+.pf-record {
+
+}
+
+.record-wins {
+
+}
+
+.record-losses {
+
+}

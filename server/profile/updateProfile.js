@@ -28,9 +28,8 @@ function formatMMR(player1, player2, num) {
 	if (num === 0) {
 		db1.losses = ++p1losses;
 		db2.wins = ++p2wins;
-	}
-	else {
-		db1.wins = p1wins;
+	} else {
+		db1.wins = ++p1wins;
 		db2.losses = ++p2losses;
 	}
 

@@ -114,12 +114,29 @@
 		<div class="lobby-right lobby-content-container">
 			<h1>Player Stats</h1>
 
-			<div>
-				<p>{{Lobby.get('player').username}}</p>
-				<p>{{Lobby.get('player').mmr}}</p>
-				<p>{{Lobby.get('player').wins}}</p>
-				<p>{{Lobby.get('player').losses}}</p>
-				<p>{{Lobby.get('player').avatar}}</p>
+			<div class="user-profile">
+				<div class="pf-avatar-container">
+					<i class="fa fa-hand-{{Lobby.get('player').avatar}}-o" aria-hidden="true"></i>
+				</div>
+				<div class="pf-info-container">
+					<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
+					<div class="pf-bit">
+						<p class="pf-coins">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-usd fa-stack-1x fa-inverse"></i>
+							</span>	
+							{{Lobby.get('player').mmr}}
+						</p>
+					</div>
+					<div class="pf-bit">
+						<p class="pf-record">
+							<i class="fa fa-trophy" aria-hidden="true"></i>
+							<span class="record-wins">{{Lobby.get('player').wins}}</span> / 
+							<span class="record-losses">{{Lobby.get('player').losses}}</span>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 
