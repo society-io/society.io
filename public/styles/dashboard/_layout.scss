@@ -194,11 +194,11 @@
 }
 
 .rows:nth-child(even) {
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(255,255,255,0.1);
 }
 
 .rows:nth-child(odd) {
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(255,255,255,0.3);
 }
 
 td {
