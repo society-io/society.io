@@ -64,13 +64,13 @@
 
 		<div class="sidebar lobby-left lobby-content-container">
 
-			<h2>My Avatar</h2>
+			<h2>My Team</h2>
 			<div class="my-avatar">
 				<i class="fa fa-hand-{{Lobby.get('avatar')}}-o fa-lg" aria-hidden="true"></i>
 			</div>
 
 
-			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars">Change Avatar</button>
+			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars">Change Team</button>
 
 			<div ng-show="Lobby.showAvatars">
 				<h2>Options</h2>
@@ -153,6 +153,7 @@
 				<thead class="titles">
 					<tr>
 						<td>Rank</td>
+						<td>Team</td>
 						<td>Username</td>
 						<td>Coins</td>
 						<td>Wins</td>
@@ -161,7 +162,8 @@
 				</thead>
 			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()" class="rows">
 				<td>{{index}}</td>
-				<td><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> {{users.username}}</td>
+				<td class="team-sign"><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> </td>
+				<td>{{users.username}}</td>
 				<td>{{users.mmr}}</td>
 				<td>{{users.wins}}</td>
 				<td>{{users.losses}}</td>
