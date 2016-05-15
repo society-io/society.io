@@ -2,11 +2,10 @@ angular
   .module('app')
   .factory('lobbyFactory', lobbyFactory);
 
-	lobbyFactory.$inject = ['socketFactory', '$state'];
+	lobbyFactory.$inject = ['$state'];
 
-	function lobbyFactory(socketFactory, $state) {
-		var emit = socketFactory.emit;
-		var on = socketFactory.on;
+	function lobbyFactory($state) {
+		
 		var state = {
 			joinCodeErrorMessage: '',
 			joinCodeErrorMessage2: '',
