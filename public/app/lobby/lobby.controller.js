@@ -11,6 +11,8 @@
     var vm = this;
     vm.pageTitle = "Lobby";
 
+    console.log('lobby controller');
+
     soundFactory.loadSounds();
 
     authFactory.checkAuth();
@@ -18,7 +20,6 @@
 
     socketFactory.connectSocket()
     .then(function() {
-      console.log('promise resolved');
       lobbyFactory.getPlayer();
     });
 
@@ -44,7 +45,6 @@
     vm.showAvatars = false;
 
     vm.signOut = function() {
-      console.log('signing out');
       authFactory.signOut();
     };
 
@@ -54,7 +54,6 @@
     };
 
     vm.toggleQueueWarning = function() {
-      console.log("inside toggleQueueWarning()");
       if(vm.showPreQueueWarning) {
         vm.showPreQueueWarning = false;
       } else {
@@ -73,23 +72,19 @@
     vm.getAvatar = function() {
       var player = vm.get('player');
       vm.myAvatar = player.avatar;
-      console.log('my avatar is: ', vm.myAvatar);
     };
 
     vm.updateAvatar = function(obj) {
-      console.log('this is update avatar: ', obj);
       lobbyFactory.updateAvatar(obj);
     };
 
     vm.setNewAvatar = lobbyFactory.setNewAvatar;
 
     vm.playClick = function() {
-      console.log('LobbyController playClick');
       soundFactory.playClick();
     };
 
     vm.playConfirm = function() {
-      console.log('LobbyController playConfirm');
       soundFactory.playConfirm();
     };
 
