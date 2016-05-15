@@ -41,7 +41,7 @@
         socket.connectSocket().then(function() {
           console.log('initializing lobby listeners');
           listeners.initLobby();
-          lobby.getPlayer();
+          socket.emit('who am i');
         });
       }
 

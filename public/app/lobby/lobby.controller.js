@@ -25,7 +25,6 @@
 
     vm.get = lobbyFactory.get;
     vm.set = lobbyFactory.set;
-    vm.queue = lobbyFactory.joinQueue;
 
     vm.createRoom = lobbyFactory.createRoom;
     vm.showCreateGameInput = false;
@@ -38,6 +37,10 @@
     vm.showPreQueueWarning = false;
 
     vm.showAvatars = false;
+
+    vm.queue = function(message) {
+      socket.emit('queue', message);
+    };
 
     vm.signOut = function() {
       authFactory.signOut();

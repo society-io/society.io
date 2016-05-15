@@ -20,18 +20,11 @@ angular
 		};
 
 		return {
-			joinQueue: joinQueue,
 			createRoom: createRoom,
 			joinRoom: joinRoom,
-			getPlayer: getPlayer,
 			get: get,
 			set: set
 		};
-
-		function joinQueue(message) {
-			emit('queue', message);
-			console.log('Emitted: joinQueue');
-		}
 
 		function createRoom(joinCode) {
 
@@ -55,10 +48,6 @@ angular
 			emit('join private game', {joinCode: joinCode});
 		}
 
-		function getPlayer() {
-			console.log('running getPlayer');
-      emit('who am i');
-		}
 		function get(key){
 			return state[key];
 		}
