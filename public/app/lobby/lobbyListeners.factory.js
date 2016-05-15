@@ -2,11 +2,11 @@
 
 angular
   .module('app')
-  .factory('listenerFactory', listenerFactory);
+  .factory('lobbyListenersFactory', lobbyListenersFactory);
 
-  listenerFactory.$inject = ['socketFactory', 'lobbyFactory','$state'];
+  lobbyListenersFactory.$inject = ['socketFactory', 'lobbyFactory','$state'];
 
-  function listenerFactory(socketFactory, lobbyFactory, $state) {
+  function lobbyListenersFactory(socketFactory, lobbyFactory, $state) {
 
     var socket = socketFactory;
     var lobby = lobbyFactory;
@@ -14,14 +14,13 @@ angular
     var lobbySetup = false;
 
     return {
-      initLobby: initLobby
+      init: init
     };
 
     // -----------------------
     // lobby listeners
 
-
-    function initLobby() {
+    function init() {
       if (!socket.isConnected()) {
         console.error('socket is not connected. Can\'t set up lobby listeners');
         return;
@@ -84,11 +83,6 @@ angular
       // event: 'join code not found'
       lobby.set('joinCodeErrorMessage2', resp.message);
     }
-
-    // -----------------------
-    // waiting listeners
-
-
 
   }
 

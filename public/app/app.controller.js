@@ -10,15 +10,15 @@
     '$window',
     '$timeout',
     'socketFactory',
-    'listenerFactory',
+    'lobbyListenersFactory',
     'lobbyFactory'
   ];
 
-  function appController($scope, $state, $window, $timeout, socketFactory, listenerFactory, lobbyFactory) {
+  function appController($scope, $state, $window, $timeout, socketFactory, lobbyListenersFactory, lobbyFactory) {
     var emit = socketFactory.emit;
     var on = socketFactory.on;
 
-    var listeners = listenerFactory;
+    var lobbyListeners = lobbyListenersFactory;
     var socket = socketFactory;
 
     var lobby = lobbyFactory;
@@ -39,8 +39,8 @@
 
       if (toState.name === 'lobby') {
         socket.connectSocket().then(function() {
-          console.log('initializing lobby listeners');
-          listeners.initLobby();
+          console.log('initializing listeners');
+          lobbyListeners.init();
           socket.emit('who am i');
         });
       }
