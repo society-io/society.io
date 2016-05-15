@@ -26,10 +26,6 @@ function config($stateProvider, $urlRouterProvider) {
 	  		bodyClasses : 'lobby'
 	  	}
 	  })
-	  .state('loading', {
-	  	url: '/loading',
-	  	templateUrl: '../app/loading/loading.html'
-	  })
 		.state('waiting', {
 			url: '/waiting',
 			templateUrl: '../app/waiting/waiting.html',

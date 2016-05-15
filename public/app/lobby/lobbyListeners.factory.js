@@ -11,7 +11,7 @@ angular
     var socket = socketFactory;
     var lobby = lobbyFactory;
 
-    var lobbySetup = false;
+    var initailized = false;
 
     return {
       init: init
@@ -26,7 +26,7 @@ angular
         return;
       }
 
-      if (lobbySetup) {
+      if (initailized) {
         console.error('lobby listeners have already been initialized');
         return;
       }
@@ -38,7 +38,7 @@ angular
       socket.on('join code found', joinCodeFound);
       socket.on('join code not found', joinCodeNotFound);
       socket.on('you are', youAre);
-      lobbySetup = true;
+      initailized = true;
     }
 
     function youAre(resp) {

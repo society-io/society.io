@@ -11,10 +11,11 @@
     '$timeout',
     'socketFactory',
     'lobbyListenersFactory',
+    'waitingListenersFactory',
     'lobbyFactory'
   ];
 
-  function appController($scope, $state, $window, $timeout, socketFactory, lobbyListenersFactory, lobbyFactory) {
+  function appController($scope, $state, $window, $timeout, socketFactory, lobbyListenersFactory, waitingListenersFactory, lobbyFactory) {
     var emit = socketFactory.emit;
     var on = socketFactory.on;
 
@@ -43,6 +44,15 @@
           lobbyListeners.init();
           socket.emit('who am i');
         });
+      }
+
+      if (toState.name === 'waiting') {
+        if (!socket.isConnected()) {
+          console.error('no socket connection is set up. Something went wrong.');
+          return;
+        }
+
+        waitingListenersFactory.init();
       }
 
       function moving(comingFrom, goingTo) {
