@@ -20,24 +20,10 @@ angular
 		};
 
 		return {
-			createRoom: createRoom,
 			joinRoom: joinRoom,
 			get: get,
 			set: set
 		};
-
-		function createRoom(joinCode) {
-
-			if (joinCode === undefined || joinCode.length < 3) {
-				state.joinCodeErrorMessage ='Minimum of 3 characters required.';
-				return;
-			}
-
-			state.tempJoinCode = joinCode;
-
-			emit('create private game', {joinCode: joinCode.toLowerCase()});
-			console.log('Emitted: create privateGame');
-		}
 
 		function joinRoom(joinCode) {
 			if (joinCode === undefined || joinCode.length < 3) {

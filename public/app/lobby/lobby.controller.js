@@ -26,7 +26,6 @@
     vm.get = lobbyFactory.get;
     vm.set = lobbyFactory.set;
 
-    vm.createRoom = lobbyFactory.createRoom;
     vm.showCreateGameInput = false;
     vm.showCreateGameController = false;
 
@@ -37,6 +36,17 @@
     vm.showPreQueueWarning = false;
 
     vm.showAvatars = false;
+
+    vm.createRoom = function(joinCode) {
+      if (joinCode === undefined || joinCode.length < 3) {
+        lobbyFactory.set('joinCodeErrorMessage', 'Minimum of 3 characters required.');
+        return;
+      }
+
+      lobbyFactory.set('tempJoinCode', joinCode);
+
+      socket.emit('create private game', {joinCode: joinCode.toLowerCase()});
+    };
 
     vm.queue = function(message) {
       socket.emit('queue', message);
