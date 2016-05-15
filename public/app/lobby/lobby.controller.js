@@ -8,20 +8,15 @@
   LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory', 'soundFactory'];
 
   function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory, soundFactory) {
+    var socket = socketFactory;
+
     var vm = this;
     vm.pageTitle = "Lobby";
 
     console.log('lobby controller');
 
     soundFactory.loadSounds();
-
     authFactory.checkAuth();
-    var tokenObj = authFactory.attachToken({});
-
-    socketFactory.connectSocket()
-    .then(function() {
-      lobbyFactory.getPlayer();
-    });
 
     $scope.options = {
       playlist: ['../audio/NVOY-AllNight.mp3'],
@@ -75,10 +70,13 @@
     };
 
     vm.updateAvatar = function(obj) {
-      lobbyFactory.updateAvatar(obj);
+      lobbyFactory.set('avatar', obj.avatar);
+      socketFactory.emit('update avatar', obj);
     };
 
-    vm.setNewAvatar = lobbyFactory.setNewAvatar;
+    vm.setNewAvatar = function(avatar) {
+      lobbyFactory.set('tempAvatar', avatar);
+    };
 
     vm.playClick = function() {
       soundFactory.playClick();
