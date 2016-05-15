@@ -28,23 +28,26 @@
 
     vm.showCreateGameInput = false;
     vm.showCreateGameController = false;
-
-    vm.joinRoom = lobbyFactory.joinRoom;
     vm.showJoinGameInput = false;
     vm.showJoinGameController = false;
-
     vm.showPreQueueWarning = false;
-
     vm.showAvatars = false;
+
+    vm.joinRoom = function(joinCode) {
+      if (joinCode === undefined || joinCode.length < 3) {
+        lobbyFactory.set('joinCodeErrorMessage2', 'Minimum 3 characters required!');
+        return;
+      }
+      lobbyFactory.set('tempJoinCode', joinCode);
+      socket.emit('join private game', {joinCode: joinCode});
+    };
 
     vm.createRoom = function(joinCode) {
       if (joinCode === undefined || joinCode.length < 3) {
         lobbyFactory.set('joinCodeErrorMessage', 'Minimum of 3 characters required.');
         return;
       }
-
       lobbyFactory.set('tempJoinCode', joinCode);
-
       socket.emit('create private game', {joinCode: joinCode.toLowerCase()});
     };
 

@@ -20,19 +20,9 @@ angular
 		};
 
 		return {
-			joinRoom: joinRoom,
 			get: get,
 			set: set
 		};
-
-		function joinRoom(joinCode) {
-			if (joinCode === undefined || joinCode.length < 3) {
-				state.joinCodeErrorMessage2 = 'Minimum 3 characters required!';
-				return;
-			}
-			state.tempJoinCode = joinCode;
-			emit('join private game', {joinCode: joinCode});
-		}
 
 		function get(key){
 			return state[key];
