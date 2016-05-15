@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  z-index: -9999;
+
+  // sunset:
+  // background: -webkit-linear-gradient(top, #40405c 0%, #6f71aa 80%, #8a76ab 100%);
+  // background: linear-gradient(to bottom, #40405c 0%, #6f71aa 80%, #8a76ab 100%);
+
+  // early-night
+  // background: -webkit-linear-gradient(top, #4a4969 0%, #7072ab 50%, #cd82a0 100%);
+  // background: linear-gradient(to bottom, #4a4969 0%, #7072ab 50%, #cd82a0 100%);
+
+  // blue skies:
+  // background: -webkit-linear-gradient(top, #57c1eb 0%, #246fa8 100%);
+  // background: linear-gradient(to bottom, #57c1eb 0%, #246fa8 100%);
+
+  // early sunrise
+  // background: -webkit-linear-gradient(top, #1e528e 0%, #265889 50%, #9da671 100%);
+  // background: linear-gradient(to bottom, #1e528e 0%, #265889 50%, #9da671 100%);
+
+  // late sunrise
+  // background: -webkit-linear-gradient(top, #1e528e 0%, #728a7c 50%, #e9ce5d 100%);
+  // background: linear-gradient(to bottom, #1e528e 0%, #728a7c 50%, #e9ce5d 100%);
+  
+  // sunset
+  // background: -webkit-linear-gradient(top, #090401 50%, #4B1D06 100%);
+  // background: linear-gradient(to bottom, #090401 50%, #4B1D06 100%);
+
+  // night time
+  // background: -webkit-linear-gradient(top, #020111 10%, #3a3a52 100%);
+  // background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
+
+  background-position: bottom center, top left;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+}
+
+body.auth {
+  background-image: url('../images/bg.png'), -webkit-linear-gradient(top, #57c1eb 0%, #246fa8 100%);
+  background-image: url('../images/bg.png'), linear-gradient(to bottom, #57c1eb 0%, #246fa8 100%);
+}
+
+body.lobby {
+  background-image: url('../images/bg.png'), -webkit-linear-gradient(top, #4a4969 0%, #7072ab 50%, #cd82a0 100%);
+  background-image: url('../images/bg.png'), linear-gradient(to bottom, #4a4969 0%, #7072ab 50%, #cd82a0 100%);
+}
+
+body.waiting {
+  background-image: url('../images/bg.png'), -webkit-linear-gradient(to bottom, #163C52 0%,#4F4F47 30%,#C5752D 60%,#B7490F 80%, #2F1107 100%);
+  background-image: url('../images/bg.png'), linear-gradient(to bottom, #163C52 0%,#4F4F47 30%,#C5752D 60%,#B7490F 80%, #2F1107 100%);
+}
+
+body.battlefield {
+  background-image: url('../images/bg.png'), -webkit-linear-gradient(top, #020111 10%, #3a3a52 100%);
+  background-image: url('../images/bg.png'), linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
+}
+
+
+// .city-overlay {
+//   opacity: 0.5;
+//   background: url('../images/bg.png') repeat-x bottom center fixed;
+//   background-color: transparent;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   z-index: -1;
+//   height: 100%;
+//   width: 100%;
+// }
+
+.view-container {
+  height: 100%;
+}

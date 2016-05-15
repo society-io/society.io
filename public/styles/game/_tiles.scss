@@ -1,0 +1,185 @@
+.tile-container {
+  text-align: center;
+}
+
+$tileMobile: 50px;
+$tilePawn: 65px;
+$tileKnight: 100px;
+
+.tile-pos {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.tile-pos.ties {
+  opacity: 0.3;
+}
+
+.tile-pos:last-child {
+  margin-right: 0;
+}
+
+.health {
+  position: relative;
+  padding: 8px;
+
+  // mobile
+  width: $tileMobile;
+  height: $tileMobile;
+
+  @include bp(pawn) {
+    width: $tilePawn;
+    height: $tilePawn;
+  }
+
+  @include bp(knight) {
+    width: $tileKnight;
+    height: $tileKnight;
+  }
+}
+
+.health-3 .health-spinner {
+  background-image: url('../images/game/health-green.png');
+  animation: rotation 8s infinite linear;
+}
+
+.health-2 .health-spinner {
+  background-image: url('../images/game/health-yellow.png');
+  animation: rotation 5s infinite linear;
+}
+
+.health-1 .health-spinner {
+  background-image: url('../images/game/health-red.png');
+  animation: rotation 2s infinite linear;
+}
+
+// damaged health spinners
+.health-3 .health-spinner.health-damage {
+  opacity: 1;
+  background-image: url('../images/game/health-yellow.png');
+  animation: rotation 8s infinite linear, blinker 0.8s linear infinite;
+}
+
+.health-2 .health-spinner.health-damage {
+  opacity: 1;
+  background-image: url('../images/game/health-red.png');
+  animation: rotation 8s infinite linear, blinker 0.8s linear infinite;
+}
+
+.health-1 .health-spinner.health-damage {
+  opacity: 1;
+  background-image: none;
+  animation: rotation 8s infinite linear, blinker 0.8s linear infinite;
+
+  .tile {
+    animation: blinker 0.8s linear infinite;
+  }
+}
+
+.health-spinner.health-dim {
+  opacity: 0.3;
+}
+
+// debugging purpose only
+// .health-0 .health-spinner {
+//   background-image: url('../images/game/health-green.png');
+//   animation: rotation 4s infinite linear;
+// }
+
+.health-spinner {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+@-webkit-keyframes rotation {
+  from {-webkit-transform: rotate(0deg);}
+  to   {-webkit-transform: rotate(359deg);}
+}
+
+.tile {
+  display: inline-block;
+  border-radius: 50%;
+  background-color: $tileBlue;
+  color: #fff;
+  position: relative;
+  width: 86%;
+  height: 86%;
+  top: 7%;
+  left: 1%;
+  transition: background-color linear 0.2s;
+}
+
+.player .tile:hover {
+  background-color: $tileLightBlue;
+  cursor: pointer;
+}
+
+.tile.lose {
+  background-color: $tileRed;
+}
+
+.tile.win {
+  background-color: $tileGreen;
+}
+
+.tile.active {
+  opacity: 1;
+}
+
+.tile.dead {
+  opacity: 0.5;
+}
+
+.tile.dead:hover {
+  background-color: $tileBlue;
+  cursor: not-allowed;
+}
+
+.tile.dark,
+.health.dark, {
+  opacity: 0.4;
+}
+
+.tile.lostRound {
+  opacity: 1;
+  animation: blinker 0.2s linear infinite;
+}
+
+.tile-inner {
+  text-align: center;
+  margin-top: 8px;
+
+  @include bp(pawn) {
+    margin-top: 13px
+  }
+
+  @include bp(knight) {
+    margin-top: 16px;
+  }
+}
+
+.tile-inner .fa-lg {
+  display: block;
+  margin-bottom: 5px;
+
+  @include bp(pawn) {
+    font-size: 22px;
+  }
+
+  @include bp(knight) {
+    font-size: 28px;
+  }
+}
+
+.choice-text {
+  display: none;
+
+  @include bp(knight) {
+    margin-top: 0;
+    display: block;
+  }
+}

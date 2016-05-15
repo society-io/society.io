@@ -1,0 +1,219 @@
+.admin-bar, .lobby-content-container, .waiting-content-container {
+  background-color: rgba(0,0,0,0.4);
+  color: #fff;
+}
+
+.admin-bar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.lobby-content-container, .waiting-content-container {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.4);
+
+  input {
+    color: $darkgray;
+  }
+}
+
+.sidebar {
+
+  button {
+    margin-bottom: 18px;
+
+    .fa {
+      position: relative;
+      display: inline-block;
+      top: -2px;
+      margin-right: 10px;
+    }
+
+    .fa-bolt {
+      top: 0px;
+    }
+  }
+
+  h2 {
+    margin: 0 0 15px 0;
+  }
+}
+
+.lobby-left, .lobby-right {
+  margin-top: 32px;
+  padding: 20px;
+}
+
+.lobby-right {
+
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.my-avatar {
+  font-size: 40px;
+  // width: 19%;
+  // height: 100%;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+  // background-color: transparent;
+  // color: white;
+  // margin-right: 1.25%;
+  // border-radius: 3px;
+  // position: relative;
+  // font-size: 40px;
+  // line-height: 50px;
+  // text-align: center;
+  // margin-bottom: 10px;
+}
+
+.change-avatar-container {
+  width: 100%;
+  margin: auto;
+  position: relative;
+  font-size: 0;
+  display: inline-block;
+}
+
+.avatars-available {
+  width: 15%;
+  height: 100%;
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  margin-right: 1.5%;
+  border-radius: 3px;
+  position: relative;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+  margin-bottom: 10px;
+  padding-right: 18%;
+}
+
+.avatars-available:hover{
+  color: $red;
+  cursor: pointer;
+}
+
+.avatar-clicked {
+  color: $red;
+}
+
+.avatars-available:last-child {
+  margin-right: 0;
+}
+
+.inline-block-small {
+  width: 23%;
+  height: 45px;
+  padding: 0px;
+  margin: 0px;
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  display: inline-block;
+  position: absolute;
+  font-size: 15px;
+}
+
+.code-input {
+  padding: 13px;
+  width: 50%;
+
+  @include bp(pawn) {
+    width: 60%;
+  }
+
+  @include bp(knight) {
+    width: 75%;
+  }
+
+  @include bp(queen) {
+    width: 55%;
+  }
+
+  @include bp(king) {
+    width: 64%;
+  }
+}
+
+.error-message {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.input-wrapper {
+  
+  button {
+    float: right;
+  }
+}
+
+.input-wrapper > * {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.lobby-sidebar-code {
+  position: relative;
+  opacity: 1;
+  top: 0;
+}
+
+.lobby-sidebar-code.ng-hide {
+  opacity: 0;
+  top: -10px;
+}
+
+.lobby-sidebar-code.ng-hide-add, .lobby-sidebar-code.ng-hide-remove {
+  transition: all linear 0.2s;
+}
+
+.input-wrapper.error-message {
+  color: $red;
+  margin-top: 11px;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 3px;
+  border-radius: 3px;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  background-color: transparent;
+  text-align: center;
+}
+
+.titles {
+  border-bottom: 1px solid grey;
+  background-color: transparent;
+}
+
+.rows:nth-child(even) {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.rows:nth-child(odd) {
+    background-color: rgba(255,255,255,0.3);
+}
+
+td {
+  padding: 2px;
+}
+
+.leaderboard-title {
+  margin-bottom: 3px;
+}
+
+.player-name {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.team-sign {
+  font-size: 20px;
+}

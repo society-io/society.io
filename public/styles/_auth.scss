@@ -1,0 +1,137 @@
+.auth {
+  padding-top: 40px;
+}
+
+.logo-container {
+  h1, h2 {
+    text-align: center;
+    margin: 0;
+    color: #efefef;
+  }
+
+  h1 {
+    font-size: 72px;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 4px rgba(0,0,0,0.3);
+  }
+
+  h2 {
+    font-size: 30px;
+    margin-bottom: 45px;
+    text-shadow: 0 3px 3px rgba(0,0,0,0.3);
+  }
+}
+
+.auth-form {
+  display: block;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 6px;
+  margin: 0 auto;
+  padding: 30px;
+  max-width: 400px;
+
+  .switch-view-link {
+    display: block;
+    text-align: center;
+    margin-top: 28px;
+
+    a {
+      opacity: 0.6;
+      color: $white;
+      text-decoration: none;
+    }
+  }
+
+  .switch-view-link a:hover {
+    opacity: 1;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    border: 0;
+    outline: 0;
+    margin-bottom: 16px;
+    padding-left: 47px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    transition: $defaultTransition;
+    background-color: rgba(255,255,255,0.8);
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus {
+    background-color: rgba(255,255,255,1);
+    box-shadow: 0 0 4px 2px rgba(255,255,255,0.2);
+  }
+
+  .error-message {
+    text-align: center;
+    margin-top: 20px;
+    color: $red;
+  }
+}
+
+.input-container {
+  position: relative;
+
+  .fa {
+    position: absolute;
+    top: 16px;
+    left: 22px;
+    color: rgba(0,0,0,0.3);
+  }
+
+  .fa-envelope {
+    left: 20px;
+  }
+}
+
+.avatar-container {
+  width: 100%;
+  margin: auto;
+  position: relative;
+  font-size: 0;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 19%;
+  height: 100%;
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  margin-right: 1.25%;
+  border-radius: 3px;
+  position: relative;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.avatar:hover{
+  color: $red;
+  cursor: pointer;
+}
+
+.avatar-clicked {
+  color: $red;
+}
+
+.avatar:last-child {
+  margin-right: 0;
+}
+
+.message {
+  text-align: center;
+  color: white;
+}
+
+
+

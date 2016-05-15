@@ -1,0 +1,62 @@
+<div class="container">
+
+  <!-- Waiting Room -->
+  <div class="col-md-6 col-md-offset-3 waiting-top">
+    <div class="waiting-content-container">
+      <h1 class="waiting-message">{{Waiting.get('centerMessage')}}</h1>
+        <div class="spinner">
+          <div class="dot1"></div>
+          <div class="dot2"></div>
+        </div>
+      <div class="queue-controls" ng-show="Waiting.lfGet('whereTo') === 'queue'">
+      </div>
+      <div class="private-controls" ng-show="Waiting.lfGet('whereTo') === 'private'">
+        <div class="joincode-label">Your Join Code:</div>
+        <div class="joincode-container"><h2>{{Waiting.lfGet('joinCode')}}</h2></div>
+        <button class="block red" ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm; Waiting.playClick()">Cancel Your Private Game</button>
+
+        <form>
+          <div ng-show="Waiting.showCancelGameForm">
+            <label>enter join code</label>
+            <!-- TODO: create model object in controller and pass to emit event on btn click -->
+            <input ng-model='joinCode'>
+            <button type="submit" ng-click="Waiting.cancelRoom(joinCode); Waiting.playClick()">enter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Player1 -->
+  <div ng-show="!Waiting.get('waiting')" class="waiting-player-profile zoomInLeft animated col-md-4 col-md-offset-2">
+    <div class="waiting-content-container waiting-left">
+      <h1 class="username">
+        <i class="fa fa-user" aria-hidden="true"></i> {{Waiting.get('player1').username}}
+      </h1>
+      <h1>
+        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player1').mmr}}
+      </h1>
+      <p class="stats"><i class="fa fa-trophy" aria-hidden="true"></i>
+        W <span class="wins">{{Waiting.get('player1').wins}}</span> /
+        L <span class="losses">{{Waiting.get('player1').losses}}</span>
+      </p>
+    </div>
+  </div><!-- End player1 -->
+
+  <!-- Player2 -->
+  <div ng-show="!Waiting.get('waiting')" class="waiting-player-profile zoomInRight animated col-md-4">
+    <div class="waiting-content-container waiting-left">
+      <h1 class="username">
+        <i class="fa fa-user" aria-hidden="true"></i> {{Waiting.get('player2').username}}
+      </h1>
+      <h1>
+        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player2').mmr}}
+      </h1>
+      <p class="stats"><i class="fa fa-trophy" aria-hidden="true"></i>
+        W <span class="wins">{{Waiting.get('player2').wins}}</span> /
+        L <span class="losses">{{Waiting.get('player2').losses}}</span>
+      </p>
+    </div>
+  </div><!-- End player2 -->
+</div>
+

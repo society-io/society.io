@@ -1,0 +1,203 @@
+<div class="admin-bar">
+	<div class="container">
+		<div class="col-md-12">
+			<h1>Society <span>The Game</span></h1>
+			<div class="admin-bar-right">
+				<i class="fa fa-user" aria-hidden="true"></i>
+				<span class="username">{{Lobby.get('player').username}}</span>
+				<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="" class="signout" ng-click="Lobby.signOut()">Sign Out</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+
+	<div class="col-md-4">
+		<div class="sidebar lobby-left lobby-content-container">
+
+			<!-- ranked -->
+			<h2>Ranked</h2>
+
+			<button class="block red" ng-click="Lobby.toggleQueueWarning(); Lobby.playClick()"><i class="fa fa-bolt" aria-hidden="true"></i> Queue for a ranked match</button>
+
+			<div class="lobby-sidebar-code" ng-show="Lobby.showPreQueueWarning">
+				<p>WARNING: You are about to enter a ranked matchmaking queue which you may not leave without being penalized!  We will pair you with another user with similar skill level.  An average game is a little less than 3 minutes, but can last up to 8 minutes.  Please allot enough time to better user experience for both players.</p>
+				<button class="green" ng-click="Lobby.queue(); Lobby.playConfirm()"><i class="fa fa-check" aria-hidden="true"></i> Confirm</button>
+				<button class="red" ng-click="Lobby.toggleQueueWarning(); Lobby.playClick()"><i class="fa fa-times" aria-hidden="true"></i> Decline</button>
+			</div>
+
+			<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinQueueErrorMessage')">{{Lobby.getErrorMessage('joinQueueErrorMessage')}}</div>
+
+			<!-- Custom Game -->
+			<h2>Casual</h2>
+
+			<button class="block blue" ng-click="Lobby.showCreateGameController = !Lobby.showCreateGameController; Lobby.playClick()">
+			<i class="fa fa-chevron-{{Lobby.showCreateGameController ? 'up' : 'down'}}" aria-hidden="true"></i> create private game</button>
+
+			<form>
+				<div class="lobby-sidebar-code" ng-show="Lobby.showCreateGameController">
+					<!--TODO:create model object in controller and pass to emit event on btn click-->
+					<div class="input-wrapper">
+						<input class="code-input" ng-model='Lobby.joinCode' placeholder="Enter Join Code">
+						<button class="inline-block red" ng-click="Lobby.createRoom(Lobby.joinCode); Lobby.playClick()">create</button>
+						<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage')">{{Lobby.getErrorMessage('joinCodeErrorMessage')}}</div>
+					</div>
+				</div>
+			</form>
+
+			<button class="block green" ng-click="Lobby.showJoinGameController = !Lobby.showJoinGameController; Lobby.playClick()">
+			<i class="fa fa-chevron-{{Lobby.showJoinGameController ? 'up' : 'down'}}" aria-hidden="true"></i> join private game</button>
+
+			<form>
+				<div class="lobby-sidebar-code" ng-show="Lobby.showJoinGameController">
+					<!--TODO:create model object in controller and pass to emit event on btn click-->
+					<div class="input-wrapper">
+						<input class="code-input" ng-model='Lobby.joinCode2' placeholder="Enter Join Code">
+				  	<button class="inline-block red" ng-click="Lobby.joinRoom(Lobby.joinCode2); Lobby.playClick()">join</button>
+				  	<div class="input-wrapper error-message" ng-if="Lobby.getErrorMessage('joinCodeErrorMessage2')">{{Lobby.getErrorMessage('joinCodeErrorMessage2')}}</div>
+					</div>
+				</div>
+			</form>
+
+		</div><!-- End sidebar -->
+
+		<div class="sidebar lobby-left lobby-content-container">
+
+			<h2>My Team</h2>
+			<div class="my-avatar">
+				<i class="fa fa-hand-{{Lobby.get('avatar')}}-o fa-lg" aria-hidden="true"></i>
+			</div>
+
+
+			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars; Lobby.playClick()">Change Team</button>
+
+			<div ng-show="Lobby.showAvatars">
+				<h2>Options</h2>
+				<div class="change-avatar-container">
+					<div class="avatars-available" id="rock" ng-click="Lobby.setNewAvatar('rock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'rock'}" ng-show="'rock' !== Lobby.myAvatar()">
+						<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatars-available" id="paper" ng-click="Lobby.setNewAvatar('paper'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'paper'}" ng-show="'paper' !== Lobby.myAvatar()">
+						<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatars-available" id="scissors" ng-click="Lobby.setNewAvatar('scissors'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'scissors'}" ng-show="'scissors' !== Lobby.myAvatar()">
+						<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatars-available" id="lizard" ng-click="Lobby.setNewAvatar('lizard'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'lizard'}" ng-show="'lizard' !== Lobby.myAvatar()">
+						<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div class="avatars-available" id="spock" ng-click="Lobby.setNewAvatar('spock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'spock'}" ng-show="'spock' !== Lobby.myAvatar()">
+						<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<button class="inline-block-small red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')}); Lobby.playClick(); Lobby.showAvatars = !Lobby.showAvatars">Update</button>
+				</div>
+
+
+
+				<!-- CHANGE MY AVATAR TO THE ONE CLICKED -->
+
+			</div>
+		</div>
+
+	</div><!-- End bootstrap column -->
+
+	<div class="col-md-8">
+		<div class="lobby-right lobby-content-container">
+			<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
+			<div class="user-profile">
+				<div class="pf-avatar-container">
+					<div class="pf-avatar-inner back">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(1px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(2px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(3px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(4px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(5px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(6px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(7px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner middle" style="transform: translateZ(8px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+					<div class="pf-avatar-inner front" style="transform: translateZ(9px)">
+						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+					</div>
+				</div>
+
+				<div class="pf-info-container">
+					<div class="pf-bit">
+						<p class="pf-coins">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-usd fa-stack-1x fa-inverse"></i>
+							</span>
+							<span class="stat-label">
+								Coins:
+							</span>
+							<span class="stat-val coins">
+								{{Lobby.get('player').mmr}}
+							</span>
+						</p>
+					</div>
+					<div class="pf-bit">
+						<p class="pf-record">
+							<span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-trophy fa-stack-1x fa-inverse"></i>
+							</span>
+							<span class="stat-val">
+								W <span class="record-wins">{{Lobby.get('player').wins}}</span>
+								L <span class="record-losses">{{Lobby.get('player').losses}}</span>
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="lobby-right lobby-content-container">
+			<h1 class="leaderboard-title">Leader Board</h1>
+
+			<table class="table table-hover table-mc-light-blue table-bordered">
+				<thead class="titles">
+					<tr>
+						<td>Rank</td>
+						<td>Team</td>
+						<td>Username</td>
+						<td>Coins</td>
+						<td>Wins</td>
+						<td>Losses</td>
+					</tr>
+				</thead>
+			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()" class="rows">
+				<td>{{index}}</td>
+				<td class="team-sign"><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> </td>
+				<td>{{users.username}}</td>
+				<td>{{users.mmr}}</td>
+				<td>{{users.wins}}</td>
+				<td>{{users.losses}}</td>
+			</tr>
+			</table>
+		</div>
+	</div>
+</div>

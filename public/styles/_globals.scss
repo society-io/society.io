@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  padding-bottom: 30px;
+}
+
+body {
+  height: 100%;
+}
+
+//colors
+
+$white: #fff;
+
+$darkgray: #2d2d2d;
+
+$yellow-l2: #FCD197;
+$yellow-l1: #F7C17C;
+$yellow: #FFBC66;
+$yellow-d1: #C98B3A;
+$yellow-d2: #AD7731;
+
+$red-l2: #F2B6BD;
+$red-l1: #E8808C;
+$red: #DA6876;
+$red-d1: #B5505C;
+$red-d2: #963945;
+
+$blue-l2: #95DCED;
+$blue-l1: #4EBAD4;
+$blue: #45ABC3;
+$blue-d1: #3791A6;
+$blue-d2: #287182;
+
+$green-l2: #A3F0DB;
+$green-l1: #5CE0BD;
+$green: #45C3A1;
+$green-d1: #2C9E7F;
+$green-d2: #1C7A61;
+
+$brown: #664923;
+
+$tileLightBlue: #658BB1;
+$tileBlue: #375675;
+$tileRed: #CC5151;
+$tileGreen: #3BED68;
+$tilePurple: #9966AD;
+
+// animations
+
+$defaultTransition: all linear 0.2s;
+$fastTransition: all linear 0.05s;
+
+$borderTransition: background-color linear 0.2s;
+
+// hyperlinks
+
+a {
+  opacity: 0.8;
+  transition: $defaultTransition;
+  color: #fff;
+}
+
+a:hover {
+  opacity: 1;
+  color: $blue;
+  text-decoration: none;
+}
+
+input {
+  border-radius: 3px;
+  border: 0;
+  margin: 0;
+  outline: 0;
+}

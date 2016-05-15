@@ -1,0 +1,115 @@
+.waiting-content-container {
+  margin-top: 32px;
+  padding: 20px;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .spinner {
+    margin: 20px auto;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    text-align: center;
+    
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+  }
+
+  .dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 100%;
+    
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+
+  .dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+
+  @-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+  @keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+  @-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+  }
+
+  @keyframes sk-bounce {
+    0%, 100% { 
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    } 50% { 
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+  }
+}
+
+.waiting-message {
+  text-align: center;
+}
+
+.joincode-label {
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 18px;
+}
+
+.joincode-container {
+  background-color: rgba(0,0,0,0.2);
+  padding: 10px 0;
+  border-radius: 3px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 400;
+  }
+}
+
+.waiting-player-profile {
+
+  p {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  h1 {
+    display: inline-block;
+  }
+
+  .username {
+    margin-right: 30px;
+  }
+
+  .stats {
+
+    span.wins {
+      color: $green;
+    }
+
+    span.losses {
+      color: $red;
+    }
+  }
+
+}
+
+.waiting-player-profile {
+  
+}
+

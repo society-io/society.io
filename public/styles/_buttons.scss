@@ -1,0 +1,83 @@
+button {
+  outline: 0;
+  border: 0;
+  border-radius: 3px;
+  padding: 12px 25px;
+  text-transform: uppercase;
+  font-weight: 700;
+  position: relative;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  top: 3px;
+}
+
+button.block {
+  display: block;
+  width: 100%;
+}
+
+button.yellow {
+  color: $brown;
+  background-color: $yellow;
+  box-shadow: 0 3px 0 0 $yellow-d1;
+  text-shadow: 0 1px 0 $yellow-l2;
+}
+
+button.yellow:hover {
+  background-color: $yellow-l1;
+}
+
+button.yellow:active {
+  background-color: $yellow-d1;
+  box-shadow: 0 -3px 0 0 $yellow-d2;
+}
+
+button.red {
+  background-color: $red;
+  box-shadow: 0 3px 0 0 $red-d1;
+  text-shadow: 0 -1px 0 $red-d2;
+}
+
+button.red:hover {
+  background-color: $red-l1;
+}
+
+button.red:active {
+  background-color: $red-d1;
+  box-shadow: 0 -3px 0 0 $red-d2;
+}
+
+button.blue {
+  background-color: $blue;
+  box-shadow: 0 3px 0 0 $blue-d1;
+  text-shadow: 0 -1px 0 $blue-d2;
+}
+
+button.blue:hover {
+  background-color: $blue-l1;
+}
+
+button.blue:active {
+  background-color: $blue-d1;
+  box-shadow: 0 -3px 0 0 $blue-d2;
+}
+
+button.green {
+  background-color: $green;
+  box-shadow: 0 3px 0 0 $green-d1;
+  text-shadow: 0 -1px 0 $green-d2;
+}
+
+button.green:hover {
+  background-color: $green-l1;
+}
+
+button.green:active {
+  background-color: $green-d1;
+  box-shadow: 0 -3px 0 0 $green-d2;
+}

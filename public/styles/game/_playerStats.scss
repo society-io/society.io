@@ -1,0 +1,18 @@
+.player .player-stats {
+  top: 30px;
+  left: 30px;
+}
+
+.opponent .player-stats {
+  top: 30px;
+  right: 30px;
+}
+
+.player-stat-group {
+  margin: 0 6px;
+  color: rgba(255,255,255,0.5);
+}
+
+.player-stat {
+  color: $white;
+}

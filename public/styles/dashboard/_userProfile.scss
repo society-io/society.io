@@ -1,0 +1,109 @@
+.user-profile > * {
+  vertical-align: middle;
+}
+
+.pf-avatar-container {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: spin 3.5s linear infinite;
+  margin-right: 40px;
+}
+
+.pf-avatar-container > div {
+  background-color: #323240;
+  border-radius: 50%;
+  border: $blue solid 4px;
+  text-align: center;
+}
+
+.pf-avatar-inner {
+  width: 100px;
+  height: 100px;
+
+  .fa {
+    margin-top: 26px;
+    font-size: 42px;
+  }
+}
+
+.pf-avatar-inner.front {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+}
+
+.pf-avatar-inner.middle {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+}
+
+.pf-avatar-inner.back {
+  width: 100px;
+  height: 100px;
+}
+
+.pf-info-container {
+  display: inline-block;
+}
+
+.pf-username {
+
+}
+
+.pf-bit {
+  font-size: 21px;
+  display: inline-block;
+
+  p {
+    margin: 0;
+  }
+}
+
+.pf-bit:first-child {
+  margin-right: 20px;
+}
+
+.pf-coins {
+
+  .fa-circle {
+    color: $blue;
+  }
+  .fa-usd {
+    color: $white;
+  }
+}
+
+.pf-record {
+  font-size: 21px;
+
+  .fa-circle {
+    color: $blue;
+  }
+
+  .fa-usd {
+    color: $white;
+  }
+}
+
+.stat-label, 
+.stat-val {
+  position: relative;
+  top: 4px;
+}
+
+.stat-val.coins {
+  color: $blue;
+}
+
+.record-wins {
+  color: $green;
+}
+
+.record-losses {
+  color: $red;
+}

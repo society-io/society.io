@@ -1,0 +1,75 @@
+.side-controls {
+  position: absolute;
+  z-index: 1000;
+}
+
+.side-controls.left-side-control {
+  color: #fff;
+  left: 0;
+  bottom: -55px;
+  transition: all linear 1s;
+
+  @include bp(pawn) {
+    bottom: -60px;
+  }
+
+  @include bp(knight) {
+    bottom: -69px;
+  }
+
+  .red {
+    color: $tileRed;
+  }
+
+  .green {
+    color: $tileGreen;
+  }
+}
+
+.side-controls.right-side-control {
+  right: 0;
+  bottom: -63px;
+  z-index: 1000;
+  transition: all linear 1s;
+  
+  @include bp(pawn) {
+    bottom: -68px;
+  }
+
+  @include bp(knight) {
+    bottom: -77px;
+  }
+}
+
+.timer {
+  text-align: center;
+  color: #fff;
+
+  p {
+    margin: 0;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 32px;
+
+    @include bp(pawn) {
+      font-size: 42px;
+    }
+
+    @include bp(knight) {
+      font-size: 52px;
+    }
+  }
+}
+
+.forfeit {
+  button {
+    padding: 10px;
+    color: #fff;
+  }
+
+  p {
+    margin: 0;
+  }
+}
