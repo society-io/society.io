@@ -19,7 +19,7 @@
 
 
     vm.sendMessage = function()  {
-      socketFactory.emit('message', {message: 'hello'});
+      socketFactory.emit('hello', {message: 'hello'});
     };
   }
 })();

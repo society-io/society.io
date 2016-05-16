@@ -6,7 +6,8 @@ function chatListeners(socket) {
     chat.add(socket);
     addChatter(socket);
   });
-  socket.on('message', function(message){
+  socket.on('hello', function(message){
+  console.log('message received');
     formatMessage(socket, message);
   });
   socket.on('disconnect', function() {
@@ -43,11 +44,11 @@ function getUserProfile (socket){
 
 formatMessage = function(socket, message) {
   var response = {};
-  response.user = socket.profile.message;
+  response.user = socket.profile.username;
   response.time = new Date();
   response.message = message.message;
-  chat.messages.push(message);
-  chat.send(message);
+  chat.messages.push(response);
+  chat.snd(response);
 };
 
 module.exports= {
