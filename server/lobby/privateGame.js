@@ -124,12 +124,7 @@ function cancelPrivateGame (socket) {
 	log_sockId_JC();
 }
 
-function isInPrivateGame(socket) {
-  return !!sockId_joinCode[socket.socketId];
-}
-
 
 module.exports = {
-  privateGameListeners: privateGameListeners,
-  isInPrivateGame: isInPrivateGame
+  privateGameListeners: privateGameListeners
 };

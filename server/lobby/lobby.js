@@ -24,14 +24,6 @@ var lobbyListeners = function(socket) {
     });
   });
 
-  socket.on('should be waiting', function() {
-    var inQueue = queue.isInQueue(socket);
-    var inPrivate = private.isInPrivateGame(socket);
-    if (!inQueue && !inPrivate) {
-      socket.emit('not waiting');
-    }
-  });
-
 };
 
 module.exports = {

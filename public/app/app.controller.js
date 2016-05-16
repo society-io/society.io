@@ -32,7 +32,6 @@
     vm.bodyClasses = 'default';
 
     function goToLobby() {
-      console.error('invalid state change');
       $state.go('lobby');
     }
 
@@ -52,6 +51,7 @@
       }
 
       if (toState.name === 'lobby') {
+        lobbyFactory.reset();
         socket.disconnect();
         socket.connectSocket().then(function() {
           lobbyListeners.init();
@@ -63,6 +63,11 @@
 
       if (toState.name === 'waiting') {
 
+        if (!lobbyFactory.get('waiting')) {
+          goToLobby();
+          return;
+        }
+
         if (fromState.name !== 'lobby') {
           goToLobby();
           return;
@@ -73,15 +78,6 @@
           $state.go('lobby');
           return;
         }
-
-        socket.on('not waiting', function() {
-          console.log('this person is not waiting');
-          goToLobby();
-        });
-
-        $timeout(function() {
-          socket.emit('should be waiting');
-        }, 3000);
 
         waitingListenersFactory.init();
       }

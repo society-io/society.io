@@ -31,6 +31,7 @@
         lobbyFactory.set('joinCodeErrorMessage2', 'Minimum 3 characters required!');
         return;
       }
+      lobbyFactory.set('waiting', true);
       lobbyFactory.set('tempJoinCode', joinCode);
       socket.emit('join private game', {joinCode: joinCode});
     };
@@ -40,11 +41,13 @@
         lobbyFactory.set('joinCodeErrorMessage', 'Minimum of 3 characters required.');
         return;
       }
+      lobbyFactory.set('waiting', true);
       lobbyFactory.set('tempJoinCode', joinCode);
       socket.emit('create private game', {joinCode: joinCode.toLowerCase()});
     };
 
     vm.queue = function(message) {
+      lobbyFactory.set('waiting', true);
       socket.emit('queue', message);
     };
 

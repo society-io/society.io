@@ -15,8 +15,8 @@
         <div class="joincode-container"><h2>{{Waiting.lfGet('joinCode')}}</h2></div>
         <button class="block red" ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm; Waiting.playClick()">Cancel Your Private Game</button>
 
-        <form>
-          <div ng-show="Waiting.showCancelGameForm">
+        <form class="cancel-form" ng-show="Waiting.showCancelGameForm">
+          <div>
             <label>enter join code</label>
             <!-- TODO: create model object in controller and pass to emit event on btn click -->
             <input ng-model='joinCode'>

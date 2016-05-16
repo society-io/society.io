@@ -47,6 +47,7 @@ angular
     function addedToQueue() {
       // event: 'added to queue'
       lobby.set('whereTo', 'queue');
+      lobby.set('waiting', true);
       $state.go('waiting');
     }
 
