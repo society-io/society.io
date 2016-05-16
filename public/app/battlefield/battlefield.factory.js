@@ -13,8 +13,7 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
 
   var bfLogic = battlefieldLogicFactory;
   var bfTimer = battlefieldTimerFactory;
-  var emit = socketFactory.emit;
-  var on = socketFactory.on;
+  var socket = socketFactory;
   var startingHealth = {
     rich: 0,
     bum: 0,
@@ -37,17 +36,11 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
     centerMessage: ''
   };
 
-  if (socketFactory.isConnected()) {
-    console.log('listeners is being invoked:');
-    listeners();
-  } else {
-    $state.go('lobby');
-  }
-
   return {
-    emit: emit,
+    listeners: listeners,
     setChoice: setChoice,
     forfeit: forfeit,
+    boardReset: boardReset,
     get: get
   };
 
@@ -60,15 +53,11 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
   }
 
   function setChoice(userChoice) {
-    console.log('userChoice = ', userChoice);
     if (userChoice) {
-      emit('choice', { choice: userChoice });
-    } else {
-      console.error('userChoice NOT defined!');
+      state.player.choice = userChoice;
+      state.submitted = true;
+      socket.emit('choice', { choice: userChoice });
     }
-
-    state.player.choice = userChoice;
-    state.submitted = true;
   }
 
   function get(name) {
@@ -87,17 +76,17 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
     state.forfeited = false;
     state.playerHealth = Object.assign({}, startingHealth);
     state.opponentHealth = Object.assign({}, startingHealth);
+
+    bfTimer.resetTimer();
   }
 
   function forfeit() {
-  console.log('EMIT FORFEIT');
-    emit('forfeit');
+    socket.emit('forfeit');
   }
 
   function listeners() {
 
-    console.log('REGISTERING LISTENERS');
-    on('gameReady', function(resp) {
+    socket.on('gameReady', function(resp) {
       // store player IDs in state
       state.player = new Player(resp.playerId, resp.playerProfile);
       state.opponent = new Player(resp.playerId === 1 ? 2 : 1, resp.opponentProfile);
@@ -106,8 +95,6 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
       state.player.profile.winrate = bfLogic.calcWinRate(state.player.profile.wins, state.player.profile.losses);
       state.opponent.profile.winrate = bfLogic.calcWinRate(state.opponent.profile.wins, state.opponent.profile.losses);
 
-      console.log(state.player.profile);
-
       // store the starting health as given by the server
       for (var choice in resp.startingHealth) {
         state.player.health[choice] = resp.startingHealth[choice];
@@ -115,14 +102,13 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
       }
 
       $rootScope.$broadcast('runAnimations');
-      console.log('BROADCASTING ANIMATIONS');
     });
 
-    on('opponentPlayed', function(resp) {
+    socket.on('opponentPlayed', function(resp) {
       state.opponentPlayed = true;
     });
 
-    on('roundResult', function(resp){
+    socket.on('roundResult', function(resp){
       console.log("roundResult: ", resp);
 
       bfTimer.resetTimer();
@@ -153,7 +139,7 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
 
     });
 
-    on('newRound', function() {
+    socket.on('newRound', function() {
       if (!state.gameStarted) {
         state.gameStarted = true;
       }
@@ -173,23 +159,22 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
         console.log('state.player.choice = ', state.player.choice);
         if (!state.player.choice) {
           state.player.choice = 'noChoice';
-          emit('noChoice');
+          socket.emit('noChoice');
           console.log('Emitted: noChoice');
         }
       });
     });
 
-    on('matchResult', function(resp) {
+    socket.on('matchResult', function(resp) {
       state.matchOver = true;
       state.centerMessage = 'Game Over! Headed to lobby...';
 
       setTimeout(function() {
         $state.go('lobby');
-        boardReset();
       }, 3000);
     });
 
-    on('forfeitedResults', function(resp) {
+    socket.on('forfeitedResults', function(resp) {
       bfTimer.stopTimer();
       state.forfeited = true;
       state.matchOver = true;
@@ -201,12 +186,11 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
       }
       setTimeout(function() {
         $state.go('lobby');
-        boardReset();
       }, 3000);
     });
 
 
-    on('matchTerminated', function(resp) {
+    socket.on('matchTerminated', function(resp) {
       if (resp.reason === 'playerDisconnected') {
         bfTimer.stopTimer();
         state.forfeited = true;
@@ -216,7 +200,6 @@ function bfFactoryFunction(socketFactory, battlefieldTimerFactory, battlefieldLo
 
         setTimeout(function() {
           $state.go('lobby');
-          boardReset();
         }, 3000);
       }
     });

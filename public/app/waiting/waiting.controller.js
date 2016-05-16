@@ -4,11 +4,12 @@ angular
   .module('app')
   .controller('WaitingController', WaitingController);
 
-  WaitingController.$inject = ['$state', 'waitingFactory', 'lobbyFactory', 'soundFactory'];
+  WaitingController.$inject = ['$state', 'socketFactory', 'waitingFactory', 'lobbyFactory', 'soundFactory'];
 
-  function WaitingController($state, waitingFactory, lobbyFactory, soundFactory) {
+  function WaitingController($state, socketFactory, waitingFactory, lobbyFactory, soundFactory) {
 
     var vm = this;
+    var socket = socketFactory;
 
     soundFactory.loadSounds();
 
@@ -16,17 +17,13 @@ angular
     vm.lfGet = lf.get;
     vm.get = waitingFactory.get;
 
-    vm.cancelRoom = waitingFactory.cancelRoom;
-    vm.showCancelGameInput = false;
-    vm.showCancelGameController = function() {
-      vm.showCancelGameInput = true;
-    };
-
     vm.showCancelGameForm = false;
 
-    vm.removeFromQueue = function(){
-      waitingFactory.removeFromQueue();
+    vm.cancelRoom = function(joinCode) {
+      socket.emit('cancel private game', {joinCode: joinCode});
+      $state.go('lobby');
     };
+
   }
 
 })();

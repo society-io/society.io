@@ -23,12 +23,9 @@ function config($stateProvider, $urlRouterProvider) {
 	  	controller: 'LobbyController',
 	  	controllerAs: 'Lobby',
 	  	data: {
-	  		bodyClasses : 'lobby'
+	  		bodyClasses : 'lobby',
+	  		auth: true
 	  	}
-	  })
-	  .state('loading', {
-	  	url: '/loading',
-	  	templateUrl: '../app/loading/loading.html'
 	  })
 		.state('waiting', {
 			url: '/waiting',
@@ -36,7 +33,8 @@ function config($stateProvider, $urlRouterProvider) {
 			controller: 'WaitingController',
 			controllerAs: 'Waiting',
 			data: {
-				bodyClasses: 'waiting'
+				bodyClasses: 'waiting',
+				auth: true
 			}
 		})
 	  .state('battlefield', {
@@ -45,7 +43,8 @@ function config($stateProvider, $urlRouterProvider) {
 	  	controller: 'BattlefieldController',
 	  	controllerAs: 'Bf',
 	  	data: {
-	  		bodyClasses: 'battlefield'
+	  		bodyClasses: 'battlefield',
+	  		auth: true
 	  	}
 	  });
 }
