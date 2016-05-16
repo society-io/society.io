@@ -24,6 +24,7 @@
     vm.showJoinGameController = false;
     vm.showPreQueueWarning = false;
     vm.showAvatars = false;
+    vm.showTutorial = false;
 
     vm.joinRoom = function(joinCode) {
       if (joinCode === undefined || joinCode.length < 3) {
@@ -56,6 +57,14 @@
         vm.showPreQueueWarning = false;
       } else {
         vm.showPreQueueWarning = true;
+      }
+    };
+
+    vm.toggleTutorial = function() {
+      if(vm.showTutorial) {
+        vm.showTutorial = false;
+      } else {
+        vm.showTutorial = true;
       }
     };
 
