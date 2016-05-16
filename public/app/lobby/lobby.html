@@ -60,6 +60,9 @@
 				</div>
 			</form>
 
+			<button class="block yellow" ng-click="Lobby.toggleTutorial()">Tutorial</button>
+			<div ng-show="Lobby.showTutorial">tutorial here</div>
+      
 		</div><!-- End sidebar -->
 
 		<div class="sidebar lobby-left lobby-content-container">
@@ -153,7 +156,7 @@
 								<i class="fa fa-usd fa-stack-1x fa-inverse"></i>
 							</span>
 							<span class="stat-label">
-								Coins:
+								Net Worth
 							</span>
 							<span class="stat-val coins">
 								{{Lobby.get('player').mmr}}
@@ -185,7 +188,7 @@
 						<td>Rank</td>
 						<td>Team</td>
 						<td>Username</td>
-						<td>Coins</td>
+						<td>Net Worth</td>
 						<td>Wins</td>
 						<td>Losses</td>
 					</tr>
