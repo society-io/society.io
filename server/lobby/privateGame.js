@@ -111,15 +111,6 @@ function initiatePrivateGame(data) {
 	player2.emit('match ready');
 }
 
-//sockId_joinCode
-// function cancelPrivateGame(data) {
-// console.log('BEFORE CANCEL privateGames'.cyan, privateGames);
-// delete privateGames[joinCode];
-// delete sockId_joinCode[socket.socketId];
-// console.log('AFTER REMOVE JOIN CODE'.red, privateGames, sockId_joinCode);
-//
-
-
 function cancelPrivateGame (socket) {
 	var joinCode = sockId_joinCode[socket.socketId];
 
@@ -133,7 +124,12 @@ function cancelPrivateGame (socket) {
 	log_sockId_JC();
 }
 
+function isInPrivateGame(socket) {
+  return !!sockId_joinCode[socket.socketId];
+}
+
 
 module.exports = {
-  privateGameListeners: privateGameListeners
+  privateGameListeners: privateGameListeners,
+  isInPrivateGame: isInPrivateGame
 };

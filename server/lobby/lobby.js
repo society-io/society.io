@@ -1,4 +1,6 @@
 var existingUser = require('../db/userModel.js');
+var queue = require('./queue');
+var private = require('./privateGame.js');
 
 var lobbyListeners = function(socket) {
 	socket.on('who am i', function() {
@@ -20,6 +22,14 @@ var lobbyListeners = function(socket) {
           success: true
         });
     });
+  });
+
+  socket.on('should be waiting', function() {
+    var inQueue = queue.isInQueue(socket);
+    var inPrivate = private.isInPrivateGame(socket);
+    if (!inQueue && !inPrivate) {
+      socket.emit('not waiting');
+    }
   });
 
 };
