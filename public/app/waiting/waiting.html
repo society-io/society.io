@@ -34,7 +34,7 @@
         <i class="fa fa-user" aria-hidden="true"></i> {{Waiting.get('player1').username}}
       </h1>
       <h1>
-        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player1').mmr}}
+        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player1').mmr.format()}}
       </h1>
       <p class="stats"><i class="fa fa-trophy" aria-hidden="true"></i>
         W <span class="wins">{{Waiting.get('player1').wins}}</span> /
@@ -50,7 +50,7 @@
         <i class="fa fa-user" aria-hidden="true"></i> {{Waiting.get('player2').username}}
       </h1>
       <h1>
-        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player2').mmr}}
+        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player2').mmr.format()}}
       </h1>
       <p class="stats"><i class="fa fa-trophy" aria-hidden="true"></i>
         W <span class="wins">{{Waiting.get('player2').wins}}</span> /
