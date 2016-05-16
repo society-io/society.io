@@ -34,7 +34,6 @@ angular
 			state.tempAvatar = '';
 			state.tempJoinCode = '';
 			state.waiting = false;
-
 		}
 
 		function get(key){

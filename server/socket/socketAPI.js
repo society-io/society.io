@@ -8,10 +8,7 @@ var chatListeners = require('../lobby/chat').chatListeners;
 var SocketAPI = function(socket, userModel, token) {
 // socket
   this.socket = socket;
-  this.connected = socket.connected;
-  this.disconnected = socket.disconnected;
   this.socketId = socket.id;
-  this.events = socket._events;
 // user
 	userModel = Object.assign({}, userModel);
 	this.user = userModel;
@@ -20,10 +17,8 @@ var SocketAPI = function(socket, userModel, token) {
 };
 
 SocketAPI.prototype.init = function() {
-	delete this.user.password;
-	console.log('this.profile'.magenta, this.profile);
-  console.log('this.user._doc'.magenta, this.user._doc);
-
+	delete this.user._doc.password;
+	console.log(this.user);
 	lobbyListeners(this);
   queueListeners(this);
   privateGameListeners(this);
@@ -56,8 +51,8 @@ SocketAPI.prototype.delayEmit = function(event, data, wait){
 	var sock = this;
 	setTimeout(function () {
 		sock.emit(event, data);
-		console.log('DELAYED EMIT'.bgYellow, event,'DATA SENT'.bgYellow, data);
-	});
+		// console.log('DELAYED EMIT'.bgYellow, event,'DATA SENT'.bgYellow, data);
+	}, wait);
 };
 
 SocketAPI.prototype.getUserModel = function() {
