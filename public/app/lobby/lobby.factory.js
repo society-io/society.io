@@ -20,8 +20,18 @@ angular
 
 		return {
 			get: get,
-			set: set
+			set: set,
+			reset: reset
 		};
+
+		function reset() {
+			console.log('reset was called inside lobby factory');
+			state.joinCodeErrorMessage = '';
+			state.joinCodeErrorMessage2 = '';
+			state.joinQueueErrorMessage = '';
+			state.tempAvatar = '';
+			state.tempJoinCode = '';
+		}
 
 		function get(key){
 			return state[key];

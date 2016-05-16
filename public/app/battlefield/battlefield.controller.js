@@ -21,16 +21,6 @@
     var bfLogic = battlefieldLogicFactory;
     var bfTimer = battlefieldTimerFactory;
 
-    // set up the document ready signal
-    if (socketFactory.isConnected()) {
-      angular.element(document).ready(function() {
-        setTimeout(function() {
-          console.log('Emitted: clientReady');
-          socketFactory.emit('client ready');
-        }, 2000);
-      });
-    }
-
     $scope.$on('runAnimations', runAnimations);
     soundFactory.loadSounds();
 
