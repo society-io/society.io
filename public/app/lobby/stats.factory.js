@@ -19,7 +19,6 @@ angular
 
     function getBoard() {
       getUsersFromDB().then(function(users) {    
-        console.log('users = ', users);  
         var storage = [];
         for(var i = 0; i < users.data.length; i++){
           storage.push(users.data[i]);

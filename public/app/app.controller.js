@@ -41,7 +41,7 @@
 
         console.log('state change =========');
         console.log('to: ', toState.name);
-        console.log('from: ', toState.name);
+        console.log('from: ', fromState.name);
         console.log('======================');
 
       if (toState.data.authenticate) {
@@ -53,9 +53,7 @@
 
       if (toState.name === 'lobby') {
         socket.disconnect();
-        console.log('connecting socket');
         socket.connectSocket().then(function() {
-          console.log('initializing lobby listeners');
           lobbyListeners.init();
           battlefieldFactory.boardReset();
           socket.emit('who am i');
@@ -64,6 +62,7 @@
       }
 
       if (toState.name === 'waiting') {
+
         if (fromState.name !== 'lobby') {
           goToLobby();
           return;
@@ -74,6 +73,15 @@
           $state.go('lobby');
           return;
         }
+
+        socket.on('not waiting', function() {
+          console.log('this person is not waiting');
+          goToLobby();
+        });
+
+        $timeout(function() {
+          socket.emit('should be waiting');
+        }, 3000);
 
         waitingListenersFactory.init();
       }
