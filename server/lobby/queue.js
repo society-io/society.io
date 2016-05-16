@@ -84,7 +84,7 @@ function removeFromQueue (socket) {
 		queue.splice(position, 1);
 	}
 	delete queueObj[socket.username];
-	// delete activeSockets[socket.socketId];
+	delete activeSockets[socket.socketId];
 	logger('REMOVED FROM QUEUE');
 }
 

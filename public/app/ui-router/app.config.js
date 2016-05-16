@@ -27,6 +27,12 @@ function config($stateProvider, $urlRouterProvider) {
 	  		auth: true
 	  	}
 	  })
+		.state('chat', {
+			url: '/chat',
+			templateUrl: '../app/chat/chat.html',
+			controller: 'ChatController',
+			controllerAs: 'Chat',
+		 })
 		.state('waiting', {
 			url: '/waiting',
 			templateUrl: '../app/waiting/waiting.html',

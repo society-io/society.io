@@ -5,8 +5,9 @@ angular
 	lobbyFactory.$inject = ['$state'];
 
 	function lobbyFactory($state) {
-		
+
 		var state = {
+			renderMessage: '',
 			joinCodeErrorMessage: '',
 			joinCodeErrorMessage2: '',
 			joinQueueErrorMessage: '',
@@ -33,6 +34,7 @@ angular
 			state.tempAvatar = '';
 			state.tempJoinCode = '';
 			state.waiting = false;
+
 		}
 
 		function get(key){

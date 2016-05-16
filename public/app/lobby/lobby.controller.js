@@ -12,6 +12,7 @@
     var socket = socketFactory;
     var vm = this;
 
+
     soundFactory.loadSounds();
     authFactory.checkAuth();
     

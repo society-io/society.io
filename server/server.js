@@ -32,16 +32,15 @@ app.use('/leaderboard', leaderboard);
 server.listen(port);
 console.log('Server Running, Port: ', port);
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
   console.log('*New Client Connected*');
-  socket.on('init', function(data) {
-
+  socket.on('init', function (data) {
     socketCheck(data.token, socket)
-      .then(function(data) {
+      .then(function (data) {
         var uid = data.uid;
         var socket = data.socket;
         var token = data.token;
-        db.findById(uid, function(err, user) {
+        db.findById(uid, function (err, user) {
           if (err) {
             throw err;
           } else {
@@ -49,8 +48,8 @@ io.on('connection', function(socket) {
             activeSockets[socket.id].init();
           }
         });
-      }, function(err) {
-        console.error(err);
-      });
+      },
+      function (err) {console.error(err);}
+    );
   });
 });

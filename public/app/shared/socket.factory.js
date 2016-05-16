@@ -59,6 +59,13 @@ angular
       });
     }
 
+
+	  // socket.on('sendChatMessage', function(message) {
+	  //   $scope.messages.push(message);
+	  // });
+	  //
+
+
     function emit(eventName, data, callback, auth) {
       if (auth) {
         data = data || {};
@@ -75,4 +82,9 @@ angular
         });
       });
     }
+
+
+
+
+
   }

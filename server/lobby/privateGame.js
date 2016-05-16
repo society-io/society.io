@@ -131,8 +131,7 @@ function cancelPrivateGame (socket) {
   delete sockId_joinCode[socket.socketId];
   delete privateGames[joinCode];
 	delete activeSockets[socket.socketId];
-  
-
+	
 	log_PG('AFTER DELETE');
 	log_sockId_JC();
 }
