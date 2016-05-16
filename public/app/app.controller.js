@@ -10,12 +10,14 @@
     '$window',
     '$timeout',
     'socketFactory',
+    'lobbyFactory',
     'lobbyListenersFactory',
     'waitingListenersFactory',
-    'lobbyFactory'
+    'waitingFactory',
+    'battlefieldFactory'
   ];
 
-  function appController($scope, $state, $window, $timeout, socketFactory, lobbyListenersFactory, waitingListenersFactory, lobbyFactory) {
+  function appController($scope, $state, $window, $timeout, socketFactory, lobbyFactory, lobbyListenersFactory, waitingListenersFactory, waitingFactory, battlefieldFactory) {
     var emit = socketFactory.emit;
     var on = socketFactory.on;
 
@@ -29,30 +31,54 @@
 
     function goToLobby() {
       $state.go('lobby');
-      console.log('Called go to lobby! Reloading now.');
-      $timeout(function() {
-        $window.location.reload();
-      }, 0);
+      // console.log('Called go to lobby! Reloading now.');
+      // $timeout(function() {
+      //   $window.location.reload();
+      // }, 0);
     }
 
     // this'll be called on every state change in the app
     $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
 
       if (toState.name === 'lobby') {
+        socket.disconnect();
+        console.log('connecting socket');
         socket.connectSocket().then(function() {
-          console.log('initializing listeners');
+          console.log('initializing lobby listeners');
           lobbyListeners.init();
+          battlefieldFactory.boardReset();
           socket.emit('who am i');
         });
       }
 
       if (toState.name === 'waiting') {
         if (!socket.isConnected()) {
-          console.error('no socket connection is set up. Something went wrong.');
-          return;
+          console.error('toState.name: waiting // No socket connection is set up. Something went wrong.');
+          $state.go('lobby');
         }
 
         waitingListenersFactory.init();
+      }
+
+      if (toState.name === 'battlefield') {
+        if (!socketFactory.isConnected()) {
+          console.error('toState.name: battlefield // No socket connection is set up. Something went wrong.');
+          $state.go('lobby');
+        }
+
+        battlefieldFactory.listeners();
+      }
+
+      if (fromState.name === 'waiting') {
+        waitingFactory.reset();
+      }
+
+      if (fromState.name === 'lobby') {
+        lobbyFactory.reset();
+      }
+
+      if (fromState.name === 'battlefield') {
+        battlefieldFactory.boardReset();
       }
 
       function moving(comingFrom, goingTo) {

@@ -19,21 +19,22 @@
       return {
         set: set,
         get: get,
-        cancelRoom: cancelRoom
+        reset: reset
       };
 
-      function get(keyName) {
-        return state[keyName];
+      function get(key) {
+        return state[key];
       }
 
       function set(key, value) {
         state[key] = value;
       }
 
-      function cancelRoom(joinCode) {
-        console.log('Canceling privateGame...');
-        emit('cancel private game', {joinCode: joinCode});
-        $state.go('lobby');
+      function reset() {
+        state.player1 = null;
+        state.player2 = null;
+        state.centerMessage = 'Waiting for opponent';
+        state.waiting = true;
       }
 
     }

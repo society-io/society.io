@@ -11,8 +11,6 @@ angular
     var socket = socketFactory;
     var lobby = lobbyFactory;
 
-    var initailized = false;
-
     return {
       init: init
     };
@@ -26,11 +24,6 @@ angular
         return;
       }
 
-      if (initailized) {
-        console.error('lobby listeners have already been initialized');
-        return;
-      }
-
       socket.on('player already in queue', userAlreadyInQueue);
       socket.on('added to queue', addedToQueue);
       socket.on('join code invalid', joinCodeInvalid);
@@ -38,7 +31,6 @@ angular
       socket.on('join code found', joinCodeFound);
       socket.on('join code not found', joinCodeNotFound);
       socket.on('you are', youAre);
-      initailized = true;
     }
 
     function youAre(resp) {
@@ -68,6 +60,7 @@ angular
       lobby.set('whereTo', 'private');
       lobby.set('joinCode', lobby.get('tempJoinCode'));
       lobby.set('tempJoinCode', '');
+      console.log('lobby whereTo = ', lobby.get('whereTo'));
       $state.go('waiting');
     }
 

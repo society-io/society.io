@@ -10,8 +10,6 @@
       var socket = socketFactory;
       var waiting = waitingFactory;
 
-      var initialized = false;
-
       return {
         init: init
       };
@@ -25,15 +23,9 @@
           return;
         }
 
-        if (initialized) {
-          console.error('lobby listeners have already been initialized');
-          return;
-        }
-
         socket.on('profile', profile);
         socket.on('match ready', matchReady);
         socket.on('join code to initialize battlefield', joinCodeToInitBf);
-        initialized = true;
       }
 
       function profile(resp) {
