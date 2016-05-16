@@ -15,7 +15,8 @@ angular
 			joinCode: '',
 			avatar: '',
 			tempAvatar: '',
-			tempJoinCode: ''
+			tempJoinCode: '',
+			waiting: false
 		};
 
 		return {
@@ -31,6 +32,7 @@ angular
 			state.joinQueueErrorMessage = '';
 			state.tempAvatar = '';
 			state.tempJoinCode = '';
+			state.waiting = false;
 		}
 
 		function get(key){

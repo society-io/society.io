@@ -86,15 +86,10 @@ function removeFromQueue (socket) {
 	logger('REMOVED FROM QUEUE');
 }
 
-function isInQueue(socket) {
-	return !!queueObj[socket.username];
-}
-
 module.exports = {
 	queueListeners: queueListeners,
 	queueMatch: queueMatch,
 	decideQueue: decideQueue,
 	addToQueue: addToQueue,
-	removeFromQueue: removeFromQueue,
-	isInQueue: isInQueue
+	removeFromQueue: removeFromQueue
 };
