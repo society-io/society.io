@@ -1,4 +1,5 @@
 (function (){
+
   angular
     .module('app')
     .factory('waitingFactory', waitingFactory);
@@ -38,6 +39,5 @@
       }
 
     }
-
 
 })();

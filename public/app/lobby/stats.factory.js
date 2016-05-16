@@ -3,24 +3,33 @@ angular
   .module('app')
   .factory('statsFactory', statsFactory);
 
-  statsFactory.$inject = ['$http'];
+  statsFactory.$inject = ['$http', 'lobbyFactory'];
 
-  function statsFactory($http) {
+  function statsFactory($http, lobbyFactory) {
 
-    var state = {leaderboard: false};
-    
-    getUsersFromDB().then(function(users) {      
-      var storage = [];
-      for(var i = 0; i < users.data.length; i++){
-        storage.push(users.data[i]);
-      }
-      var sorted = storage.sort(function(a, b) {
-        return b.mmr - a.mmr;
+    var state = {
+      leaderboard: false
+    };
+
+  	return {
+      get: get,
+      getBoard: getBoard,
+      updatePlayerAvatar: updatePlayerAvatar
+    };
+
+    function getBoard() {
+      getUsersFromDB().then(function(users) {    
+        console.log('users = ', users);  
+        var storage = [];
+        for(var i = 0; i < users.data.length; i++){
+          storage.push(users.data[i]);
+        }
+        var sorted = storage.sort(function(a, b) {
+          return b.mmr - a.mmr;
+        });
+        state.leaderboard = sorted;
       });
-      state.leaderboard = sorted;
-    });
-
-  	return {get: get};
+    }
 
     function getUsersFromDB() {
       return $http.get('/leaderboard');
@@ -28,6 +37,15 @@ angular
 
     function get(key) {
     	return state[key];
+    }
+
+    function updatePlayerAvatar(newAvatar) {
+      state.leaderboard.forEach(function(user) {
+        if (user.username === lobbyFactory.get('player').username) {
+          user.avatar = newAvatar;
+          temp = user;
+        }
+      });
     }
 
   }
