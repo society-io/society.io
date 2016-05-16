@@ -4,11 +4,24 @@
     .module('app')
     .controller('AppController', appController);
 
-  appController.$inject = ['$scope', '$state', '$window', '$timeout', 'socketFactory'];
+  appController.$inject = [
+    '$scope',
+    '$state',
+    '$window',
+    '$timeout',
+    'socketFactory',
+    'lobbyListenersFactory',
+    'lobbyFactory'
+  ];
 
-  function appController($scope, $state, $window, $timeout, socketFactory) {
+  function appController($scope, $state, $window, $timeout, socketFactory, lobbyListenersFactory, lobbyFactory) {
     var emit = socketFactory.emit;
     var on = socketFactory.on;
+
+    var lobbyListeners = lobbyListenersFactory;
+    var socket = socketFactory;
+
+    var lobby = lobbyFactory;
 
     var vm = this;
     vm.bodyClasses = 'default';
@@ -23,6 +36,14 @@
 
     // this'll be called on every state change in the app
     $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+
+      if (toState.name === 'lobby') {
+        socket.connectSocket().then(function() {
+          console.log('initializing listeners');
+          lobbyListeners.init();
+          socket.emit('who am i');
+        });
+      }
 
       function moving(comingFrom, goingTo) {
         return fromState.name === comingFrom && toState.name === goingTo;
