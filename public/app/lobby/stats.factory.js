@@ -11,6 +11,11 @@ angular
       leaderboard: false
     };
 
+    Number.prototype.format = function(n, x) {
+      var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+      return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+    };
+
   	return {
       get: get,
       getBoard: getBoard,
@@ -21,7 +26,9 @@ angular
       getUsersFromDB().then(function(users) {    
         var storage = [];
         for(var i = 0; i < users.data.length; i++){
-          storage.push(users.data[i]);
+          var userData = users.data[i];
+          userData.mmr = userData.mmr.format();
+          storage.push(userData);
         }
         var sorted = storage.sort(function(a, b) {
           return b.mmr - a.mmr;
