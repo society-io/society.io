@@ -66,6 +66,7 @@
     vm.updateAvatar = function(obj) {
       lobbyFactory.set('avatar', obj.avatar);
       socketFactory.emit('update avatar', obj);
+      statsFactory.updatePlayerAvatar(obj.avatar);
     };
 
     vm.setNewAvatar = function(avatar) {

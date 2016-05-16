@@ -11,6 +11,7 @@
     '$timeout',
     'authFactory',
     'socketFactory',
+    'statsFactory',
     'lobbyFactory',
     'lobbyListenersFactory',
     'waitingListenersFactory',
@@ -18,7 +19,7 @@
     'battlefieldFactory'
   ];
 
-  function appController($scope, $state, $window, $timeout, authFactory, socketFactory, lobbyFactory, lobbyListenersFactory, waitingListenersFactory, waitingFactory, battlefieldFactory) {
+  function appController($scope, $state, $window, $timeout, authFactory, socketFactory, statsFactory, lobbyFactory, lobbyListenersFactory, waitingListenersFactory, waitingFactory, battlefieldFactory) {
     var emit = socketFactory.emit;
     var on = socketFactory.on;
 
@@ -58,6 +59,7 @@
           lobbyListeners.init();
           battlefieldFactory.boardReset();
           socket.emit('who am i');
+          statsFactory.getBoard();
         });
       }
 
