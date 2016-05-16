@@ -25,7 +25,7 @@ angular
 		};
 
 		function reset() {
-			console.error('reset was called inside lobby factory');
+			console.log('reset was called inside lobby factory');
 			state.joinCodeErrorMessage = '';
 			state.joinCodeErrorMessage2 = '';
 			state.joinQueueErrorMessage = '';
