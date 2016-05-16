@@ -1,22 +1,22 @@
 var color = require('colors');
-
-var chat = [];
-
-function chatListeners(socket) {
-  socket.on('chat', function() {
-    chat.push(socket);
-    userJoinNotification(socket);
-  });
-}
-  function userJoinNotification (socket){
-    var userJoined = {};
-    userJoined.username = socket.user.username;
-    // userJoined.avatar = socket.user.avatar;
-    userJoined.date = new Date();
-
-   socket.emit('chat', userJoined);
-   console.log('USER JOINED OBJECT'.cyan, userJoined);
-  }
+//
+// var chat = [];
+//
+// function chatListeners(socket) {
+//   socket.on('chat', function() {
+//     chat.push(socket);
+//     userJoinNotification(socket);
+//   });
+// }
+//   function userJoinNotification (socket){
+//     var userJoined = {};
+//     userJoined.username = socket.user.username;
+//     // userJoined.avatar = socket.user.avatar;
+//     userJoined.date = new Date();
+//
+//    socket.emit('chat', userJoined);
+//    console.log('USER JOINED OBJECT'.cyan, userJoined);
+//   }
 //
 // Date.prototype.time = function(obj) {
 //   var that = this;

@@ -14,13 +14,16 @@ var SocketAPI = function(socket, userModel, token) {
   this.events = socket._events;
 // user
 	userModel = Object.assign({}, userModel);
-	this.user =
-	 userModel._doc;
+	this.user = userModel;
+	this.profile = this.user._doc;
 	this.token = token;
 };
 
 SocketAPI.prototype.init = function() {
 	delete this.user.password;
+	console.log('this.profile'.magenta, this.profile);
+  console.log('this.user._doc'.magenta, this.user._doc);
+
 	lobbyListeners(this);
   queueListeners(this);
   privateGameListeners(this);
