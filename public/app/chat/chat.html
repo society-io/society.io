@@ -1,3 +1,5 @@
 <h2>Message</h2>
-<input>
-<button ng-click="Chat.sendMessage()">SEND</button>
+<div>{{Chat.messages}}</div>
+<input ng-model="Chat.message">
+<button ng-click="Chat.sendMessage(Chat.message)">SEND</button>
+<div ng-repeat="user in Chat.get('userList')">{{user}}</div>

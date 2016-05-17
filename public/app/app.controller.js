@@ -16,10 +16,11 @@
     'lobbyListenersFactory',
     'waitingListenersFactory',
     'waitingFactory',
-    'battlefieldFactory'
+    'battlefieldFactory',
+    'chatFactory'
   ];
 
-  function appController($scope, $state, $window, $timeout, authFactory, socketFactory, statsFactory, lobbyFactory, lobbyListenersFactory, waitingListenersFactory, waitingFactory, battlefieldFactory) {
+  function appController($scope, $state, $window, $timeout, authFactory, socketFactory, statsFactory, lobbyFactory, lobbyListenersFactory, waitingListenersFactory, waitingFactory, battlefieldFactory, chatFactory) {
     var emit = socketFactory.emit;
     var on = socketFactory.on;
 
@@ -55,6 +56,7 @@
         socket.disconnect();
         socket.connectSocket().then(function() {
           lobbyListeners.init();
+          chatFactory.chatListeners();
           battlefieldFactory.boardReset();
           socket.emit('who am i');
           statsFactory.getBoard();
@@ -137,13 +139,13 @@
 
       // if (moving('battlefield', 'lobby')) {
       //   goToLobby();
-      // } 
+      // }
 
       // // if (fromState.name === 'battlefield' && toState.name === 'lobby') {
       // //   $window.location.reload();
       // // }
 
-      // if ((fromState.name === '' && toState.name === 'waiting') || 
+      // if ((fromState.name === '' && toState.name === 'waiting') ||
       //     (fromState.name === '' && toState.name === 'battlefield') ||
       //     (fromState.name === 'waiting' && toState.name === 'lobby') ||
       //     (fromState.name === 'battlefield' && toState.name !== 'lobby')
