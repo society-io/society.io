@@ -3,6 +3,7 @@ var firebase = require('../common').firebase;
 var privateGameListeners = require('../lobby/privateGame').privateGameListeners;
 var queueListeners = require('../lobby/queue').queueListeners;
 var lobbyListeners = require('../lobby/lobby').lobbyListeners;
+var chatListeners = require('../chat/chat').chatListeners;
 
 var SocketAPI = function(socket, userModel, token) {
 
@@ -27,6 +28,7 @@ SocketAPI.prototype.init = function() {
 	lobbyListeners(this);
   queueListeners(this);
   privateGameListeners(this);
+  chatListeners(this);
 	this.emit('socket initialized');
 };
 
