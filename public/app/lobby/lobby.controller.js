@@ -25,6 +25,10 @@
     vm.showPreQueueWarning = false;
     vm.showAvatars = false;
     vm.showTutorial = false;
+    vm.joinQueueTutorial = false;
+    vm.gameplayTutorial = false;
+    vm.createPrivateGameTutorial = false;
+    vm.joinPrivateGameTutorial = false;
 
     vm.joinRoom = function(joinCode) {
       if (joinCode === undefined || joinCode.length < 3) {

@@ -110,37 +110,44 @@
 	</div><!-- End bootstrap column -->
 
 	<div class="col-md-8">
-		<div ng-show="Lobby.showTutorial" class="lobby-right lobby-content-container">
-			<div>TUTORIAL
-				<br>
-			  <p>Joining the Queue:
-          <img src='../../tutorialGIFS/enteringQueue.gif' alt='Joining the Queue'>
-			  </p>
-			  <br>
-				<p>Creating a Private Game:
-          <img src='../../tutorialGIFS/createPrivateGame.gif' alt='Creating a Private Game'>
-				</p>
-				<br>
-				<p>Joining a Private Game:
-          <img src='../../tutorialGIFS/joinPrivateGame.gif' alt='Joining a Private Game'>
-				</p>
-				<br>
-				<p>Game Play:
-					<p>
-          	<img src='../../tutorialGIFS/gamePlay.gif' alt='Game Play'>
-          </p>
-          <br>
+		<div ng-show="Lobby.showTutorial" class="lobby-right lobby-content-container lobby-sidebar-code">
+			<div><span class="yellow-color"><h1>TUTORIAL</h1></span>
+				
 					<div>Overall Rules & Strategy:
-						<p>The goal of Society is to outwit your opponent in a Rock-Paper-Scissors fashion.</p>
+						<p>The goal of Society is to outwit your opponent in Rock-Paper-Scissors fashion.</p>
 						<p>When hovering over your options on the bottom, your opponent's options will either be:</p>
 						<ul>
-							<li>Transparent:  Your hovered choice ties with the transparent choice.</li>
-							<li>Green:  Your hovered choice WINS against the highlighted green choices.</li>
-							<li>Red:  Your hovered choice LOSES against the highlighted red choices.</li>
+							<li><span class="green-color">Green:  </span>  Your hovered choice WINS against the highlighted green choices.</li>
+							<li><span class="red-color">Red:  </span>  Your hovered choice LOSES against the highlighted red choices.</li>
+							<li><span class="grey-color">Faded:  </span>  Your hovered choice ties with the transparent choice.</li>
 						</ul>
-						<p>Pro-Tip: Take risks by playing options with low health. Your opponent might not see it coming!</p>
+						<p><span class="blue-color">Pro-Tip:  </span> Take risks by playing options with low health. Your opponent might not see it coming!</p>
+						<p><h2>How To Gifs:</h2></p>
 					</div>
 				</p>
+
+				<br>
+
+				<button class="tutorial-btn" ng-click="Lobby.joinQueueTutorial = !Lobby.joinQueueTutorial">Joining the Queue</button>
+				<br>
+          <img ng-show='Lobby.joinQueueTutorial' src='../../tutorialGIFS/enteringQueue.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
+			  <br>
+
+				<button class="tutorial-btn" ng-click="Lobby.createPrivateGameTutorial = !Lobby.createPrivateGameTutorial">Create a Private Game</button>
+				<br>
+          <img ng-show='Lobby.createPrivateGameTutorial' src='../../tutorialGIFS/createPrivateGame.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
+			  <br>
+
+			  <button class="tutorial-btn" ng-click="Lobby.joinPrivateGameTutorial = !Lobby.joinPrivateGameTutorial">Join Private Game</button>
+				<br>
+          <img ng-show='Lobby.joinPrivateGameTutorial' src='../../tutorialGIFS/joinPrivateGame.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
+			  <br>
+
+			  <button class="tutorial-btn" ng-click="Lobby.gameplayTutorial = !Lobby.gameplayTutorial">Gameplay</button>
+				<br>
+          <img ng-show='Lobby.gameplayTutorial' src='../../tutorialGIFS/gamePlay.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
+			  <br>
+				
 			</div>
 		</div>
 		<div class="lobby-right lobby-content-container">
