@@ -3,33 +3,22 @@
   angular
     .module('app')
     .controller('ChatController', ChatController);
-    ChatController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory', 'chatFactory'];
 
-  function ChatController($scope, lobbyFactory, socketFactory, authFactory, statsFactory, chatFactory) {
+  ChatController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'chatFactory'];
+
+  function ChatController($scope, lobbyFactory, socketFactory, chatFactory) {
     var vm = this;
-    // authFactory.checkAuth();
-    // var tokenObj = authFactory.attachToken({});
-    // vm.get = lobbyFactory.get;
-    $scope.message = {};
-    socketFactory.on('user joined', function(data) {
-      console.log(data);
-    });
 
-    socketFactory.on('updated user list', function(data) {
-      console.log(data);
-    });
+    vm.messages = null;
 
-   socketFactory.on('message', function(data){
-      $scope.message= data;
-      console.log(data);
-    });
+    vm.get = chatFactory.get;
 
-  socketFactory.on('user left', function(data){
-    console.log(data);
-  });
+    vm.messages = chatFactory.get('messages');
+    vm.users = chatFactory.get('userList');
 
-    vm.sendMessage = function()  {
-      socketFactory.emit('message', {message: 'hello'});
+    vm.sendMessage = function(message)  {
+      socketFactory.emit('new message', {message: message});
+      vm.message = '';
     };
 
   }

@@ -1,5 +1,5 @@
 var color = require('colors');
-var chat= require('./chatAPI').chat;
+var chat = require('./chatAPI').chat;
 var addToChat = require ('./chatAPI').addToChat;
 var removeSock = require('./chatAPI').removeSock;
 var broadcast = require('./chatAPI').broadcast;
@@ -15,7 +15,7 @@ function chatListeners(socket) {
     addChatter(socket);
   });
 
-  socket.on('message', function(data){
+  socket.on('new message', function(data){
     addMessage(socket, data);
   });
 
@@ -34,7 +34,7 @@ function addChatter (socket) {
 
 function addMessage (socket, data) {
    var response = {};
-   response.user = socket.profile.username;
+   response.user = socket.username;
    response.time = new Date();
    response.message = data.message;
    chat.messages.push(response);
@@ -53,8 +53,7 @@ function removeChatter(socket) {
 function getUserProfile (socket){
   var obj = {};
   obj.sockId= socket.socketId;
-  obj.username = socket.profile.username;
-  // obj.avatar= socket.profile.avatar;
+  obj.username = socket.username;
   obj.joinTime = new Date();
   return obj;
 }

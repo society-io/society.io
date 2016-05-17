@@ -21,7 +21,7 @@ var SocketAPI = function(socket, userModel, token) {
   this.profile = this.user;
 	this.userId = this.user._doc._id;
 	this.token = token;
-	this.username =this.user._doc.username;
+	this.username = this.user._doc.username;
 };
 
 SocketAPI.prototype.init = function() {

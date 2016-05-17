@@ -8,60 +8,52 @@ angular
     var socket = socketFactory;
     var lobby = lobbyFactory;
 
-    var userJoined,
-      userList,
-      message,
-      userLeft;
+    var state = {
+      userJoined: null,
+      userList: [],
+      userLeft: null,
+      messages: []
+    };
 
-    socket.on('user joined', function (data) {
-      userJoined = data;
-      console.log('user joined: ', data);
-    });
+    function chatListeners() {
+      socket.on('user joined', function (data) {
+        set('userJoined', data);
+        console.log('user joined: ', data);
+      });
 
-    socket.on('updated user list', function (data) {
-      userList = data;
-      console.log('user list: ', data);
-    });
+      socket.on('updated user list', function (data) {
+        set('userList', data);
+        console.log('user list: ', data);
+      });
 
-    socket.on('message: ', function (data) {
-      message = data;
-      console.log('message:', message);
-    });
+      socket.on('message', function (data) {
+        set('messages', data);
+        console.log('messages: ', state.messages);
+      });
 
-    socket.on('user left ', function (data) {
-      userLeft = data;
-      console.log('message:', message);
-    });
+      socket.on('user left ', function (data) {
+        set('userLeft', data);
+        console.log('message: ', message);
+      });
+    }
+
+    function get(key) {
+      return state[key];
+    }
+
+    function set(key, data) {
+      if(Array.isArray(state[key])) {
+        state[key].push(data);
+      } else {
+        state[key] = data;
+        console.log('State: ',state);
+      }
+    }
+
     return {
-      getUser: function () {
-        return userJoined;
-      },
-
-      getUserList: function () {
-        return userList;
-      },
-
-      getUserLeft: function () {
-        var temp = userLeft;
-        userLeft = null;
-        return temp;
-      },
-
-      getLastMsg: function () {
-        return lastMessage;
-      },
+      chatListeners: chatListeners,
+      get: get,
+      set: set
     };
 
   }
-
-    // Date.prototype.time = function (obj) {
-    //   var that = this;
-    //   var date = {};
-    //   date.day = that.getDate().toString();
-    //   date.month = that.toLocaleString('en-us', {month: 'short'});
-    //   date.time = that.toLocaleTimeString(navigator.language, {hour: '2-digit', minute: '2-digit'});
-    //   if (obj === undefined) {
-    //     return date.time.toLocaleLowerCase() + ' -- ' + date.month + ' ' + date.day;
-    //   }
-    //   return date;
-    // };
