@@ -217,3 +217,45 @@ td {
 .team-sign {
   font-size: 20px;
 }
+
+.tutorial-gif {
+  display: block;
+  margin: 0 auto;
+}
+
+.tutorial-btn {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  border: 5px solid $tilePurple;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.tutorial-btn:hover {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  border: 5px solid $tilePurple;
+  border-radius: 3px;
+  background-color: $tilePurple;
+}
+
+.yellow-color {
+  color: $yellow;
+}
+
+.red-color {
+  color: $red;
+}
+
+.green-color {
+  color: $green;
+}
+
+.blue-color {
+  color: $blue;
+}
+.grey-color {
+  color: grey;
+}
