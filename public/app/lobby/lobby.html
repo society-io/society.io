@@ -66,13 +66,16 @@
 
 		<div class="sidebar lobby-left lobby-content-container">
 
-			<h2>My Team</h2>
+       <button ng-click="Lobby.chat()">chat</button>
+
+			<h2>My Avatar</h2>
 			<div class="my-avatar">
 				<i class="fa fa-hand-{{Lobby.get('avatar')}}-o fa-lg" aria-hidden="true"></i>
 			</div>
 
 
 			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars; Lobby.playClick()">Change Team</button>
+
 
 			<div ng-show="Lobby.showAvatars">
 				<h2>Options</h2>
@@ -152,6 +155,7 @@
 		</div>
 		<div class="lobby-right lobby-content-container">
 			<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
+
 			<div class="user-profile">
 				<div class="pf-avatar-container">
 					<div class="pf-avatar-inner back">
@@ -188,6 +192,7 @@
 				<div class="pf-avatar-midpoint"></div>
 
 				<div class="pf-info-container">
+					<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
 					<div class="pf-bit">
 						<p class="pf-coins">
 							<span class="fa-stack fa-lg">
@@ -200,6 +205,7 @@
 							<span class="stat-val coins">
 								{{Lobby.get('player').mmr.format()}}
 							</span>
+
 						</p>
 					</div>
 					<div class="pf-bit">
@@ -212,6 +218,8 @@
 								W <span class="record-wins">{{Lobby.get('player').wins}}</span>
 								L <span class="record-losses">{{Lobby.get('player').losses}}</span>
 							</span>
+
+
 						</p>
 					</div>
 				</div>
@@ -219,23 +227,21 @@
 		</div>
 
 		<div class="lobby-right lobby-content-container">
-			<h1 class="leaderboard-title">Leader Board</h1>
+			<h1>Leader Board</h1>
 
 			<table class="table table-hover table-mc-light-blue table-bordered">
 				<thead class="titles">
 					<tr>
 						<td>Rank</td>
-						<td>Team</td>
 						<td>Username</td>
 						<td>Net Worth ($)</td>
 						<td>Wins</td>
 						<td>Losses</td>
 					</tr>
 				</thead>
-			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()" class="rows">
+			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()">
 				<td>{{index}}</td>
-				<td class="team-sign"><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> </td>
-				<td>{{users.username}}</td>
+				<td><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> {{users.username}}</td>
 				<td>{{users.mmr}}</td>
 				<td>{{users.wins}}</td>
 				<td>{{users.losses}}</td>
