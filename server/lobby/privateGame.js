@@ -110,18 +110,6 @@ function initiatePrivateGame(data) {
 	player1.emit('match ready');
 	player2.emit('match ready');
 }
-
-<<<<<<< HEAD
-=======
-//sockId_joinCode
-// function cancelPrivateGame(data) {
-// console.log('BEFORE CANCEL privateGames'.cyan, privateGames);
-// delete privateGames[joinCode];
-// delete sockId_joinCode[socket.socketId];
-// console.log('AFTER REMOVE JOIN CODE'.red, privateGames, sockId_joinCode);
-//
-
->>>>>>> [Debug] various state issues
 function cancelPrivateGame (socket) {
 	var joinCode = sockId_joinCode[socket.socketId];
 

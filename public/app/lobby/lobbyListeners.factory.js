@@ -23,7 +23,7 @@ angular
         console.error('socket is not connected. Can\'t set up lobby listeners');
         return;
       }
-
+      socket.on('chat', chat);
       socket.on('player already in queue', userAlreadyInQueue);
       socket.on('added to queue', addedToQueue);
       socket.on('join code invalid', joinCodeInvalid);
@@ -31,6 +31,10 @@ angular
       socket.on('join code found', joinCodeFound);
       socket.on('join code not found', joinCodeNotFound);
       socket.on('you are', youAre);
+    }
+
+    function chat() {
+      $state.go('chat');
     }
 
     function youAre(resp) {

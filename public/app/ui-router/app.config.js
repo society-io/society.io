@@ -32,7 +32,11 @@ function config($stateProvider, $urlRouterProvider) {
 			templateUrl: '../app/chat/chat.html',
 			controller: 'ChatController',
 			controllerAs: 'Chat',
-		 })
+			data: {
+			  bodyClasses: 'lobby',
+			  auth: true
+      }
+    })
 		.state('waiting', {
 			url: '/waiting',
 			templateUrl: '../app/waiting/waiting.html',

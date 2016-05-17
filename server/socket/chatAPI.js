@@ -3,9 +3,9 @@ chat.sockets ={};
 chat.len = 0;
 chat.messages= [];
 
-function broadcast (string, object) {
+function broadcast (string, object, wait) {
   for (var socketId in chat.sockets) {
-    chat.sockets[socketId].emit(string, object);
+    chat.sockets[socketId].delayEmit(string, object, wait);
   }
 }
 // function sendToOthers(socket, string, object, wait) {
@@ -42,7 +42,6 @@ function removeSock (socket) {
 function generateUserList() {
   var userArr =[];
   for (var prop in chat.sockets) {
-
     userArr.push(chat.sockets[prop].profile);
     console.log('PUSHED TO PROFILE'.cyan, userArr);
   }

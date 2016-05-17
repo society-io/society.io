@@ -18,7 +18,6 @@ var SocketAPI = function(socket, userModel, token) {
 
 SocketAPI.prototype.init = function() {
 	delete this.user._doc.password;
-	console.log(this.user);
 	lobbyListeners(this);
   queueListeners(this);
   privateGameListeners(this);
@@ -71,12 +70,7 @@ SocketAPI.prototype.err = function(err) {
 
 SocketAPI.prototype.disconnect = function(close) {
 	this.socket.disconnect(close);
-	// this.socket.disconnected = true;
-	// this.socket.connected = false;
 };
-
-
-
 
 module.exports = {
   SocketAPI: SocketAPI

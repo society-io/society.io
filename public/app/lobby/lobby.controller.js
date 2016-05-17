@@ -15,7 +15,7 @@
 
     soundFactory.loadSounds();
     authFactory.checkAuth();
-    
+
     vm.get = lobbyFactory.get;
     vm.set = lobbyFactory.set;
 
@@ -30,6 +30,10 @@
     vm.gameplayTutorial = false;
     vm.createPrivateGameTutorial = false;
     vm.joinPrivateGameTutorial = false;
+    
+    vm.chat = function(message) {
+      socket.emit('chat');
+    };
 
     vm.joinRoom = function(joinCode) {
       if (joinCode === undefined || joinCode.length < 3) {
@@ -55,7 +59,7 @@
       lobbyFactory.set('waiting', true);
       socket.emit('queue', message);
     };
-
+    
     vm.signOut = function() {
       authFactory.signOut();
     };
