@@ -217,6 +217,34 @@
 						</p>
 					</div>
 				</div>
+				<br></br>
+				<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars; Lobby.playClick()">Change Team</button>
+
+				<div ng-show="Lobby.showAvatars">
+					<h2>Options</h2>
+					<div class="change-avatar-container">
+						<div class="avatars-available" id="rock" ng-click="Lobby.setNewAvatar('rock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'rock'}" ng-show="'rock' !== Lobby.get('avatar')">
+							<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
+						</div>
+
+						<div class="avatars-available" id="paper" ng-click="Lobby.setNewAvatar('paper'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'paper'}" ng-show="'paper' !== Lobby.get('avatar')">
+							<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
+						</div>
+
+						<div class="avatars-available" id="scissors" ng-click="Lobby.setNewAvatar('scissors'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'scissors'}" ng-show="'scissors' !== Lobby.get('avatar')">
+							<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
+						</div>
+
+						<div class="avatars-available" id="lizard" ng-click="Lobby.setNewAvatar('lizard'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'lizard'}" ng-show="'lizard' !== Lobby.get('avatar')">
+							<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
+						</div>
+
+						<div class="avatars-available" id="spock" ng-click="Lobby.setNewAvatar('spock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'spock'}" ng-show="'spock' !== Lobby.get('avatar')">
+							<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
+						</div>
+
+						<button class="inline-block-small red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')}); Lobby.playClick(); Lobby.showAvatars = !Lobby.showAvatars">Update</button>
+					</div>
 			</div>
 		</div>
 
