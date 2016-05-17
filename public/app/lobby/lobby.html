@@ -66,6 +66,8 @@
 
 		<div class="sidebar lobby-left lobby-content-container">
 
+		<button ng-click="Lobby.chat()">chat</button>
+
 			<h2>My Team</h2>
 			<div class="my-avatar">
 				<i class="fa fa-hand-{{Lobby.get('avatar')}}-o fa-lg" aria-hidden="true"></i>
@@ -112,7 +114,7 @@
 	<div class="col-md-8">
 		<div ng-show="Lobby.showTutorial" class="lobby-right lobby-content-container lobby-sidebar-code">
 			<div><span class="yellow-color"><h1>TUTORIAL</h1></span>
-				
+
 					<div>Overall Rules & Strategy:
 						<p>The goal of Society is to outwit your opponent in Rock-Paper-Scissors fashion.</p>
 						<p>When hovering over your options on the bottom, your opponent's options will either be:</p>
@@ -147,7 +149,7 @@
 				<br>
           <img ng-show='Lobby.gameplayTutorial' src='../../images/gamePlay.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
 			  <br>
-				
+
 			</div>
 		</div>
 		<div class="lobby-right lobby-content-container">

@@ -18,6 +18,7 @@ var SocketAPI = function(socket, userModel, token) {
 // user
 	userModel = Object.assign({}, userModel);
 	this.user = userModel;
+  this.profile = this.user;
 	this.userId = this.user._doc._id;
 	this.token = token;
 	this.username =this.user._doc.username;

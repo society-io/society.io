@@ -8,7 +8,7 @@
   LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory', 'soundFactory'];
 
   function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory, soundFactory) {
-    
+
     var socket = socketFactory;
     var vm = this;
 
@@ -29,6 +29,10 @@
     vm.gameplayTutorial = false;
     vm.createPrivateGameTutorial = false;
     vm.joinPrivateGameTutorial = false;
+
+    vm.chat = function(message) {
+      socket.emit('chat', message);
+    };
 
     vm.joinRoom = function(joinCode) {
       if (joinCode === undefined || joinCode.length < 3) {
