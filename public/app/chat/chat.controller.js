@@ -13,14 +13,26 @@
     var tokenObj = authFactory.attachToken({});
     vm.get = lobbyFactory.get;
 
-    socketFactory.on('updated user list', function(message) {
-      console.log(message);
+    socketFactory.on('chat', function(data) {
+      console.log(data);
     });
 
 
+    socketFactory.on('updated user list', function(data) {
+      console.log(data);
+    });
+
+
+
     vm.sendMessage = function()  {
-      socketFactory.emit('hello', {message: 'hello'});
+      socketFactory.emit('message', {message: 'hello'});
     };
+
+
+
+   socketFactory.on('message', function(message){
+     console.log(message);
+    });
   }
 })();
 

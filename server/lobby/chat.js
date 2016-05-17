@@ -1,55 +1,64 @@
 var color = require('colors');
 var chat= require('../socket/chatAPI').chat;
+var addToChat = require ('../socket/chatAPI').addToChat;
+var removeSock = require('../socket/chatAPI').removeSock;
+var broadcast = require('../socket/chatAPI').broadcast;
+var generateUserList = require('../socket/chatAPI').generateUserList;
+var sendChat= require('../socket/chatAPI').sendChat;
 
 function chatListeners(socket) {
   socket.on('chat', function() {
-    chat.add(socket);
+    addToChat(socket);
+    console.log(chat);
     addChatter(socket);
   });
-  socket.on('hello', function(message){
-  console.log('message received');
-    formatMessage(socket, message);
+
+  socket.on('message', function(data){
+    addMessage(socket, data);
   });
+
   socket.on('disconnect', function() {
-    var userName = socket.profile.username;
-    chat.delUser(socket);
+    removeSock(socket);
+    removeChatter(socket);
   });
 }
-
+// EMITTERS
 function addChatter (socket) {
   var userJoined = getUserProfile(socket);
-  var updatedUserList = {userList: chat.userList};
-
-  socket.delayEmit('chat', userJoined, 2000);
-  socket.delayEmit('updated user list', updatedUserList, 5000 );
+  var updatedUserList = generateUserList();
+  broadcast('chat', userJoined);
+  broadcast('updated user list', updatedUserList );
 }
+
+
+function addMessage (socket, data) {
+   var response = {};
+   response.user = socket.profile.username;
+   response.time = new Date();
+   response.message = data.message;
+   chat.messages.push(response);
+   broadcast('message', response);
+}
+
 
 function removeChatter(socket) {
-  var userLeftMessage = 'user left @' + new Date().time;
-  var updateUserList = chat.getUserList();
+  var userLeftMessage = 'user left @' + new Date();
+  var updateUserList = generateUserList();
 
-  socket.delayEmit('userLeft', userLeftMessage, 2000);
-  socket.delayEmit('updated userList', updateUserList, 2000);
+  broadcast('userLeft', userLeftMessage);
+  broadcast('updated userList', updateUserList);
 }
 
 
+// EMIT MESSAGE HELPERS/FORMATERS
 function getUserProfile (socket){
   var obj = {};
   obj.sockId= socket.socketId;
   obj.username = socket.profile.username;
-  obj.avatar= socket.profile.avatar;
+  // obj.avatar= socket.profile.avatar;
   obj.joinTime = new Date();
   return obj;
 }
-
-formatMessage = function(socket, message) {
-  var response = {};
-  response.user = socket.profile.username;
-  response.time = new Date();
-  response.message = message.message;
-  chat.messages.push(response);
-  chat.snd(response);
-};
 
 module.exports= {
   chatListeners:chatListeners

@@ -1,51 +1,61 @@
 var chat = {};
-chat.sockets= {length: 0};
-// chat.users = {length:0};
-chat.sockList = [];
-chat.userList =[];
+chat.sockets ={};
+chat.len = 0;
 chat.messages= [];
 
-chat.add =function(socket){
+function broadcast (string, object) {
+  for (var socketId in chat.sockets) {
+    chat.sockets[socketId].emit(string, object);
+  }
+}
+// function sendToOthers(socket, string, object, wait) {
+//   var sockId = socket.socketId;
+//   for (var prop in chat.sockets) {
+//     if (chat.sockets[prop] === sockId) {
+//       var uniqueMessage = {received: new Date()}
+//       chat.sockets[prop]
+//
+//       .delayEmit('unique', uniqueMessage, wait)
+//     }
+//     else {
+//       chat.sockets[prop].delayEmit(string, object, wait);
+//     }
+//   }
+// }
+
+function addToChat (socket) {
   if (!chat.sockets.hasOwnProperty(socket.socketId)) {
     chat.sockets[socket.socketId] = socket;
-    // chat.users[socket.socketId]= socket.profile;
-    chat.sockets.length += 1;
-    chat.sockList.push(socket);
-    chat.userList.push(socket.profile.username);
-    // chat.users.length += 1;
-    console.log('CHAT OBJECT', chat.userUsers);
+    chat.len += 1;
+    console.log('CHAT OBJECT'.yellow, chat);
    }
-};
+}
 
-chat.delUser = function(socket) {
+function removeSock (socket) {
   if (chat.sockets.hasOwnProperty(socket.socketId)) {
-    delete chat.sockets[socket.socketId];
-    chat.sockets.length -= 1;
-    var position = chat.sockList.indexOf(socket);
-      if (position >= 0 ) {
-        chat.sockList.splice(postion, 1);
-      }
-    var idx = chat.userList.indexOf(socket.profile.username);
-    if (idx >= 0 ) {
-      chat.userList.splice(postion, 1);
-    }
+   delete chat.sockets[socket.socketId];
+    chat.len-= 1;
+    console.log('chat socket'.cyan, chat);
   }
-};
+}
 
-chat.snd =function(message){
-  var sock = chat.sockList;
-  for (var i = 0; i < sock.length; i++) {
-    sock[i].delayEmit('message', message, 1000);
-    console.log('MESSAGE', message);
+function generateUserList() {
+  var userArr =[];
+  for (var prop in chat.sockets) {
+
+    userArr.push(chat.sockets[prop].profile);
+    console.log('PUSHED TO PROFILE'.cyan, userArr);
   }
-};
-
-chat.getUserList = function() {
-  var userList = {};
-  userList.list = chat.userList;
-  return userList;
-};
+  var list = {};
+  list.users= userArr;
+  return list;
+}
 
 module.exports = {
-  chat:chat
+  chat:chat,
+  addToChat: addToChat,
+  broadcast: broadcast,
+  removeSock: removeSock,
+  generateUserList: generateUserList
 };
+
