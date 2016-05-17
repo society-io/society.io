@@ -31,6 +31,11 @@ angular
       socket.on('join code found', joinCodeFound);
       socket.on('join code not found', joinCodeNotFound);
       socket.on('you are', youAre);
+      socket.on('chat', chat);
+    }
+
+    function chat() {
+      $state.go('chat');
     }
 
     function youAre(resp) {
