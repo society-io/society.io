@@ -1,6 +1,6 @@
 var colors = require('colors');
 var Game = require('../game/game').Game;
-// var activeSockets = require('../common').activeSockets;
+var activeSockets = require('../common').activeSockets;
 var privateGames = {}; // { joinCode: [{sock1}, {sock2}] }
 var sockId_joinCode = {}; // { socketId: joinCode }
 
@@ -78,7 +78,7 @@ function storePlayer2(socket, data) {
 		setTimeout(function(){
       socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
     }, 3000);
-    
+
 	} else {
 	socket.emit('join code not found', {message: 'join code not found'});
 	}
@@ -110,16 +110,6 @@ function initiatePrivateGame(data) {
 	player1.emit('match ready');
 	player2.emit('match ready');
 }
-
-//sockId_joinCode
-// function cancelPrivateGame(data) {
-// console.log('BEFORE CANCEL privateGames'.cyan, privateGames);
-// delete privateGames[joinCode];
-// delete sockId_joinCode[socket.socketId];
-// console.log('AFTER REMOVE JOIN CODE'.red, privateGames, sockId_joinCode);
-//
-
-
 function cancelPrivateGame (socket) {
 	var joinCode = sockId_joinCode[socket.socketId];
 
@@ -128,12 +118,14 @@ function cancelPrivateGame (socket) {
 
   delete sockId_joinCode[socket.socketId];
   delete privateGames[joinCode];
-
+	delete activeSockets[socket.socketId];
+	
 	log_PG('AFTER DELETE');
 	log_sockId_JC();
 }
 
-
 module.exports = {
-  privateGameListeners: privateGameListeners
+	privateGameListeners: privateGameListeners,
+  privateGames: privateGames,
+  sockId_joinCode: sockId_joinCode
 };

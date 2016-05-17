@@ -35,6 +35,8 @@ module.exports = function(grunt) {
           'public/app/lobby/**/*.factory.js',
           'public/app/lobby/**/*.controller.js',
 
+          'public/app/chat/**/*.controller.js',
+
           'public/app/waiting/**/*.factory.js',
           'public/app/waiting/**/*.controller.js',
 
@@ -64,4 +66,3 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['jshint', 'concat', 'sass']);
 };
-

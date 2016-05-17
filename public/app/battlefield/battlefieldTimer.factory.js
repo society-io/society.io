@@ -22,6 +22,7 @@ function bfTimerFactoryFunction($rootScope, $interval) {
 
   function resetTimer() {
     time = 10;
+    stopTimer();
   }
 
   function startTimer() {

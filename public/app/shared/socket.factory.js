@@ -9,7 +9,8 @@ angular
     var socket;
 
     return {
-      connectSocket:connectSocket,
+      disconnect: disconnect,
+      connectSocket: connectSocket,
       on: on,
       emit: emit,
       isConnected: isConnected
@@ -18,6 +19,14 @@ angular
     function isConnected() {
       console.log('socket connection = ', !!socket);
       return !!socket;
+    }
+
+    function disconnect() {
+      if (isConnected()) {
+        console.log('calling disconnect');
+        socket.disconnect();
+        socket = null;
+      }
     }
 
     function connectSocket() {
@@ -50,12 +59,20 @@ angular
       });
     }
 
+
+	  // socket.on('sendChatMessage', function(message) {
+	  //   $scope.messages.push(message);
+	  // });
+	  //
+
+
     function emit(eventName, data, callback, auth) {
       if (auth) {
         data = data || {};
         data = authFactory.attachToken(data);
       }
-      console.log('emit was called. inside socket facotry, eventName = ', eventName);
+      console.log('emit was called. inside socket factory, eventName = ', eventName);
+      console.log('socketID', socket.id);
       socket.emit(eventName, data, function() {
         var args = arguments;
         $rootScope.$apply(function() {
@@ -65,4 +82,9 @@ angular
         });
       });
     }
+
+
+
+
+
   }

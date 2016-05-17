@@ -1,3 +1,7 @@
+.user-profile {
+  position: relative;
+}
+
 .user-profile > * {
   vertical-align: middle;
 }
@@ -9,6 +13,7 @@
   transform-style: preserve-3d;
   animation: spin 3.5s linear infinite;
   margin-right: 40px;
+  transform-origin: 50% 50% 5px;
 }
 
 .pf-avatar-container > div {
@@ -38,8 +43,21 @@
 .pf-avatar-inner.middle {
   width: 100px;
   height: 100px;
+  background-color: $blue;
   position: absolute;
   top: 0;
+}
+
+.pf-avatar-midpoint {
+  width: 10px;
+  height: 100px;
+  background-color: $blue;
+  position: absolute;
+  top: 0;
+  left: 45px;
+  border-radius: 2px;
+  border: none;
+  z-index: -1;
 }
 
 .pf-avatar-inner.back {
