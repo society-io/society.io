@@ -1,12 +1,12 @@
 var color = require('colors');
-var chat= require('../socket/chatAPI').chat;
-var addToChat = require ('../socket/chatAPI').addToChat;
-var removeSock = require('../socket/chatAPI').removeSock;
-var broadcast = require('../socket/chatAPI').broadcast;
-var delayBroadcast = require('../socket/chatAPI').broadcast;
+var chat= require('./chatAPI').chat;
+var addToChat = require ('./chatAPI').addToChat;
+var removeSock = require('./chatAPI').removeSock;
+var broadcast = require('./chatAPI').broadcast;
+var delayBroadcast = require('./chatAPI').broadcast;
 
-var generateUserList = require('../socket/chatAPI').generateUserList;
-var sendChat= require('../socket/chatAPI').sendChat;
+var generateUserList = require('./chatAPI').generateUserList;
+var sendChat= require('./chatAPI').sendChat;
 
 function chatListeners(socket) {
   socket.on('chat', function() {

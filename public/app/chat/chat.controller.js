@@ -3,9 +3,9 @@
   angular
     .module('app')
     .controller('ChatController', ChatController);
-    ChatController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory'];
+    ChatController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory', 'chatFactory'];
 
-  function ChatController($scope, lobbyFactory, socketFactory, authFactory, statsFactory) {
+  function ChatController($scope, lobbyFactory, socketFactory, authFactory, statsFactory, chatFactory) {
     var vm = this;
     // authFactory.checkAuth();
     // var tokenObj = authFactory.attachToken({});
