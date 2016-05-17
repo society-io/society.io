@@ -21,7 +21,7 @@ angular
       });
 
       socket.on('updated user list', function(data) {
-        set('userList', data);
+        state.userList = data.users;
         console.log('user list: ', data);
       });
 

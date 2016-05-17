@@ -27,7 +27,8 @@ function chatListeners(socket) {
 // EMITTERS
 function addChatter (socket) {
   var newUser = {};
-  newUser.message = socket.username + ' joined the Chat at ' + formatTime() + ' !';
+  newUser.avatar = socket.avatar;
+  newUser.message = socket.username + ' joined @ ' + formatTime() + ' !';
   var updatedUserList = generateUserList();
   delayBroadcast('user joined', newUser, 2000);
   delayBroadcast('updated user list', updatedUserList, 2000);
@@ -54,6 +55,7 @@ function removeChatter(socket) {
 // EMIT MESSAGE HELPERS/FORMATERS
 function getUserProfile (socket){
   var obj = {};
+  obj.avatar = socket.avatar;
   obj.username = socket.username;
   obj.joinTime = formatTime();
   return obj;

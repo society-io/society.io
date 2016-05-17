@@ -14,10 +14,6 @@
     vm.get = chatFactory.get;
 
     vm.messages = chatFactory.get('messages');
-    vm.updateUserList = function() {
-      vm.users = null;
-      vm.users = chatFactory.get('userList');
-    };
 
     vm.sendMessage = function(message)  {
       socketFactory.emit('new message', {message: message});

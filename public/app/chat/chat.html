@@ -1,4 +1,4 @@
-<h2>Message</h2>
+<h2>Common Room</h2>
 <br>
 <div style='color: white' ng-repeat="i in Chat.messages track by $index">
 <p>{{i.avatar}}&nbsp{{i.user}}&nbsp{{(i.time)}}&nbsp{{i.message}}</p>
@@ -9,5 +9,5 @@
 <button ng-click="Chat.sendMessage(Chat.message)">SEND</button>
 <br>
 <div>Current Users:
-  <div style='color: yellow' ng-repeat="i in Chat.users track by $index">{{i}}</div>
+  <div style='color: yellow' ng-repeat="i in Chat.get('userList') track by $index">{{i}}</div>
 </div>
