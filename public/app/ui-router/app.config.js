@@ -17,6 +17,15 @@ function config($stateProvider, $urlRouterProvider) {
 				bodyClasses: 'auth'
 			}
 		})
+		.state('about', {
+			url: '/about',
+			templateUrl: '../app/about/about.html',
+			// controller: 'AboutController',
+			// controllerAs: 'About',
+			data: {
+				bodyClasses: 'auth'
+			}
+		})
 	  .state('lobby', {
 	  	url: '/lobby',
 	  	templateUrl: '../app/lobby/lobby.html',
