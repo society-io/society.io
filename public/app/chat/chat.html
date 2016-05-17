@@ -1,0 +1,20 @@
+<div class="col-md-4">
+  <div class="sidebar lobby-left lobby-content-container">
+    <h2>CHAT</h2>
+    <div style='color: white' ng-repeat="i in Chat.messages track by $index">
+      <p><i class="fa fa-hand-{{i.avatar}}-o"></i>&nbsp{{i.user}}&nbsp{{(i.time)}}&nbsp{{i.message}}</p>
+    </div>
+    <div>
+      <form>
+        <input ng-model="Chat.message" placeholder="message">
+        <button ng-click="Chat.sendMessage(Chat.message)">SEND</button>
+      </form>
+    </div>
+    <div>
+      <h3>Current Users:</h3>
+      <div style='color: yellow' ng-repeat="i in Chat.get('userList') track by $index">
+        <p>{{i}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -77,7 +77,6 @@ function queueMatch () {
 	}
 }
 
-
 function removeFromQueue (socket) {
 	var position = queue.indexOf(socket);
 	if (position >= 0) {

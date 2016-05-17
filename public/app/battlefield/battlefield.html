@@ -26,8 +26,8 @@
             <span class="player-stat player-stat-un">{{Bf.get('opponent').profile.username}}</span>
           </span>
           <span class="player-stat-group">
-            <i class="fa fa-usd" aria-hidden="true"></i> Coins:
-            <span class="player-stat player-stat-mmr">{{Bf.get('opponent').profile.mmr}}</span>
+            <i class="fa fa-usd" aria-hidden="true"></i> Net Worth:
+            <span class="player-stat player-stat-mmr">{{Bf.get('opponent').profile.mmr.format()}}</span>
           </span>
           <span class="player-stat-group">
             <i class="fa fa-bolt" aria-hidden="true"></i> Win Rate:
@@ -226,8 +226,8 @@
             <span class="player-stat player-stat-un">{{Bf.get('player').profile.username}}</span>
           </span>
           <span class="player-stat-group">
-            <i class="fa fa-usd" aria-hidden="true"></i> MMR:
-            <span class="player-stat player-stat-mmr">{{Bf.get('player').profile.mmr}}</span>
+            <i class="fa fa-usd" aria-hidden="true"></i> Net Worth:
+            <span class="player-stat player-stat-mmr">{{Bf.get('player').profile.mmr.format()}}</span>
           </span>
           <span class="player-stat-group">
             <i class="fa fa-bolt" aria-hidden="true"></i> Win Rate:
