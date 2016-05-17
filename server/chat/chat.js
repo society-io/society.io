@@ -26,23 +26,25 @@ function chatListeners(socket) {
 }
 // EMITTERS
 function addChatter (socket) {
-  var userJoined = getUserProfile(socket);
+  var newUser = {};
+  newUser.message = socket.username + ' joined the Chat at ' + formatTime() + ' !';
   var updatedUserList = generateUserList();
-  delayBroadcast('user joined', userJoined, 2000);
+  delayBroadcast('user joined', newUser, 2000);
   delayBroadcast('updated user list', updatedUserList, 2000);
 }
 
 function addMessage (socket, data) {
    var response = {};
+   response.avatar = socket.avatar;
    response.user = socket.username;
-   response.time = new Date();
+   response.time = formatTime();
    response.message = data.message;
    chat.messages.push(response);
    broadcast('message', response);
 }
 
 function removeChatter(socket) {
-  var userLeftMessage = 'user left @' + new Date();
+  var userLeftMessage = 'user left @' + formatTime();
   var updateUserList = generateUserList();
 
   broadcast('user left', userLeftMessage);
@@ -52,10 +54,28 @@ function removeChatter(socket) {
 // EMIT MESSAGE HELPERS/FORMATERS
 function getUserProfile (socket){
   var obj = {};
-  obj.sockId= socket.socketId;
   obj.username = socket.username;
-  obj.joinTime = new Date();
+  obj.joinTime = formatTime();
   return obj;
+}
+
+function formatTime() {
+  var time = new Date();
+  var firstHalf = time.getHours();
+  var secondHalf = time.getMinutes();
+  var formattedTime;
+  if(secondHalf<10) {
+    secondHalf = '0' + secondHalf;
+  } else {
+    secondHalf = secondHalf;
+  }
+  if(firstHalf>12) {
+    firstHalf = firstHalf - 12;
+    formattedTime = firstHalf +':'+ secondHalf + 'PM';
+  } else {
+    formattedTime = firstHalf +':'+ secondHalf +'AM';
+  }
+  return formattedTime;
 }
 
 module.exports= {

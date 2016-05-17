@@ -32,24 +32,12 @@ function removeSock (socket) {
 function generateUserList() {
   var userArr =[];
   for (var prop in chat.sockets) {
-    userArr.push(chat.sockets[prop].profile);
+    userArr.push(chat.sockets[prop].username);
   }
   var list = {};
   list.users= userArr;
   return list;
 }
-
-// Date.prototype.time = function (obj) {
-//   var that = this;
-//   var date = {};
-//   date.day = that.getDate().toString();
-//   date.month = that.toLocaleString('en-us', {month: 'short'});
-//   date.time = that.toLocaleTimeString(navigator.language, {hour: '2-digit', minute: '2-digit'});
-//   if (obj === undefined) {
-//     return date.time.toLocaleLowerCase() + ' -- ' + date.month + ' ' + date.day;
-//   }
-//   return date;
-// };
 
 module.exports = {
   chat: chat,

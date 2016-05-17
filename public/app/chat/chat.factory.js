@@ -9,29 +9,28 @@ angular
     var lobby = lobbyFactory;
 
     var state = {
-      userJoined: null,
       userList: [],
       userLeft: null,
       messages: []
     };
 
     function chatListeners() {
-      socket.on('user joined', function (data) {
-        set('userJoined', data);
+      socket.on('user joined', function(data) {
+        set('messages', data);
         console.log('user joined: ', data);
       });
 
-      socket.on('updated user list', function (data) {
+      socket.on('updated user list', function(data) {
         set('userList', data);
         console.log('user list: ', data);
       });
 
-      socket.on('message', function (data) {
+      socket.on('message', function(data) {
         set('messages', data);
         console.log('messages: ', state.messages);
       });
 
-      socket.on('user left ', function (data) {
+      socket.on('user left ', function(data) {
         set('userLeft', data);
         console.log('message: ', message);
       });

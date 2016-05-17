@@ -1,5 +1,13 @@
 <h2>Message</h2>
-<div>{{Chat.messages}}</div>
+<br>
+<div style='color: white' ng-repeat="i in Chat.messages track by $index">
+<p>{{i.avatar}}&nbsp{{i.user}}&nbsp{{(i.time)}}&nbsp{{i.message}}</p>
+</div>
+<br>
 <input ng-model="Chat.message">
+<br>
 <button ng-click="Chat.sendMessage(Chat.message)">SEND</button>
-<div ng-repeat="user in Chat.get('userList')">{{user}}</div>
+<br>
+<div>Current Users:
+  <div style='color: yellow' ng-repeat="i in Chat.users track by $index">{{i}}</div>
+</div>
