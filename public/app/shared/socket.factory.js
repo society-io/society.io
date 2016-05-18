@@ -9,7 +9,8 @@ angular
     var socket;
 
     return {
-      connectSocket:connectSocket,
+      disconnect: disconnect,
+      connectSocket: connectSocket,
       on: on,
       emit: emit,
       isConnected: isConnected
@@ -18,6 +19,14 @@ angular
     function isConnected() {
       console.log('socket connection = ', !!socket);
       return !!socket;
+    }
+
+    function disconnect() {
+      if (isConnected()) {
+        console.log('calling disconnect');
+        socket.disconnect();
+        socket = null;
+      }
     }
 
     function connectSocket() {

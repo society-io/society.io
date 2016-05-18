@@ -20,6 +20,8 @@ module.exports = function(grunt) {
           'public/app/app.module.js',
           'public/app/app.controller.js',
 
+          'public/app/directives/**/*.js',
+
           'public/app/auth/**/*.factory.js',
           'public/app/auth/**/*.controller.js',
 

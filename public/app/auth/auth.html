@@ -49,14 +49,13 @@
 				</div>
 			</div>
 
-
 			<button class="block yellow" class="input" ng-click="Auth.signUp({username: Auth.usernameUp, email: Auth.emailUp, password: Auth.passwordUp, avatar: Auth.get('avatarClicked')}); Auth.playClick()">Sign Up</button>
 
 			<!-- for error on signUp -->
 			<div class="error-message" ng-if="Auth.signUpErrorMessage() && !Auth.signInForm">{{Auth.signUpErrorMessage()}}</div>
 
 			<div class="switch-view-link">
-				<a href="" ng-click="Auth.set('signinErrorMessage', ''); Auth.playClick() ; Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a>
+				<h3 class="center-link"><a href="" ng-click="Auth.set('signinErrorMessage', ''); Auth.playClick() ; Auth.signInForm = true ; Auth.signUpForm = false">Sign In</a></h3>
 			</div>
 		</form>
 
@@ -77,10 +76,12 @@
 			<div class="error-message" ng-if="Auth.signInErrorMessage() && Auth.signInForm">{{Auth.signInErrorMessage()}}</div>
 
 			<div class="switch-view-link">
-				<a href="" ng-click="Auth.set('signupErrorMessage', ''); Auth.playClick() ; Auth.signUpForm = true ; Auth.signInForm = false">Sign Up</a>
+				<h3 class="center-link"><a href="" ng-click="Auth.set('signupErrorMessage', ''); Auth.playClick() ; Auth.signUpForm = true ; Auth.signInForm = false">Sign Up</a></h3>
 			</div>
 
 		</form>
+
+		<h3 class="center-link about"><a ui-sref="about">About the Game</a></h3>
 
 	</div>
 </div>
