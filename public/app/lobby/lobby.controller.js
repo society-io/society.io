@@ -83,6 +83,9 @@
     };
 
     vm.updateAvatar = function(obj) {
+      if (obj.avatar === ""){
+        return;
+      }
       lobbyFactory.set('avatar', obj.avatar);
       socketFactory.emit('update avatar', obj);
       statsFactory.updatePlayerAvatar(obj.avatar);
