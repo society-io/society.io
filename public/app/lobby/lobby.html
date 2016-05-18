@@ -65,25 +65,34 @@
 		</div><!-- End sidebar -->
 
 		<div class="sidebar lobby-left lobby-content-container">
-			<h2>CHAT</h2>
+			<h2>Chat</h2>
 
 			<div class="chat-box" scroll-glue>
-				<div style='color: white' ng-repeat="message in Lobby.messages track by $index">
-				  <p><i class="fa fa-hand-{{message.avatar}}-o"></i> {{message.user}} ({{message.time}}): {{message.message}}</p>
+				<div class="chat-message" ng-repeat="message in Lobby.messages track by $index">
+				  <p class="chat-user-label">
+				  	<i class="fa fa-hand-{{message.avatar}}-o"></i>
+				  	<span class="chat-user">
+				  		{{message.user}}
+				  	</span>
+				  	<span class="chat-time">
+				  		({{message.time}}):
+				  	</span>
+				  </p>
+				  <p class="chat-message-content">{{message.message}}</p>
 				</div>
 			</div>
 			<br>
 			<!-- Input Message -->
-			<div>
+			<div class="chat-input">
 			  <form ng-submit="Lobby.sendMessage(Lobby.message); Lobby.playChat()">
-			    <input ng-model="Lobby.message" placeholder="message">
+			    <input class="block" ng-model="Lobby.message" placeholder="message">
 			  </form>
 			</div>
 			<br>
 			<!-- Current Users Connected To Chat List -->
 			<div class="chat-users" scroll-glue>
-			  <h3>Current Users:</h3>
-			  <div style='color: yellow' ng-repeat="i in Lobby.getChats('userList') track by $index">
+			  <h2>Players Online:</h2>
+			  <div ng-repeat="i in Lobby.getChats('userList') track by $index">
 			    <p>{{i}}</p>
 			  </div>
 			</div>
@@ -227,32 +236,34 @@
 						</div>
 				</div>
 			</div>
-
-			<div class="lobby-right lobby-content-container">
-				<h1 class="leaderboard-title">Leader Board</h1>
-
-				<table class="table table-hover table-mc-light-blue table-bordered">
-					<thead class="titles">
-						<tr>
-							<td>Rank</td>
-							<td>Team</td>
-							<td>Username</td>
-							<td>Net Worth ($)</td>
-							<td>Wins</td>
-							<td>Losses</td>
-						</tr>
-					</thead>
-				<tr ng-repeat="(index, users) in Lobby.getLeaderboard()" class="rows">
-					<td>{{index}}</td>
-					<td class="team-sign"><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> </td>
-					<td>{{users.username}}</td>
-					<td>{{users.mmr}}</td>
-					<td>{{users.wins}}</td>
-					<td>{{users.losses}}</td>
-				</tr>
-				</table>
-			</div>
 		</div>
 	</div><!-- End bootstrap column -->
+
+	<div class="col-md-8">
+		<div class="lobby-right lobby-content-container">
+			<h1 class="leaderboard-title">Leader Board</h1>
+
+			<table class="table table-hover table-mc-light-blue table-bordered">
+				<thead class="titles">
+					<tr>
+						<td>Rank</td>
+						<td>Team</td>
+						<td>Username</td>
+						<td>Net Worth ($)</td>
+						<td>Wins</td>
+						<td>Losses</td>
+					</tr>
+				</thead>
+			<tr ng-repeat="(index, users) in Lobby.getLeaderboard()" class="rows">
+				<td>{{index}}</td>
+				<td class="team-sign"><i class="fa fa-hand-{{users.avatar}}-o" aria-hidden="true"></i> </td>
+				<td>{{users.username}}</td>
+				<td>{{users.mmr}}</td>
+				<td>{{users.wins}}</td>
+				<td>{{users.losses}}</td>
+			</tr>
+			</table>
+		</div>
+	</div>
 
 </div>
