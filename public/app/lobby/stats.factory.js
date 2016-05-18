@@ -27,11 +27,12 @@ angular
         var storage = [];
         for(var i = 0; i < users.data.length; i++){
           var userData = users.data[i];
+          userData.mmrNum = userData.mmr;
           userData.mmr = userData.mmr.format();
           storage.push(userData);
         }
         var sorted = storage.sort(function(a, b) {
-          return b.mmr - a.mmr;
+          return b.mmrNum - a.mmrNum;
         });
         state.leaderboard = sorted;
       });

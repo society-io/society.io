@@ -5,7 +5,7 @@ angular
 
 function config($stateProvider, $urlRouterProvider) {
 
-	$urlRouterProvider.otherwise('/auth');
+  $urlRouterProvider.otherwise('/auth');
 
 	$stateProvider
 		.state('auth', {
