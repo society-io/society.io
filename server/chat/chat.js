@@ -65,6 +65,7 @@ function getUserProfile (socket){
 }
 
 function formatTime() {
+  process.env.TZ = 'america/los_angeles';
   var time = new Date();
   var firstHalf = time.getHours();
   var secondHalf = time.getMinutes();
