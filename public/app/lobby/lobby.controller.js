@@ -1,14 +1,13 @@
-
 (function () {
 'use strict';
  angular
   .module('app')
   .controller('LobbyController', LobbyController);
 
-  LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory', 'soundFactory'];
+  LobbyController.$inject = ['$scope', 'lobbyFactory', 'socketFactory', 'authFactory', 'statsFactory', 'soundFactory', 'chatFactory'];
 
-  function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory, soundFactory) {
-    
+  function LobbyController($scope, lobbyFactory, socketFactory, authFactory, statsFactory, soundFactory, chatFactory) {
+
     var socket = socketFactory;
     var vm = this;
 
@@ -29,6 +28,10 @@
     vm.gameplayTutorial = false;
     vm.createPrivateGameTutorial = false;
     vm.joinPrivateGameTutorial = false;
+
+    vm.messages = null;
+    vm.getChats = chatFactory.get;
+    vm.messages = chatFactory.get('messages');
 
     vm.joinRoom = function(joinCode) {
       if (joinCode === undefined || joinCode.length < 3) {
@@ -97,5 +100,13 @@
       soundFactory.playConfirm();
     };
 
+    vm.playChat = function() {
+      soundFactory.playChat();
+    };
+
+    vm.sendMessage = function(message)  {
+      socketFactory.emit('new message', {message: message});
+      vm.message = '';
+    };
   }
 })();

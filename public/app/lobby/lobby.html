@@ -65,159 +65,181 @@
 		</div><!-- End sidebar -->
 
 		<div class="sidebar lobby-left lobby-content-container">
+			<h2>Chat</h2>
 
-			<h2>My Team</h2>
-			<div class="my-avatar">
-				<i class="fa fa-hand-{{Lobby.get('avatar')}}-o fa-lg" aria-hidden="true"></i>
+			<div class="chat-box" scroll-glue>
+				<div class="chat-message" ng-repeat="message in Lobby.messages track by $index">
+				  <p class="chat-user-label">
+				  	<i class="fa fa-hand-{{message.avatar}}-o"></i>
+				  	<span class="chat-user">
+				  		{{message.user}}
+				  	</span>
+				  	<span class="chat-time">
+				  		({{message.time}}):
+				  	</span>
+				  </p>
+				  <p class="chat-message-content">{{message.message}}</p>
+				</div>
+			</div>
+			<br>
+			<!-- Input Message -->
+			<div class="chat-input">
+			  <form ng-submit="Lobby.sendMessage(Lobby.message); Lobby.playChat()">
+			    <input class="block" ng-model="Lobby.message" placeholder="message">
+			  </form>
+			</div>
+			<br>
+			<!-- Current Users Connected To Chat List -->
+			<div class="chat-users" scroll-glue>
+			  <h2>Players Online:</h2>
+			  <div ng-repeat="i in Lobby.getChats('userList') track by $index">
+			    <p>{{i}}</p>
+			  </div>
 			</div>
 
+		</div>
+	</div>
 
-			<button class="block red" ng-click="Lobby.showAvatars = !Lobby.showAvatars; Lobby.playClick()">Change Team</button>
+		<div class="col-md-8">
+			<div ng-show="Lobby.showTutorial" class="lobby-right lobby-content-container lobby-sidebar-code">
+				<div><span class="yellow-color"><h1>TUTORIAL</h1></span>
 
-			<div ng-show="Lobby.showAvatars">
-				<h2>Options</h2>
-				<div class="change-avatar-container">
-					<div class="avatars-available" id="rock" ng-click="Lobby.setNewAvatar('rock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'rock'}" ng-show="'rock' !== Lobby.get('avatar')">
-						<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
-					</div>
+						<div>Overall Rules & Strategy:
+							<p>The goal of Society is to outwit your opponent in Rock-Paper-Scissors fashion.</p>
+							<p>When hovering over your options on the bottom, your opponent's options will either be:</p>
+							<ul>
+								<li><span class="green-color">Green:  </span>  Your hovered choice WINS against the highlighted green choices.</li>
+								<li><span class="red-color">Red:  </span>  Your hovered choice LOSES against the highlighted red choices.</li>
+								<li><span class="grey-color">Faded:  </span>  Your hovered choice ties with the transparent choice.</li>
+							</ul>
+							<p><span class="blue-color">Pro-Tip:  </span> Take risks by playing options with low health. Your opponent might not see it coming!</p>
+							<p><h2>How To Gifs:</h2></p>
+						</div>
+					</p>
 
-					<div class="avatars-available" id="paper" ng-click="Lobby.setNewAvatar('paper'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'paper'}" ng-show="'paper' !== Lobby.get('avatar')">
-						<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
-					</div>
+					<br>
 
-					<div class="avatars-available" id="scissors" ng-click="Lobby.setNewAvatar('scissors'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'scissors'}" ng-show="'scissors' !== Lobby.get('avatar')">
-						<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
-					</div>
+					<button class="tutorial-btn" ng-click="Lobby.joinQueueTutorial = !Lobby.joinQueueTutorial">Joining the Queue</button>
+					<br>
+	          <img ng-show='Lobby.joinQueueTutorial' src='../../images/enteringQueue.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
+				  <br>
 
-					<div class="avatars-available" id="lizard" ng-click="Lobby.setNewAvatar('lizard'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'lizard'}" ng-show="'lizard' !== Lobby.get('avatar')">
-						<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
-					</div>
+					<button class="tutorial-btn" ng-click="Lobby.createPrivateGameTutorial = !Lobby.createPrivateGameTutorial">Create a Private Game</button>
+					<br>
+	          <img ng-show='Lobby.createPrivateGameTutorial' src='../../images/createPrivateGame.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
+				  <br>
 
-					<div class="avatars-available" id="spock" ng-click="Lobby.setNewAvatar('spock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'spock'}" ng-show="'spock' !== Lobby.get('avatar')">
-						<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
-					</div>
+				  <button class="tutorial-btn" ng-click="Lobby.joinPrivateGameTutorial = !Lobby.joinPrivateGameTutorial">Join Private Game</button>
+					<br>
+	          <img ng-show='Lobby.joinPrivateGameTutorial' src='../../images/joinPrivateGame.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
+				  <br>
 
-					<button class="inline-block-small red" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')}); Lobby.playClick(); Lobby.showAvatars = !Lobby.showAvatars">Update</button>
+				  <button class="tutorial-btn" ng-click="Lobby.gameplayTutorial = !Lobby.gameplayTutorial">Gameplay</button>
+					<br>
+	          <img ng-show='Lobby.gameplayTutorial' src='../../images/gamePlay.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
+				  <br>
+
 				</div>
+			</div>
+			<div class="lobby-right lobby-content-container">
+				<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
+				<div class="user-profile">
+					<div class="pf-avatar-container">
+						<div class="pf-avatar-inner back">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner middle" style="transform: translateZ(1px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner middle" style="transform: translateZ(2px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner middle" style="transform: translateZ(3px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner middle" style="transform: translateZ(4px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner middle" style="transform: translateZ(5px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner middle" style="transform: translateZ(6px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner middle" style="transform: translateZ(7px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner middle" style="transform: translateZ(8px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+						<div class="pf-avatar-inner front" style="transform: translateZ(9px)">
+							<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div class="pf-avatar-midpoint"></div>
 
+					<div class="pf-info-container">
+						<div class="pf-bit">
+							<p class="pf-coins">
+								<span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-usd fa-stack-1x fa-inverse"></i>
+								</span>
+								<span class="stat-label">
+									Net Worth
+								</span>
+								<span class="stat-val coins">
+									{{Lobby.get('player').mmr.format()}}
+								</span>
+							</p>
+						</div>
+						<div class="pf-bit">
+							<p class="pf-record">
+								<span class="fa-stack fa-lg">
+										<i class="fa fa-circle fa-stack-2x"></i>
+										<i class="fa fa-trophy fa-stack-1x fa-inverse"></i>
+								</span>
+								<span class="stat-val">
+									W <span class="record-wins">{{Lobby.get('player').wins}}</span>
+									L <span class="record-losses">{{Lobby.get('player').losses}}</span>
+								</span>
+							</p>
+						</div>
+					</div>
+					<br></br>
+					<button class="tutorial-btn" ng-click="Lobby.showAvatars = !Lobby.showAvatars; Lobby.playClick()">Change Team</button>
 
+					<div ng-show="Lobby.showAvatars">
+						<h2>Options</h2>
+						<div class="change-avatar-container">
+							<div class="avatars-available" id="rock" ng-click="Lobby.setNewAvatar('rock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'rock'}" ng-show="'rock' !== Lobby.get('avatar')">
+								<i class="fa fa-hand-rock-o fa-lg" aria-hidden="true"></i>
+							</div>
 
-				<!-- CHANGE MY AVATAR TO THE ONE CLICKED -->
+							<div class="avatars-available" id="paper" ng-click="Lobby.setNewAvatar('paper'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'paper'}" ng-show="'paper' !== Lobby.get('avatar')">
+								<i class="fa fa-hand-paper-o fa-lg" aria-hidden="true"></i>
+							</div>
 
+							<div class="avatars-available" id="scissors" ng-click="Lobby.setNewAvatar('scissors'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'scissors'}" ng-show="'scissors' !== Lobby.get('avatar')">
+								<i class="fa fa-hand-scissors-o fa-lg" aria-hidden="true"></i>
+							</div>
+
+							<div class="avatars-available" id="lizard" ng-click="Lobby.setNewAvatar('lizard'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'lizard'}" ng-show="'lizard' !== Lobby.get('avatar')">
+								<i class="fa fa-hand-lizard-o fa-lg" aria-hidden="true"></i>
+							</div>
+
+							<div class="avatars-available" id="spock" ng-click="Lobby.setNewAvatar('spock'); Lobby.playClick()"  ng-class="{'avatar-clicked': Lobby.get('tempAvatar') === 'spock'}" ng-show="'spock' !== Lobby.get('avatar')">
+								<i class="fa fa-hand-spock-o fa-lg" aria-hidden="true"></i>
+							</div>
+
+							<button class="inline-block-small yellow" ng-click="Lobby.updateAvatar({email: Lobby.get('player').email, avatar: Lobby.get('tempAvatar')}); Lobby.playClick(); Lobby.showAvatars = !Lobby.showAvatars">Update</button>
+						</div>
+				</div>
 			</div>
 		</div>
-
 	</div><!-- End bootstrap column -->
 
 	<div class="col-md-8">
-		<div ng-show="Lobby.showTutorial" class="lobby-right lobby-content-container lobby-sidebar-code">
-			<div><span class="yellow-color"><h1>TUTORIAL</h1></span>
-				
-					<div>Overall Rules & Strategy:
-						<p>The goal of Society is to outwit your opponent in Rock-Paper-Scissors fashion.</p>
-						<p>When hovering over your options on the bottom, your opponent's options will either be:</p>
-						<ul>
-							<li><span class="green-color">Green:  </span>  Your hovered choice WINS against the highlighted green choices.</li>
-							<li><span class="red-color">Red:  </span>  Your hovered choice LOSES against the highlighted red choices.</li>
-							<li><span class="grey-color">Faded:  </span>  Your hovered choice ties with the transparent choice.</li>
-						</ul>
-						<p><span class="blue-color">Pro-Tip:  </span> Take risks by playing options with low health. Your opponent might not see it coming!</p>
-						<p><h2>How To Gifs:</h2></p>
-					</div>
-				</p>
-
-				<br>
-
-				<button class="tutorial-btn" ng-click="Lobby.joinQueueTutorial = !Lobby.joinQueueTutorial">Joining the Queue</button>
-				<br>
-          <img ng-show='Lobby.joinQueueTutorial' src='../../images/enteringQueue.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
-			  <br>
-
-				<button class="tutorial-btn" ng-click="Lobby.createPrivateGameTutorial = !Lobby.createPrivateGameTutorial">Create a Private Game</button>
-				<br>
-          <img ng-show='Lobby.createPrivateGameTutorial' src='../../images/createPrivateGame.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
-			  <br>
-
-			  <button class="tutorial-btn" ng-click="Lobby.joinPrivateGameTutorial = !Lobby.joinPrivateGameTutorial">Join Private Game</button>
-				<br>
-          <img ng-show='Lobby.joinPrivateGameTutorial' src='../../images/joinPrivateGame.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
-			  <br>
-
-			  <button class="tutorial-btn" ng-click="Lobby.gameplayTutorial = !Lobby.gameplayTutorial">Gameplay</button>
-				<br>
-          <img ng-show='Lobby.gameplayTutorial' src='../../images/gamePlay.gif' alt='Joining the Queue' class="tutorial-gif lobby-sidebar-code">
-			  <br>
-				
-			</div>
-		</div>
-		<div class="lobby-right lobby-content-container">
-			<h1 class="pf-username"><i class="fa fa-user" aria-hidden="true"></i> {{Lobby.get('player').username}}</h1>
-			<div class="user-profile">
-				<div class="pf-avatar-container">
-					<div class="pf-avatar-inner back">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner middle" style="transform: translateZ(1px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner middle" style="transform: translateZ(2px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner middle" style="transform: translateZ(3px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner middle" style="transform: translateZ(4px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner middle" style="transform: translateZ(5px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner middle" style="transform: translateZ(6px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner middle" style="transform: translateZ(7px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner middle" style="transform: translateZ(8px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-					<div class="pf-avatar-inner front" style="transform: translateZ(9px)">
-						<i class="fa fa-hand-{{Lobby.get('avatar')}}-o" aria-hidden="true"></i>
-					</div>
-				</div>
-				<div class="pf-avatar-midpoint"></div>
-
-				<div class="pf-info-container">
-					<div class="pf-bit">
-						<p class="pf-coins">
-							<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x"></i>
-								<i class="fa fa-usd fa-stack-1x fa-inverse"></i>
-							</span>
-							<span class="stat-label">
-								Net Worth
-							</span>
-							<span class="stat-val coins">
-								{{Lobby.get('player').mmr.format()}}
-							</span>
-						</p>
-					</div>
-					<div class="pf-bit">
-						<p class="pf-record">
-							<span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-trophy fa-stack-1x fa-inverse"></i>
-							</span>
-							<span class="stat-val">
-								W <span class="record-wins">{{Lobby.get('player').wins}}</span>
-								L <span class="record-losses">{{Lobby.get('player').losses}}</span>
-							</span>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<div class="lobby-right lobby-content-container">
 			<h1 class="leaderboard-title">Leader Board</h1>
 
@@ -243,4 +265,5 @@
 			</table>
 		</div>
 	</div>
+
 </div>
