@@ -41,6 +41,9 @@ function addMessage (socket, data) {
    response.time = formatTime();
    response.message = data.message;
    chat.messages.push(response);
+   if (chat.messages.length === 100) {
+    chat.shift();
+   }
    broadcast('message', response);
 }
 
