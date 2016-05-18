@@ -15,10 +15,10 @@ angular
     };
 
     function chatListeners() {
-      socket.on('user joined', function(data) {
-        set('messages', data);
-        console.log('user joined: ', data);
-      });
+      // socket.on('user joined', function(data) {
+      //   set('messages', data);
+      //   console.log('user joined: ', data);
+      // });
 
       socket.on('updated user list', function(data) {
         state.userList = data.users;

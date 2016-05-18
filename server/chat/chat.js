@@ -26,11 +26,11 @@ function chatListeners(socket) {
 }
 // EMITTERS
 function addChatter (socket) {
-  var newUser = {};
-  newUser.avatar = socket.avatar;
-  newUser.message = socket.username + ' joined @ ' + formatTime() + ' !';
+  // var newUser = {};
+  // newUser.avatar = socket.avatar;
+  // newUser.message = socket.username + ' joined @ ' + formatTime() + ' !';
   var updatedUserList = generateUserList();
-  delayBroadcast('user joined', newUser, 2000);
+  // delayBroadcast('user joined', newUser, 2000);
   delayBroadcast('updated user list', updatedUserList, 2000);
 }
 

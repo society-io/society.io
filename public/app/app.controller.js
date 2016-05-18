@@ -59,6 +59,7 @@
           chatFactory.chatListeners();
           battlefieldFactory.boardReset();
           socket.emit('who am i');
+          socket.emit('chat');
           statsFactory.getBoard();
         });
       }

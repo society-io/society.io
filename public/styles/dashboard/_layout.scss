@@ -95,12 +95,12 @@
 }
 
 .avatars-available:hover{
-  color: $red;
+  color: $tilePurple;
   cursor: pointer;
 }
 
 .avatar-clicked {
-  color: $red;
+  color: $tilePurple;
 }
 
 .avatars-available:last-child {
@@ -146,7 +146,7 @@
 }
 
 .input-wrapper {
-  
+
   button {
     float: right;
   }
@@ -258,4 +258,9 @@ td {
 }
 .grey-color {
   color: grey;
+}
+
+.chat-box {
+  height: 100px;
+  overflow: auto;
 }
