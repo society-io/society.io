@@ -66,22 +66,22 @@
 
 		<div class="sidebar lobby-left lobby-content-container">
 			<h2>CHAT</h2>
-			<!-- Input Message -->
-			<div>
-			  <form>
-			    <input ng-model="Lobby.message" placeholder="message">
-			    <button ng-click="Lobby.sendMessage(Lobby.message); Lobby.playChat()">SEND</button>
-			  </form>
-			</div>
 
-			<div class="chat-box" scroll-bottom="Lobby.messages">
+			<div class="chat-box" scroll-glue>
 				<div style='color: white' ng-repeat="message in Lobby.messages track by $index">
 				  <p><i class="fa fa-hand-{{message.avatar}}-o"></i> {{message.user}} ({{message.time}}): {{message.message}}</p>
 				</div>
 			</div>
-
-			<!-- Current Users Connected To Chat List -->
+			<br>
+			<!-- Input Message -->
 			<div>
+			  <form ng-submit="Lobby.sendMessage(Lobby.message); Lobby.playChat()">
+			    <input ng-model="Lobby.message" placeholder="message">
+			  </form>
+			</div>
+			<br>
+			<!-- Current Users Connected To Chat List -->
+			<div class="chat-users" scroll-glue>
 			  <h3>Current Users:</h3>
 			  <div style='color: yellow' ng-repeat="i in Lobby.getChats('userList') track by $index">
 			    <p>{{i}}</p>

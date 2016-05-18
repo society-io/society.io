@@ -1,4 +1,3 @@
-
 (function () {
 'use strict';
  angular
@@ -109,6 +108,5 @@
       socketFactory.emit('new message', {message: message});
       vm.message = '';
     };
-
   }
 })();

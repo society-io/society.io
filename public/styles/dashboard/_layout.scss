@@ -261,6 +261,13 @@ td {
 }
 
 .chat-box {
+  height: 300px;
+  overflow: auto;
+  border: thin solid white;
+}
+
+.chat-users {
   height: 100px;
   overflow: auto;
+  border: thin solid white;
 }
