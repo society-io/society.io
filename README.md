@@ -6,7 +6,7 @@
 
 **_Society_** is a fun multiplayer experience for all ages that brings the childhood concept of "Rock, Paper, Scissors" to a whole *new* level.
 
-Built upon the [**iteration**](http://www.samkass.com/theories/RPSSL.html) of the "Rock, Paper, Scissors" by software development leader **Sam Kass**, which was featured in the CBS hit-comedy [**"The Big Bang Theory"**](https://www.youtube.com/watch?v=x5Q6-wMx-K8), the game adds a satirical theme with familiar elements from our society: “**Rich**”, “**Bum**”, “**Cop**”, “**Tax**”, “**Jail**”.
+Built upon the [**iteration**](http://www.samkass.com/theories/RPSSL.html) of the "Rock, Paper, Scissors" by software development leader **Sam Kass**, which was featured in the CBS hit-comedy [**"The Big Bang Theory"**](https://www.youtube.com/watch?v=x5Q6-wMx-K8), the game adds a satirical theme with familiar elements from our society: “**Rich**”, “**Bum**”, “**Cop**”, “**Tax**”, & “**Jail**”.
 
 Players must predict their opponent’s choices based on a Health-Points system attached to each option.
 
