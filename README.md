@@ -60,7 +60,6 @@ When a player enters this overall Queue, they must battle opponents and climb to
 ### To Contribute:
 
 * Fork & Locally Clone Repo
-
 * Ensure MongoDB is installed. If not, install Globally: `brew install mongod -g`
 * Start a MongoDB instance: `mongod`
 * Install Server & Client Dependencies: `npm install` & `bower install`
@@ -80,7 +79,8 @@ The game's Front-End implements the Angular.js Framework.
 
 
 #### Back-End:
-The game's RESTful APO is build with Node.js, Express, MongoDB, & Mongoose.
+The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose.
+Data is transferred between the client & server using Socket.io.
 
 ##### Server:
 
