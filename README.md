@@ -86,9 +86,9 @@ The game's RESTful APO is build with Node.js, Express, MongoDB, & Mongoose.
 
 ##### Database:
 
-## S O C I E T Y Team
-*[Austin Kim](https://github.com/austinyearlykim) - **Product Owner**
-*[Kan Adachi](https://github.com/obber) - **Scrum Master**
-*[Ben Richter](https://github.com/bjr22) - **Front-End**
-*[Patrice Sandhu](https://github.com/pmsandhu) - **Front-End**
-*[Neil Agarwal](https://github.com/neilDeep) - **Back-End**
+## The S O C I E T Y Team
+* [Austin Kim](https://github.com/austinyearlykim) **Product Owner**
+* [Kan Adachi](https://github.com/obber) **Scrum Master**
+* [Ben Richter](https://github.com/bjr22) **Front-End**
+* [Patrice Sandhu](https://github.com/pmsandhu) **Front-End**
+* [Neil Agarwal](https://github.com/neilDeep) **Back-End**
