@@ -57,6 +57,11 @@
       lobbyFactory.set('waiting', true);
       socket.emit('queue', message);
     };
+	  
+	  vm.chat = function(){
+		  socket.emit('chat');
+	  };
+
 
     vm.signOut = function() {
       authFactory.signOut();
