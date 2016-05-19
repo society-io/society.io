@@ -1,12 +1,5 @@
 # S O C I E T Y : The Game
 
-#### Table of Contents
-- [**Overview**](#overview)
-- [**Play SOCIETY** (**Internet**)](#play-society-(internet))
-- [**Play SOCIETY** (**Locally**)](#play-society-(locally))
-
-
-
 ## Overview
 
 **_Society_** is a fun multiplayer experience for all ages that brings the childhood concept of "Rock, Paper, Scissors" to a whole *new* level.
