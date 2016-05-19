@@ -2,8 +2,8 @@
 
 #### Table of Contents
 - [Overview](#overview)
-- [Play S O C I E T Y (Internet)](#play-s-o-c-i-e-t-y-(-i-n-t-e-r-n-e-t-))
-- [Play S O C I E T Y (Locally)](#play-s-o-c-i-e-t-y-(-l-o-c-a-l-l-y-))
+- [Play S O C I E T Y (Internet)](#play-s o c i e t y-(internet))
+- [Play S O C I E T Y (Locally)](#play-s o c i e t y-(locally))
 
 
 
@@ -17,7 +17,7 @@ Players must predict their opponent’s choices based on a Health-Points system 
 The health-points of each option decline once that option is overcome by a “superior” one.
 As these points reach zero, that option will be rendered unavailable, and the player must choose the next option with much more care than before.
 
-Society allows its players to invite friends into **private rooms**; or they may choose to join a **Queue**, which matches each player according to their skill level MMR (**MatchMaking Rating**).
+Society allows its players to invite friends into **Private Games**; *or* they may choose to join a **Public Queue**, which matches each player according to their skill level (**Match-Making Rating**).
 When a player enters this overall Queue, they must battle opponents and climb to the top of the **Leaderboard**.
 
 
