@@ -20,7 +20,7 @@ When a player enters this overall Queue, they must battle opponents and climb to
 
 2. Click "**Sign Up**" & Fill In the *Required* Fields
 
-3. When You Enter the Lobby, Click on "**Tutorials**" & Read the Rules / Strategy Tips
+3. When You Enter the Lobby, Click on "**Tutorials**" & Read the Rules
 
 4. **Play S O C I E T Y!**
 
@@ -41,6 +41,6 @@ When a player enters this overall Queue, they must battle opponents and climb to
 
 7. Click "**Sign Up**" & Fill in the *Required* Fields
 
-8. When You Enter the Lobby, Click on "**Tutorials**" & Read the Rules/Strategy Tips
+8. When You Enter the Lobby, Click on "**Tutorials**" & Read the Rules
 
 9. **Play S O C I E T Y!**
