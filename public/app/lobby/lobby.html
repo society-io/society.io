@@ -85,7 +85,7 @@
 			<!-- Input Message -->
 			<div class="chat-input">
 			  <form ng-submit="Lobby.sendMessage(Lobby.message); Lobby.playChat()">
-			    <input class="block" ng-model="Lobby.message" placeholder="message">
+			    <input class="block" ng-model="Lobby.message" ng-focus="Lobby.chat();" placeholder="message">
 			  </form>
 			</div>
 			<br>
@@ -141,7 +141,7 @@
 
 
 				</div>
-				
+
 			</div>
 
 			<div class="lobby-right lobby-content-container">
