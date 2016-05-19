@@ -6,14 +6,17 @@
 
 **_Society_** is a fun multiplayer experience for all ages that brings the childhood concept of "Rock, Paper, Scissors" to a whole *new* level.
 
-Built upon the [iteration](http://www.samkass.com/theories/RPSSL.html) of the "Rock, Paper, Scissors" by software development leader **Sam Kass**, which was featured in the CBS hit-comedy [**"The Big Bang Theory"**](https://www.youtube.com/watch?v=x5Q6-wMx-K8), the game adds a satirical theme with familiar elements from our society: “Rich”, “Bum”, “Cop”, “Tax”, “Jail”.
+Built upon the [**iteration**](http://www.samkass.com/theories/RPSSL.html) of the "Rock, Paper, Scissors" by software development leader **Sam Kass**, which was featured in the CBS hit-comedy [**"The Big Bang Theory"**](https://www.youtube.com/watch?v=x5Q6-wMx-K8), the game adds a satirical theme with familiar elements from our society: “**Rich**”, “**Bum**”, “**Cop**”, “**Tax**”, “**Jail**”.
 
 Players must predict their opponent’s choices based on a Health-Points system attached to each option.
-The health-points of each option decline once that option is overcome by a “superior” one.
-As these points reach zero, that option will be rendered unavailable, and the player must choose the next option with much more care than before.
 
-Society allows its players to invite friends into **Private Games**; *or* they may choose to join a **Public Queue**, which matches each player according to their skill level (**Match-Making Rating**).
-When a player enters this overall Queue, they must battle opponents and climb to the top of the **Leaderboard**.
+The health-points of an option declines once it is overcome by the opponent's *superior* choice.
+
+As these points reach zero, that option will be disabled, & the player must choose the next option with much more care than before.
+
+Society allows its players to invite friends into **Private Games**, *or*, they may choose to join a **Public Queue**, which matches each player according to their skill level (**Match-Making Rating**).
+
+When a player enters this Public Queue, they must battle opponents & climb to the top of Society's **Leaderboard**.
 
 
 ## Play Online
@@ -60,10 +63,15 @@ When a player enters this overall Queue, they must battle opponents and climb to
 ### To Contribute:
 
 * Fork & Locally Clone Repo
+
 * Ensure MongoDB is installed. If not, install Globally: `brew install mongod -g`
+
 * Start a MongoDB instance: `mongod`
+
 * Install Server & Client Dependencies: `npm install` & `bower install`
+
 * Run the App on Local Server: `npm start`
+
 * Visit  http://localhost:8080/
 
 #### Front-End:
@@ -87,10 +95,10 @@ The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose.
 
 Data is transferred between the client & server using Socket.io.
 
-##### Server:
+##### Server
 ---
 
-##### Database:
+##### Database
 ---
 
 
