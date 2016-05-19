@@ -49,31 +49,46 @@ When a player enters this overall Queue, they must battle opponents and climb to
 
 ## Developer Documentation
 
-### Tools Used
+### Tools Used:
 
-* **M**ongoDB
-* **E**xpress
-* **A**ngularJS
-* **N**ode
-* Socket.io
+* [**M**ongoDB](https://www.mongodb.org/)
+* [**E**xpress](http://expressjs.com/)
+* [**A**ngularJS](https://angularjs.org/)
+* [**N**ode](https://nodejs.org/)
+* [Socket.io](http://socket.io/)
 
 ### To Contribute:
 
 * Fork & Locally Clone Repo
-* Ensure MongoDB is installed. If not, install Globally:
-  `brew install mongod -g`
-* Start a MongoDB instance
-* Install Server & Client Dependencies
-  `npm install`
-  `bower install`
-* Run the App on Local Server
-  `npm start`
+
+* Ensure MongoDB is installed. If not, install Globally: `brew install mongod -g`
+* Start a MongoDB instance: `mongod`
+* Install Server & Client Dependencies: `npm install` & `bower install`
+* Run the App on Local Server: `npm start`
 * Visit  http://localhost:8080/
 
-#### Front-End
+#### Front-End:
+The game's Front-End implements the Angular.js Framework.
+
+##### App Config:
+
+##### Views:
+
+##### Controllers:
+
+##### Factories:
 
 
-#### Back-End
+#### Back-End:
+The game's RESTful APO is build with Node.js, Express, MongoDB, & Mongoose.
 
+##### Server:
 
+##### Database:
 
+## S O C I E T Y Team
+*[Austin Kim](https://github.com/austinyearlykim) - **Product Owner**
+*[Kan Adachi](https://github.com/obber) - **Scrum Master**
+*[Ben Richter](https://github.com/bjr22) - **Front-End**
+*[Patrice Sandhu](https://github.com/pmsandhu) - **Front-End**
+*[Neil Agarwal](https://github.com/neilDeep) - **Back-End**
