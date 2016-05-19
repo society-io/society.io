@@ -1,5 +1,7 @@
 # S O C I E T Y : The Game
 
+# KAN: MAKE A "TABLE OF CONTENTS" HERE #
+
 ## Overview
 
 **_Society_** is a fun multiplayer experience for all ages that brings the childhood concept of "Rock, Paper, Scissors" to a whole *new* level.
@@ -44,3 +46,34 @@ When a player enters this overall Queue, they must battle opponents and climb to
 8. When You Enter the Lobby, Click on "**Tutorials**" & Read the Rules
 
 9. **Play S O C I E T Y!**
+
+## Developer Documentation
+
+### Tools Used
+
+* **M**ongoDB
+* **E**xpress
+* **A**ngularJS
+* **N**ode
+* Socket.io
+
+### To Contribute:
+
+* Fork & Locally Clone Repo
+* Ensure MongoDB is installed. If not, install Globally:
+  `brew install mongod -g`
+* Start a MongoDB instance
+* Install Server & Client Dependencies
+  `npm install`
+  `bower install`
+* Run the App on Local Server
+  `npm start`
+* Visit  http://localhost:8080/
+
+#### Front-End
+
+
+#### Back-End
+
+
+
