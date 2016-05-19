@@ -2,8 +2,8 @@
 
 #### Table of Contents
 - [Overview](#overview)
-- [Play S O C I E T Y (Internet)](#play-s o c i e t y-(internet))
-- [Play S O C I E T Y (Locally)](#play-s o c i e t y-(locally))
+- [Play **SOCIETY** (**Internet**)](#play-society-(internet))
+- [Play **SOCIETY** (**Locally**)](#play-society-(locally))
 
 
 
