@@ -14,7 +14,7 @@ Society allows its players to invite friends into **Private Games**; *or* they m
 When a player enters this overall Queue, they must battle opponents and climb to the top of the **Leaderboard**.
 
 
-## **Play SOCIETY** (**Internet**)
+## Play Online
 
 1. Visit **http://societyapp.io/**
 
@@ -25,7 +25,7 @@ When a player enters this overall Queue, they must battle opponents and climb to
 4. **Play S O C I E T Y!**
 
 
-## **Play SOCIETY** (**Locally**)
+## Play Locally
 
 1. Fork & Clone This Repo
 
