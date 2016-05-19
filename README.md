@@ -6,7 +6,7 @@
 
 **_Society_** is a fun multiplayer experience for all ages that brings the childhood concept of "Rock, Paper, Scissors" to a whole *new* level.
 
-Built upon the iteration of the "Rock, Paper, Scissors" by software development leader **Sam Kass**, which was featured in the CBS hit-comedy [**"The Big Bang Theory"**](https://www.youtube.com/watch?v=x5Q6-wMx-K8), the game adds a satirical theme with familiar elements from our society: “Rich”, “Bum”, “Cop”, “Tax”, “Jail”.
+Built upon the [iteration](http://www.samkass.com/theories/RPSSL.html) of the "Rock, Paper, Scissors" by software development leader **Sam Kass**, which was featured in the CBS hit-comedy [**"The Big Bang Theory"**](https://www.youtube.com/watch?v=x5Q6-wMx-K8), the game adds a satirical theme with familiar elements from our society: “Rich”, “Bum”, “Cop”, “Tax”, “Jail”.
 
 Players must predict their opponent’s choices based on a Health-Points system attached to each option.
 The health-points of each option decline once that option is overcome by a “superior” one.
@@ -88,10 +88,13 @@ The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose.
 Data is transferred between the client & server using Socket.io.
 
 ##### Server:
+---
 
 ##### Database:
+---
 
-## The S O C I E T Y Team
+
+## Founding Team
 * [Austin Kim](https://github.com/austinyearlykim) (**Product Owner**)
 * [Kan Adachi](https://github.com/obber) (**Scrum Master**)
 * [Ben Richter](https://github.com/bjr22) (**Front-End**)
