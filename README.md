@@ -87,19 +87,19 @@ The game's Front-End implements the Angular.js Framework in accordance to John P
 app
 ├── about
 |   ├── about.controller.js
-|   ├── about.html
+|   └── about.html
 |
 ├── auth
 |   ├── auth.conroller.js
 |   ├── auth.factory.js
-|   ├── auth.html
+|   └── auth.html
 |   
 ├── battlefield
 |   ├── battlefield.controller.js
 |   ├── battlefield.factory.js
 |   ├── battlefield.html
 |   ├── battlefieldLogic.factory.js
-|   ├── battlefieldTimer.factory.js
+|   └── battlefieldTimer.factory.js
 | 
 ├── lobby
 |   ├── chat.factory.js
@@ -107,29 +107,28 @@ app
 |   ├── lobby.factory.js
 |   ├── lobby.html
 |   ├── lobbyListeners.factory.js
-|   ├── stats.factory.js
+|   └── stats.factory.js
 | 
 ├── shared
-|   ├── socket.factory.js
+|   └── socket.factory.js
 | 
 ├── sound
-|   ├── sound.factory.js
+|   └── sound.factory.js
 | 
 ├── ui-router
-|   ├── app.config.js
+|   └── app.config.js
 | 
 ├── waiting
 |   ├── waiting.controller.js
 |   ├── waiting.factory.js
 |   ├── waiting.html
-|   ├── waitingListeners.factory.js
+|   └── waitingListeners.factory.js
 | 
 ├── app.controller.js
 └── app.module.js
 ```
 
-##### Separation of Concerns Across Angular Modules
----
+#### Separation of Concerns Across Angular Modules
 
 In general, the angular modules are separated by concern:
 
@@ -139,25 +138,25 @@ In general, the angular modules are separated by concern:
 * Factories that are named with 'Listeners' in the name include socket event listeners that then manipulate the associated data stores
 * Other misc. factory names are specific to that particular use case, typically serving a singular purpose.
 
-##### Socket Events
----
+#### Socket Events
 
 The full spectrum of front-end/back-end socket events are described in the back-end documentation below.
 
 ### Back-End:
+---
 The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose. Data is transferred between the client & server using Socket.io. The file structure for the back-end is as follows:
 
 ```
 server
 ├── chat
 |   ├── chat.js
-|   ├── chatAPI.js
+|   └── chatAPI.js
 |
 ├── config
-|   ├── config.js
+|   └── config.js
 |
 ├── db
-|   ├── userModel.js
+|   └── userModel.js
 |
 ├── game
 |   ├── config.js
@@ -165,24 +164,24 @@ server
 |   ├── game.js
 |   ├── listeners.js
 |   ├── logic.js
-|   ├── player.js
+|   └── player.js
 |
 ├── lobby
 |   ├── lobby.js
 |   ├── privateGame.js
-|   ├── queue.js
-
+|   └── queue.js
+|
 ├── profile
-|   ├── updateProfile.js
+|   └── updateProfile.js
 |
 ├── routes
 |   ├── leaderboard.js
 |   ├── signin.js
-|   ├── signup.js
+|   └── signup.js
 |
 ├── socket
 |   ├── socketAPI.js
-|   ├── socketHelpers.js
+|   └── socketHelpers.js
 |
 ├── common.js
 └── server.js
@@ -226,20 +225,20 @@ game.js
     |── client ready
     |── choice
     |── noChoice
-    |── forfeit
+    └── forfeit
   * EMITTERS
     |── game ready
     |── choices
     |── newRound
     |── forfeitedResults
-    |── matchTerminated
+    └── matchTerminated
 
 logic.js
   * EMITTERS
     |── opponentPlayed
     |── roundResults
     |── matchOver
-    |── gameOver
+    └── gameOver
 ```
 
 #####/chat
@@ -247,12 +246,12 @@ logic.js
 ```
 chat.js
  * LISTENERS
-   ├── chatAPI.js
+   └── chatAPI.js
  * EMITTERS
    |── user joined
    |── user left
    |── updated user list
-   |── message
+   └── message
 ```
 
 #####/lobby
@@ -260,18 +259,18 @@ chat.js
 ```
 lobby.js
   * LISTENERS
-    |── who am i
+    └── who am i
   * EMITTERS
     |── you are
     |── avatar updated
-    |── avatar no updated
+    └── avatar no updated
 
 privateGame.js
   * LISTENERS
     |── create private game
     |── join private game
     |── initialize battlefield
-    |── cancel private game
+    └── cancel private game
   * EMITTERS
     |── join code valid
     |── join code invalid
@@ -279,16 +278,16 @@ privateGame.js
     |── join code not found
     |── join code to initialize battlefield
     |── profile
-    |── match ready
+    └── match ready
 
 queue.js
   * LISTENERS
-    |── queue
+    └── queue
   * EMITTERS
     |── player already in queue
     |── added to queue
     |── profile
-    |── match ready
+    └── match ready
 ```
 
 ## Founding Team
