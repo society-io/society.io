@@ -1,8 +1,7 @@
-#### Back-End:
-The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose.
+### Back-End:
+The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose. Data is transferred between the client & server using Socket.io. The file structure for the back-end is as follows:
 
-Data is transferred between the client & server using Socket.io.
-
+```
 server
 ├── chat
 |   ├── chat.js
@@ -41,14 +40,15 @@ server
 |
 ├── common.js
 └── server.js
+```
 
-##### Server
+#### Server
 The server is built using Node.js and Express. The Express server is created first and then passed into Socket.io as parameter. When the application is started the listen() function activates both the Express and socket server. After the player is successfully authenticated the client sends an io.connect() event to the server and upon success the communication protocol is upgraded from http to web sockets and control is passed to the Socket.io server, which is then used to manage all client requests throughout the application there forward.
 
-##### Database
+#### Database
 The Mongo database is used to store player profile information (see user model below). Upon game completion the player's MMR is updated to reflect their game result and their position on the leader board.
 
-## Schema
+#### Schema
  Player {
   email: String,
   username: String,
@@ -59,10 +59,11 @@ The Mongo database is used to store player profile information (see user model b
   losses: Number
  }
 
-#### SocketAPI
+### SocketAPI
 The SocketAPI constructor is used through the backend code to associate the connection initiated by the user's web browser within the socket's stream. The SocketAPI object extends the Socket.io Socket constructor by providing additional properties and methods to access and update the connected player's profile information and communicate state changes to the Express server and Mongo database.
 
-## EndPoints
+### EndPoints
+
 #### Express API EndPoints
 * /signup - used to store new players in Mongo db, as well as authenticate and authorize them to enter the site
 * /signin - used to authenticate and authorize player to enter the game
@@ -72,8 +73,9 @@ The SocketAPI constructor is used through the backend code to associate the conn
 #### Socket Connection End Points
 * All listeners are initialized upon client connection through the SocketAPI's init() method.
 
-##/game
-	`game.js
+#####/game
+```
+game.js
 	* LISTENERS
     |── client ready
     |── choice
@@ -86,15 +88,18 @@ The SocketAPI constructor is used through the backend code to associate the conn
     |── forfeitedResults
   	|── matchTerminated
 
-	`logic.js
+logic.js
 	* EMITTERS
 		|── opponentPlayed
 		|── roundResults
 	  |── matchOver
     |── gameOver
+```
 
-##/chat
-	`chat.js
+#####/chat
+
+```
+chat.js
  * LISTENERS
    ├── chatAPI.js
  * EMITTERS
@@ -102,9 +107,12 @@ The SocketAPI constructor is used through the backend code to associate the conn
 	 |── user left
    |── updated user list
    |── message
+```
 
-##/lobby
- `lobby.js
+#####/lobby
+
+```
+lobby.js
 	* LISTENERS
 		|── who am i
 	* EMITTERS
@@ -112,7 +120,7 @@ The SocketAPI constructor is used through the backend code to associate the conn
 		|── avatar updated
   	|── avatar no updated
 
-	`privateGame.js
+privateGame.js
 	* LISTENERS
 	  |── create private game
 	  |── join private game
@@ -127,7 +135,7 @@ The SocketAPI constructor is used through the backend code to associate the conn
     |── profile
     |── match ready
 
-	`queue.js
+queue.js
 	* LISTENERS
 		|── queue
 	* EMITTERS
@@ -135,5 +143,4 @@ The SocketAPI constructor is used through the backend code to associate the conn
 		|── added to queue
 		|── profile
   	|── match ready
-
-
+```
