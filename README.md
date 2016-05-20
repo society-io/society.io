@@ -142,6 +142,50 @@ In general, the angular modules are separated by concern:
 
 The full spectrum of front-end/back-end socket events are described in the back-end documentation below.
 
+### Front-End (Styles):
+---
+The front-end styling is written with SASS css-precompiler, using the SCSS syntax. By employing SCSS's @import directive, the code is modularized in the following way:
+
+```
+styles
+├── dashboard
+|   ├── _adminBar.scss
+|   ├── _layout.scss
+|   ├── _userProfile.scss
+|   └── _chat.scss
+|
+├── game
+|   ├── _animations.scss
+|   ├── _emotes.scss
+|   ├── _layout.scss
+|   ├── _overlay.scss
+|   ├── _playerStats.scss
+|   ├── _playingField.scss
+|   ├── _sideControls.scss
+|   ├── _spinner.scss
+|   └── _tiles.scss
+|
+├── vendor
+|   ├── _bootstrapGrid.scss
+|   └── _noramlize.scss
+|
+├── waiting
+|   ├── _layout.scss
+|   └── _players.scss
+|
+├── _about.scss
+├── _animations.scss
+├── _auth.scss
+├── _buttons.scss
+├── _globals.scss
+├── _layout.scss
+├── _mixins.scss
+├── _typography.scss
+└── style.scss
+```
+
+#### Media Queries
+
 ### Back-End:
 ---
 The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose. Data is transferred between the client & server using Socket.io. The file structure for the back-end is as follows:
