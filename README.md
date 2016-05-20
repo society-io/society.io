@@ -87,19 +87,19 @@ The game's Front-End implements the Angular.js Framework in accordance to John P
 app
 ├── about
 |   ├── about.controller.js
-|   ├── about.html
+|   └── about.html
 |
 ├── auth
 |   ├── auth.conroller.js
 |   ├── auth.factory.js
-|   ├── auth.html
+|   └── auth.html
 |   
 ├── battlefield
 |   ├── battlefield.controller.js
 |   ├── battlefield.factory.js
 |   ├── battlefield.html
 |   ├── battlefieldLogic.factory.js
-|   ├── battlefieldTimer.factory.js
+|   └── battlefieldTimer.factory.js
 | 
 ├── lobby
 |   ├── chat.factory.js
@@ -107,29 +107,28 @@ app
 |   ├── lobby.factory.js
 |   ├── lobby.html
 |   ├── lobbyListeners.factory.js
-|   ├── stats.factory.js
+|   └── stats.factory.js
 | 
 ├── shared
-|   ├── socket.factory.js
+|   └── socket.factory.js
 | 
 ├── sound
-|   ├── sound.factory.js
+|   └── sound.factory.js
 | 
 ├── ui-router
-|   ├── app.config.js
+|   └── app.config.js
 | 
 ├── waiting
 |   ├── waiting.controller.js
 |   ├── waiting.factory.js
 |   ├── waiting.html
-|   ├── waitingListeners.factory.js
+|   └── waitingListeners.factory.js
 | 
 ├── app.controller.js
 └── app.module.js
 ```
 
-##### Separation of Concerns Across Angular Modules
----
+#### Separation of Concerns Across Angular Modules
 
 In general, the angular modules are separated by concern:
 
@@ -139,25 +138,96 @@ In general, the angular modules are separated by concern:
 * Factories that are named with 'Listeners' in the name include socket event listeners that then manipulate the associated data stores
 * Other misc. factory names are specific to that particular use case, typically serving a singular purpose.
 
-##### Socket Events
----
+#### Socket Events
 
 The full spectrum of front-end/back-end socket events are described in the back-end documentation below.
 
+### Front-End (Styles):
+---
+The front-end styling is written with SASS css-precompiler, using the SCSS syntax. By employing SCSS's @import directive, the code is modularized in the following way:
+
+```
+styles
+├── dashboard
+|   ├── _adminBar.scss
+|   ├── _layout.scss
+|   ├── _userProfile.scss
+|   └── _chat.scss
+|
+├── game
+|   ├── _animations.scss
+|   ├── _emotes.scss
+|   ├── _layout.scss
+|   ├── _overlay.scss
+|   ├── _playerStats.scss
+|   ├── _playingField.scss
+|   ├── _sideControls.scss
+|   ├── _spinner.scss
+|   └── _tiles.scss
+|
+├── vendor
+|   ├── _bootstrapGrid.scss
+|   └── _noramlize.scss
+|
+├── waiting
+|   ├── _layout.scss
+|   └── _players.scss
+|
+├── _about.scss
+├── _animations.scss
+├── _auth.scss
+├── _buttons.scss
+├── _globals.scss
+├── _layout.scss
+├── _mixins.scss
+├── _typography.scss
+└── style.scss
+```
+
+#### Media Queries
+
+Individual media queries are separated and associated only with corresponding components instead of grouping them into big blocks of media query CSS rules for many elements. This way, we are able to achieve a semantic, pragmatic separation of concerns in our stylesheets. For example:
+
+```
+.code-input {
+  padding: 13px;
+  width: 50%;
+
+  @include bp(pawn) {
+    width: 60%;
+  }
+
+  @include bp(knight) {
+    width: 75%;
+  }
+
+  @include bp(queen) {
+    width: 55%;
+  }
+
+  @include bp(king) {
+    width: 64%;
+  }
+}
+```
+
+Have a look at the `_mixins.scss` file for further information.
+
 ### Back-End:
+---
 The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose. Data is transferred between the client & server using Socket.io. The file structure for the back-end is as follows:
 
 ```
 server
 ├── chat
 |   ├── chat.js
-|   ├── chatAPI.js
+|   └── chatAPI.js
 |
 ├── config
-|   ├── config.js
+|   └── config.js
 |
 ├── db
-|   ├── userModel.js
+|   └── userModel.js
 |
 ├── game
 |   ├── config.js
@@ -165,24 +235,24 @@ server
 |   ├── game.js
 |   ├── listeners.js
 |   ├── logic.js
-|   ├── player.js
+|   └── player.js
 |
 ├── lobby
 |   ├── lobby.js
 |   ├── privateGame.js
-|   ├── queue.js
-
+|   └── queue.js
+|
 ├── profile
-|   ├── updateProfile.js
+|   └── updateProfile.js
 |
 ├── routes
 |   ├── leaderboard.js
 |   ├── signin.js
-|   ├── signup.js
+|   └── signup.js
 |
 ├── socket
 |   ├── socketAPI.js
-|   ├── socketHelpers.js
+|   └── socketHelpers.js
 |
 ├── common.js
 └── server.js
@@ -226,20 +296,20 @@ game.js
     |── client ready
     |── choice
     |── noChoice
-    |── forfeit
+    └── forfeit
   * EMITTERS
     |── game ready
     |── choices
     |── newRound
     |── forfeitedResults
-    |── matchTerminated
+    └── matchTerminated
 
 logic.js
   * EMITTERS
     |── opponentPlayed
     |── roundResults
     |── matchOver
-    |── gameOver
+    └── gameOver
 ```
 
 #####/chat
@@ -247,12 +317,12 @@ logic.js
 ```
 chat.js
  * LISTENERS
-   ├── chatAPI.js
+   └── chatAPI.js
  * EMITTERS
    |── user joined
    |── user left
    |── updated user list
-   |── message
+   └── message
 ```
 
 #####/lobby
@@ -260,18 +330,18 @@ chat.js
 ```
 lobby.js
   * LISTENERS
-    |── who am i
+    └── who am i
   * EMITTERS
     |── you are
     |── avatar updated
-    |── avatar no updated
+    └── avatar no updated
 
 privateGame.js
   * LISTENERS
     |── create private game
     |── join private game
     |── initialize battlefield
-    |── cancel private game
+    └── cancel private game
   * EMITTERS
     |── join code valid
     |── join code invalid
@@ -279,16 +349,16 @@ privateGame.js
     |── join code not found
     |── join code to initialize battlefield
     |── profile
-    |── match ready
+    └── match ready
 
 queue.js
   * LISTENERS
-    |── queue
+    └── queue
   * EMITTERS
     |── player already in queue
     |── added to queue
     |── profile
-    |── match ready
+    └── match ready
 ```
 
 ## Founding Team
