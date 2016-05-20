@@ -186,6 +186,33 @@ styles
 
 #### Media Queries
 
+Individual media queries are separated and associated only with corresponding components instead of grouping them into big blocks of media query CSS rules for many elements. This way, we are able to achieve a semantic, pragmatic separation of concerns in our stylesheets. For example:
+
+```
+.code-input {
+  padding: 13px;
+  width: 50%;
+
+  @include bp(pawn) {
+    width: 60%;
+  }
+
+  @include bp(knight) {
+    width: 75%;
+  }
+
+  @include bp(queen) {
+    width: 55%;
+  }
+
+  @include bp(king) {
+    width: 64%;
+  }
+}
+```
+
+Have a look at the `_mixins.scss` file for further information.
+
 ### Back-End:
 ---
 The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose. Data is transferred between the client & server using Socket.io. The file structure for the back-end is as follows:
