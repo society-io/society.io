@@ -6,7 +6,7 @@
 
 **_Society_** is a fun multiplayer experience for all ages that brings the childhood concept of "Rock, Paper, Scissors" to a whole *new* level.
 
-Built upon the [**iteration**](http://www.samkass.com/theories/RPSSL.html) of the "Rock, Paper, Scissors" by software development leader **Sam Kass**, which was featured in the CBS hit-comedy [**"The Big Bang Theory"**](https://www.youtube.com/watch?v=x5Q6-wMx-K8), the game adds a satirical theme with familiar elements from our society: “**Rich**”, “**Bum**”, “**Cop**”, “**Tax**”, & “**Jail**”.
+Built upon the [**iteration**](http://www.samkass.com/theories/RPSSL.html) of the "Rock, Paper, Scissors" by software developer **Sam Kass**, which was featured in the CBS hit-comedy [**"The Big Bang Theory"**](https://www.youtube.com/watch?v=x5Q6-wMx-K8), the game adds a satirical theme with familiar elements from our society: “**Rich**”, “**Bum**”, “**Cop**”, “**Tax**”, & “**Jail**”.
 
 Players must predict their opponent’s choices based on a Health-Points system attached to each option.
 
@@ -74,11 +74,13 @@ When a player enters this Public Queue, they must battle opponents & climb to th
 
 * Visit  http://localhost:8080/
 
-### Explanation of files:
+**Explanation of Files**
+The front-end files reside inside of the public/ directory inside the project root folder. The `.js` files reside inside of `/app`, and the styles are located inside of `styles`.
 
-The majority of the front-end files 
+The back-end files reside inside of the server/ directory inside the project root folder.
 
-#### Front-End (AngularJS):
+### Front-End (AngularJS):
+---
 The game's Front-End implements the Angular.js Framework in accordance to John Papa's style guide. Thus, the file structure is organized as such:
 
 ```
@@ -126,30 +128,168 @@ app
 └── app.module.js
 ```
 
-##### App Config
+##### Separation of Concerns Across Angular Modules
 ---
 
-##### Views
+In general, the angular modules are separated by concern:
+
+* `.html` pages are responsible for rendering the view upon digest  
+* Controllers attach and expose functions to be invoked in the view  
+* Factories by default act as data stores and the manipulation of the data occurs exclusively through getters and setters  
+* Factories that are named with 'Listeners' in the name include socket event listeners that then manipulate the associated data stores
+* Other misc. factory names are specific to that particular use case, typically serving a singular purpose.
+
+##### Socket Events
 ---
 
-##### Controllers
----
+The full spectrum of front-end/back-end socket events are described in the back-end documentation below.
 
-##### Factories
----
+### Back-End:
+The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose. Data is transferred between the client & server using Socket.io. The file structure for the back-end is as follows:
 
+```
+server
+├── chat
+|   ├── chat.js
+|   ├── chatAPI.js
+|
+├── config
+|   ├── config.js
+|
+├── db
+|   ├── userModel.js
+|
+├── game
+|   ├── config.js
+|   ├── evalRound.js
+|   ├── game.js
+|   ├── listeners.js
+|   ├── logic.js
+|   ├── player.js
+|
+├── lobby
+|   ├── lobby.js
+|   ├── privateGame.js
+|   ├── queue.js
 
-#### Back-End:
-The game's RESTful API is built with Node.js, Express, MongoDB, & Mongoose.
+├── profile
+|   ├── updateProfile.js
+|
+├── routes
+|   ├── leaderboard.js
+|   ├── signin.js
+|   ├── signup.js
+|
+├── socket
+|   ├── socketAPI.js
+|   ├── socketHelpers.js
+|
+├── common.js
+└── server.js
+```
 
-Data is transferred between the client & server using Socket.io.
+#### Server
+The server is built using Node.js and Express. The Express server is created first and then passed into Socket.io as parameter. When the application is started the listen() function activates both the Express and socket server. After the player is successfully authenticated the client sends an io.connect() event to the server and upon success the communication protocol is upgraded from http to web sockets and control is passed to the Socket.io server, which is then used to manage all client requests throughout the application there forward.
 
-##### Server
----
+#### Database
+The Mongo database is used to store player profile information (see user model below). Upon game completion the player's MMR is updated to reflect their game result and their position on the leader board.
 
-##### Database
----
+#### Schema
+ Player {
+  email: String,
+  username: String,
+  password: String,
+  avatar: String,
+  mmr: Number,
+  wins: Number,
+  losses: Number
+ }
 
+### SocketAPI
+The SocketAPI constructor is used through the backend code to associate the connection initiated by the user's web browser within the socket's stream. The SocketAPI object extends the Socket.io Socket constructor by providing additional properties and methods to access and update the connected player's profile information and communicate state changes to the Express server and Mongo database.
+
+### EndPoints
+
+#### Express API EndPoints
+* /signup - used to store new players in Mongo db, as well as authenticate and authorize them to enter the site
+* /signin - used to authenticate and authorize player to enter the game
+* /leaderboard - used to get a list of all players from Mongo database and then sort them based on MMR rank to display the
+   leader board
+
+#### Socket Connection End Points
+* All listeners are initialized upon client connection through the SocketAPI's init() method.
+
+#####/game
+```
+game.js
+  * LISTENERS
+    |── client ready
+    |── choice
+    |── noChoice
+    |── forfeit
+  * EMITTERS
+    |── game ready
+    |── choices
+    |── newRound
+    |── forfeitedResults
+    |── matchTerminated
+
+logic.js
+  * EMITTERS
+    |── opponentPlayed
+    |── roundResults
+    |── matchOver
+    |── gameOver
+```
+
+#####/chat
+
+```
+chat.js
+ * LISTENERS
+   ├── chatAPI.js
+ * EMITTERS
+   |── user joined
+   |── user left
+   |── updated user list
+   |── message
+```
+
+#####/lobby
+
+```
+lobby.js
+  * LISTENERS
+    |── who am i
+  * EMITTERS
+    |── you are
+    |── avatar updated
+    |── avatar no updated
+
+privateGame.js
+  * LISTENERS
+    |── create private game
+    |── join private game
+    |── initialize battlefield
+    |── cancel private game
+  * EMITTERS
+    |── join code valid
+    |── join code invalid
+    |── join code found
+    |── join code not found
+    |── join code to initialize battlefield
+    |── profile
+    |── match ready
+
+queue.js
+  * LISTENERS
+    |── queue
+  * EMITTERS
+    |── player already in queue
+    |── added to queue
+    |── profile
+    |── match ready
+```
 
 ## Founding Team
 * [Austin Kim](https://github.com/austinyearlykim) (**Product Owner**)
