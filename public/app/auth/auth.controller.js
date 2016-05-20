@@ -7,7 +7,6 @@ angular
 AuthController.$inject = ['$scope', 'authFactory', 'soundFactory'];
 
 function AuthController($scope, authFactory, soundFactory) {
-	/* jshint validthis: true */
 	var vm = this;
 
 	soundFactory.loadSounds();

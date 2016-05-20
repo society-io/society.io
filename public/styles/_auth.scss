@@ -133,5 +133,16 @@
   color: white;
 }
 
+.center-link {
+  text-align: center;
+  margin-bottom: 0;
+}
 
+.center-link.about {
+  color: $white;
+  margin-top: 45px;
+}
 
+.center-link.about a:hover {
+  color: $yellow;
+}

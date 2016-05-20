@@ -5,7 +5,7 @@ angular
 
 function config($stateProvider, $urlRouterProvider) {
 
-	$urlRouterProvider.otherwise('/auth');
+  $urlRouterProvider.otherwise('/auth');
 
 	$stateProvider
 		.state('auth', {
@@ -17,18 +17,24 @@ function config($stateProvider, $urlRouterProvider) {
 				bodyClasses: 'auth'
 			}
 		})
+		.state('about', {
+			url: '/about',
+			templateUrl: '../app/about/about.html',
+			// controller: 'AboutController',
+			// controllerAs: 'About',
+			data: {
+				bodyClasses: 'auth'
+			}
+		})
 	  .state('lobby', {
 	  	url: '/lobby',
 	  	templateUrl: '../app/lobby/lobby.html',
 	  	controller: 'LobbyController',
 	  	controllerAs: 'Lobby',
 	  	data: {
-	  		bodyClasses : 'lobby'
+	  		bodyClasses : 'lobby',
+	  		auth: true
 	  	}
-	  })
-	  .state('loading', {
-	  	url: '/loading',
-	  	templateUrl: '../app/loading/loading.html'
 	  })
 		.state('waiting', {
 			url: '/waiting',
@@ -36,7 +42,8 @@ function config($stateProvider, $urlRouterProvider) {
 			controller: 'WaitingController',
 			controllerAs: 'Waiting',
 			data: {
-				bodyClasses: 'waiting'
+				bodyClasses: 'waiting',
+				auth: true
 			}
 		})
 	  .state('battlefield', {
@@ -45,7 +52,8 @@ function config($stateProvider, $urlRouterProvider) {
 	  	controller: 'BattlefieldController',
 	  	controllerAs: 'Bf',
 	  	data: {
-	  		bodyClasses: 'battlefield'
+	  		bodyClasses: 'battlefield',
+	  		auth: true
 	  	}
 	  });
 }

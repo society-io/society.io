@@ -1,0 +1,32 @@
+.chat-box {
+  height: 300px;
+  overflow: auto;
+}
+
+.chat-users {
+  height: 200px;
+  overflow: auto;
+}
+
+.chat-message {
+  padding: 8px;
+}
+
+.chat-message:nth-child(odd) {
+  background-color: rgba(0,0,0,0.2);
+}
+
+.chat-user-label {
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+}
+
+.chat-message-content {
+  margin: 0;
+}
+
+.chat-input input {
+  padding: 12px;
+  display: block;
+  width: 100%;
+}

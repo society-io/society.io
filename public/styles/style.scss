@@ -10,10 +10,12 @@
 @import 'typography';
 @import 'auth';
 @import 'animations';
+@import 'about';
 
 @import 'dashboard/layout';
 @import 'dashboard/adminBar';
 @import 'dashboard/userProfile';
+@import 'dashboard/chat';
 
 @import 'waiting/layout';
 @import 'waiting/players';

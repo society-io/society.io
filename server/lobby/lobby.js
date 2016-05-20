@@ -1,4 +1,6 @@
 var existingUser = require('../db/userModel.js');
+var queue = require('./queue');
+var private = require('./privateGame.js');
 
 var lobbyListeners = function(socket) {
 	socket.on('who am i', function() {

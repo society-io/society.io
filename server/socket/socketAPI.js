@@ -3,6 +3,7 @@ var firebase = require('../common').firebase;
 var privateGameListeners = require('../lobby/privateGame').privateGameListeners;
 var queueListeners = require('../lobby/queue').queueListeners;
 var lobbyListeners = require('../lobby/lobby').lobbyListeners;
+var chatListeners = require('../chat/chat').chatListeners;
 
 var SocketAPI = function(socket, userModel, token) {
 
@@ -17,9 +18,11 @@ var SocketAPI = function(socket, userModel, token) {
 // user
 	userModel = Object.assign({}, userModel);
 	this.user = userModel;
+  this.profile = this.user;
 	this.userId = this.user._doc._id;
 	this.token = token;
-	this.username =this.user._doc.username;
+	this.username = this.user._doc.username;
+  this.avatar = this.user._doc.avatar;
 };
 
 SocketAPI.prototype.init = function() {
@@ -27,6 +30,7 @@ SocketAPI.prototype.init = function() {
 	lobbyListeners(this);
   queueListeners(this);
   privateGameListeners(this);
+  chatListeners(this);
 	this.emit('socket initialized');
 };
 
@@ -89,7 +93,6 @@ SocketAPI.prototype.err = function(err) {
 SocketAPI.prototype.disconnect = function() {
 	this.socket.disconnect();
 };
-
 
 
 module.exports = {

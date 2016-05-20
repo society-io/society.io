@@ -13,14 +13,14 @@
       <div class="private-controls" ng-show="Waiting.lfGet('whereTo') === 'private'">
         <div class="joincode-label">Your Join Code:</div>
         <div class="joincode-container"><h2>{{Waiting.lfGet('joinCode')}}</h2></div>
-        <button class="block red" ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm; Waiting.playClick()">Cancel Your Private Game</button>
+        <button id="waiting-room-btn" class="block red" ng-click="Waiting.showCancelGameForm = !Waiting.showCancelGameForm; Waiting.playClick()">Cancel Your Private Game</button>
 
-        <form>
-          <div ng-show="Waiting.showCancelGameForm">
-            <label>enter join code</label>
+        <form class="cancel-form" ng-show="Waiting.showCancelGameForm">
+          <div class="align-center">
             <!-- TODO: create model object in controller and pass to emit event on btn click -->
-            <input ng-model='joinCode'>
-            <button type="submit" ng-click="Waiting.cancelRoom(joinCode); Waiting.playClick()">enter</button>
+            <br>
+            <input placeholder="Enter Join Code" class="code-input waiting-join-code-input" ng-model='joinCode'>
+            <button type="submit" ng-click="Waiting.cancelRoom(joinCode); Waiting.playClick()" class="waiting-enter-btn">enter</button>
           </div>
         </form>
       </div>
@@ -34,7 +34,7 @@
         <i class="fa fa-user" aria-hidden="true"></i> {{Waiting.get('player1').username}}
       </h1>
       <h1>
-        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player1').mmr}}
+        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player1').mmr.format()}}
       </h1>
       <p class="stats"><i class="fa fa-trophy" aria-hidden="true"></i>
         W <span class="wins">{{Waiting.get('player1').wins}}</span> /
@@ -50,7 +50,7 @@
         <i class="fa fa-user" aria-hidden="true"></i> {{Waiting.get('player2').username}}
       </h1>
       <h1>
-        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player2').mmr}}
+        <i class="fa fa-usd" aria-hidden="true"></i> {{Waiting.get('player2').mmr.format()}}
       </h1>
       <p class="stats"><i class="fa fa-trophy" aria-hidden="true"></i>
         W <span class="wins">{{Waiting.get('player2').wins}}</span> /
