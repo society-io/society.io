@@ -155,5 +155,5 @@ Data is transferred between the client & server using Socket.io.
 * [Austin Kim](https://github.com/austinyearlykim) (**Product Owner**)
 * [Kan Adachi](https://github.com/obber) (**Scrum Master**)
 * [Ben Richter](https://github.com/bjr22) (**Front-End**)
-* [Patrice Sandhu](https://github.com/pmsandhu) (**Back-End**)
+* [Patrice Sandhu](https://github.com/pmsandhu) (**Full-Stack**)
 * [Neil Agarwal](https://github.com/neilDeep) (**Back-End**)
