@@ -1,6 +1,6 @@
-# S O C I E T Y : The Game
+# Society: The Game
 
-# KAN: MAKE A "TABLE OF CONTENTS" HERE #
+# Table of Contents
 
 ## Overview
 
@@ -74,8 +74,57 @@ When a player enters this Public Queue, they must battle opponents & climb to th
 
 * Visit  http://localhost:8080/
 
-#### Front-End:
-The game's Front-End implements the Angular.js Framework.
+### Explanation of files:
+
+The majority of the front-end files 
+
+#### Front-End (AngularJS):
+The game's Front-End implements the Angular.js Framework in accordance to John Papa's style guide. Thus, the file structure is organized as such:
+
+```
+app
+├── about
+|   ├── about.controller.js
+|   ├── about.html
+|
+├── auth
+|   ├── auth.conroller.js
+|   ├── auth.factory.js
+|   ├── auth.html
+|   
+├── battlefield
+|   ├── battlefield.controller.js
+|   ├── battlefield.factory.js
+|   ├── battlefield.html
+|   ├── battlefieldLogic.factory.js
+|   ├── battlefieldTimer.factory.js
+| 
+├── lobby
+|   ├── chat.factory.js
+|   ├── lobby.controller.js
+|   ├── lobby.factory.js
+|   ├── lobby.html
+|   ├── lobbyListeners.factory.js
+|   ├── stats.factory.js
+| 
+├── shared
+|   ├── socket.factory.js
+| 
+├── sound
+|   ├── sound.factory.js
+| 
+├── ui-router
+|   ├── app.config.js
+| 
+├── waiting
+|   ├── waiting.controller.js
+|   ├── waiting.factory.js
+|   ├── waiting.html
+|   ├── waitingListeners.factory.js
+| 
+├── app.controller.js
+└── app.module.js
+```
 
 ##### App Config
 ---
