@@ -1,6 +1,6 @@
 # Society: The Game
 
-# Table of Contents
+A modern take on rock paper scissors where players battle it out in a game of wits, dashed with a pinch of luck.
 
 ## Overview
 
