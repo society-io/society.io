@@ -95,7 +95,6 @@ SocketAPI.prototype.disconnect = function() {
 };
 
 
-
 module.exports = {
   SocketAPI: SocketAPI
 };

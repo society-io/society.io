@@ -66,19 +66,19 @@ function storePlayer1(socket, data) {
 }
 
 function storePlayer2(socket, data) {
-	if(privateGames[data.joinCode] && !privateGames[data.joinCode][1]) {
-
-		privateGames[data.joinCode][1] = socket;
-		sockId_joinCode[socket.socketId] = data.joinCode;
-		log_PG('PLAYER 2 STORED to ');
-		log_sockId_JC();
-
-		socket.emit('join code found');
-
-		setTimeout(function(){
-      socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
-    }, 3000);
+  if(privateGames[data.joinCode] && !privateGames[data.joinCode][1]) {
     
+    privateGames[data.joinCode][1] = socket;
+	sockId_joinCode[socket.socketId] = data.joinCode;
+	log_PG('PLAYER 2 STORED to ');
+	log_sockId_JC();
+
+	socket.emit('join code found');
+
+	setTimeout(function(){
+	  socket.emit('join code to initialize battlefield', {joinCode: data.joinCode});
+	}, 3000);
+
 	} else {
 	socket.emit('join code not found', {message: 'join code not found'});
 	}
