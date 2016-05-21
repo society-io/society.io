@@ -362,8 +362,8 @@ queue.js
 ```
 
 ## Founding Team
-* [Austin Kim](https://github.com/austinyearlykim) (**Product Owner**)
-* [Kan Adachi](https://github.com/obber) (**Scrum Master**)
+* [Austin Kim](https://github.com/austinyearlykim) (**Full-Stack**)
+* [Kan Adachi](https://github.com/obber) (**Full-Stack**)
 * [Ben Richter](https://github.com/bjr22) (**Front-End**)
 * [Patrice Sandhu](https://github.com/pmsandhu) (**Full-Stack**)
 * [Neil Agarwal](https://github.com/neilDeep) (**Back-End**)
