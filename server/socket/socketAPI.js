@@ -1,5 +1,5 @@
-// var eventEmitter = require('events');
-var firebase = require('../common').firebase;
+var jwt = require('jsonwebtoken');
+var jwtSecret = require('../config/config').jwtSecret;
 var privateGameListeners = require('../lobby/privateGame').privateGameListeners;
 var queueListeners = require('../lobby/queue').queueListeners;
 var lobbyListeners = require('../lobby/lobby').lobbyListeners;
@@ -42,9 +42,12 @@ SocketAPI.prototype.on = function(event, cb, auth) {
 	  console.log('ON:'.bgMagenta,'-->'.magenta, event);
   }
 	function authenticate(data) {
-    firebase.authWithCustomToken(data.token, function(err, authData) {
-      if(err) {this.emit('err');}
-      cb(data);
+    jwt.verify(data.token, jwtSecret, function(err, decoded) {
+      if (err) {
+        this.emit('err');
+      } else {
+        cb(data);
+      }
     });
   }
 	this.listeners[event]=this.socketId;

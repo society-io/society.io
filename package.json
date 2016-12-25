@@ -21,8 +21,6 @@
     "colors": "^1.1.2",
     "cors": "^2.7.1",
     "express": "^4.13.4",
-    "firebase": "^2.4.2",
-    "firebase-token-generator": "^2.0.0",
     "mongodb": "^2.1.18",
     "mongoose": "^4.4.14",
     "socket.io": "^1.4.5"

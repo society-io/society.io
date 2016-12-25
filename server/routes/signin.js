@@ -1,10 +1,8 @@
 var router = require('express').Router();
 var bcrypt = require('bcrypt');
-var FirebaseTokenGenerator = require("firebase-token-generator");
-var pI = require('../config/config.js');
+var jwt = require('jsonwebtoken');
+var jwtSecret = require('../config/config.js').jwtSecret;
 var db = require('../db/userModel.js');
-
-var tokenGenerator = new FirebaseTokenGenerator(pI.secret);
 
 router.post('/', function (req, res) {
 	if (req.body.username === undefined || 
@@ -24,9 +22,11 @@ router.post('/', function (req, res) {
 				if (result) {
 					console.log('passwordCorrect');
 					var stringUID = users[0]._id.toString();
-					var token = tokenGenerator.createToken({
+					var token = jwt.sign({
 						uid: stringUID,
 						username: users[0].username
+					}, jwtSecret, {
+						expiresIn: '7d'
 					});
 					res.send({token: token, auth: result});
 				} else {

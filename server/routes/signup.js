@@ -1,10 +1,8 @@
 var router = require('express').Router();
 var bcrypt = require('bcrypt');
-var FirebaseTokenGenerator = require("firebase-token-generator");
-var pI = require('../config/config.js');
+var jwt = require('jsonwebtoken');
+var jwtSecret = require('../config/config.js').jwtSecret;
 var newUser = require('../db/userModel.js');
-
-var tokenGenerator = new FirebaseTokenGenerator(pI.secret);
 
 var saltRounds = 10;
 
@@ -43,7 +41,12 @@ router.post('/', function(req, res){
                   console.log('User Saved in DB, Error Assigning Token!');
                 } else {
                   var stringUID = users[0]._id.toString();
-                  var token = tokenGenerator.createToken({uid: stringUID, username: users[0].username});
+                  var token = jwt.sign({
+                    uid: stringUID,
+                    username: users[0].username
+                  }, jwtSecret, {
+                    expiresIn: '7d'
+                  });
                   res.send({token: token});
     			  			}
     			  		});

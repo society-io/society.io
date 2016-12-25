@@ -39,8 +39,6 @@ bower_components/
 
 # Config Files
 server/auth/config.js
-
-#austins firebase
 server/config/config.js
 
 #patrice socket-io object
